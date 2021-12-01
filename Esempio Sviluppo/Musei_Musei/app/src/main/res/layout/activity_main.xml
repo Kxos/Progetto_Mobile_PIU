@@ -7,21 +7,21 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_museum"
         android:layout_width="121dp"
         android:layout_height="154dp"
         android:layout_marginStart="145dp"
         android:layout_marginTop="77dp"
         android:layout_marginEnd="145dp"
         android:layout_marginBottom="87dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/textfield_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/museum" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/textfield_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="103dp"
@@ -30,19 +30,19 @@
         android:layout_marginBottom="53dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/textfield_email"
         app:layout_constraintVertical_bias="0.522" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/textfield_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginEnd="102dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginEnd="98dp"
         android:layout_marginBottom="42dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -55,7 +55,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
+        android:layout_marginStart="103dp"
         android:layout_marginTop="364dp"
         android:layout_marginEnd="277dp"
         android:text="Email"
@@ -75,10 +75,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/textfield_email" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
