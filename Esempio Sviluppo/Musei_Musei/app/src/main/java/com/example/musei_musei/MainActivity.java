@@ -3,12 +3,14 @@ package com.example.musei_musei;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +32,16 @@ public class MainActivity extends AppCompatActivity {
         email_error_icon = findViewById(R.id.email_error_icon);
         password_error_icon = findViewById(R.id.password_error_icon);
 
+        TextView registrati;
+        registrati = findViewById(R.id.textView_register);
+        registrati.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+
+        registrati.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("Registrati","Ehi, funziona!");
+            }
+        });
+
         button_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Scrive un messaggio sulla console
@@ -41,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 CharSequence email_value = email.getText().toString();
                 CharSequence password_value = password.getText().toString();
 
-                // Controllo Credenzali
                 if (isEmailValid(email_value) && isPasswordValid(password_value)){
+                    // Login validato
 
                     /**
                      // Passaggio da una Activity ad un altra
@@ -53,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                      */
 
                 }else{
+                    // Errore nelle credenziali
+
                     if (!isEmailValid(email_value)){
                         email_error_icon.setVisibility(View.VISIBLE);
                     }

@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_facebook_auth"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="55dp"
@@ -16,7 +16,7 @@
         android:text="ACCEDI CON FACEBOOK"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button_google_auth" />
 
     <ImageView
         android:id="@+id/img_museum"
@@ -32,12 +32,14 @@
         app:srcCompat="@drawable/museum" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView_register"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="97dp"
+        android:contextClickable="false"
         android:text="Registrati"
+        android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
@@ -74,7 +76,7 @@
         android:layout_marginStart="103dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="98dp"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -117,7 +119,7 @@
         android:id="@+id/password_error_icon"
         android:layout_width="41dp"
         android:layout_height="36dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="56dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +149,7 @@
         android:layout_marginEnd="70dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_register" />
 
     <View
         android:id="@+id/divider"
@@ -160,7 +162,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_google_auth"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="55dp"
@@ -168,7 +170,7 @@
         android:layout_marginEnd="56dp"
         android:layout_marginBottom="8dp"
         android:text="ACCEDI CON GOOGLE"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/button_facebook_auth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
