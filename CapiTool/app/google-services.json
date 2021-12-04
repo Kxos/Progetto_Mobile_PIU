@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "216024092837",
+    "firebase_url": "https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "capitool-6a9ea",
+    "storage_bucket": "capitool-6a9ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216024092837:android:572df16c5e0ad0c1dabd4c",
+        "android_client_info": {
+          "package_name": "com.uniba.capitool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216024092837-3slkm0p77nf1eqdi70q2nhpgr71av0pf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmQ00ucfnj51DxXq4YZupbpmCBZYSIyKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216024092837-3slkm0p77nf1eqdi70q2nhpgr71av0pf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
