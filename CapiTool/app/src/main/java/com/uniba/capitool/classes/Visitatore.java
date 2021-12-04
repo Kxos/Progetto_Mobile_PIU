@@ -3,8 +3,9 @@ package com.uniba.capitool.classes;
 import java.util.ArrayList;
 
 public class Visitatore {
-    private String dataNascita;      //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
 
+    private String dataNascita;      //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
+    private int id;
     private String ruolo;
     private String cognome;
 
@@ -20,7 +21,7 @@ public class Visitatore {
     public Visitatore() {
     }
 
-    public Visitatore(String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username) {
+    public Visitatore(int id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username) {
         this.dataNascita = dataNascita;
         this.ruolo = ruolo;
         this.cognome = cognome;
@@ -84,6 +85,22 @@ public class Visitatore {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<Percorso> getPercorsi() {
+        return percorsi;
+    }
+
+    public void setPercorsi(ArrayList<Percorso> percorsi) {
+        this.percorsi = percorsi;
     }
 
     //non mettere questo motodo pubblico, altrimenti nel db andra a scrivere questa stringa in un attributo

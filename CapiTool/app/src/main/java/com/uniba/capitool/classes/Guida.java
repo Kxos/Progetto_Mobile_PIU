@@ -7,8 +7,8 @@ public class Guida extends Visitatore{
         this.idPatentino = idPatentino;
     }
 
-    public Guida(String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username, String idPatentino) {
-        super(dataNascita, ruolo, cognome, psw, nome, email, username);
+    public Guida(int id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username, String idPatentino) {
+        super(id, dataNascita, ruolo, cognome, psw, nome, email, username);
         this.idPatentino = idPatentino;
     }
 
