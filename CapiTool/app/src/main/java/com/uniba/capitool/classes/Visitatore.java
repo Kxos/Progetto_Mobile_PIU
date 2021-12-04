@@ -93,11 +93,11 @@ public class Visitatore {
     }
 
     protected boolean aggiungiPercorso(Percorso percorso){
-        return percorsi.add(Percorso);
+        return percorsi.add(percorso);
     }
 
     protected boolean rimuoviPercorso(Percorso percorso){
-        return percorsi.remove(Percorso);
+        return percorsi.remove(percorso);
     }
 
     protected void aggiornaProfilo(){

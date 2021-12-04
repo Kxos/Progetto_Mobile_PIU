@@ -5,7 +5,7 @@ import android.media.Image;
 import java.util.Date;
 import 	java.util.ArrayList;
 
-public class Sito_Culturale {
+public class SitoCulturale {
 
     private int id;
     private String nome;
@@ -17,7 +17,7 @@ public class Sito_Culturale {
     private Image foto;
     private ArrayList<Zona> zone;
 
-    public Sito_Culturale(){
+    public SitoCulturale(){
 
     }
 
