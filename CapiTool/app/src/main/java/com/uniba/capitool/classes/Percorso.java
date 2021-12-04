@@ -16,7 +16,25 @@ public class Percorso {
         this.idSitoAssociato = idSitoAssociato;
         this.descrizione = descrizione;
     }
+    
+    protected void aggiornaPercorso(){
 
+    }
+
+    protected void eliminaPercorso(){
+
+    }
+
+    protected boolean aggiungiZonaScelta(Zona zonaScelta){
+        return zoneScelte.add(zonaScelta);
+    }
+
+    protected boolean rimuoviZonaScelta(Zona zonaScelta){
+        return zoneScelte.remove(zonaScelta);
+    }
+
+
+    //METODI GETTER & SETTER
     public int getId() {
         return id;
     }
@@ -57,19 +75,4 @@ public class Percorso {
         this.descrizione = descrizione;
     }
 
-    protected void aggiornaPercorso(){
-
-    }
-
-    protected void eliminaPercorso(){
-
-    }
-
-    protected boolean aggiungiZonaScelta(Zona zonaScelta){
-        return zoneScelte.add(zonaScelta);
-    }
-
-    protected boolean rimuoviZonaScelta(Zona zonaScelta){
-        return zoneScelte.remove(zonaScelta);
-    }
 }
