@@ -1,5 +1,7 @@
 package com.uniba.capitool.classes;
 
+import java.util.ArrayList;
+
 public class Visitatore {
     private String dataNascita;      //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
 
@@ -12,6 +14,8 @@ public class Visitatore {
     private String email;
 
     private String username;
+
+    private ArrayList<Percorso> percorsi;
 
     public Visitatore() {
     }
@@ -83,8 +87,25 @@ public class Visitatore {
     }
 
     //non mettere questo motodo pubblico, altrimenti nel db andra a scrivere questa stringa in un attributo
-    String getAll(){
+    protected String getAll(){
         String risultato=""+dataNascita+","+username+","+ruolo+","+email+","+nome+","+cognome+","+psw;
         return risultato;
     }
+
+    protected boolean aggiungiPercorso(Percorso percorso){
+        return percorsi.add(Percorso);
+    }
+
+    protected boolean rimuoviPercorso(Percorso percorso){
+        return percorsi.remove(Percorso);
+    }
+
+    protected void aggiornaProfilo(){
+
+    }
+
+    protected void eliminaVisitatore(){
+
+    }
+
 }
