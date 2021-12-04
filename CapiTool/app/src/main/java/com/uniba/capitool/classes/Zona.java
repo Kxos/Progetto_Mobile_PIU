@@ -1,13 +1,9 @@
 package com.uniba.capitool.classes;
 
-import android.media.Image;
-
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 public class Zona {
-
-
 
 
     private int id ;
@@ -16,6 +12,8 @@ public class Zona {
 
     private static int countId = 0;
 
+
+    public Zona(){} ;
 
     public Zona (String nome){
         this.nome = nome ;

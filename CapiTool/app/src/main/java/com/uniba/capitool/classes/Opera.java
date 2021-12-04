@@ -13,7 +13,8 @@ public class Opera {
     private Image iotCode ;
 
     private static int countId = 0 ;
-    
+
+    public Opera(){} ;
 
     public Opera (String titolo, String descrizione, Image foto){
         this.titolo = titolo;
