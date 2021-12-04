@@ -16,7 +16,7 @@ public class Percorso {
         this.idSitoAssociato = idSitoAssociato;
         this.descrizione = descrizione;
     }
-    
+
     protected void aggiornaPercorso(){
 
     }
