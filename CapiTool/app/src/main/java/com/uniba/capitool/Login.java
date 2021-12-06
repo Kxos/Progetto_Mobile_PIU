@@ -109,19 +109,7 @@ public class Login extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if(user == null){
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-
-            builder.setTitle("Account non trovato!");
-            builder.setMessage("Controlla i dati inseriti e riprova.");
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                }
-            });
-
-            AlertDialog invalidDialogError = builder.create();
-            invalidDialogError.show();
+            BasicMethod.alertDialog(this, "Controlla i dati inseriti e riprova", "Account non trovato", "Ok");
 
         }
 

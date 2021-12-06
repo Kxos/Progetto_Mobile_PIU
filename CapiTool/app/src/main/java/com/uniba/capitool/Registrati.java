@@ -32,17 +32,6 @@ public class Registrati extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //fa comparire nella toolbar il pulsante back
 
-      /*  avanti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registraRuolo = new Intent(RegistratiCredenziali.this, RegistraRuolo.class);
-                Bundle mBundle = new Bundle();
-                mBundle.putString("email", email.getText().toString());
-                mBundle.putString("password", password.getText().toString());
-                registraRuolo.putExtras(mBundle);
-                startActivity(registraRuolo);
-            }
-        });*/
 
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
