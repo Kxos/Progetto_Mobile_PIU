@@ -74,12 +74,10 @@ public class Login extends AppCompatActivity {
     }
 
     // Effettua il login tramite email e password. Gestito da AUthentication di Firebase
-    public boolean signIn(String email, String password){
+    public void signIn(String email, String password){
 
         if(email.isEmpty())   { email = "none"; }
         if(password.isEmpty()){ password = "none"; }
-
-        final boolean[] risultato = {false};
 
         //inizializzazione Autenticazione Firebase
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -94,24 +92,23 @@ public class Login extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.d("uid Utente", mAuth.getUid());
                             updateUI(user);
-                            risultato[0] = true;
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(Login.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
-                            risultato[0] =  false;
+
                         }
                     }
                 });
-        return risultato[0];
     }
 
 
     private void updateUI(FirebaseUser user) {
         if(user == null){
-            Log.d("----------------------------------------------","---------------------------------------------------------");
+
             AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
 
             builder.setTitle("Account non trovato!");
