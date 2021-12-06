@@ -3,8 +3,11 @@ package com.uniba.capitool;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -25,24 +28,18 @@ import com.uniba.capitool.classes.Visitatore;
 
 public class Login extends AppCompatActivity {
 
-    ImageView email_error_icon;
-    ImageView password_error_icon;
+    EditText email;
+    EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email_error_icon    = findViewById(R.id.email_error_icon);
-        password_error_icon = findViewById(R.id.password_error_icon);
-
         Button button_login;
         button_login = findViewById(R.id.button_login);
 
-        EditText email;
         email = findViewById(R.id.textfield_email);
-
-        EditText password;
         password = findViewById(R.id.textfield_password);
 
         TextView registrati;
@@ -69,7 +66,7 @@ public class Login extends AppCompatActivity {
                 if(isEmailValid(email_value)){
                     signIn(email_value,password_value);
                 }else{
-                    showCredentialError();
+                    email.setError("Inserisci un Email");
                 }
             }
         });
@@ -113,8 +110,25 @@ public class Login extends AppCompatActivity {
 
 
     private void updateUI(FirebaseUser user) {
-        if(user == null){ showCredentialError(); }
-        else{
+        if(user == null){
+            Log.d("----------------------------------------------","---------------------------------------------------------");
+            AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+
+            builder.setTitle("Account non trovato!");
+            builder.setMessage("Controlla i dati inseriti e riprova.");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+
+            AlertDialog invalidDialogError = builder.create();
+            invalidDialogError.show();
+
+        }
+
+        if(user != null) {
             Log.d("User_ID: ", user.getUid());
 
             // Passaggio da una Activity ad un altra
@@ -122,6 +136,7 @@ public class Login extends AppCompatActivity {
             myIntent.putExtra("User_ID", user.getUid()); //Optional parameters
             Login.this.startActivity(myIntent);
         }
+
     }
 
     /***
@@ -132,11 +147,5 @@ public class Login extends AppCompatActivity {
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
-    private void showCredentialError() {
-        email_error_icon.setVisibility(View.VISIBLE);
-        password_error_icon.setVisibility(View.VISIBLE);
-    }
-
 
 }
