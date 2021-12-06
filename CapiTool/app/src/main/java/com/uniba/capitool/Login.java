@@ -1,5 +1,8 @@
 package com.uniba.capitool;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,15 +14,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.uniba.capitool.classes.Visitatore;
 
 public class Login extends AppCompatActivity {
+
+    ImageView email_error_icon;
+    ImageView password_error_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        email_error_icon    = findViewById(R.id.email_error_icon);
+        password_error_icon = findViewById(R.id.password_error_icon);
 
         Button button_login;
         button_login = findViewById(R.id.button_login);
@@ -29,10 +44,6 @@ public class Login extends AppCompatActivity {
 
         EditText password;
         password = findViewById(R.id.textfield_password);
-
-        ImageView email_error_icon, password_error_icon;
-        email_error_icon = findViewById(R.id.email_error_icon);
-        password_error_icon = findViewById(R.id.password_error_icon);
 
         TextView registrati;
         registrati = findViewById(R.id.textView_register);
@@ -51,42 +62,66 @@ public class Login extends AppCompatActivity {
 
         button_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Scrive un messaggio sulla console
-                Log.d("Risultato","Hai cliccato il pulsante");
 
-                Log.d("Email", email.getText().toString());
-                Log.d("Password", password.getText().toString());
+                String email_value = email.getText().toString();
+                String password_value = password.getText().toString();
 
-                CharSequence email_value = email.getText().toString();
-                CharSequence password_value = password.getText().toString();
-
-                if (isEmailValid(email_value) && isPasswordValid(password_value)){
-                    // Login validato
-
-                    /**
-                     // Passaggio da una Activity ad un altra
-                     String value = "Sei entrato";
-                     Intent myIntent = new Intent(MainActivity.this, SignIn.class);
-                     myIntent.putExtra("key", value); //Optional parameters
-                     MainActivity.this.startActivity(myIntent);
-                     */
-
+                if(isEmailValid(email_value)){
+                    signIn(email_value,password_value);
                 }else{
-                    // Errore nelle credenziali
-
-                    if (!isEmailValid(email_value)){
-                        email_error_icon.setVisibility(View.VISIBLE);
-                    }
-
-                    if (!isPasswordValid(password_value)){
-                        password_error_icon.setVisibility(View.VISIBLE);
-                    }
-
+                    showCredentialError();
                 }
-
             }
         });
 
+    }
+
+    // Effettua il login tramite email e password. Gestito da AUthentication di Firebase
+    public boolean signIn(String email, String password){
+
+        if(email.isEmpty())   { email = "none"; }
+        if(password.isEmpty()){ password = "none"; }
+
+        final boolean[] risultato = {false};
+
+        //inizializzazione Autenticazione Firebase
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Log.d("uid Utente", mAuth.getUid());
+                            updateUI(user);
+                            risultato[0] = true;
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                            risultato[0] =  false;
+                        }
+                    }
+                });
+        return risultato[0];
+    }
+
+
+    private void updateUI(FirebaseUser user) {
+        if(user == null){ showCredentialError(); }
+        else{
+            Log.d("User_ID: ", user.getUid());
+
+            // Passaggio da una Activity ad un altra
+            Intent myIntent = new Intent(Login.this, HomePage.class);
+            myIntent.putExtra("User_ID", user.getUid()); //Optional parameters
+            Login.this.startActivity(myIntent);
+        }
     }
 
     /***
@@ -98,12 +133,10 @@ public class Login extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    /***
-     *
-     * @param password - Password da validare
-     * @return boolean
-     */
-    private boolean isPasswordValid(CharSequence password) {
-        return true;
+    private void showCredentialError() {
+        email_error_icon.setVisibility(View.VISIBLE);
+        password_error_icon.setVisibility(View.VISIBLE);
     }
+
+
 }

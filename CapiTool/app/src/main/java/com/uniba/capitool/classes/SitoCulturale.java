@@ -21,6 +21,18 @@ public class SitoCulturale {
 
     }
 
+    public SitoCulturale(int id, String nome, String indirizzo, Date orarioApertura, Date orarioChiusura, float costoBiglietto, String citta, Image foto, ArrayList<Zona> zone) {
+        this.id = id;
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.orarioApertura = orarioApertura;
+        this.orarioChiusura = orarioChiusura;
+        this.costoBiglietto = costoBiglietto;
+        this.citta = citta;
+        this.foto = foto;
+        this.zone = zone;
+    }
+
     protected boolean aggiungiZona(Zona zona) {
         return zone.add(zona);
     }
