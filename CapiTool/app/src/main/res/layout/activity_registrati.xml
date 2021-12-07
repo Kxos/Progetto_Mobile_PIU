@@ -7,9 +7,7 @@
     android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
     tools:context=".Registrati">
 
-    <include
-        android:id="@+id/toolbar2"
-        layout="@layout/toolbar2" />
+    <include layout="@layout/toolbar" />
     <!--
         <EditText
             android:id="@+id/email"
@@ -89,8 +87,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar2"
+        android:layout_height="675dp"
+        android:layout_below="@+id/toolbar"
         android:layout_marginTop="0dp" />
 
 
