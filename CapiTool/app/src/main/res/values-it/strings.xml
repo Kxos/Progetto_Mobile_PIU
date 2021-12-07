@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CapiTool</string>
+    <string name="myRoutes">I miei Percorsi</string>
+    <string name="myFavourites">Preferiti</string>
+    <string name="recommendedRoutes">Consigliati dalle Guide</string>
+    <string name="profile">Profilo</string>
+
+</resources>

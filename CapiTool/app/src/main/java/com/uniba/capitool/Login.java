@@ -63,11 +63,18 @@ public class Login extends AppCompatActivity {
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();
 
+                // Passaggio da una Activity ad un altra
+                Intent myIntent = new Intent(Login.this, HomePage.class);
+                Login.this.startActivity(myIntent);
+
+                /**
                 if(isEmailValid(email_value)){
                     signIn(email_value,password_value);
                 }else{
                     email.setError("Inserisci un Email");
                 }
+                */
+
             }
         });
 
