@@ -12,7 +12,7 @@ public class Curatore extends Visitatore {
         this.sito = sito;
     }
 
-    public Curatore(int id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username, SitoCulturale sito) {
+    public Curatore(String id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username, SitoCulturale sito) {
         super(id, dataNascita, ruolo, cognome, psw, nome, email, username);
         this.sito = sito;
     }

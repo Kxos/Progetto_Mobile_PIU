@@ -15,10 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.uniba.capitool.classes.Visitatore;
+
 public class Registrati extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrati);
 
@@ -40,9 +43,9 @@ public class Registrati extends AppCompatActivity {
 
 
         //toolbar.setNavigationIcon(R.drawable.ic_android_black_24dp);
+        Visitatore visit =new Visitatore();
 
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+       toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //in questo modo recupero il fragment in uso, così se l'utente spinge back torno al passo precedente

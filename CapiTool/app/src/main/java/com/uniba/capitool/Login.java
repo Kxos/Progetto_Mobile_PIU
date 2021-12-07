@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +31,7 @@ import com.uniba.capitool.classes.Visitatore;
 public class Login extends AppCompatActivity {
 
     EditText email;
-    EditText password;
+    TextInputEditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class Login extends AppCompatActivity {
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();
 
-                if(isEmailValid(email_value)){
+                if(BasicMethod.isEmailValid(email_value)){
                     signIn(email_value,password_value);
                 }else{
                     email.setError("Inserisci un Email");
@@ -129,8 +131,6 @@ public class Login extends AppCompatActivity {
      * @param email - Email da verificare
      * @return Boolean
      */
-    boolean isEmailValid(CharSequence email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
+
 
 }
