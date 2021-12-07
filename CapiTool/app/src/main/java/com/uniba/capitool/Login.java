@@ -2,6 +2,8 @@ package com.uniba.capitool;
 
 import static android.content.ContentValues.TAG;
 
+import static com.uniba.capitool.BasicMethod.isEmailValid;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,11 +67,15 @@ public class Login extends AppCompatActivity {
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();
 
-                if(BasicMethod.isEmailValid(email_value)){
+
+                if(isEmailValid(email_value)){
+
                     signIn(email_value,password_value);
                 }else{
                     email.setError("Inserisci un Email");
                 }
+
+
             }
         });
 
