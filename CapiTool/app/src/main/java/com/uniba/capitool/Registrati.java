@@ -69,7 +69,7 @@ public class Registrati extends AppCompatActivity {
             }
         });
     }
-
+ 
     @Override
     public void onBackPressed() {
         //fare la stessa cosa della toolbar
