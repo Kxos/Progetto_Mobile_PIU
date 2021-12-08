@@ -2,6 +2,8 @@ package com.uniba.capitool;
 
 import static android.content.ContentValues.TAG;
 
+import static com.uniba.capitool.BasicMethod.isEmailValid;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +33,7 @@ import com.uniba.capitool.classes.Visitatore;
 public class Login extends AppCompatActivity {
 
     EditText email;
-    EditText password;
+    TextInputEditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Visitatore visit= new Visitatore();
                 visit.setCognome("Nardo");
+
                 Intent intentRegistrati = new Intent(Login.this, Registrati.class);
                 intentRegistrati.putExtra("cognome",visit.getCognome());
                 intentRegistrati.putExtra("nome",visit.getNome());
@@ -63,17 +68,14 @@ public class Login extends AppCompatActivity {
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();
 
-                // Passaggio da una Activity ad un altra
-                Intent myIntent = new Intent(Login.this, HomePage.class);
-                Login.this.startActivity(myIntent);
 
-                /**
                 if(isEmailValid(email_value)){
+
                     signIn(email_value,password_value);
                 }else{
                     email.setError("Inserisci un Email");
                 }
-                */
+
 
             }
         });
@@ -136,8 +138,6 @@ public class Login extends AppCompatActivity {
      * @param email - Email da verificare
      * @return Boolean
      */
-    boolean isEmailValid(CharSequence email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
+
 
 }

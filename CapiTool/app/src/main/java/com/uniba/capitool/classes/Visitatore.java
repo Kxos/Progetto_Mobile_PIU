@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Visitatore {
 
     private String dataNascita;      //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
-    private int id;
+    private String id;
     private String ruolo;
     private String cognome;
 
@@ -21,7 +21,7 @@ public class Visitatore {
     public Visitatore() {
     }
 
-    public Visitatore(int id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username) {
+    public Visitatore(String id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username) {
         this.dataNascita = dataNascita;
         this.ruolo = ruolo;
         this.cognome = cognome;
@@ -87,11 +87,11 @@ public class Visitatore {
         this.username = username;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

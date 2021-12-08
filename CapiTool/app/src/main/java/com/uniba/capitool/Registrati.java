@@ -1,6 +1,8 @@
 package com.uniba.capitool;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,12 +17,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.uniba.capitool.classes.Visitatore;
+
 public class Registrati extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrati);
+
+        SharedPreferences datiRegistrazioneUtente = this.getPreferences(Context.MODE_PRIVATE);//getSharedPreferences("datiRegistrazioneUtente", );
+        datiRegistrazioneUtente.edit().clear().commit();
 
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);
@@ -40,9 +48,9 @@ public class Registrati extends AppCompatActivity {
 
 
         //toolbar.setNavigationIcon(R.drawable.ic_android_black_24dp);
+        Visitatore visit =new Visitatore();
 
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+       toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //in questo modo recupero il fragment in uso, così se l'utente spinge back torno al passo precedente
