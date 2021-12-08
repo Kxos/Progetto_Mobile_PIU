@@ -36,9 +36,9 @@
         android:label="Impostazioni Sito"
         tools:layout="@layout/fragment_impostazioni_sito" />
     <fragment
-        android:id="@+id/disconnettiti"
+        android:id="@+id/disconnetti"
         android:name="com.uniba.capitool.fragmentsNavDrawnBar.FragmentDisconnettiti"
-        android:label="Disconnettiti"
+        android:label="Disconnetti"
         tools:layout="@layout/fragment_disconnettiti" />
 
 </navigation>

@@ -40,7 +40,7 @@
         android:title="@string/profile" />
 
     <item
-        android:id="@+id/disconnettiti"
+        android:id="@+id/disconnetti"
         android:icon="@drawable/ic_baseline_exit_to_app_24"
         android:title="@string/logout" />
 
