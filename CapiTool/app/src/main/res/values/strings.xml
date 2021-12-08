@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">CapiTool</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="siteManagement">Site Management</string>
+    <string name="mySite">My Site</string>
+    <string name="settingSite">Site Settings</string>
 
     <string name="myRoutes">My Routes</string>
     <string name="myFavourites">Favourites</string>
     <string name="recommendedRoutes">Recommended Routes</string>
     <string name="profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

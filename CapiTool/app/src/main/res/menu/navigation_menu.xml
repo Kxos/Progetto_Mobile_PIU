@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:title="@string/siteManagement">
+
+        <menu>
+
+            <item
+                android:id="@+id/mioSito"
+                android:icon="@drawable/ic_baseline_account_balance_24"
+                android:title="@string/mySite" />
+
+            <item
+                android:id="@+id/impostazioniSito"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="@string/settingSite" />
+
+        </menu>
+
+    </item>
+
     <item
         android:id="@+id/mieiPercorsi"
         android:icon="@drawable/ic_baseline_map_24"

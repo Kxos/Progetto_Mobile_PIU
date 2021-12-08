@@ -7,8 +7,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +32,6 @@ public class HomePage extends AppCompatActivity {
         //String value = intent.getStringExtra("User_ID");
         //Log.d("Risultato",value);
 
-
         drawerLayout = findViewById(R.id.drawerLayout);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -44,13 +47,28 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+        setNavLateralMenu(toolbar);
+
     }
 
-    /**
+    /***
      * Default method for Android Back Button
      */
     @Override
     public void onBackPressed() {
         drawerLayout.closeDrawers();
     }
+
+    /***
+     *
+     */
+    public void setNavLateralMenu(Toolbar toolbar) {
+        NavigationView navigationView = findViewById(R.id.Home_Nav_Menu);
+        navigationView.setItemIconTintList(toolbar.getBackgroundTintList());
+        navigationView.setItemTextColor(null);
+
+        NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
+        NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
 }

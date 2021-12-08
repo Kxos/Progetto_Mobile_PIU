@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/mieiPercorsi">
+
+    <fragment
+        android:id="@+id/mieiPercorsi"
+        android:name="com.uniba.capitool.FragmentMieiPercorsi"
+        android:label="I Miei Percorsi"
+        tools:layout="@layout/fragment_miei_percorsi" />
+    <fragment
+        android:id="@+id/profilo"
+        android:name="com.uniba.capitool.FragmentProfilo"
+        android:label="Profilo"
+        tools:layout="@layout/fragment_profilo" />
+    <fragment
+        android:id="@+id/preferiti"
+        android:name="com.uniba.capitool.FragmentPreferiti"
+        android:label="Preferiti"
+        tools:layout="@layout/fragment_preferiti" />
+    <fragment
+        android:id="@+id/consigliati"
+        android:name="com.uniba.capitool.FragmentConsigliati"
+        android:label="Consigliati"
+        tools:layout="@layout/fragment_consigliati" />
+</navigation>

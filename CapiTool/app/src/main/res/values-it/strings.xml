@@ -2,6 +2,11 @@
 <resources>
 
     <string name="app_name">CapiTool</string>
+
+    <string name="siteManagement">Gestione Sito</string>
+    <string name="mySite">Il mio sito</string>
+    <string name="settingSite">Impostazioni Sito</string>
+
     <string name="myRoutes">I miei Percorsi</string>
     <string name="myFavourites">Preferiti</string>
     <string name="recommendedRoutes">Consigliati dalle Guide</string>
