@@ -1,4 +1,4 @@
-package com.uniba.capitool;
+package com.uniba.capitool.fragmentsNavDrawnBar;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.uniba.capitool.R;
 
 /**
  */

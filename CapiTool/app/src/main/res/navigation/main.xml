@@ -6,23 +6,39 @@
     app:startDestination="@id/mieiPercorsi">
 
     <fragment
+        android:id="@+id/mioSito"
+        android:name="com.uniba.capitool.fragmentsNavDrawnBar.FragmentMioSito"
+        android:label="Mio Sito"
+        tools:layout="@layout/fragment_mio_sito" />
+    <fragment
         android:id="@+id/mieiPercorsi"
-        android:name="com.uniba.capitool.FragmentMieiPercorsi"
+        android:name="com.uniba.capitool.fragmentsNavDrawnBar.FragmentMieiPercorsi"
         android:label="I Miei Percorsi"
         tools:layout="@layout/fragment_miei_percorsi" />
     <fragment
         android:id="@+id/profilo"
-        android:name="com.uniba.capitool.FragmentProfilo"
+        android:name="com.uniba.capitool.fragmentsNavDrawnBar.FragmentProfilo"
         android:label="Profilo"
         tools:layout="@layout/fragment_profilo" />
     <fragment
         android:id="@+id/preferiti"
-        android:name="com.uniba.capitool.FragmentPreferiti"
+        android:name="com.uniba.capitool.fragmentsNavDrawnBar.FragmentPreferiti"
         android:label="Preferiti"
         tools:layout="@layout/fragment_preferiti" />
     <fragment
         android:id="@+id/consigliati"
-        android:name="com.uniba.capitool.FragmentConsigliati"
+        android:name="com.uniba.capitool.fragmentsNavDrawnBar.FragmentConsigliati"
         android:label="Consigliati"
         tools:layout="@layout/fragment_consigliati" />
+    <fragment
+        android:id="@+id/impostazioniSito"
+        android:name="com.uniba.capitool.fragmentsNavDrawnBar.FragmentImpostazioniSito"
+        android:label="Impostazioni Sito"
+        tools:layout="@layout/fragment_impostazioni_sito" />
+    <fragment
+        android:id="@+id/disconnettiti"
+        android:name="com.uniba.capitool.fragmentsNavDrawnBar.FragmentDisconnettiti"
+        android:label="Disconnettiti"
+        tools:layout="@layout/fragment_disconnettiti" />
+
 </navigation>

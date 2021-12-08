@@ -18,6 +18,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.uniba.capitool.classes.Visitatore;
+import com.uniba.capitool.fragmentsRegistrazione.FragmentRegistraCredenziali;
+import com.uniba.capitool.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
+import com.uniba.capitool.fragmentsRegistrazione.FragmentRegistraRuolo;
 
 public class Registrati extends AppCompatActivity {
 

@@ -11,6 +11,7 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -102,8 +103,9 @@ public class HomePage extends AppCompatActivity {
 
         // TODO - QUERY PER RICEVERE IL RUOLO DELL'UTENTE
         // TODO - ... RUOLO RICEVUTO
-        // TODO - SELEZIONE MENU A SECONDA DEL RUOLO
+        // TODO - IMPOSTA MENU LATERALE A SECONDA DEL RUOLO
         navigationView.inflateMenu(R.menu.navigation_curatore_menu);
+
     }
 
 }

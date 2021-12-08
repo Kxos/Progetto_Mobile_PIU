@@ -1,10 +1,9 @@
-package com.uniba.capitool;
+package com.uniba.capitool.fragmentsRegistrazione;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,6 +16,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.uniba.capitool.BasicMethod;
+import com.uniba.capitool.R;
 
 
 public class FragmentRegistraRuolo extends Fragment {

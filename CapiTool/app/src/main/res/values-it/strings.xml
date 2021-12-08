@@ -11,5 +11,6 @@
     <string name="myFavourites">Preferiti</string>
     <string name="recommendedRoutes">Consigliati dalle Guide</string>
     <string name="profile">Profilo</string>
+    <string name="logout">Disconnettiti</string>
 
 </resources>

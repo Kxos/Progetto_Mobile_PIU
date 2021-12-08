@@ -1,6 +1,4 @@
-package com.uniba.capitool;
-
-import static android.content.ContentValues.TAG;
+package com.uniba.capitool.fragmentsRegistrazione;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,15 +19,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.uniba.capitool.BasicMethod;
+import com.uniba.capitool.R;
 
 public class FragmentRegistraCredenziali extends Fragment {
 

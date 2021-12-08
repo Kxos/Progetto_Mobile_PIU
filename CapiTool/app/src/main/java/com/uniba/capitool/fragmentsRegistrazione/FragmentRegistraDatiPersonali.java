@@ -1,4 +1,4 @@
-package com.uniba.capitool;
+package com.uniba.capitool.fragmentsRegistrazione;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -19,6 +19,7 @@ import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.uniba.capitool.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
