@@ -54,6 +54,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Visitatore visit= new Visitatore();
                 visit.setCognome("Nardo");
+
                 Intent intentRegistrati = new Intent(Login.this, Registrati.class);
                 intentRegistrati.putExtra("cognome",visit.getCognome());
                 intentRegistrati.putExtra("nome",visit.getNome());

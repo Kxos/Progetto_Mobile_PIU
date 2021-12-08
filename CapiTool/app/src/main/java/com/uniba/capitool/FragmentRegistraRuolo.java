@@ -1,5 +1,7 @@
 package com.uniba.capitool;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -38,6 +40,8 @@ public class FragmentRegistraRuolo extends Fragment {
 
 
 
+
+
         // Inflate the layout for this fragment
          View v=inflater.inflate(R.layout.fragment_registra_ruolo, container, false);
 
@@ -70,6 +74,7 @@ public class FragmentRegistraRuolo extends Fragment {
         RadioButton visitatore = v.findViewById(R.id.visitatore);
         visitatore.setChecked(true);
         TextView backCredenziali = v.findViewById(R.id.backCredenziali);
+
 
         backCredenziali.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,12 +115,18 @@ public class FragmentRegistraRuolo extends Fragment {
                 }
 
 
-                Bundle bundle = new Bundle();
+               /* Bundle bundle = new Bundle();
                 bundle.putString("email",email);
                 bundle.putString("password",password);
-                bundle.putString("ruolo", ruoloSelezionato);
+                bundle.putString("ruolo", ruoloSelezionato);*/
+
+                SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = datiRegistrazioneUtente.edit();
+                editor.putString("ruolo", ruoloSelezionato);
+                editor.apply();
+
                 FragmentRegistraDatiPersonali fragmentRegistraDatiPersonali = new FragmentRegistraDatiPersonali();
-                fragmentRegistraDatiPersonali.setArguments(bundle);
+               // fragmentRegistraDatiPersonali.setArguments(bundle);
 
                 FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();

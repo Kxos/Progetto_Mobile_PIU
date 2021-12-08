@@ -1,5 +1,7 @@
 package com.uniba.capitool;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -41,6 +43,19 @@ public class FragmentRegistraDatiPersonali extends Fragment {
             //Bundle bundle = new Bundle();
             //bundle.putString("ruolo",ruolo.getText().toString()); // Put anything what you want
         }
+
+        //leggere il file SharedPreferences
+        SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
+        if(datiRegistrazioneUtente!=null){
+            String emailTrovata = datiRegistrazioneUtente.getString("email", "");
+            String passwordTrovata = datiRegistrazioneUtente.getString("password", "");
+            String ruoloTrovato = datiRegistrazioneUtente.getString("ruolo", "");
+            Log.e("DATI SharedPreferences ", ""+emailTrovata+" , "+passwordTrovata+" , "+ruoloTrovato);
+
+        }else{
+            Log.e( "onCreateView: ", "SharedPreferences non trovato");
+        }
+
         username=v.findViewById(R.id.username2);
         nome=v.findViewById(R.id.nome);
         cognome=v.findViewById(R.id.surname);

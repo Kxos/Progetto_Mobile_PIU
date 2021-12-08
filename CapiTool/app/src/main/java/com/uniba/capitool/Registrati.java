@@ -1,6 +1,8 @@
 package com.uniba.capitool;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,9 @@ public class Registrati extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrati);
+
+        SharedPreferences datiRegistrazioneUtente = this.getPreferences(Context.MODE_PRIVATE);//getSharedPreferences("datiRegistrazioneUtente", );
+        datiRegistrazioneUtente.edit().clear().commit();
 
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);

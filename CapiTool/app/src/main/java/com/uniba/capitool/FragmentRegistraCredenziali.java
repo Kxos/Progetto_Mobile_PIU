@@ -2,6 +2,8 @@ package com.uniba.capitool;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,6 +47,7 @@ CheckBox mostraPassword;
         outState.putString("password", password.getText().toString());
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,7 +60,20 @@ CheckBox mostraPassword;
        password=v.findViewById(R.id.password);
        confermaPassword=v.findViewById(R.id.confermaPassword);
 
-        if (savedInstanceState != null) {
+       //leggere il file SharedPreferences
+        SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
+        if(datiRegistrazioneUtente!=null){
+            String emailTrovata = datiRegistrazioneUtente.getString("email", "");
+            String passwordTrovata = datiRegistrazioneUtente.getString("password", "");
+            email.setText(emailTrovata);
+            password.setText(passwordTrovata);
+
+        }else{
+            Log.e( "onCreateView: ", "SharedPreferences non trovato");
+        }
+
+
+      /*  if (savedInstanceState != null) {
             email.setText(savedInstanceState.getString("email"));
             password.setText(savedInstanceState.getString("password"));
         } else {
@@ -66,7 +83,8 @@ CheckBox mostraPassword;
        if(bundle!=null){
            email.setText(bundle.get("email").toString());
            password.setText(bundle.get("password").toString());
-       }
+       }*/
+
        mostraPassword=v.findViewById(R.id.mostraPassword);
 
        mAuth = FirebaseAuth.getInstance();
@@ -159,6 +177,8 @@ CheckBox mostraPassword;
         if(isNewUser==true){
             Log.d( "************************: ", "TUTTO OK");
 
+
+
             Bundle bundle = new Bundle();
             bundle.putString("email",email.getText().toString());
             bundle.putString("password",password.getText().toString());
@@ -169,6 +189,12 @@ CheckBox mostraPassword;
             FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainerView, fragmentRegistraRuolo);
             fragmentTransaction.commit();
+
+            SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = datiRegistrazioneUtente.edit();
+            editor.putString("email", email.getText().toString());
+            editor.putString("password", password.getText().toString());
+            editor.apply();
 
         }else{
             Log.d( "************************: ", "NON OK");
