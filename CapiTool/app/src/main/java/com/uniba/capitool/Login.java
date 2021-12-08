@@ -68,6 +68,11 @@ public class Login extends AppCompatActivity {
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();
 
+                // TODO - RIMUOVERE QUESTE 2 FUNZIONI, ACCESSO VELOCE IN LOGIN
+                // Passa alla HomePage
+                Intent myIntent = new Intent(Login.this, HomePage.class);
+                Login.this.startActivity(myIntent);
+                // TODO -------------------------------------------------------------------
 
                 if(isEmailValid(email_value)){
 
@@ -117,27 +122,19 @@ public class Login extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if(user == null){
-
             BasicMethod.alertDialog(this, "Controlla i dati inseriti e riprova", "Account non trovato", "Ok");
-
         }
 
         if(user != null) {
             Log.d("User_ID: ", user.getUid());
 
-            // Passaggio da una Activity ad un altra
+            // Passa alla HomePage
             Intent myIntent = new Intent(Login.this, HomePage.class);
             myIntent.putExtra("User_ID", user.getUid()); //Optional parameters
             Login.this.startActivity(myIntent);
         }
 
     }
-
-    /***
-     *
-     * @param email - Email da verificare
-     * @return Boolean
-     */
 
 
 }

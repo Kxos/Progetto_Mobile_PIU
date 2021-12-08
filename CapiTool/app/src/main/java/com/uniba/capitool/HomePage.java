@@ -6,20 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -32,13 +25,8 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        //Intent intent = getIntent();
-        //String value = intent.getStringExtra("User_ID");
-        //Log.d("Risultato",value);
-
         Toolbar toolbar = startToolbarDrawerLayout();
-        NavController navController = setNavLateralMenu(toolbar);
-
+        NavController navController = startNavLateralMenu(toolbar);
 
     }
 
@@ -51,6 +39,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     /***
+     * Inizializza la Toolbar ed il Drawer laterale vuoto
      *
      * @return toolbar: la toolbar configurata
      */
@@ -77,13 +66,17 @@ public class HomePage extends AppCompatActivity {
 
     /***
      *
+     * Inizializza il Drawer laterale con gli item di navigation_menu
+     *
      * @param toolbar: La toolbar predefinita
      * @return navController: Impostato dell navigationView configurato
      */
-    public NavController setNavLateralMenu(Toolbar toolbar) {
+    public NavController startNavLateralMenu(Toolbar toolbar) {
         NavigationView navigationView = findViewById(R.id.Home_Nav_Menu);
         navigationView.setItemIconTintList(toolbar.getBackgroundTintList());
         navigationView.setItemTextColor(null);
+
+        setNavLateralMenuOnUserRole(navigationView);
 
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -97,6 +90,20 @@ public class HomePage extends AppCompatActivity {
         });
 
         return navController;
+    }
+
+    /***
+     * Imposta il Menù laterale in base al Ruolo dell'utente
+     *
+     * @param navigationView: Viene passata la navigationView legata alla Toolbar
+     */
+    public void setNavLateralMenuOnUserRole(NavigationView navigationView){
+        navigationView.getMenu().clear();
+
+        // TODO - QUERY PER RICEVERE IL RUOLO DELL'UTENTE
+        // TODO - ... RUOLO RICEVUTO
+        // TODO - SELEZIONE MENU A SECONDA DEL RUOLO
+        navigationView.inflateMenu(R.menu.navigation_curatore_menu);
     }
 
 }

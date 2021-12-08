@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mieiPercorsi"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:title="@string/myRoutes" />
+
+    <item
+        android:id="@+id/preferiti"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/myFavourites" />
+    <item
+        android:id="@+id/consigliati"
+        android:icon="@drawable/ic_baseline_thumb_up_24"
+        android:title="@string/recommendedRoutes" />
+
+    <item
+        android:id="@+id/profilo"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/profile" />
+
+</menu>
