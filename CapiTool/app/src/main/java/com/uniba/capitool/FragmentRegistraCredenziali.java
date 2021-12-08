@@ -190,6 +190,7 @@ CheckBox mostraPassword;
             fragmentTransaction.replace(R.id.fragmentContainerView, fragmentRegistraRuolo);
             fragmentTransaction.commit();
 
+            //scrivere nel file SharedPreferences
             SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = datiRegistrazioneUtente.edit();
             editor.putString("email", email.getText().toString());
