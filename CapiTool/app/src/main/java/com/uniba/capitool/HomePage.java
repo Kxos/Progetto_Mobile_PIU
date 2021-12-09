@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
@@ -38,7 +39,7 @@ public class HomePage extends AppCompatActivity {
     public void onBackPressed() { drawerLayout.closeDrawers(); }
 
     /***
-     * Inizializza la Toolbar ed il Drawer laterale vuoto
+     * Inizializza la Toolbar ed il Drawer laterale vuoto (Bianco)
      *
      * @return toolbar: la toolbar configurata
      */
@@ -65,7 +66,7 @@ public class HomePage extends AppCompatActivity {
 
     /***
      *
-     * Inizializza il Drawer laterale con gli item di navigation_menu
+     * Inizializza il Drawer laterale con gli item di navigation_RUOLO_menu
      *
      * @param toolbar: La toolbar predefinita
      * @return navController: Impostato dell navigationView configurato
@@ -85,6 +86,16 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 toolbar.setTitle(destination.getLabel());
+
+                switch (destination.getId()){
+
+                    // Torna al Login
+                    case R.id.disconnetti:
+                        Intent myIntent = new Intent(HomePage.this, Login.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(myIntent);
+                        break;
+                }
             }
         });
 
