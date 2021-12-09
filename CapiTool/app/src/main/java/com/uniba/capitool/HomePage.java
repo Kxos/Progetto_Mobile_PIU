@@ -35,9 +35,7 @@ public class HomePage extends AppCompatActivity {
      * Default method for Android Back Button
      */
     @Override
-    public void onBackPressed() {
-        drawerLayout.closeDrawers();
-    }
+    public void onBackPressed() { drawerLayout.closeDrawers(); }
 
     /***
      * Inizializza la Toolbar ed il Drawer laterale vuoto

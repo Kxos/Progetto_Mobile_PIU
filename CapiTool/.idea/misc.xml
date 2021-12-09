@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_disconnettiti.xml" value="0.20520833333333333" />
+        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/navigation_header.xml" value="0.25" />
+        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/menu/navigation_curatore_menu.xml" value="0.25" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_home_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_registrati.xml" value="0.36666666666666664" />
