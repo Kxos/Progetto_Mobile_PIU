@@ -37,18 +37,15 @@ public class Registrati extends AppCompatActivity {
         EditText password = findViewById(R.id.password);
         Button avanti = findViewById(R.id.avanti);
 
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Registrati");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //fa comparire nella toolbar il pulsante back
 
-
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, new FragmentRegistraCredenziali() );
         fragmentTransaction.commit();
-
 
         //toolbar.setNavigationIcon(R.drawable.ic_android_black_24dp);
         Visitatore visit =new Visitatore();
@@ -76,7 +73,6 @@ public class Registrati extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.fragmentContainerView, new FragmentRegistraRuolo() );
                     fragmentTransaction.commit();
                 }
-
             }
         });
     }

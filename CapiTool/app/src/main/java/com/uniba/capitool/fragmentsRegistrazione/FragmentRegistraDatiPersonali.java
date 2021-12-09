@@ -4,7 +4,9 @@ import static android.content.ContentValues.TAG;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -26,8 +29,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.uniba.capitool.HomePage;
+import com.uniba.capitool.Login;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.Guida;
@@ -60,6 +68,7 @@ public class FragmentRegistraDatiPersonali extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_registra_dati_personali, container, false);
 
@@ -74,6 +83,7 @@ public class FragmentRegistraDatiPersonali extends Fragment {
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         if(sharedPreferences!=null){
+
             emailTrovata = sharedPreferences.getString("email", "");
             passwordTrovata = sharedPreferences.getString("password", "");
             ruoloTrovato = sharedPreferences.getString("ruolo", "");
@@ -82,7 +92,6 @@ public class FragmentRegistraDatiPersonali extends Fragment {
             username.setText(sharedPreferences.getString("username", ""));
             nome.setText(sharedPreferences.getString("nome", ""));
             cognome.setText(sharedPreferences.getString("cognome", ""));
-            //Log.e("DATI SharedPreferences ", ""+emailTrovata+" , "+passwordTrovata+" , "+ruoloTrovato+" , "+sharedPreferences.getString("dataNascita", ""));
 
         }else{
             Log.e( "onCreateView: ", "SharedPreferences non trovato");
@@ -187,6 +196,13 @@ public class FragmentRegistraDatiPersonali extends Fragment {
         dataNascita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if no view has focus else hide KEYBOARD
+                View view = getActivity().getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+
                 apriCalendario();
             }
         });
@@ -207,17 +223,11 @@ public class FragmentRegistraDatiPersonali extends Fragment {
             }
 
         };
+
         new DatePickerDialog(getActivity(), date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-        /*dataNascita.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-            }
-        });*/
     }
 
     private void updateEditTextDataNascita() {
@@ -230,10 +240,10 @@ public class FragmentRegistraDatiPersonali extends Fragment {
         datiRegistrazioneUtente.apply();
     }
 
-
-
     public void insertUtente(){
+
         mAuth = FirebaseAuth.getInstance();
+
         mAuth.createUserWithEmailAndPassword(emailTrovata, passwordTrovata)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
@@ -254,7 +264,7 @@ public class FragmentRegistraDatiPersonali extends Fragment {
 
     public void insertUtenteRealtimeDB(FirebaseUser user){
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://e-culture-tool-default-rtdb.europe-west1.firebasedatabase.app/");
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef = database.getReference("/Utenti/"+user.getUid());
 
         if(ruoloTrovato.equals("visitatore")){
@@ -274,6 +284,21 @@ public class FragmentRegistraDatiPersonali extends Fragment {
                     dataNascita.getText().toString(), ruoloTrovato, numeroPatentino.getText().toString());
             myRef.setValue(guida);
         }
+
+        //bisogna aspettare il caricamento nel db altrimenti va avanti e non scive i dati nel DB!
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Intent homePage = new Intent(getActivity(), HomePage.class);
+                homePage.putExtra("email", emailTrovata); //Optional parameters
+                getActivity().startActivity(homePage);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }

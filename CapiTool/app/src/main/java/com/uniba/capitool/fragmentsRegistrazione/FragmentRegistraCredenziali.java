@@ -68,19 +68,6 @@ CheckBox mostraPassword;
             Log.e( "onCreateView: ", "SharedPreferences non trovato");
         }
 
-
-      /*  if (savedInstanceState != null) {
-            email.setText(savedInstanceState.getString("email"));
-            password.setText(savedInstanceState.getString("password"));
-        } else {
-           // randomGoodDeed = viewModel.generateRandomGoodDeed();
-        }
-        Bundle bundle = this.getArguments();
-       if(bundle!=null){
-           email.setText(bundle.get("email").toString());
-           password.setText(bundle.get("password").toString());
-       }*/
-
        mostraPassword=v.findViewById(R.id.mostraPassword);
 
        mAuth = FirebaseAuth.getInstance();
@@ -100,7 +87,6 @@ CheckBox mostraPassword;
            }
        });
 
-
        avanti.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -118,7 +104,7 @@ CheckBox mostraPassword;
                 String messaggio=BasicMethod.isPasswordStrong(password.getText().toString());
 
                 if(messaggio==null){      // Significa che la password è forte e non ho ricevuto messaggi di errore in ritorno /
-                                                // Nota: if(messaggio.getText==null) non funziona
+
                     if(password.getText().toString().equals(confermaPassword.getText().toString())==false){
                         confermaPassword.setError("La password non corrisponde");
                         errorePassword=true;
@@ -133,14 +119,11 @@ CheckBox mostraPassword;
 
                     //con questo metodo controllo se l'email non è già presente in Authentication di Firebase
                     checkIfUserAlreadyExist(email.getText().toString());
-
                 }
-
            }
        });
 
         return v;
-
     }
 
     public void checkIfUserAlreadyExist(String email1){
@@ -173,8 +156,6 @@ CheckBox mostraPassword;
         if(isNewUser==true){
             Log.d( "************************: ", "TUTTO OK");
 
-
-
             Bundle bundle = new Bundle();
             bundle.putString("email",email.getText().toString());
             bundle.putString("password",password.getText().toString());
@@ -197,51 +178,5 @@ CheckBox mostraPassword;
             Log.d( "************************: ", "NON OK");
         }
     }
-
-    /*
-    //crea un nuovo utente con umail e password che userà per accedervi. Gestito da Auth di Firebase
-    public void createAccount(String email, String password){
-
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener( getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUIfragment(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            updateUIfragment(null);
-                        }
-                    }
-                });
-    }
-
-    private void updateUIfragment(FirebaseUser user) {
-        if(user!=null){
-
-            Bundle bundle = new Bundle();
-            bundle.putString("email",email.getText().toString()); // Put anything what you want
-            bundle.putString("password",password.getText().toString());
-            FragmentRegistraRuolo fragmentRegistraRuolo = new FragmentRegistraRuolo();
-            fragmentRegistraRuolo.setArguments(bundle);
-
-            FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentContainerView, fragmentRegistraRuolo);
-            fragmentTransaction.commit();
-
-        }else{
-
-            BasicMethod.alertDialog(getActivity(), "Credenziali esistenti", "Errore", "Ok");
-        }
-    }
-
-*/
 
 }
