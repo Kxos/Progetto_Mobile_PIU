@@ -78,9 +78,9 @@ public class FragmentRegistraRuolo extends Fragment {
         TextView backCredenziali = v.findViewById(R.id.backCredenziali);
 
         //leggere il file SharedPreferences
-        SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
-        if(datiRegistrazioneUtente!=null){
-            String ruoloTrovato = datiRegistrazioneUtente.getString("ruolo", "");
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        if(sharedPreferences!=null){
+            String ruoloTrovato = sharedPreferences.getString("ruolo", "");
 
             if(ruoloTrovato.equals("guida")){
                 guida.setChecked(true);
@@ -112,30 +112,30 @@ public class FragmentRegistraRuolo extends Fragment {
         });*/
 
 
-       // SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = datiRegistrazioneUtente.edit();
+       // SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor datiRegistrazioneUtente = sharedPreferences.edit();
 
         guida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putString("ruolo", "guida");
-                editor.apply();
+                datiRegistrazioneUtente.putString("ruolo", "guida");
+                datiRegistrazioneUtente.apply();
             }
         });
 
         curatore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putString("ruolo", "curatore");
-                editor.apply();
+                datiRegistrazioneUtente.putString("ruolo", "curatore");
+                datiRegistrazioneUtente.apply();
             }
         });
 
         visitatore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putString("ruolo", "visitatore");
-                editor.apply();
+                datiRegistrazioneUtente.putString("ruolo", "visitatore");
+                datiRegistrazioneUtente.apply();
             }
         });
    /*     radioGroup.setOnClickListener(new View.OnClickListener() {
@@ -147,18 +147,18 @@ public class FragmentRegistraRuolo extends Fragment {
 
                 if(guida.isChecked()){
                     ruoloSelezionato="guida";
-                    editor.putString("ruolo", ruoloSelezionato);
-                    editor.apply();
+                    datiRegistrazioneUtente.putString("ruolo", ruoloSelezionato);
+                    datiRegistrazioneUtente.apply();
 
                 }else if(curatore.isChecked()){
                     ruoloSelezionato="curatore";
-                    editor.putString("ruolo", ruoloSelezionato);
-                    editor.apply();
+                    datiRegistrazioneUtente.putString("ruolo", ruoloSelezionato);
+                    datiRegistrazioneUtente.apply();
 
                 }else if(visitatore.isChecked()){
                     ruoloSelezionato="visitatore";
-                    editor.putString("ruolo", ruoloSelezionato);
-                    editor.apply();
+                    datiRegistrazioneUtente.putString("ruolo", ruoloSelezionato);
+                    datiRegistrazioneUtente.apply();
 
                 }
             }
@@ -173,18 +173,18 @@ public class FragmentRegistraRuolo extends Fragment {
 
                 if(guida.isChecked()){
                     ruoloSelezionato="guida";
-                    editor.putString("ruolo", ruoloSelezionato);
-                    editor.apply();
+                    datiRegistrazioneUtente.putString("ruolo", ruoloSelezionato);
+                    datiRegistrazioneUtente.apply();
 
                 }else if(curatore.isChecked()){
                     ruoloSelezionato="curatore";
-                    editor.putString("ruolo", ruoloSelezionato);
-                    editor.apply();
+                    datiRegistrazioneUtente.putString("ruolo", ruoloSelezionato);
+                    datiRegistrazioneUtente.apply();
 
                 }else if(visitatore.isChecked()){
                     ruoloSelezionato="visitatore";
-                    editor.putString("ruolo", ruoloSelezionato);
-                    editor.apply();
+                    datiRegistrazioneUtente.putString("ruolo", ruoloSelezionato);
+                    datiRegistrazioneUtente.apply();
 
                 }else{
                     erroreRuolo=true;

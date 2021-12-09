@@ -1,10 +1,13 @@
 package com.uniba.capitool.fragmentsRegistrazione;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -16,10 +19,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.Curatore;
+import com.uniba.capitool.classes.Guida;
+import com.uniba.capitool.classes.Visitatore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,10 +40,20 @@ import java.util.Locale;
 
 public class FragmentRegistraDatiPersonali extends Fragment {
 
+    FirebaseAuth mAuth;
     EditText username;
     EditText nome;
     EditText cognome;
     EditText dataNascita;
+    EditText numeroPatentino;
+    Button conferma;
+
+    String emailTrovata;
+    String passwordTrovata;
+    String ruoloTrovato="";
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor datiRegistrazioneUtente;
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -41,65 +63,74 @@ public class FragmentRegistraDatiPersonali extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_registra_dati_personali, container, false);
 
-   /*     Bundle bundle = this.getArguments();
-
-        if(bundle != null){
-            // handle your code here.
-            Log.d("onCreateView: ", bundle.get("email").toString());
-            //bundle.putString("nome",nome.getText().toString());
-           // bundle.putString("cognome",cognome.getText().toString());
-           // bundle.putString("dataNascita",username.getText().toString());
-        }else{
-            //Bundle bundle = new Bundle();
-            //bundle.putString("ruolo",ruolo.getText().toString()); // Put anything what you want
-        }*/
+        username=v.findViewById(R.id.username);
+        nome=v.findViewById(R.id.nome);
+        cognome=v.findViewById(R.id.cognome);
+        dataNascita=v.findViewById(R.id.dataNascita);
+        numeroPatentino=v.findViewById(R.id.numeroPatentino);
+        conferma= v.findViewById(R.id.conferma);
 
         //leggere il file SharedPreferences
-        SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
-        if(datiRegistrazioneUtente!=null){
-            String emailTrovata = datiRegistrazioneUtente.getString("email", "");
-            String passwordTrovata = datiRegistrazioneUtente.getString("password", "");
-            String ruoloTrovato = datiRegistrazioneUtente.getString("ruolo", "");
-            Log.e("DATI SharedPreferences ", ""+emailTrovata+" , "+passwordTrovata+" , "+ruoloTrovato);
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+        if(sharedPreferences!=null){
+            emailTrovata = sharedPreferences.getString("email", "");
+            passwordTrovata = sharedPreferences.getString("password", "");
+            ruoloTrovato = sharedPreferences.getString("ruolo", "");
+
+            dataNascita.setText(sharedPreferences.getString("dataNascita", ""));
+            username.setText(sharedPreferences.getString("username", ""));
+            nome.setText(sharedPreferences.getString("nome", ""));
+            cognome.setText(sharedPreferences.getString("cognome", ""));
+            //Log.e("DATI SharedPreferences ", ""+emailTrovata+" , "+passwordTrovata+" , "+ruoloTrovato+" , "+sharedPreferences.getString("dataNascita", ""));
 
         }else{
             Log.e( "onCreateView: ", "SharedPreferences non trovato");
         }
 
-        username=v.findViewById(R.id.username);
-        nome=v.findViewById(R.id.nome);
-        cognome=v.findViewById(R.id.cognome);
-        dataNascita=v.findViewById(R.id.dataNascita);
-        Button conferma= v.findViewById(R.id.conferma);
+        if(!ruoloTrovato.equals("guida")){
+
+            numeroPatentino.setHint("");
+            numeroPatentino.setEnabled(false);
+            numeroPatentino.setBackground(null);
+            numeroPatentino.setFocusable(false);
+        }
+
+        //metodo per abilitare le modifiche al file sharedPreferences
+        datiRegistrazioneUtente=sharedPreferences.edit();
 
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean erroreDatiPersonali=false;
 
-                if(username==null){
+                if(username.getText().toString().equals("")){
                     username.setError("Inserisci un username");
                     erroreDatiPersonali=true;
-                }else if(nome==null){
+                }else if(nome.getText().toString().equals("")){
                     nome.setError("Inserisci il tuo nome");
                     erroreDatiPersonali=true;
-                }else if(cognome==null){
+                }else if(cognome.getText().toString().equals("")){
                     cognome.setError("Inserisci il tuo cognome");
                     erroreDatiPersonali=true;
-                }else if(dataNascita==null){
+                }else if(dataNascita.getText().toString().equals("")){
                     dataNascita.setError("Inserisci la tua data di nascita");
                     erroreDatiPersonali=true;
                 }
 
+                if(ruoloTrovato.equals("guida") && numeroPatentino.getText().toString().equals("")){
+                    numeroPatentino.setError("Inserisci il tuo numero di patentino");
+                    erroreDatiPersonali=true;
+                }
+
                 if(erroreDatiPersonali==false){
-
-                    //vado avanti
-
+                    //vado avanti e insrisco l'utente
+                    insertUtente();
                 }
             }
         });
 
-       username.addTextChangedListener(new TextWatcher() {
+        username.addTextChangedListener(new TextWatcher() {
            @Override
            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -112,28 +143,51 @@ public class FragmentRegistraDatiPersonali extends Fragment {
 
            @Override
            public void afterTextChanged(Editable s) {
-
+               datiRegistrazioneUtente.putString("username", username.getText().toString());
+               datiRegistrazioneUtente.apply();
            }
        });
 
+        nome.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+           }
 
+           @Override
+           public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+           }
+
+           @Override
+           public void afterTextChanged(Editable s) {
+               datiRegistrazioneUtente.putString("nome", nome.getText().toString());
+               datiRegistrazioneUtente.apply();
+           }
+       });
+
+        cognome.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+           }
+
+           @Override
+           public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+           }
+
+           @Override
+           public void afterTextChanged(Editable s) {
+               datiRegistrazioneUtente.putString("cognome", cognome.getText().toString());
+               datiRegistrazioneUtente.apply();
+           }
+       });
 
         dataNascita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 apriCalendario();
-               /* Calendar c= Calendar.getInstance();
-                int year= c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day= c.get(Calendar.DAY_OF_MONTH);
-
-                new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year, month, day);
-                DialogFragment datePicker = new DataPickerFragment();
-                datePicker.show(getActivity().getSupportFragmentManager(), "date picker");*/
-
-
             }
         });
         return v;
@@ -171,19 +225,55 @@ public class FragmentRegistraDatiPersonali extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
 
         dataNascita.setText(sdf.format(myCalendar.getTime()));
+
+        datiRegistrazioneUtente.putString("dataNascita", dataNascita.getText().toString());
+        datiRegistrazioneUtente.apply();
     }
 
 
 
-    public void insertQueryUtente(){
+    public void insertUtente(){
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(emailTrovata, passwordTrovata)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            insertUtenteRealtimeDB(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    public void insertUtenteRealtimeDB(FirebaseUser user){
+
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://e-culture-tool-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef = database.getReference("/");
+        DatabaseReference myRef = database.getReference("/Utenti/"+user.getUid());
 
+        if(ruoloTrovato.equals("visitatore")){
+            Visitatore visitatore= new Visitatore(emailTrovata, username.getText().toString(), nome.getText().toString(), cognome.getText().toString(),
+                    dataNascita.getText().toString(), ruoloTrovato);
+            myRef.setValue(visitatore);
+        }
 
+        if(ruoloTrovato.equals("curatore")){
+            Curatore curatore= new Curatore(emailTrovata, username.getText().toString(), nome.getText().toString(), cognome.getText().toString(),
+                    dataNascita.getText().toString(), ruoloTrovato);
+            myRef.setValue(curatore);
+        }
 
-      /*  //INSERT di un nuovo oggetto
-        Visitatore visitatore= new Visitatore("18/11/99", "visitatore", "De Matteis", "5985", "Vincenzo", "vitoiann@gmail.com", "vito56");
-        myRef=database.getReference("/Utenti/9/");
-        myRef.setValue(visitatore);*/
+        if(ruoloTrovato.equals("guida")){
+            Guida guida= new Guida(emailTrovata, username.getText().toString(), nome.getText().toString(), cognome.getText().toString(),
+                    dataNascita.getText().toString(), ruoloTrovato, numeroPatentino.getText().toString());
+            myRef.setValue(guida);
+        }
+
     }
 }

@@ -4,31 +4,37 @@ import java.util.ArrayList;
 
 public class Visitatore {
 
-    private String dataNascita;      //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
-    private String id;
-    private String ruolo;
-    private String cognome;
-
-    private String psw;
-    private String nome;
-
+         //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
+    private String uid;
     private String email;
-
     private String username;
-
+    private String nome;
+    private String cognome;
+    private String dataNascita;
+    private String ruolo;
     private ArrayList<Percorso> percorsi;
 
     public Visitatore() {
     }
 
-    public Visitatore(String id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username) {
-        this.dataNascita = dataNascita;
-        this.ruolo = ruolo;
-        this.cognome = cognome;
-        this.psw = psw;
-        this.nome = nome;
+    public Visitatore(String uid, String email, String username, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi) {
+        this.uid = uid;
         this.email = email;
         this.username = username;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.dataNascita = dataNascita;
+        this.ruolo = ruolo;
+        this.percorsi = percorsi;
+    }
+
+    public Visitatore(String email, String username, String nome, String cognome, String dataNascita, String ruolo) {
+        this.email = email;
+        this.username = username;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.dataNascita = dataNascita;
+        this.ruolo = ruolo;
     }
 
     public String getDataNascita() {
@@ -55,14 +61,6 @@ public class Visitatore {
         this.cognome = cognome;
     }
 
-    public String getPsw() {
-        return psw;
-    }
-
-    public void setPsw(String psw) {
-        this.psw = psw;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -87,12 +85,12 @@ public class Visitatore {
         this.username = username;
     }
 
-    public String getId() {
-        return id;
+    public String getUid() {
+        return uid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public ArrayList<Percorso> getPercorsi() {
@@ -105,7 +103,7 @@ public class Visitatore {
 
     //non mettere questo motodo pubblico, altrimenti nel db andra a scrivere questa stringa in un attributo
     protected String getAll(){
-        String risultato=""+dataNascita+","+username+","+ruolo+","+email+","+nome+","+cognome+","+psw;
+        String risultato=""+dataNascita+","+username+","+ruolo+","+email+","+nome+","+cognome;
         return risultato;
     }
 

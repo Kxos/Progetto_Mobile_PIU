@@ -1,5 +1,7 @@
 package com.uniba.capitool.classes;
 
+import java.util.ArrayList;
+
 public class Guida extends Visitatore{
     private String idPatentino;
 
@@ -7,11 +9,15 @@ public class Guida extends Visitatore{
         this.idPatentino = idPatentino;
     }
 
-    public Guida(String id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username, String idPatentino) {
-        super(id, dataNascita, ruolo, cognome, psw, nome, email, username);
+    public Guida(String uid, String email, String username, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi, String idPatentino) {
+        super(uid, email, username, nome, cognome, dataNascita, ruolo, percorsi);
         this.idPatentino = idPatentino;
     }
 
+    public Guida(String email, String username, String nome, String cognome, String dataNascita, String ruolo, String idPatentino) {
+        super(email, username, nome, cognome, dataNascita, ruolo);
+        this.idPatentino = idPatentino;
+    }
 
     public Guida() {
     }

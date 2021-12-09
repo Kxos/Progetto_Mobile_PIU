@@ -187,11 +187,11 @@ CheckBox mostraPassword;
             fragmentTransaction.commit();
 
             //scrivere nel file SharedPreferences
-            SharedPreferences datiRegistrazioneUtente = getActivity().getPreferences(Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = datiRegistrazioneUtente.edit();
-            editor.putString("email", email.getText().toString());
-            editor.putString("password", password.getText().toString());
-            editor.apply();
+            SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor datiRegistrazioneUtente = sharedPreferences.edit();
+            datiRegistrazioneUtente.putString("email", email.getText().toString());
+            datiRegistrazioneUtente.putString("password", password.getText().toString());
+            datiRegistrazioneUtente.apply();
 
         }else{
             Log.d( "************************: ", "NON OK");

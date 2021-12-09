@@ -1,5 +1,7 @@
 package com.uniba.capitool.classes;
 
+import java.util.ArrayList;
+
 public class Curatore extends Visitatore {
     private SitoCulturale sito;
 
@@ -8,13 +10,13 @@ public class Curatore extends Visitatore {
 
     }
 
-    public Curatore(SitoCulturale sito) {
+    public Curatore(String uid, String email, String username, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi, SitoCulturale sito) {
+        super(uid, email, username, nome, cognome, dataNascita, ruolo, percorsi);
         this.sito = sito;
     }
 
-    public Curatore(String id, String dataNascita, String ruolo, String cognome, String psw, String nome, String email, String username, SitoCulturale sito) {
-        super(id, dataNascita, ruolo, cognome, psw, nome, email, username);
-        this.sito = sito;
+    public Curatore(String email, String username, String nome, String cognome, String dataNascita, String ruolo) {
+        super(email, username, nome, cognome, dataNascita, ruolo);
     }
 
     public SitoCulturale getSito() {
