@@ -30,7 +30,7 @@ public class Registrati extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrati);
 
-        SharedPreferences datiRegistrazioneUtente = this.getPreferences(Context.MODE_PRIVATE);//getSharedPreferences("datiRegistrazioneUtente", );
+        SharedPreferences datiRegistrazioneUtente = this.getPreferences(Context.MODE_PRIVATE);
         datiRegistrazioneUtente.edit().clear().commit();
 
         EditText email = findViewById(R.id.email);
