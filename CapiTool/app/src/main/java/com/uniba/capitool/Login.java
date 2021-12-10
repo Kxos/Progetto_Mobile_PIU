@@ -68,11 +68,13 @@ public class Login extends AppCompatActivity {
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();
 
+
                 // TODO - RIMUOVERE QUESTE 2 FUNZIONI, ACCESSO VELOCE IN LOGIN
                 // Passa alla HomePage
                 Intent myIntent = new Intent(Login.this, HomePage.class);
                 Login.this.startActivity(myIntent);
                 // TODO -------------------------------------------------------------------
+
 
                 if(isEmailValid(email_value)){
 
