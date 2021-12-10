@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".AggiungiNomeSito"
+            android:exported="true" />
+        <activity
             android:name=".HomePage"
             android:exported="false" />
         <activity

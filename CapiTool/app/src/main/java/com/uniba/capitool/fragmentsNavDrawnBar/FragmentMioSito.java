@@ -1,5 +1,6 @@
 package com.uniba.capitool.fragmentsNavDrawnBar;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.uniba.capitool.AggiungiNomeSito;
 import com.uniba.capitool.R;
 
 /**
@@ -20,10 +23,25 @@ public class FragmentMioSito extends Fragment {
     }
 
 
-    @Override
+   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mio_sito, container, false);
-    }
+
+       View v = inflater.inflate(R.layout.fragment_mio_sito, container, false);
+       FloatingActionButton addSito = v.findViewById(R.id.buttonAddSito);
+
+       addSito.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent aggiungiSito = new Intent(getActivity(), AggiungiNomeSito.class);
+               getActivity().startActivity(aggiungiSito);
+           }
+       });
+
+       return v;
+
+   }
+
+
 }
