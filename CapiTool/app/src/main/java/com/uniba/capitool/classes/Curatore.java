@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Curatore extends Visitatore {
     private SitoCulturale sito;
 
-
     public Curatore(){
 
     }

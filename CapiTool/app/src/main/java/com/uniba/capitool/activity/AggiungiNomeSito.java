@@ -1,9 +1,11 @@
-package com.uniba.capitool;
+package com.uniba.capitool.activity;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.Bundle;
+import com.uniba.capitool.R;
 
 public class AggiungiNomeSito extends AppCompatActivity {
 

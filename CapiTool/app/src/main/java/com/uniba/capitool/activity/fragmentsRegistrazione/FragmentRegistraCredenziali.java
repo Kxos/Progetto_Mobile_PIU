@@ -1,17 +1,10 @@
-package com.uniba.capitool.fragmentsRegistrazione;
+package com.uniba.capitool.activity.fragmentsRegistrazione;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +13,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.SignInMethodQueryResult;
-import com.uniba.capitool.BasicMethod;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activity.BasicMethod;
 
 public class FragmentRegistraCredenziali extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.uniba.capitool;
+package com.uniba.capitool.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;

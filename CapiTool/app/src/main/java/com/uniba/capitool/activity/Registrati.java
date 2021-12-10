@@ -1,4 +1,4 @@
-package com.uniba.capitool;
+package com.uniba.capitool.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,10 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Visitatore;
-import com.uniba.capitool.fragmentsRegistrazione.FragmentRegistraCredenziali;
-import com.uniba.capitool.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
-import com.uniba.capitool.fragmentsRegistrazione.FragmentRegistraRuolo;
+import com.uniba.capitool.activity.fragmentsRegistrazione.FragmentRegistraCredenziali;
+import com.uniba.capitool.activity.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
+import com.uniba.capitool.activity.fragmentsRegistrazione.FragmentRegistraRuolo;
 
 public class Registrati extends AppCompatActivity {
 
