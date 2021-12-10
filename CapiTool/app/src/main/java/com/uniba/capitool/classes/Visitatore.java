@@ -7,7 +7,6 @@ public class Visitatore {
          //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
     private String uid;
     private String email;
-    private String username;
     private String nome;
     private String cognome;
     private String dataNascita;
@@ -17,10 +16,9 @@ public class Visitatore {
     public Visitatore() {
     }
 
-    public Visitatore(String uid, String email, String username, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi) {
+    public Visitatore(String uid, String email, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi) {
         this.uid = uid;
         this.email = email;
-        this.username = username;
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
@@ -28,9 +26,8 @@ public class Visitatore {
         this.percorsi = percorsi;
     }
 
-    public Visitatore(String email, String username, String nome, String cognome, String dataNascita, String ruolo) {
+    public Visitatore(String email, String nome, String cognome, String dataNascita, String ruolo) {
         this.email = email;
-        this.username = username;
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
@@ -77,14 +74,6 @@ public class Visitatore {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getUid() {
         return uid;
     }
@@ -103,7 +92,7 @@ public class Visitatore {
 
     //non mettere questo motodo pubblico, altrimenti nel db andra a scrivere questa stringa in un attributo
     protected String getAll(){
-        String risultato=""+dataNascita+","+username+","+ruolo+","+email+","+nome+","+cognome;
+        String risultato=""+dataNascita+","+ruolo+","+email+","+nome+","+cognome;
         return risultato;
     }
 

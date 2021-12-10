@@ -10,13 +10,13 @@ public class Curatore extends Visitatore {
 
     }
 
-    public Curatore(String uid, String email, String username, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi, SitoCulturale sito) {
-        super(uid, email, username, nome, cognome, dataNascita, ruolo, percorsi);
+    public Curatore(String uid, String email, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi, SitoCulturale sito) {
+        super(uid, email, nome, cognome, dataNascita, ruolo, percorsi);
         this.sito = sito;
     }
 
-    public Curatore(String email, String username, String nome, String cognome, String dataNascita, String ruolo) {
-        super(email, username, nome, cognome, dataNascita, ruolo);
+    public Curatore(String email, String nome, String cognome, String dataNascita, String ruolo) {
+        super(email, nome, cognome, dataNascita, ruolo);
     }
 
     public SitoCulturale getSito() {

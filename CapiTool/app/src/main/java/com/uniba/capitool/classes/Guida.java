@@ -9,13 +9,13 @@ public class Guida extends Visitatore{
         this.idPatentino = idPatentino;
     }
 
-    public Guida(String uid, String email, String username, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi, String idPatentino) {
-        super(uid, email, username, nome, cognome, dataNascita, ruolo, percorsi);
+    public Guida(String uid, String email, String nome, String cognome, String dataNascita, String ruolo, ArrayList<Percorso> percorsi, String idPatentino) {
+        super(uid, email, nome, cognome, dataNascita, ruolo, percorsi);
         this.idPatentino = idPatentino;
     }
 
-    public Guida(String email, String username, String nome, String cognome, String dataNascita, String ruolo, String idPatentino) {
-        super(email, username, nome, cognome, dataNascita, ruolo);
+    public Guida(String email, String nome, String cognome, String dataNascita, String ruolo, String idPatentino) {
+        super(email, nome, cognome, dataNascita, ruolo);
         this.idPatentino = idPatentino;
     }
 

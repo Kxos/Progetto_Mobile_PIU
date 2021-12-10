@@ -49,7 +49,6 @@ import java.util.Locale;
 public class FragmentRegistraDatiPersonali extends Fragment {
 
     FirebaseAuth mAuth;
-    EditText username;
     EditText nome;
     EditText cognome;
     EditText dataNascita;
@@ -72,7 +71,6 @@ public class FragmentRegistraDatiPersonali extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_registra_dati_personali, container, false);
 
-        username=v.findViewById(R.id.username);
         nome=v.findViewById(R.id.nome);
         cognome=v.findViewById(R.id.cognome);
         dataNascita=v.findViewById(R.id.dataNascita);
@@ -89,7 +87,6 @@ public class FragmentRegistraDatiPersonali extends Fragment {
             ruoloTrovato = sharedPreferences.getString("ruolo", "");
 
             dataNascita.setText(sharedPreferences.getString("dataNascita", ""));
-            username.setText(sharedPreferences.getString("username", ""));
             nome.setText(sharedPreferences.getString("nome", ""));
             cognome.setText(sharedPreferences.getString("cognome", ""));
 
@@ -113,10 +110,7 @@ public class FragmentRegistraDatiPersonali extends Fragment {
             public void onClick(View v) {
                 boolean erroreDatiPersonali=false;
 
-                if(username.getText().toString().equals("")){
-                    username.setError("Inserisci un username");
-                    erroreDatiPersonali=true;
-                }else if(nome.getText().toString().equals("")){
+                if(nome.getText().toString().equals("")){
                     nome.setError("Inserisci il tuo nome");
                     erroreDatiPersonali=true;
                 }else if(cognome.getText().toString().equals("")){
@@ -138,24 +132,6 @@ public class FragmentRegistraDatiPersonali extends Fragment {
                 }
             }
         });
-
-        username.addTextChangedListener(new TextWatcher() {
-           @Override
-           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-           }
-
-           @Override
-           public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-           }
-
-           @Override
-           public void afterTextChanged(Editable s) {
-               datiRegistrazioneUtente.putString("username", username.getText().toString());
-               datiRegistrazioneUtente.apply();
-           }
-       });
 
         nome.addTextChangedListener(new TextWatcher() {
            @Override
@@ -268,19 +244,19 @@ public class FragmentRegistraDatiPersonali extends Fragment {
         DatabaseReference myRef = database.getReference("/Utenti/"+user.getUid());
 
         if(ruoloTrovato.equals("visitatore")){
-            Visitatore visitatore= new Visitatore(emailTrovata, username.getText().toString(), nome.getText().toString(), cognome.getText().toString(),
+            Visitatore visitatore= new Visitatore(emailTrovata, nome.getText().toString(), cognome.getText().toString(),
                     dataNascita.getText().toString(), ruoloTrovato);
             myRef.setValue(visitatore);
         }
 
         if(ruoloTrovato.equals("curatore")){
-            Curatore curatore= new Curatore(emailTrovata, username.getText().toString(), nome.getText().toString(), cognome.getText().toString(),
+            Curatore curatore= new Curatore(emailTrovata, nome.getText().toString(), cognome.getText().toString(),
                     dataNascita.getText().toString(), ruoloTrovato);
             myRef.setValue(curatore);
         }
 
         if(ruoloTrovato.equals("guida")){
-            Guida guida= new Guida(emailTrovata, username.getText().toString(), nome.getText().toString(), cognome.getText().toString(),
+            Guida guida= new Guida(emailTrovata, nome.getText().toString(), cognome.getText().toString(),
                     dataNascita.getText().toString(), ruoloTrovato, numeroPatentino.getText().toString());
             myRef.setValue(guida);
         }
@@ -291,6 +267,9 @@ public class FragmentRegistraDatiPersonali extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Intent homePage = new Intent(getActivity(), HomePage.class);
                 homePage.putExtra("email", emailTrovata); //Optional parameters
+                homePage.putExtra("nome", nome.getText().toString());
+                homePage.putExtra("cognome", cognome.getText().toString());
+                homePage.putExtra("uid", user.getUid());
                 getActivity().startActivity(homePage);
             }
 
