@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.uniba.capitool.classes.Visitatore;
+
 public class BasicMethod {
 
     public static void alertDialog(Activity activity, String messaggio, String titolo, String messaggioBottone){
@@ -21,6 +23,16 @@ public class BasicMethod {
 
         AlertDialog invalidDialogError = builder.create();
         invalidDialogError.show();
+    }
+
+
+    /***
+     *
+     * @return risultato: Stringa formattata con gli attributi di un Visitatore
+     */
+    public static String getAllVisitatore(Visitatore visitatore){
+        String risultato=""+visitatore.getNome()+","+visitatore.getCognome()+","+visitatore.getEmail()+","+visitatore.getRuolo()+","+visitatore.getDataNascita();
+        return risultato;
     }
 
 

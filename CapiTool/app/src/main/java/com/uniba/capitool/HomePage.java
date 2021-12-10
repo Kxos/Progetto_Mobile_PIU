@@ -11,10 +11,13 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -27,8 +30,12 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        SharedPreferences datiRegistrazioneUtente = this.getPreferences(Context.MODE_PRIVATE);
+        datiRegistrazioneUtente.edit().clear().commit();
+
         Toolbar toolbar = startToolbarDrawerLayout();
         NavController navController = startNavLateralMenu(toolbar);
+
 
     }
 
@@ -110,10 +117,29 @@ public class HomePage extends AppCompatActivity {
     public void setNavLateralMenuOnUserRole(NavigationView navigationView){
         navigationView.getMenu().clear();
 
-        // TODO - QUERY PER RICEVERE IL RUOLO DELL'UTENTE
-        // TODO - ... RUOLO RICEVUTO
-        // TODO - IMPOSTA MENU LATERALE A SECONDA DEL RUOLO
-        navigationView.inflateMenu(R.menu.navigation_curatore_menu);
+        Bundle b = getIntent().getExtras();
+
+        String id = b.getString("uid");
+        String nome = b.getString("nome");
+        String cognome = b.getString("cognome");
+        String email = b.getString("email");
+        String ruolo = b.getString("ruolo");
+
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView headerNome    = headerView.findViewById(R.id.headerNome);
+        TextView headerCognome = headerView.findViewById(R.id.headerCognome);
+        TextView headerEmail   = headerView.findViewById(R.id.headerEmail);
+
+        headerNome.setText(nome);
+        headerCognome.setText(cognome);
+        headerEmail.setText(email);
+
+        if(ruolo.equals("curatore")){
+            navigationView.inflateMenu(R.menu.navigation_curatore_menu);
+        }else{
+            navigationView.inflateMenu(R.menu.navigation_visitatore_menu);
+        }
 
     }
 

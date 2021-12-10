@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Visitatore {
 
-         //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
+    //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
     private String uid;
     private String email;
     private String nome;
@@ -88,12 +88,6 @@ public class Visitatore {
 
     public void setPercorsi(ArrayList<Percorso> percorsi) {
         this.percorsi = percorsi;
-    }
-
-    //non mettere questo motodo pubblico, altrimenti nel db andra a scrivere questa stringa in un attributo
-    protected String getAll(){
-        String risultato=""+dataNascita+","+ruolo+","+email+","+nome+","+cognome;
-        return risultato;
     }
 
     protected boolean aggiungiPercorso(Percorso percorso){
