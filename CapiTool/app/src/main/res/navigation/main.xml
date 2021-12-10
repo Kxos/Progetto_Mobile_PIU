@@ -7,37 +7,37 @@
 
     <fragment
         android:id="@+id/mioSito"
-        android:name="com.uniba.capitool.activity.fragmentsNavDrawnBar.FragmentMioSito"
+        android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMioSito"
         android:label="Mio Sito"
         tools:layout="@layout/fragment_mio_sito" />
     <fragment
         android:id="@+id/mieiPercorsi"
-        android:name="com.uniba.capitool.activity.fragmentsNavDrawnBar.FragmentMieiPercorsi"
+        android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMieiPercorsi"
         android:label="I Miei Percorsi"
         tools:layout="@layout/fragment_miei_percorsi" />
     <fragment
         android:id="@+id/profilo"
-        android:name="com.uniba.capitool.activity.fragmentsNavDrawnBar.FragmentProfilo"
+        android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentProfilo"
         android:label="Profilo"
         tools:layout="@layout/fragment_profilo" />
     <fragment
         android:id="@+id/preferiti"
-        android:name="com.uniba.capitool.activity.fragmentsNavDrawnBar.FragmentPreferiti"
+        android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentPreferiti"
         android:label="Preferiti"
         tools:layout="@layout/fragment_preferiti" />
     <fragment
         android:id="@+id/consigliati"
-        android:name="com.uniba.capitool.activity.fragmentsNavDrawnBar.FragmentConsigliati"
+        android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentConsigliati"
         android:label="Consigliati"
         tools:layout="@layout/fragment_consigliati" />
     <fragment
         android:id="@+id/impostazioniSito"
-        android:name="com.uniba.capitool.activity.fragmentsNavDrawnBar.FragmentImpostazioniSito"
+        android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentImpostazioniSito"
         android:label="Impostazioni Sito"
         tools:layout="@layout/fragment_impostazioni_sito" />
     <fragment
         android:id="@+id/disconnetti"
-        android:name="com.uniba.capitool.activity.fragmentsNavDrawnBar.FragmentDisconnettiti"
+        android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentDisconnettiti"
         android:label="Disconnetti"
         tools:layout="@layout/fragment_disconnettiti" />
 

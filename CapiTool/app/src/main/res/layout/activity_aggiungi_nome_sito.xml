@@ -5,7 +5,7 @@
     android:id="@+id/textNomeSito"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AggiungiNomeSito">
+    tools:context=".activities.AggiungiNomeSito">
 
     <include layout="@layout/toolbar" />
 

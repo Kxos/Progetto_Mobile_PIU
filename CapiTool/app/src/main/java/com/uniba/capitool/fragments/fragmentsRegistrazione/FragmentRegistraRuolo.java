@@ -1,4 +1,4 @@
-package com.uniba.capitool.activity.fragmentsRegistrazione;
+package com.uniba.capitool.fragments.fragmentsRegistrazione;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.uniba.capitool.R;
-import com.uniba.capitool.activity.BasicMethod;
+import com.uniba.capitool.activities.BasicMethod;
 
 
 public class FragmentRegistraRuolo extends Fragment {

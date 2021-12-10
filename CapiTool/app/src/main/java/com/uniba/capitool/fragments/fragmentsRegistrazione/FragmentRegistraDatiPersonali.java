@@ -1,4 +1,4 @@
-package com.uniba.capitool.activity.fragmentsRegistrazione;
+package com.uniba.capitool.fragments.fragmentsRegistrazione;
 
 import static android.content.ContentValues.TAG;
 
@@ -33,9 +33,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
-import com.uniba.capitool.activity.HomePage;
-import com.uniba.capitool.classes.*;
 import com.uniba.capitool.classes.Visitatore;
+import com.uniba.capitool.activities.HomePage;
+import com.uniba.capitool.classes.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -265,7 +265,9 @@ public class FragmentRegistraDatiPersonali extends Fragment {
                 homePage.putExtra("email", emailTrovata); //Optional parameters
                 homePage.putExtra("nome", nome.getText().toString());
                 homePage.putExtra("cognome", cognome.getText().toString());
+                homePage.putExtra("ruolo", ruoloTrovato);
                 homePage.putExtra("uid", user.getUid());
+               // Log.d("*******************************", ""+emailTrovata+""+ nome.getText().toString()+""+cognome.getText().toString()+""+user.getUid());
                 getActivity().startActivity(homePage);
             }
 

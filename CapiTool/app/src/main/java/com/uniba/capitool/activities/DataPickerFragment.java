@@ -1,4 +1,4 @@
-package com.uniba.capitool.activity;
+package com.uniba.capitool.activities;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

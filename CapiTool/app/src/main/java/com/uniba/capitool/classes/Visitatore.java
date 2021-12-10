@@ -94,6 +94,11 @@ public class Visitatore {
         return percorsi.add(percorso);
     }
 
+    public String getAll(){
+        String risultato=""+nome+","+cognome+","+email+","+ruolo+","+dataNascita;
+        return risultato;
+    }
+
     protected boolean rimuoviPercorso(Percorso percorso){
         return percorsi.remove(percorso);
     }

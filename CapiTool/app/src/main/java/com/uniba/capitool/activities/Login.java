@@ -1,7 +1,7 @@
-package com.uniba.capitool.activity;
+package com.uniba.capitool.activities;
 
 import static android.content.ContentValues.TAG;
-import static com.uniba.capitool.activity.BasicMethod.isEmailValid;
+import static com.uniba.capitool.activities.BasicMethod.isEmailValid;
 
 import android.content.Intent;
 import android.graphics.Paint;

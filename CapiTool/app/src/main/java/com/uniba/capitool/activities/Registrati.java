@@ -1,4 +1,4 @@
-package com.uniba.capitool.activity;
+package com.uniba.capitool.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,22 +6,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-//import per la toolbar
-import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Visitatore;
-import com.uniba.capitool.activity.fragmentsRegistrazione.FragmentRegistraCredenziali;
-import com.uniba.capitool.activity.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
-import com.uniba.capitool.activity.fragmentsRegistrazione.FragmentRegistraRuolo;
+import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraCredenziali;
+import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
+import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraRuolo;
+
+//import per la toolbar
 
 public class Registrati extends AppCompatActivity {
 
@@ -33,10 +31,6 @@ public class Registrati extends AppCompatActivity {
 
         SharedPreferences datiRegistrazioneUtente = this.getPreferences(Context.MODE_PRIVATE);
         datiRegistrazioneUtente.edit().clear().commit();
-
-        EditText email = findViewById(R.id.email);
-        EditText password = findViewById(R.id.password);
-        Button avanti = findViewById(R.id.avanti);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Registrati");

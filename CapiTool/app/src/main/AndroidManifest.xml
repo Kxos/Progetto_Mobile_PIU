@@ -10,17 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
-            android:name=".activity.AggiungiNomeSito"
+            android:name=".activities.AggiungiNomeSito"
             android:exported="true" />
         <activity
-            android:name=".activity.HomePage"
+            android:name=".activities.HomePage"
             android:exported="false" />
         <activity
-            android:name=".activity.Registrati"
+            android:name=".activities.Registrati"
             android:exported="true"
-            android:parentActivityName=".activity.Login" /> <!-- in Registrati cliccando back, nella tool bar, tornerà in Login -->
+            android:parentActivityName=".activities.Login" /> <!-- in Registrati cliccando back, nella tool bar, tornerà in Login -->
         <activity
-            android:name=".activity.Login"
+            android:name=".activities.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

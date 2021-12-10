@@ -2,7 +2,7 @@ package com.uniba.capitool.classes;
 
 import java.util.ArrayList;
 
-public class Guida extends Visitatore{
+public class Guida extends Visitatore {
     private String idPatentino;
 
     public Guida(String idPatentino) {
