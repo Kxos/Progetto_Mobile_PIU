@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".activities.AggiungiPercorso"
+            android:exported="false" />
+        <activity
             android:name=".activities.AggiungiSito"
             android:exported="true" />
         <activity
