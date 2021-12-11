@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.uniba.capitool">
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,14 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
-            android:name=".HomePage"
+            android:name=".activities.AggiungiPercorso"
             android:exported="false" />
         <activity
-            android:name=".Registrati"
-            android:exported="true"
-            android:parentActivityName=".Login" /> <!-- in Registrati cliccando back, nella tool bar, tornerà in Login -->
+            android:name=".activities.AggiungiSito"
+            android:exported="true" />
         <activity
-            android:name=".Login"
+            android:name=".activities.HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Registrati"
+            android:exported="true"
+            android:parentActivityName=".activities.Login" /> <!-- in Registrati cliccando back, nella tool bar, tornerà in Login -->
+        <activity
+            android:name=".activities.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

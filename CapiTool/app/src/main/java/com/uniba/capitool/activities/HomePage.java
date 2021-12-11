@@ -1,4 +1,11 @@
-package com.uniba.capitool;
+package com.uniba.capitool.activities;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,17 +13,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
 import com.google.android.material.navigation.NavigationView;
+import com.uniba.capitool.R;
+import com.uniba.capitool.classes.Curatore;
+import com.uniba.capitool.classes.Visitatore;
+import com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMieiPercorsi;
 
 public class HomePage extends AppCompatActivity {
 
@@ -27,8 +34,12 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        SharedPreferences datiRegistrazioneUtente = this.getPreferences(Context.MODE_PRIVATE);
+        datiRegistrazioneUtente.edit().clear().commit();
+
         Toolbar toolbar = startToolbarDrawerLayout();
         NavController navController = startNavLateralMenu(toolbar);
+
 
     }
 
@@ -110,10 +121,33 @@ public class HomePage extends AppCompatActivity {
     public void setNavLateralMenuOnUserRole(NavigationView navigationView){
         navigationView.getMenu().clear();
 
-        // TODO - QUERY PER RICEVERE IL RUOLO DELL'UTENTE
-        // TODO - ... RUOLO RICEVUTO
-        // TODO - IMPOSTA MENU LATERALE A SECONDA DEL RUOLO
-        navigationView.inflateMenu(R.menu.navigation_curatore_menu);
+        Bundle b = getIntent().getExtras();
+
+        Visitatore utente;
+
+        if(BasicMethod.isCuratore(b.getString("ruolo"))){
+            utente = new Visitatore();
+            navigationView.inflateMenu(R.menu.navigation_curatore_menu);
+        }else{
+            utente = new Curatore();
+            navigationView.inflateMenu(R.menu.navigation_visitatore_menu);
+        }
+
+        utente.setUid(b.getString("uid"));
+        utente.setNome(b.getString("nome"));
+        utente.setCognome(b.getString("cognome"));
+        utente.setEmail(b.getString("email"));
+        utente.setRuolo(b.getString("ruolo"));
+
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView headerNome    = headerView.findViewById(R.id.headerNome);
+        TextView headerCognome = headerView.findViewById(R.id.headerCognome);
+        TextView headerEmail   = headerView.findViewById(R.id.headerEmail);
+
+        headerNome.setText(utente.getNome());
+        headerCognome.setText(utente.getCognome());
+        headerEmail.setText(utente.getEmail());
 
     }
 

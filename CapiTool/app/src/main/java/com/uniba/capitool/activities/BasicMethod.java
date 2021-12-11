@@ -1,9 +1,11 @@
-package com.uniba.capitool;
+package com.uniba.capitool.activities;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.uniba.capitool.classes.Visitatore;
 
 public class BasicMethod {
 
@@ -21,6 +23,16 @@ public class BasicMethod {
 
         AlertDialog invalidDialogError = builder.create();
         invalidDialogError.show();
+    }
+
+
+    /***
+     *
+     * @return risultato: Stringa formattata con gli attributi di un Visitatore
+     */
+    public static String getAllVisitatore(Visitatore visitatore){
+        String risultato=""+visitatore.getNome()+","+visitatore.getCognome()+","+visitatore.getEmail()+","+visitatore.getRuolo()+","+visitatore.getDataNascita();
+        return risultato;
     }
 
 
@@ -91,6 +103,17 @@ public class BasicMethod {
 
         // se messaggio=null significa che la password è sicura
         return messaggio;
+    }
+
+    /***
+     * Controlla che un utente è un curatore
+     *
+     * @param ruolo
+     * @return boolean
+     */
+    public static boolean isCuratore(String ruolo){
+        if(ruolo.equals("curatore")){ return true; }
+        return false;
     }
 
 }

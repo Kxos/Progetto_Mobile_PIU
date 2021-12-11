@@ -8,7 +8,7 @@ public class Zona {
 
     private int id ;
     private String nome ;
-    private ArrayList<Opera> opere ;
+    private ArrayList<Opera> opere;
 
     private static int countId = 0;
 
@@ -54,6 +54,6 @@ public class Zona {
     }
 
     protected boolean rimuoviOpera(Opera opera){
-        return opere.remove(opera) ;
+        return opere.remove(opera);
     }
 }

@@ -1,21 +1,20 @@
-package com.uniba.capitool.fragmentsNavDrawnBar;
+package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.uniba.capitool.R;
 
 /**
- * create an instance of this fragment.
  */
-public class FragmentPreferiti extends Fragment {
+public class FragmentProfilo extends Fragment {
 
-    public FragmentPreferiti() {
+
+    public FragmentProfilo() {
         // Required empty public constructor
     }
 
@@ -23,6 +22,6 @@ public class FragmentPreferiti extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_preferiti, container, false);
+        return inflater.inflate(R.layout.fragment_profilo, container, false);
     }
 }

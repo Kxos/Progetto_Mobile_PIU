@@ -2,8 +2,8 @@ package com.uniba.capitool.classes;
 
 import android.media.Image;
 
+import java.util.ArrayList;
 import java.util.Date;
-import 	java.util.ArrayList;
 
 public class SitoCulturale {
 

@@ -7,6 +7,17 @@
     android:padding = "20dp">
 
 
+    <TextView
+        android:id="@+id/headerCognome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Cognome "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/headerEmail"
+        app:layout_constraintStart_toEndOf="@+id/headerNome" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageProfile"
         android:layout_width="70dp"
@@ -18,26 +29,23 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/headerNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="12dp"
-        android:text="Nome Profilo"
+        android:layout_marginTop="10dp"
+        android:text="Nome "
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/imageProfile" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/headerEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
         android:text="testing@example.it"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/imageProfile"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerNome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
