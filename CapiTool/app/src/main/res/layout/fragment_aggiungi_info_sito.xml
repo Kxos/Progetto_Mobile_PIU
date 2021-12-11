@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/editTextTextPersonName6"
+            android:id="@+id/CostoIngresso"
             android:layout_width="130dp"
             android:layout_height="54dp"
             android:layout_marginTop="47dp"
@@ -21,10 +21,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.249"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+            app:layout_constraintTop_toBottomOf="@+id/OrarioApertura" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/OrarioChiusura"
             android:layout_width="130dp"
             android:layout_height="54dp"
             android:layout_marginTop="42dp"
@@ -34,10 +34,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+            app:layout_constraintTop_toBottomOf="@+id/Indirizzo" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/OrarioApertura"
             android:layout_width="130dp"
             android:layout_height="54dp"
             android:layout_marginTop="42dp"
@@ -47,10 +47,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.25"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+            app:layout_constraintTop_toBottomOf="@+id/Indirizzo" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/Città"
             android:layout_width="269dp"
             android:layout_height="50dp"
             android:layout_marginTop="73dp"
@@ -63,7 +63,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/Indirizzo"
             android:layout_width="269dp"
             android:layout_height="50dp"
             android:layout_marginTop="48dp"
@@ -73,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintTop_toBottomOf="@+id/Città" />
 
         <Button
             android:id="@+id/button2"
