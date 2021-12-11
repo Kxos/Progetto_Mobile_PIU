@@ -3,12 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_aggiungi_nome_sito.xml" value="0.33" />
+        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_aggiungi_nome_sito.xml" value="0.1" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_aggiungi_sito.xml" value="0.325" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_login.xml" value="0.35104166666666664" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_registrati.xml" value="0.24947916666666667" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_aggiungi_info_sito.xml" value="0.25364583333333335" />
-        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_aggiungi_nome_sito.xml" value="0.36666666666666664" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_disconnettiti.xml" value="0.20520833333333333" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_mio_sito.xml" value="0.33" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_registra_credenziali.xml" value="0.32916666666666666" />
@@ -21,14 +20,18 @@
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/fragment_registra_credenziali.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/fragment_registra_dati_personali.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/fragment_registra_ruolo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/navigation_header.xml" value="0.3645833333333333" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/toolbar2.xml" value="0.36666666666666664" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/menu/navigation_visitatore_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_aggiungi_percorso.xml" value="0.3307291666666667" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_aggiungi_sito.xml" value="0.3307291666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_home_page.xml" value="0.3307291666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_registrati.xml" value="0.3307291666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_consigliati.xml" value="0.3296875" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_disconnettiti.xml" value="0.5541666666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_impostazioni_sito.xml" value="0.5541666666666667" />
-        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_miei_percorsi.xml" value="0.33" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_miei_percorsi.xml" value="0.5" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_mio_sito.xml" value="0.5541666666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_preferiti.xml" value="0.27152988855116517" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_profilo.xml" value="0.27152988855116517" />

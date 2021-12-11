@@ -1,6 +1,7 @@
 package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +11,10 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.AggiungiPercorso;
+import com.uniba.capitool.activities.AggiungiSito;
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.Visitatore;
@@ -23,13 +27,38 @@ import java.util.zip.Inflater;
  */
 public class FragmentMieiPercorsi extends Fragment {
 
-    public FragmentMieiPercorsi() {
-        // Required empty public constructor
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        Visitatore utente = getUserInfo();
+
+        View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
+        FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
+
+        addPercorso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent aggiungiPercorso = new Intent(getActivity(), AggiungiPercorso.class);
+                aggiungiPercorso.putExtra("uid", utente.getUid()); //Optional parameters
+                aggiungiPercorso.putExtra("nome", utente.getNome()); //Optional parameters
+                aggiungiPercorso.putExtra("cognome", utente.getCognome()); //Optional parameters
+                aggiungiPercorso.putExtra("email", utente.getEmail()); //Optional parameters
+                aggiungiPercorso.putExtra("ruolo", utente.getRuolo()); //Optional parameters
+                getActivity().startActivity(aggiungiPercorso);
+            }
+        });
+
+        // Inflate the layout for this fragment
+        return v;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    /***
+     * Ottiene i dati dell'utente loggato
+     *
+     * @return utente: Ritorna l'utente valorizzato delle sue informazioni
+     */
+    public Visitatore getUserInfo(){
 
         Visitatore utente;
 
@@ -45,15 +74,6 @@ public class FragmentMieiPercorsi extends Fragment {
         utente.setEmail(getActivity().getIntent().getExtras().getString("email"));
         utente.setRuolo(getActivity().getIntent().getExtras().getString("ruolo"));
 
-
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
+        return utente;
     }
 }
