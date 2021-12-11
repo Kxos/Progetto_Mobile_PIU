@@ -1,13 +1,21 @@
 package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.classes.Curatore;
+import com.uniba.capitool.classes.Visitatore;
+
+import java.util.zip.Inflater;
 
 /**
 
@@ -17,6 +25,28 @@ public class FragmentMieiPercorsi extends Fragment {
 
     public FragmentMieiPercorsi() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Visitatore utente;
+
+        if(BasicMethod.isCuratore(getActivity().getIntent().getExtras().getString("ruolo"))){
+            utente = new Visitatore();
+        }else{
+            utente = new Curatore();
+        }
+
+        utente.setUid(getActivity().getIntent().getExtras().getString("uid"));
+        utente.setNome(getActivity().getIntent().getExtras().getString("nome"));
+        utente.setCognome(getActivity().getIntent().getExtras().getString("cognome"));
+        utente.setEmail(getActivity().getIntent().getExtras().getString("email"));
+        utente.setRuolo(getActivity().getIntent().getExtras().getString("ruolo"));
+
+
+
     }
 
     @Override
