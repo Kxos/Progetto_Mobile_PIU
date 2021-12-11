@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textNomeSito"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-    tools:context=".activities.Registrati">
+    android:layout_height="match_parent"
+    tools:context=".activities.AggiungiSito">
 
     <include layout="@layout/toolbar" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/fragmentContainerAggiungiSito"
+        android:name="com.uniba.capitool.fragments.fragmentsAggiungiInfoSito.AggiungiInfoSito"
         android:layout_width="match_parent"
-        android:layout_height="675dp"
+        android:layout_height="787dp"
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="0dp" />
 
 
-</RelativeLayout>
+</RelativeLayout >

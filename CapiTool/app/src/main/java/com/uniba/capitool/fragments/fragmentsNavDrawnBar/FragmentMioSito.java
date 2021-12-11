@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uniba.capitool.R;
-import com.uniba.capitool.activities.AggiungiNomeSito;
+import com.uniba.capitool.activities.AggiungiSito;
 
 /**
  * create an instance of this fragment.
@@ -33,7 +33,7 @@ public class FragmentMioSito extends Fragment {
        addSito.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Intent aggiungiSito = new Intent(getActivity(), AggiungiNomeSito.class);
+               Intent aggiungiSito = new Intent(getActivity(), AggiungiSito.class);
                getActivity().startActivity(aggiungiSito);
            }
        });
