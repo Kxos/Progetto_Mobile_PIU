@@ -105,4 +105,15 @@ public class BasicMethod {
         return messaggio;
     }
 
+    /***
+     * Controlla che un utente è un curatore
+     *
+     * @param ruolo
+     * @return boolean
+     */
+    public static boolean isCuratore(String ruolo){
+        if(ruolo.equals("curatore")){ return true; }
+        return false;
+    }
+
 }

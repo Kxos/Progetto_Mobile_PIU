@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -20,6 +21,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.Curatore;
+import com.uniba.capitool.classes.Visitatore;
+import com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMieiPercorsi;
 
 public class HomePage extends AppCompatActivity {
 
@@ -119,11 +123,21 @@ public class HomePage extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
 
-        String id = b.getString("uid");
-        String nome = b.getString("nome");
-        String cognome = b.getString("cognome");
-        String email = b.getString("email");
-        String ruolo = b.getString("ruolo");
+        Visitatore utente;
+
+        if(BasicMethod.isCuratore(b.getString("ruolo"))){
+            utente = new Visitatore();
+            navigationView.inflateMenu(R.menu.navigation_curatore_menu);
+        }else{
+            utente = new Curatore();
+            navigationView.inflateMenu(R.menu.navigation_visitatore_menu);
+        }
+
+        utente.setUid(b.getString("uid"));
+        utente.setNome(b.getString("nome"));
+        utente.setCognome(b.getString("cognome"));
+        utente.setEmail(b.getString("email"));
+        utente.setRuolo(b.getString("ruolo"));
 
         View headerView = navigationView.getHeaderView(0);
 
@@ -131,15 +145,9 @@ public class HomePage extends AppCompatActivity {
         TextView headerCognome = headerView.findViewById(R.id.headerCognome);
         TextView headerEmail   = headerView.findViewById(R.id.headerEmail);
 
-        headerNome.setText(nome);
-        headerCognome.setText(cognome);
-        headerEmail.setText(email);
-
-        if(ruolo.equals("curatore")){
-            navigationView.inflateMenu(R.menu.navigation_curatore_menu);
-        }else{
-            navigationView.inflateMenu(R.menu.navigation_visitatore_menu);
-        }
+        headerNome.setText(utente.getNome());
+        headerCognome.setText(utente.getCognome());
+        headerEmail.setText(utente.getEmail());
 
     }
 
