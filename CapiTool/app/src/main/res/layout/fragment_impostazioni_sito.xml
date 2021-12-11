@@ -4,19 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".fragmentsNavDrawnBar.FragmentImpostazioniSito">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="149dp"
-        android:layout_marginTop="352dp"
-        android:layout_marginEnd="150dp"
-        android:text="@string/settingSite"
-        android:textSize="20dp"
+        android:id="@+id/text_elimina_sito"
+        android:layout_width="382dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="428dp"
+        android:background="@drawable/rounded_style"
+        android:fontFamily="sans-serif"
+        android:text="Elimina Sito"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/text_sub_delega_sito"
+        android:layout_width="382dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="104dp"
+        android:background="@drawable/rounded_style"
+        android:contentDescription="Delega il mio sito ad un altro curatore"
+        android:fontFamily="sans-serif"
+        android:text="Delega Sito"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_delega_sito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:text="Delega il tuo sito ad un altro curatore"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_sub_delega_sito"
+        app:layout_constraintStart_toStartOf="@+id/text_sub_delega_sito"
+        app:layout_constraintTop_toTopOf="@+id/text_sub_delega_sito"
+        app:layout_constraintVertical_bias="0.804" />
+
+    <TextView
+        android:id="@+id/text_sub_elimina_sito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="32dp"
+        android:text="Elimina l'intero Sito Culturale ed i suoi dati "
+        app:layout_constraintStart_toStartOf="@+id/text_elimina_sito"
+        app:layout_constraintTop_toTopOf="@+id/text_elimina_sito" />
+
+    <ImageView
+        android:id="@+id/image_delega_sito"
+        android:layout_width="41dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_sharp_output_24"
+        app:layout_constraintBottom_toBottomOf="@+id/text_sub_delega_sito"
+        app:layout_constraintStart_toStartOf="@+id/text_sub_delega_sito" />
+
+    <ImageButton
+        android:id="@+id/button_delega_sito"
+        android:layout_width="34dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_navigate_next_24"
+        app:layout_constraintBottom_toBottomOf="@+id/text_sub_delega_sito"
+        app:layout_constraintEnd_toEndOf="@+id/text_sub_delega_sito" />
+
+    <ImageButton
+        android:id="@+id/button_elimina_sito"
+        android:layout_width="35dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_navigate_next_24"
+        app:layout_constraintBottom_toBottomOf="@+id/text_elimina_sito"
+        app:layout_constraintEnd_toEndOf="@+id/text_elimina_sito" />
+
+    <ImageView
+        android:id="@+id/image_elimina_sito"
+        android:layout_width="40dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="12dp"
+        android:background="@color/white"
+        android:src="@android:drawable/ic_menu_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/text_elimina_sito"
+        app:layout_constraintStart_toStartOf="@+id/text_elimina_sito" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
