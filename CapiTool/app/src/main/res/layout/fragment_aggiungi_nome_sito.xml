@@ -13,25 +13,28 @@
 
         <EditText
             android:id="@+id/nomeSito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_width="226dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="108dp"
+            android:background="@drawable/rounded_style"
             android:ems="10"
             android:hint="Nome Sito"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            app:layout_constraintTop_toBottomOf="@+id/immagineSito" />
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="158dp"
-            android:layout_height="156dp"
-            android:layout_marginTop="77dp"
+            android:id="@+id/immagineSito"
+            android:layout_width="286dp"
+            android:layout_height="238dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/rounded_style"
+            android:clickable="true"
             android:src="@drawable/ic_baseline_account_balance_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,11 +42,27 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:layout_marginBottom="216dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="140dp"
+            android:background="@drawable/rounded_style"
             android:text="Avanti"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="62dp"
+            android:layout_marginEnd="131dp"
+            android:layout_marginBottom="94dp"
+            android:text="Clicca sull'immagine per selezionarne una nuova"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/nomeSito"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/immagineSito" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
