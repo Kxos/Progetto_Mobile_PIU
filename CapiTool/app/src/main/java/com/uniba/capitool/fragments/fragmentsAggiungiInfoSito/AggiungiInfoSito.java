@@ -1,6 +1,7 @@
 package com.uniba.capitool.fragments.fragmentsAggiungiInfoSito;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Visitatore;
 
@@ -208,9 +210,23 @@ public class AggiungiInfoSito extends Fragment {
         SitoCulturale sito= new SitoCulturale((int)counterIndex,nomeSito, indirizzo.getText().toString(), orarioApertura.getText().toString(),
                                                 orarioChiusura.getText().toString(), Float.parseFloat(costoIngresso.getText().toString()),
                                                 nomeCitta.getText().toString(), mAuth.getCurrentUser().getUid());
-        
+
         myRef=database.getReference("/Siti/"+counterIndex);
         myRef.setValue(sito);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Intent homePage = new Intent(getActivity(), HomePage.class);
+
+                // Log.d("*******************************", ""+emailTrovata+""+ nome.getText().toString()+""+cognome.getText().toString()+""+user.getUid());
+                getActivity().startActivity(homePage);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
