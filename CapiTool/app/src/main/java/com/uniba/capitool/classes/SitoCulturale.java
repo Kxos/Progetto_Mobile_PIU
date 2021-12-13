@@ -3,25 +3,25 @@ package com.uniba.capitool.classes;
 import android.media.Image;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class SitoCulturale {
 
     private int id;
     private String nome;
     private String indirizzo;
-    private Date orarioApertura;
-    private Date orarioChiusura;
+    private String orarioApertura;
+    private String orarioChiusura;
     private float costoBiglietto;
     private String citta;
     private Image foto;
-    private ArrayList<Zona> zone;
+    private ArrayList<Zona> zone = new ArrayList<>();
+    private String uidCuratore;
 
     public SitoCulturale(){
 
     }
 
-    public SitoCulturale(int id, String nome, String indirizzo, Date orarioApertura, Date orarioChiusura, float costoBiglietto, String citta, Image foto, ArrayList<Zona> zone) {
+    public SitoCulturale(int id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, float costoBiglietto, String citta, Image foto, ArrayList<Zona> zone, String uidCuratore) {
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
@@ -31,6 +31,27 @@ public class SitoCulturale {
         this.citta = citta;
         this.foto = foto;
         this.zone = zone;
+        this.uidCuratore = uidCuratore;
+    }
+
+    public SitoCulturale(int id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, float costoBiglietto, String citta, String uidCuratore) {
+        this.id = id;
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.orarioApertura = orarioApertura;
+        this.orarioChiusura = orarioChiusura;
+        this.costoBiglietto = costoBiglietto;
+        this.citta = citta;
+
+        this.uidCuratore = uidCuratore;
+    }
+
+    public String getUidCuratore() {
+        return uidCuratore;
+    }
+
+    public void setUidCuratore(String uidCuratore) {
+        this.uidCuratore = uidCuratore;
     }
 
     protected boolean aggiungiZona(Zona zona) {
@@ -49,9 +70,9 @@ public class SitoCulturale {
 
     public void setIndirizzo(String indirizzo) { this.indirizzo = indirizzo; }
 
-    public void setOrarioApertura(Date orarioApertura) { this.orarioApertura = orarioApertura; }
+    public void setOrarioApertura(String orarioApertura) { this.orarioApertura = orarioApertura; }
 
-    public void setOrarioChiusura(Date orarioChiusura) { this.orarioChiusura = orarioChiusura; }
+    public void setOrarioChiusura(String orarioChiusura) { this.orarioChiusura = orarioChiusura; }
 
     public void setCostoBiglietto(float costoBiglietto) { this.costoBiglietto = costoBiglietto; }
 
@@ -65,9 +86,9 @@ public class SitoCulturale {
 
     public String getIndirizzo() { return indirizzo; }
 
-    public Date getOrarioApertura() { return orarioApertura; }
+    public String getOrarioApertura() { return orarioApertura; }
 
-    public Date getOrarioChiusura() { return orarioChiusura; }
+    public String getOrarioChiusura() { return orarioChiusura; }
 
     public float getCostoBiglietto() { return costoBiglietto; }
 
