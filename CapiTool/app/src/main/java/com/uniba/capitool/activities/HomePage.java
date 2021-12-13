@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -23,7 +22,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.Visitatore;
-import com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMieiPercorsi;
 
 public class HomePage extends AppCompatActivity {
 
@@ -133,11 +131,20 @@ public class HomePage extends AppCompatActivity {
             navigationView.inflateMenu(R.menu.navigation_visitatore_menu);
         }
 
-        utente.setUid(b.getString("uid"));
-        utente.setNome(b.getString("nome"));
-        utente.setCognome(b.getString("cognome"));
-        utente.setEmail(b.getString("email"));
-        utente.setRuolo(b.getString("ruolo"));
+        if(b!=null){
+            utente.setUid(b.getString("uid"));
+            utente.setNome(b.getString("nome"));
+            utente.setCognome(b.getString("cognome"));
+            utente.setEmail(b.getString("email"));
+            utente.setRuolo(b.getString("ruolo"));
+        }else{
+            BasicMethod.alertDialog(this, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
+            Intent login= new Intent(HomePage.this, Login.class);
+            this.startActivity(login);
+
+        }
+
+
 
         View headerView = navigationView.getHeaderView(0);
 
