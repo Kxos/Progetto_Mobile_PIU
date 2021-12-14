@@ -87,7 +87,7 @@ public class AggiungiPercorso extends AppCompatActivity {
         RecyclerView rvCardsSiti = (RecyclerView) findViewById(R.id.recyclerViewSiti);
 
         ArrayList<CardSitoCulturale> cardSitiCulturali = new ArrayList<>();
-        
+
         // TODO - INSERIMENTO DELLE INFO SU CARD
         // TODO ----------------------------------------------------------
 
