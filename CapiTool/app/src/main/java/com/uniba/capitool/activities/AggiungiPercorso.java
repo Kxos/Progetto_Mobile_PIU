@@ -72,12 +72,14 @@ public class AggiungiPercorso extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // Noneg
+                // None
             }
         });
 
         // TODO ----------------------------------------------------------
     }
+    /** FINE onCreate()
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
      * Popola la RecyclerView con i Siti Culturali cercati
@@ -88,17 +90,8 @@ public class AggiungiPercorso extends AppCompatActivity {
 
         ArrayList<CardSitoCulturale> cardSitiCulturali = new ArrayList<>();
 
-        // TODO - INSERIMENTO DELLE INFO SU CARD
+        // TODO - INSERIMENTO DI TUTTE LE INFO SU CARD
         // TODO ----------------------------------------------------------
-
-        /**
-        // Creazione di una singola card
-        CardSitoCulturale cardSitoCulturale = new CardSitoCulturale();
-        cardSitoCulturale.setNome("Sito di Prova 1");
-        cardSitoCulturale.setDescrizione("Non è importante al momento.");
-        cardSitoCulturale.setCitta("Bari");
-        cardSitiCulturali.add(cardSitoCulturale);
-         */
 
         if(!valoreDiRicerca.isEmpty()){
             cardSitiCulturali = getSitoFromDB(valoreDiRicerca);
@@ -114,6 +107,8 @@ public class AggiungiPercorso extends AppCompatActivity {
         // SetLayoutManager posiziona i Siti trovati nel Layout
         rvCardsSiti.setLayoutManager(new LinearLayoutManager(this));
     }
+    /** FINE popolaSitiInRecyclerView()
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
      * Ottiene tutti gli attributi di un Sito
@@ -127,14 +122,10 @@ public class AggiungiPercorso extends AppCompatActivity {
 
         cardSitiCulturali = getSitoFromDBOrderByNome(valoreDiRicerca);
 
-        // Non trova nulla nella ricerca per nome
-        if(cardSitiCulturali.isEmpty()){
-            cardSitiCulturali = getSitoFromDBOrderByCitta(valoreDiRicerca);
-        }
-
         return cardSitiCulturali;
     }
-
+    /** FINE getSitoFromDB()
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
      * Ottiene tutti gli attributi di un Sito, cercando per Nome
@@ -143,7 +134,7 @@ public class AggiungiPercorso extends AppCompatActivity {
      */
     public ArrayList<CardSitoCulturale> getSitoFromDBOrderByNome(String valoreDiRicerca) {
 
-        ArrayList<CardSitoCulturale> CardSitiCulturali = new ArrayList<>();
+        final ArrayList<CardSitoCulturale>[] CardSitiCulturali = new ArrayList[]{new ArrayList<>()};
         Query recentPostsQuery;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -161,7 +152,13 @@ public class AggiungiPercorso extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
                     Log.e("RISULTATO DB NOME: ",cardSitoCulturale.getNome());
-                    CardSitiCulturali.add(cardSitoCulturale);
+                    CardSitiCulturali[0].add(cardSitoCulturale);
+                }
+
+                // Se non trova nulla nella ricerca per nome ...
+                if(CardSitiCulturali[0].isEmpty()){
+                    Log.e("SEI DENTRO ALLA CITTA ","  ");
+                    getSitoFromDBOrderByCitta(valoreDiRicerca, CardSitiCulturali);
                 }
 
             }
@@ -173,18 +170,19 @@ public class AggiungiPercorso extends AppCompatActivity {
             }
         });
 
-        return CardSitiCulturali;
+        return CardSitiCulturali[0];
 
     }
+    /** FINE getSitoFromDBOrderByNome()
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
      * Ottiene tutti gli attributi di un Sito, cercando per Città
      *
      * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà una Città)
      */
-    public ArrayList<CardSitoCulturale> getSitoFromDBOrderByCitta(String valoreDiRicerca) {
+    public ArrayList<CardSitoCulturale> getSitoFromDBOrderByCitta(String valoreDiRicerca, ArrayList<CardSitoCulturale>[] CardSitiCulturali) {
 
-        ArrayList<CardSitoCulturale> cardSitiCulturali = new ArrayList<>();
         Query recentPostsQuery;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -202,19 +200,9 @@ public class AggiungiPercorso extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
                     Log.e("RISULTATO DB CITTA: ",cardSitoCulturale.getNome());
-                    cardSitiCulturali.add(cardSitoCulturale);
+                    CardSitiCulturali[0].add(cardSitoCulturale);
                 }
 
-                /**
-                 //ciclo for per scorrere la lista ottenuta dal db
-                 int contatore=0;
-                 for(Visitatore visitatore : visitatori){
-                 Log.e("OGGETTO RESTITUITO "+(contatore+1)+" della lista visitatori", BasicMethod.getAllVisitatore(visitatori.get(contatore)));
-                 contatore++;
-                 }
-                 */
-
-                //Log.d("Lunghezza lista della query", String.valueOf(visitatori.size()));
             }
 
             @Override
@@ -224,7 +212,7 @@ public class AggiungiPercorso extends AppCompatActivity {
             }
         });
 
-        return cardSitiCulturali;
+        return CardSitiCulturali[0];
 
     }
 }

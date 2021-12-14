@@ -43,6 +43,9 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         TextView cardNomeSito = holder.nome;
         cardNomeSito.setText(cardSitoCulturale.getNome());
 
+        TextView cardCittaSito = holder.citta;
+        cardCittaSito.setText(cardSitoCulturale.getCitta());
+
         TextView cardDescrizioneSito = holder.descrizione;
         cardDescrizioneSito.setText(cardSitoCulturale.getDescrizione());
     }
@@ -59,6 +62,7 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView nome;
+        public TextView citta;
         public TextView descrizione;
         public ImageView foto;
 
@@ -70,6 +74,7 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             super(itemView);
 
             nome = (TextView) itemView.findViewById(R.id.itemNomeSito);
+            citta = (TextView) itemView.findViewById(R.id.itemCittaSito);
             descrizione = (TextView) itemView.findViewById(R.id.itemDescrizioneSito);
             foto = (ImageView) itemView.findViewById(R.id.itemImmagineSito);
         }
