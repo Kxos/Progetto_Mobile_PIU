@@ -10,7 +10,7 @@
         layout="@layout/toolbar" />
 
     <EditText
-        android:id="@+id/editCercaSitoPercorso"
+        android:id="@+id/editCercaSitoCitta"
         android:layout_width="351dp"
         android:layout_height="54dp"
         android:layout_marginStart="20dp"
@@ -29,6 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCercaSitoPercorso" />
+        app:layout_constraintTop_toBottomOf="@+id/editCercaSitoCitta" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

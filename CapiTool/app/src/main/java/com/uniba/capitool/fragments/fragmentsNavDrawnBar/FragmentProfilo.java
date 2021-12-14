@@ -41,6 +41,7 @@ public class FragmentProfilo extends Fragment {
         viewPager=view.findViewById(R.id.pager);
 
         FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+        /** TODO
         PagerAdapter adapter = new PagerAdapter() {
             @Override
             public int getCount() {
@@ -52,5 +53,6 @@ public class FragmentProfilo extends Fragment {
                 return false;
             }
         };
+         */
     }
 }

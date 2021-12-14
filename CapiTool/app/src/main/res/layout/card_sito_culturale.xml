@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/itemImmagineSito"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,14 +34,14 @@
 
         <TextView
             android:id="@+id/itemDescrizioneSito"
-            android:layout_width="220dp"
-            android:layout_height="98dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="219dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="10dp"
             android:text="Questa è una descrizione di prova, ma potrebbe anche includere informazioni inutilli e ridondanti. Specialmente per Zia Maria."
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
