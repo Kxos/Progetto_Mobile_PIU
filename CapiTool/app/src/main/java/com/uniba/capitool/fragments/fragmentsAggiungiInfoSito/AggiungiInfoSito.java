@@ -167,6 +167,8 @@ public class AggiungiInfoSito extends Fragment {
             @Override
             public void onClick(View view) {
                 addSitoOnLastPosition();
+                datiSito.clear();
+                datiSito.commit();
             }
         });
 
@@ -175,7 +177,7 @@ public class AggiungiInfoSito extends Fragment {
         return v;
     }
 
-    public int addSitoOnLastPosition(){
+    public void addSitoOnLastPosition(){
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef = database.getReference("/");
@@ -199,7 +201,7 @@ public class AggiungiInfoSito extends Fragment {
             }
         });
 
-        return 0;
+
     }
 
     public void insertQuery(long counterIndex,  FirebaseDatabase database, DatabaseReference myRef){
@@ -217,8 +219,6 @@ public class AggiungiInfoSito extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Intent homePage = new Intent(getActivity(), HomePage.class);
-
-                // Log.d("*******************************", ""+emailTrovata+""+ nome.getText().toString()+""+cognome.getText().toString()+""+user.getUid());
                 getActivity().startActivity(homePage);
             }
 

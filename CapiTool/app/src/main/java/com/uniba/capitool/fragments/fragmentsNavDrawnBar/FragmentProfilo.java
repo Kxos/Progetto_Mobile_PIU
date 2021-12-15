@@ -41,7 +41,8 @@ public class FragmentProfilo extends Fragment {
         viewPager=view.findViewById(R.id.pager);
 
         FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
-        PagerAdapter adapter = new PagerAdapter() {
+
+        /*PagerAdapter adapter = new PagerAdapter() {
             @Override
             public int getCount() {
                 return tabsLayout.get(index).constructFragment();
@@ -51,6 +52,6 @@ public class FragmentProfilo extends Fragment {
             public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
                 return false;
             }
-        };
+        };*/
     }
 }

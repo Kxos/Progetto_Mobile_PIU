@@ -52,6 +52,9 @@ public class AggiungiSito extends AppCompatActivity {
                     Log.d( "--------------------FRAGMENT IN USE: ", "Registrati1");
                     Intent aggiungiSito = new Intent(AggiungiSito.this, HomePage.class);
                     startActivity(aggiungiSito);
+
+
+
                 }else if(currentFragment instanceof AggiungiInfoSito){
                     Log.d( "--------------------FRAGMENT IN USE: ", "Registrati2");
                     FragmentManager fragmentManager= getSupportFragmentManager();
