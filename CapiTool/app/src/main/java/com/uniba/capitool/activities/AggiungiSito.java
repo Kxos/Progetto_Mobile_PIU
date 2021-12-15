@@ -21,16 +21,32 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.Visitatore;
 import com.uniba.capitool.fragments.fragmentsAggiungiInfoSito.*;
 import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraCredenziali;
 import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
 import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraRuolo;
 
 public class AggiungiSito extends AppCompatActivity {
-
+    Visitatore utente = new Visitatore();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+
+        if(b!=null){
+            utente.setUid(b.getString("uid"));
+            utente.setNome(b.getString("nome"));
+            utente.setCognome(b.getString("cognome"));
+            utente.setEmail(b.getString("email"));
+            utente.setRuolo(b.getString("ruolo"));
+        }else{
+           /* BasicMethod.alertDialog(this, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
+            Intent login= new Intent(HomePage.this, Login.class);
+            this.startActivity(login);
+            */
+        }
+
         setContentView(R.layout.activity_aggiungi_sito);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -50,8 +66,13 @@ public class AggiungiSito extends AppCompatActivity {
                 Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerAggiungiSito);
                 if(currentFragment instanceof AggiungiNomeSito){
                     Log.d( "--------------------FRAGMENT IN USE: ", "Registrati1");
-                    Intent aggiungiSito = new Intent(AggiungiSito.this, HomePage.class);
-                    startActivity(aggiungiSito);
+                    Intent homePage = new Intent(AggiungiSito.this, HomePage.class);
+                    homePage.putExtra("cognome",utente.getCognome());
+                    homePage.putExtra("nome",utente.getNome());
+                    homePage.putExtra("uid",utente.getUid());
+                    homePage.putExtra("email",utente.getEmail());
+                    homePage.putExtra("ruolo",utente.getRuolo());
+                    startActivity(homePage);
 
 
 
@@ -68,4 +89,8 @@ public class AggiungiSito extends AppCompatActivity {
 
     }
 
+    public Visitatore getUtente(){
+
+        return utente;
+    }
 }

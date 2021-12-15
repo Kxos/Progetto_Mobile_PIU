@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.AggiungiSito;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Visitatore;
@@ -218,7 +219,13 @@ public class AggiungiInfoSito extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Visitatore utente = ((AggiungiSito)getActivity()).getUtente();
                 Intent homePage = new Intent(getActivity(), HomePage.class);
+                homePage.putExtra("cognome",utente.getCognome());
+                homePage.putExtra("nome",utente.getNome());
+                homePage.putExtra("uid",utente.getUid());
+                homePage.putExtra("email",utente.getEmail());
+                homePage.putExtra("ruolo",utente.getRuolo());
                 getActivity().startActivity(homePage);
             }
 
