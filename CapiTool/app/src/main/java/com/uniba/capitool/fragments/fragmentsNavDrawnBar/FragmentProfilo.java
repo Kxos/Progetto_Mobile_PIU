@@ -70,48 +70,8 @@ public class FragmentProfilo extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
 
-<<<<<<< HEAD
-        tabsLayout=view.findViewById(R.id.tab_layout);
-        viewPager=view.findViewById(R.id.pager);
-
-        FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
-
-<<<<<<< HEAD
-        /*PagerAdapter adapter = new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return tabsLayout.get(index).constructFragment();
-            }
-
-            @Override
-            public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-                return false;
-            }
-        };*/
-=======
-        /** TODO
-        PagerAdapter adapter = new PagerAdapter() {
-
-       /*    PagerAdapter adapter = new PagerAdapter() {
-
-                @Override
-                public int getCount() {
-                    return tabsLayout.get(index).constructFragment();
-                }
-
-                @Override
-                public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-                    return false;
-                }
-
-            };
-
-        };*/
-
->>>>>>> cf2cf244b80758071a4fd6be174e326cbed0b88b
-=======
->>>>>>> 40b6b742a832ba0fd84655ee3a33e68e754cc33b
     }
 
 }
