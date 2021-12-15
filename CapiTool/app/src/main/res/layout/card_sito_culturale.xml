@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemIndirizzo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -13,8 +14,8 @@
 
         <ImageView
             android:id="@+id/itemImmagineSito"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,24 +27,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Sito di Prova 1"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/itemDescrizioneSito"
-            android:layout_width="219dp"
-            android:layout_height="68dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="10dp"
-            android:text="Questa è una descrizione di prova, ma potrebbe anche includere informazioni inutilli e ridondanti. Specialmente per Zia Maria."
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
-            app:layout_constraintTop_toBottomOf="@+id/itemCittaSito" />
 
         <TextView
             android:id="@+id/itemCittaSito"
@@ -55,6 +44,91 @@
             android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
             app:layout_constraintTop_toBottomOf="@+id/itemNomeSito" />
+
+        <TextView
+            android:id="@+id/itemLableOrarioAperturaSito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Apertura: "
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
+            app:layout_constraintTop_toBottomOf="@+id/itemLableCostoBigliettoSito" />
+
+        <TextView
+            android:id="@+id/itemLableOrarioChiusuraSito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="8dp"
+            android:text="Chiusura: "
+            app:layout_constraintStart_toEndOf="@+id/itemOrarioAperturaSito"
+            app:layout_constraintTop_toBottomOf="@+id/itemLableCostoBigliettoSito" />
+
+        <TextView
+            android:id="@+id/itemIndirizzoSito"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="161dp"
+            android:text="Via Baldo degli Ubaldi 26"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemLableIndirizzoSito" />
+
+        <TextView
+            android:id="@+id/itemLableCostoBigliettoSito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Costo Biglietto: "
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
+            app:layout_constraintTop_toBottomOf="@+id/itemCittaSito" />
+
+        <TextView
+            android:id="@+id/itemCostoBigliettoSito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:text="12"
+            app:layout_constraintStart_toEndOf="@+id/itemLableCostoBigliettoSito"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemOrarioAperturaSito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="10:00"
+            app:layout_constraintStart_toEndOf="@+id/itemLableOrarioAperturaSito"
+            app:layout_constraintTop_toBottomOf="@+id/itemLableCostoBigliettoSito" />
+
+        <TextView
+            android:id="@+id/itemOrarioChiusuraSito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="12:00"
+            app:layout_constraintStart_toEndOf="@+id/itemLableOrarioChiusuraSito"
+            app:layout_constraintTop_toBottomOf="@+id/itemCostoBigliettoSito" />
+
+        <TextView
+            android:id="@+id/LableEuro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:text="€"
+            app:layout_constraintStart_toEndOf="@+id/itemCostoBigliettoSito"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemLableIndirizzoSito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Indirizzo: "
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
+            app:layout_constraintTop_toBottomOf="@+id/itemLableOrarioAperturaSito" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

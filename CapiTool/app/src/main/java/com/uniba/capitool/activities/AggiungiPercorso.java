@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -53,10 +54,9 @@ public class AggiungiPercorso extends AppCompatActivity {
         utente.setEmail(b.getString("email"));
         utente.setRuolo(b.getString("ruolo"));
 
-        TextView valoreDiRicerca = findViewById(R.id.editCercaSitoCitta);
+        EditText valoreDiRicerca = findViewById(R.id.editCercaSitoCitta);
 
         // TODO - OTTENERE LE CARD IN TEMPO REALE
-        // TODO - RIMUOVERE LA TASTIERA
         // TODO ----------------------------------------------------------
 
         valoreDiRicerca.addTextChangedListener(new TextWatcher() {
@@ -215,4 +215,6 @@ public class AggiungiPercorso extends AppCompatActivity {
         return CardSitiCulturali[0];
 
     }
+    /** FINE getSitoFromDBOrderByCitta()
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 }

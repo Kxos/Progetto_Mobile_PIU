@@ -43,11 +43,21 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         TextView cardNomeSito = holder.nome;
         cardNomeSito.setText(cardSitoCulturale.getNome());
 
+        TextView cardIndirizzoSito = holder.indirizzo;
+        cardIndirizzoSito.setText(cardSitoCulturale.getIndirizzo());
+
+        TextView cardOrarioAperturaSito = holder.orarioApertura;
+        cardOrarioAperturaSito.setText(cardSitoCulturale.getOrarioApertura());
+
+        TextView cardOrarioChiusuraSito = holder.orarioChiusura;
+        cardOrarioChiusuraSito.setText(cardSitoCulturale.getOrarioChiusura());
+
+        TextView cardCostoBigliettoSito = holder.costoBiglietto;
+        cardCostoBigliettoSito.setText(cardSitoCulturale.getCostoBiglietto().toString());
+
         TextView cardCittaSito = holder.citta;
         cardCittaSito.setText(cardSitoCulturale.getCitta());
 
-        TextView cardDescrizioneSito = holder.descrizione;
-        cardDescrizioneSito.setText(cardSitoCulturale.getDescrizione());
     }
 
     // Returns the total count of items in the list
@@ -61,10 +71,13 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView nome;
-        public TextView citta;
-        public TextView descrizione;
         public ImageView foto;
+        public TextView nome;
+        public TextView indirizzo;
+        public TextView orarioApertura;
+        public TextView orarioChiusura;
+        public TextView costoBiglietto;
+        public TextView citta;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -73,10 +86,14 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            nome = (TextView) itemView.findViewById(R.id.itemNomeSito);
-            citta = (TextView) itemView.findViewById(R.id.itemCittaSito);
-            descrizione = (TextView) itemView.findViewById(R.id.itemDescrizioneSito);
             foto = (ImageView) itemView.findViewById(R.id.itemImmagineSito);
+            nome = (TextView) itemView.findViewById(R.id.itemNomeSito);
+            indirizzo = (TextView) itemView.findViewById(R.id.itemIndirizzoSito);
+            orarioApertura = (TextView) itemView.findViewById(R.id.itemOrarioAperturaSito);
+            orarioChiusura = (TextView) itemView.findViewById(R.id.itemOrarioChiusuraSito);
+            costoBiglietto = (TextView) itemView.findViewById(R.id.itemCostoBigliettoSito);
+            citta = (TextView) itemView.findViewById(R.id.itemCittaSito);
+
         }
     }
 

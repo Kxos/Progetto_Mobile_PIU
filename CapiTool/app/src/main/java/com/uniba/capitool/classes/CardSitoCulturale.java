@@ -6,17 +6,23 @@ public class CardSitoCulturale {
 
     private Image foto;
     private String nome;
-    private String descrizione;
+    private String indirizzo;
+    private String orarioApertura;
+    private String orarioChiusura;
+    private Long costoBiglietto;
     private String citta;
 
 
     public CardSitoCulturale() {
     }
 
-    public CardSitoCulturale(Image foto, String nome, String descrizione, String citta) {
+    public CardSitoCulturale(Image foto, String nome, String indirizzo, String orarioApertura, String orarioChiusura, Long costoBiglietto, String citta) {
         this.foto = foto;
         this.nome = nome;
-        this.descrizione = descrizione;
+        this.indirizzo = indirizzo;
+        this.orarioApertura = orarioApertura;
+        this.orarioChiusura = orarioChiusura;
+        this.costoBiglietto = costoBiglietto;
         this.citta = citta;
     }
 
@@ -28,13 +34,19 @@ public class CardSitoCulturale {
         return nome;
     }
 
-    public String getDescrizione() {
-        return descrizione;
+    public String getIndirizzo() {
+        return indirizzo;
     }
 
     public String getCitta() {
         return citta;
     }
+
+    public Long getCostoBiglietto() { return costoBiglietto; }
+
+    public String getOrarioChiusura() { return orarioChiusura; }
+
+    public String getOrarioApertura() { return orarioApertura; }
 
     public void setFoto(Image foto) {
         this.foto = foto;
@@ -44,11 +56,17 @@ public class CardSitoCulturale {
         this.nome = nome;
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
+    public void setIndirizzo(String descrizione) {
+        this.indirizzo = descrizione;
     }
 
     public void setCitta(String citta) {
         this.citta = citta;
     }
+
+    public void setOrarioApertura(String orarioApertura) { this.orarioApertura = orarioApertura; }
+
+    public void setOrarioChiusura(String orarioChiusura) { this.orarioChiusura = orarioChiusura; }
+
+    public void setCostoBiglietto(Long costoBiglietto) { this.costoBiglietto = costoBiglietto; }
 }
