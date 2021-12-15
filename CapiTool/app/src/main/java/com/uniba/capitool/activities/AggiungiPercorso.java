@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,7 +28,10 @@ import com.uniba.capitool.classes.Visitatore;
 
 import java.util.ArrayList;
 
-public class AggiungiPercorso extends AppCompatActivity {
+public class AggiungiPercorso extends AppCompatActivity implements CardSitoCulturaleAdapter.OnEventClickListener{
+
+    private Visitatore utente;
+    private ArrayList<CardSitoCulturale> cardSitiCulturali;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,6 @@ public class AggiungiPercorso extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle b = getIntent().getExtras();
-        Visitatore utente;
 
         if(BasicMethod.isCuratore(b.getString("ruolo"))){
             utente = new Visitatore();
@@ -67,12 +70,12 @@ public class AggiungiPercorso extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                popolaSitiInRecyclerView(charSequence.toString());
+                // None
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // None
+                popolaSitiInRecyclerView(editable.toString());
             }
         });
 
@@ -82,28 +85,48 @@ public class AggiungiPercorso extends AppCompatActivity {
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
+     * Al click sulla Card, passa i dati alla Activity: SelezionaOpere
+     *
+     * @param position: paramentro che indica la Card cliccata
+     */
+    @Override
+    public void onEventClick(int position) {
+        Intent detailIntent =new Intent (this, SelezionaOpere.class);
+        CardSitoCulturale clickedEvent = cardSitiCulturali.get(position);
+
+        detailIntent.putExtra("uidUtente", utente.getUid());
+        detailIntent.putExtra("ruoloUtente", utente.getRuolo());
+
+        detailIntent.putExtra("idSito", clickedEvent.getId());
+        detailIntent.putExtra("nomeSito", clickedEvent.getNome());
+        detailIntent.putExtra("orarioAperturaSito", clickedEvent.getOrarioApertura());
+        detailIntent.putExtra("orarioChiusuraSito", clickedEvent.getOrarioChiusura());
+        detailIntent.putExtra("indirizzoSito", clickedEvent.getIndirizzo());
+        detailIntent.putExtra("costoBigliettoSito", clickedEvent.getCostoBiglietto());
+        detailIntent.putExtra("cittaSito", clickedEvent.getCitta());
+
+        startActivity(detailIntent);
+
+    }
+
+    /***
      * Popola la RecyclerView con i Siti Culturali cercati
      */
     public void popolaSitiInRecyclerView(String valoreDiRicerca){
 
         RecyclerView rvCardsSiti = (RecyclerView) findViewById(R.id.recyclerViewSiti);
 
-        ArrayList<CardSitoCulturale> cardSitiCulturali = new ArrayList<>();
-
-        // TODO - INSERIMENTO DI TUTTE LE INFO SU CARD
-        // TODO ----------------------------------------------------------
-
         if(!valoreDiRicerca.isEmpty()){
             cardSitiCulturali = getSitoFromDB(valoreDiRicerca);
         }
-
-        // TODO ----------------------------------------------------------
 
         // Crea un adapter passando i siti trovati
         CardSitoCulturaleAdapter adapter = new CardSitoCulturaleAdapter(cardSitiCulturali);
 
         // Lega l'Adapter alla recyclerview per popolare i Siti
         rvCardsSiti.setAdapter(adapter);
+        adapter.setOnEventClickListener(this);
+
         // SetLayoutManager posiziona i Siti trovati nel Layout
         rvCardsSiti.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -217,4 +240,5 @@ public class AggiungiPercorso extends AppCompatActivity {
     }
     /** FINE getSitoFromDBOrderByCitta()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
 }
