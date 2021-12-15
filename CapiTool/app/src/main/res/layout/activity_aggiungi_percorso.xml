@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".activities.AggiungiPercorso">
 
-    <include layout="@layout/toolbar" />
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <EditText
+        android:id="@+id/editCercaSitoCitta"
+        android:layout_width="351dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:drawableRight="@drawable/ic_baseline_search_24"
+        android:ems="10"
+        android:hint="Cerca il Sito o la sua Città"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSiti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCercaSitoCitta" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
