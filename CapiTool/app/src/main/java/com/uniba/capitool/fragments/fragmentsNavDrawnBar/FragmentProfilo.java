@@ -9,33 +9,69 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.uniba.capitool.R;
+import com.uniba.capitool.fragments.fragmentsProfilo.FragmentAdapterProfilo;
 
-/**
- */
 public class FragmentProfilo extends Fragment {
 
     TabLayout tabsLayout;
-    ViewPager viewPager;
-
-    public FragmentProfilo() {
-        // Required empty public constructor
-    }
+    ViewPager2 viewPager2;
+    FragmentAdapterProfilo adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view=inflater.inflate(R.layout.fragment_profilo, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profilo, container, false);
+        tabsLayout=view.findViewById(R.id.tab_layout);
+        viewPager2=view.findViewById(R.id.pager);
+
+
+        FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+        adapter= new FragmentAdapterProfilo(fragmentManager, getLifecycle());
+        viewPager2.setAdapter(adapter);
+
+        //nomi che compaiono per ogni scheda sulla barra in alto
+        tabsLayout.addTab(tabsLayout.newTab().setText("Dati Personali"));
+        tabsLayout.addTab(tabsLayout.newTab().setText("Sicurezza"));
+        tabsLayout.addTab(tabsLayout.newTab().setText("Gestione Account"));
+
+        tabsLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                //Log.e("onTabSelected: ", String.valueOf(tab.getPosition()));
+                viewPager2.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                tabsLayout.selectTab(tabsLayout.getTabAt(position));
+            }
+        });
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+<<<<<<< HEAD
         tabsLayout=view.findViewById(R.id.tab_layout);
         viewPager=view.findViewById(R.id.pager);
 
@@ -74,5 +110,8 @@ public class FragmentProfilo extends Fragment {
         };*/
 
 >>>>>>> cf2cf244b80758071a4fd6be174e326cbed0b88b
+=======
+>>>>>>> 40b6b742a832ba0fd84655ee3a33e68e754cc33b
     }
+
 }
