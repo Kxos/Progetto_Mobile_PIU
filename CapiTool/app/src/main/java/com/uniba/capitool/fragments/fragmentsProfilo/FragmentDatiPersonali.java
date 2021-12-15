@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.Visitatore;
@@ -27,10 +28,18 @@ public class FragmentDatiPersonali extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView text= view.findViewById(R.id.textDatiP);
+        TextInputEditText email= view.findViewById(R.id.text_email);
+        TextInputEditText nome= view.findViewById(R.id.text_nome);
+        TextInputEditText cognome= view.findViewById(R.id.text_cognome);
+        TextInputEditText dataNascita= view.findViewById(R.id.text_dataNascita);
+        Button conferma= view.findViewById(R.id.confermaModifiche);
 
         Visitatore utente=((HomePage)getActivity()).getUtente();    //recupero l'utente che ha fatto il login dalla activity HomePage
-        text.setText(utente.getUid());
+        email.setText(utente.getEmail());
+        nome.setText(utente.getNome());
+        cognome.setText(utente.getCognome());
+        dataNascita.setText(utente.getDataNascita());
+
 
     }
 }
