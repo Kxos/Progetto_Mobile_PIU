@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class SitoCulturale {
 
-    private int id;
+    private String id;
     private String nome;
     private String indirizzo;
     private String orarioApertura;
@@ -21,7 +21,7 @@ public class SitoCulturale {
 
     }
 
-    public SitoCulturale(int id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, float costoBiglietto, String citta, Image foto, ArrayList<Zona> zone, String uidCuratore) {
+    public SitoCulturale(String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, float costoBiglietto, String citta, Image foto, ArrayList<Zona> zone, String uidCuratore) {
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
@@ -34,7 +34,7 @@ public class SitoCulturale {
         this.uidCuratore = uidCuratore;
     }
 
-    public SitoCulturale(int id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, float costoBiglietto, String citta, String uidCuratore) {
+    public SitoCulturale(String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, float costoBiglietto, String citta, String uidCuratore) {
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
@@ -64,7 +64,7 @@ public class SitoCulturale {
 
     // Getter - Setter
     //-----------------------------------------------------------------------------------------
-    public void setId(int id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
 
     public void setNome(String nome) { this.nome = nome; }
 
@@ -80,7 +80,7 @@ public class SitoCulturale {
 
     public void setFoto(Image foto) { this.foto = foto; }
 
-    public int getId() { return id; }
+    public String getId() { return id; }
 
     public String getNome() { return nome; }
 

@@ -16,6 +16,23 @@ import java.util.ArrayList;
 
 public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCulturaleAdapter.ViewHolder>{
 
+    // Store a member variable
+    private ArrayList<CardSitoCulturale> sitiCulturali;
+    private OnEventClickListener mListener;
+
+    public interface OnEventClickListener{
+        void onEventClick (int position);
+    }
+
+    public void setOnEventClickListener(OnEventClickListener listener){
+        mListener=listener;
+    }
+
+    // Pass in the array into the constructor
+    public CardSitoCulturaleAdapter(ArrayList<CardSitoCulturale> sitiCulturali) {
+        this.sitiCulturali = sitiCulturali;
+    }
+
     // Usually involves inflating a layout from XML and returning the holder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,6 +57,9 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         CardSitoCulturale cardSitoCulturale = sitiCulturali.get(position);
 
         // Set item views based on your views and data model
+        TextView cardIdSito = holder.id;
+        cardIdSito.setText(cardSitoCulturale.getId());
+
         TextView cardNomeSito = holder.nome;
         cardNomeSito.setText(cardSitoCulturale.getNome());
 
@@ -72,6 +92,7 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public ImageView foto;
+        public TextView id;
         public TextView nome;
         public TextView indirizzo;
         public TextView orarioApertura;
@@ -87,6 +108,7 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             super(itemView);
 
             foto = (ImageView) itemView.findViewById(R.id.itemImmagineSito);
+            id = (TextView) itemView.findViewById(R.id.itemIdSito);
             nome = (TextView) itemView.findViewById(R.id.itemNomeSito);
             indirizzo = (TextView) itemView.findViewById(R.id.itemIndirizzoSito);
             orarioApertura = (TextView) itemView.findViewById(R.id.itemOrarioAperturaSito);
@@ -94,15 +116,20 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             costoBiglietto = (TextView) itemView.findViewById(R.id.itemCostoBigliettoSito);
             citta = (TextView) itemView.findViewById(R.id.itemCittaSito);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mListener!=null){
+                        int position=getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            mListener.onEventClick(position);
+                        }
+                    }
+                }
+            });
+
         }
     }
 
-    // Store a member variable
-    private ArrayList<CardSitoCulturale> sitiCulturali;
-
-    // Pass in the array into the constructor
-    public CardSitoCulturaleAdapter(ArrayList<CardSitoCulturale> sitiCulturali) {
-        this.sitiCulturali = sitiCulturali;
-    }
 
 }
