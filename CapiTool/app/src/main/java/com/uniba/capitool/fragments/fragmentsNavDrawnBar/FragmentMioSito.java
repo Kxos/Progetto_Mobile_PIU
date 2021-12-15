@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiSito;
+import com.uniba.capitool.activities.HomePage;
+import com.uniba.capitool.classes.Visitatore;
 
 /**
  * create an instance of this fragment.
@@ -33,7 +35,13 @@ public class FragmentMioSito extends Fragment {
        addSito.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               Visitatore utente = ((HomePage)getActivity()).getUtente();
                Intent aggiungiSito = new Intent(getActivity(), AggiungiSito.class);
+               aggiungiSito.putExtra("cognome",utente.getCognome());
+               aggiungiSito.putExtra("nome",utente.getNome());
+               aggiungiSito.putExtra("uid",utente.getUid());
+               aggiungiSito.putExtra("email",utente.getEmail());
+               aggiungiSito.putExtra("ruolo",utente.getRuolo());
                getActivity().startActivity(aggiungiSito);
            }
        });
@@ -41,6 +49,5 @@ public class FragmentMioSito extends Fragment {
        return v;
 
    }
-
 
 }
