@@ -27,13 +27,15 @@ public class HomePage extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
 
+    Visitatore utente;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        SharedPreferences datiRegistrazioneUtente = this.getPreferences(Context.MODE_PRIVATE);
-        datiRegistrazioneUtente.edit().clear().commit();
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
 
         Toolbar toolbar = startToolbarDrawerLayout();
         NavController navController = startNavLateralMenu(toolbar);
@@ -121,8 +123,6 @@ public class HomePage extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
 
-        Visitatore utente;
-
         if(BasicMethod.isCuratore(b.getString("ruolo"))){
             utente = new Visitatore();
             navigationView.inflateMenu(R.menu.navigation_curatore_menu);
@@ -156,6 +156,10 @@ public class HomePage extends AppCompatActivity {
         headerCognome.setText(utente.getCognome());
         headerEmail.setText(utente.getEmail());
 
+    }
+
+    public Visitatore getUtente(){
+        return utente;
     }
 
 }
