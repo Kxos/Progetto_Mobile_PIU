@@ -17,6 +17,10 @@
         <activity
             android:name=".activities.DelegaSito"
             android:exported="true" />
+
+            android:name=".activities.SelezionaOpere"
+            android:exported="false" />
+
         <activity
             android:name=".activities.AggiungiPercorso"
             android:exported="false" />

@@ -94,7 +94,7 @@ public class Visitatore {
         return percorsi.add(percorso);
     }
 
-    public String getAll(){
+    String getAll(){
         String risultato=""+nome+","+cognome+","+email+","+ruolo+","+dataNascita;
         return risultato;
     }
