@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">CapiTool</string>
 
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+
+
     <string name="siteManagement">Site Management</string>
     <string name="mySite">My Site</string>
     <string name="site">Site</string>
@@ -13,5 +17,23 @@
     <string name="logout">Logout</string>
     <string name="searchSites">Search for Sites or Cities</string>
     <string name="addSite">Create new Route</string>
+
+    <string name="deleteSite">Delete site</string>
+    <string name="deleteSite_subtext">Delete the entire cultural site and its data</string>
+    <string name="delegateSite">Delegate site</string>
+    <string name="delegateSite_subtext">Delegate your site to another curator</string>
+
+    <string name="selectDelegate">Choose who to delegate your site</string>
+    <string name="delegatedEmail">Enter the delegate\'s email</string>
+    <string name="checkInfoConfermed">I confirm that I have read the information</string>
+
+    <string name="howToDeletePassword">Enter your password and confirm to delete your cultural site</string>
+    <string name="insertYourPassword">Insert your password</string>
+
+
+
+
+
+
 
 </resources>
