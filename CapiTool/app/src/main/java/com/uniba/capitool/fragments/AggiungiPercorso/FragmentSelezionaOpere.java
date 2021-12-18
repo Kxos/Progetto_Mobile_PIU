@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -22,6 +23,8 @@ import com.uniba.capitool.classes.Utente;
  */
 public class FragmentSelezionaOpere extends Fragment {
 
+    Toolbar toolbar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class FragmentSelezionaOpere extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        toolbar = ((AggiungiPercorso)getActivity()).getToolbar();
+
         //leggere il file SharedPreferences
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
@@ -42,6 +47,8 @@ public class FragmentSelezionaOpere extends Fragment {
 
             sitoCulturale.setId(sharedPreferences.getString("idSito", ""));
             sitoCulturale.setNome(sharedPreferences.getString("nomeSito", ""));
+            
+            toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
 
         }else{
             Log.e( "onCreateView: ", "SharedPreferences non trovato");

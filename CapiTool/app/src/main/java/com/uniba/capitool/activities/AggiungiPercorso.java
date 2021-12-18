@@ -22,15 +22,16 @@ import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraRuolo
 
 public class AggiungiPercorso extends AppCompatActivity {
 
-    public Utente utente;
+    Utente utente;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aggiungi_percorso);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Aggiungi Percorso");
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.addSite);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -68,6 +69,10 @@ public class AggiungiPercorso extends AppCompatActivity {
 
     public Utente getUtente(){
         return utente;
+    }
+
+    public Toolbar getToolbar(){
+        return toolbar;
     }
 
 }
