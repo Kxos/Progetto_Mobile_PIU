@@ -28,55 +28,51 @@
         android:id="@+id/edit_text_email"
         android:layout_width="329dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_style"
         android:ems="10"
         android:hint="francesco.rossi@example.com"
         android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/text_email_delegato"
         app:layout_constraintTop_toBottomOf="@+id/text_email_delegato" />
 
     <TextView
         android:id="@+id/text_email_delegato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="56dp"
         android:text="@string/delegatedEmail"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/text_scegli_delegato"
         app:layout_constraintTop_toBottomOf="@+id/text_scegli_delegato" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="322dp"
         android:layout_height="46dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="116dp"
         android:text="@string/checkInfoConfermed"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/edit_text_email"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_email" />
 
     <Button
         android:id="@+id/button_annulla_delega"
         android:layout_width="131dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="144dp"
         android:background="@drawable/rounded_style"
         android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <Button
         android:id="@+id/button_conferma_delega"
         android:layout_width="131dp"
         android:layout_height="48dp"
+        android:layout_marginTop="144dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
         android:background="@drawable/rounded_style"
         android:text="@string/confirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
