@@ -16,6 +16,7 @@ import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
 import com.uniba.capitool.fragments.AggiungiPercorso.FragmentRicercaSiti;
+import com.uniba.capitool.fragments.AggiungiPercorso.FragmentSelezionaOpere;
 import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraCredenziali;
 import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
 import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraRuolo;
@@ -59,6 +60,13 @@ public class AggiungiPercorso extends AppCompatActivity {
                     Log.d( "--------------------FRAGMENT IN USE: ", "FragmentRicercaSiti");
                     Intent HomePage = BasicMethod.putUtenteExtrasInIntent(AggiungiPercorso.this,utente,HomePage.class);
                     startActivity(HomePage);
+                } else if (currentFragment instanceof FragmentSelezionaOpere){
+                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentSelezionaOpere");
+                    toolbar.setTitle(R.string.addSite);
+                    FragmentManager fragmentManager= getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerRicercaSiti, new FragmentRicercaSiti() );
+                    fragmentTransaction.commit();
                 }
             }
         });
