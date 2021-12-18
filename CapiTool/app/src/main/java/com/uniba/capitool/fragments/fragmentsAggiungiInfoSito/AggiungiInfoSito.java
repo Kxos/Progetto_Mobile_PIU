@@ -1,17 +1,23 @@
 package com.uniba.capitool.fragments.fragmentsAggiungiInfoSito;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,17 +35,21 @@ import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Visitatore;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class AggiungiInfoSito extends Fragment {
     SitoCulturale sitoCulturale;
     String nomeSito;
     EditText nomeCitta;
-    EditText orarioChiusura;
-    EditText orarioApertura;
+    TextView orarioChiusura;
+    TextView  orarioApertura;
     EditText costoIngresso;
     EditText indirizzo;
+    int hour, minute;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -47,12 +57,11 @@ public class AggiungiInfoSito extends Fragment {
                              Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_aggiungi_info_sito, container, false);
         nomeCitta = v.findViewById(R.id.Città);
-        orarioChiusura =v.findViewById(R.id.OrarioChiusura);
-        orarioApertura =v.findViewById(R.id.OrarioApertura);
+        orarioChiusura =v.findViewById(R.id.Timer2);
+        orarioApertura =v.findViewById(R.id.Timer);
         costoIngresso =v.findViewById(R.id.CostoIngresso);
         indirizzo =v.findViewById(R.id.Indirizzo);
         Button btnConferma = v.findViewById(R.id.btnConferma);
-
         sitoCulturale = new SitoCulturale();
 
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -173,6 +182,75 @@ public class AggiungiInfoSito extends Fragment {
             }
         });
 
+        orarioApertura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), android.R.style.Theme_Holo_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int oraApertura, int minutiApertura) {
+
+                        //Inizializzo ora e minuti
+                        hour = oraApertura;
+                        minute = minutiApertura;
+
+                        //Salvo ora e minuti
+                        String time = hour + ":" + minute;
+
+                        //Inizializza l'orario con un format di 24 ore
+                        SimpleDateFormat f24Hours = new SimpleDateFormat(
+                                "HH:mm"
+                        );
+
+                        try {
+                            Date date = f24Hours.parse(time);
+
+                            //Cambia la text view con l'orario selezionato
+                            orarioApertura.setText(f24Hours.format(date));
+                        } catch (ParseException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, 24,0,true);
+
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.updateTime(hour,minute);
+                timePickerDialog.show();
+            }
+        });
+
+        orarioChiusura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), android.R.style.Theme_Holo_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int oraChiusura, int minutiChiusura) {
+                        //Iniziallizza ora e minuti
+                        hour = oraChiusura;
+                        minute = minutiChiusura;
+
+                        //Salvo ora e minuti
+                        String time = hour + ":" + minute;
+
+                        //Inizializza l'orario con un format di 24 ore
+                        SimpleDateFormat f24Hours = new SimpleDateFormat(
+                                "HH:mm"
+                        );
+                        try {
+                            Date date = f24Hours.parse(time);
+
+                            //Cambia la text view con l'orario selezionato
+                            orarioChiusura.setText(f24Hours.format(date));
+                        } catch (ParseException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, 24,0,true);
+
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.updateTime(hour,minute);
+                timePickerDialog.show();
+            }
+        });
 
         // Inflate the layout for this fragment
         return v;
@@ -209,13 +287,18 @@ public class AggiungiInfoSito extends Fragment {
 
 
 
+        String key = myRef.push().getKey();
         //INSERT di un nuovo oggetto
-        SitoCulturale sito= new SitoCulturale((int)counterIndex,nomeSito, indirizzo.getText().toString(), orarioApertura.getText().toString(),
-                                                orarioChiusura.getText().toString(), Float.parseFloat(costoIngresso.getText().toString()),
+        SitoCulturale sito= new SitoCulturale(key,nomeSito, indirizzo.getText().toString(), orarioApertura.getText().toString(),
+                                                orarioChiusura.getText().toString(), costoIngresso.getText().toString(),
                                                 nomeCitta.getText().toString(), mAuth.getCurrentUser().getUid());
 
-        myRef=database.getReference("/Siti/"+counterIndex);
+
+
+        myRef=database.getReference("Siti").child(key);
+
         myRef.setValue(sito);
+        /*Log.e("******* ID *******", myRef.push().getKey() );*/
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
