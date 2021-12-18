@@ -20,14 +20,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.uniba.capitool.R;
-import com.uniba.capitool.classes.Curatore;
-import com.uniba.capitool.classes.Visitatore;
+import com.uniba.capitool.classes.Utente;
 
 public class HomePage extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
 
-    Visitatore utente;
+    Utente utente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,14 +123,17 @@ public class HomePage extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
 
         if(BasicMethod.isCuratore(b.getString("ruolo"))){
-            utente = new Curatore();
+           // utente = new Curatore();
             navigationView.inflateMenu(R.menu.navigation_curatore_menu);
         }else{
-            utente = new Visitatore();
+          //  utente = new Visitatore();
             navigationView.inflateMenu(R.menu.navigation_visitatore_menu);
         }
 
         if(b!=null){
+
+            utente = new Utente();
+            
             utente.setUid(b.getString("uid"));
             utente.setNome(b.getString("nome"));
             utente.setCognome(b.getString("cognome"));
@@ -158,7 +160,7 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-    public Visitatore getUtente(){
+    public Utente getUtente(){
         return utente;
     }
 
