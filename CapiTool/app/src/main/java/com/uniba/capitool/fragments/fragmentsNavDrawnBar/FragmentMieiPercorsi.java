@@ -17,6 +17,7 @@ import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.AggiungiSito;
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.Curatore;
+import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
 
 import java.util.zip.Inflater;
@@ -31,7 +32,7 @@ public class FragmentMieiPercorsi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Visitatore utente = getUserInfo();
+        Utente utente = getUserInfo();
 
         View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
         FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
@@ -39,12 +40,7 @@ public class FragmentMieiPercorsi extends Fragment {
         addPercorso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent aggiungiPercorso = new Intent(getActivity(), AggiungiPercorso.class);
-                aggiungiPercorso.putExtra("uid", utente.getUid()); //Optional parameters
-                aggiungiPercorso.putExtra("nome", utente.getNome()); //Optional parameters
-                aggiungiPercorso.putExtra("cognome", utente.getCognome()); //Optional parameters
-                aggiungiPercorso.putExtra("email", utente.getEmail()); //Optional parameters
-                aggiungiPercorso.putExtra("ruolo", utente.getRuolo()); //Optional parameters
+                Intent aggiungiPercorso = BasicMethod.putUtenteExtrasInIntent(getActivity(),utente,AggiungiPercorso.class);
                 getActivity().startActivity(aggiungiPercorso);
             }
         });
@@ -58,15 +54,9 @@ public class FragmentMieiPercorsi extends Fragment {
      *
      * @return utente: Ritorna l'utente valorizzato delle sue informazioni
      */
-    public Visitatore getUserInfo(){
+    public Utente getUserInfo(){
 
-        Visitatore utente;
-
-        if(BasicMethod.isCuratore(getActivity().getIntent().getExtras().getString("ruolo"))){
-            utente = new Visitatore();
-        }else{
-            utente = new Curatore();
-        }
+        Utente utente = new Utente();
 
         utente.setUid(getActivity().getIntent().getExtras().getString("uid"));
         utente.setNome(getActivity().getIntent().getExtras().getString("nome"));

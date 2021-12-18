@@ -12,5 +12,6 @@
     <string name="recommendedRoutes">Consigliati dalle Guide</string>
     <string name="profile">Profilo</string>
     <string name="logout">Disconnetti</string>
+    <string name="searchSites">Cerca per Siti o per Città</string>
 
 </resources>

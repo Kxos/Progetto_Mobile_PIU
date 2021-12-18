@@ -1,37 +1,28 @@
 package com.uniba.capitool.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.view.View;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
-import com.uniba.capitool.classes.CardSitoCulturale;
-import com.uniba.capitool.classes.CardSitoCulturaleAdapter;
 import com.uniba.capitool.classes.Curatore;
+import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
+import com.uniba.capitool.fragments.AggiungiPercorso.FragmentRicercaSiti;
+import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraCredenziali;
+import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
+import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraRuolo;
 
-import java.util.ArrayList;
+public class AggiungiPercorso extends AppCompatActivity {
 
-public class AggiungiPercorso extends AppCompatActivity implements CardSitoCulturaleAdapter.OnEventClickListener{
-
-    private Visitatore utente;
-    private ArrayList<CardSitoCulturale> cardSitiCulturali;
+    public Utente utente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +36,7 @@ public class AggiungiPercorso extends AppCompatActivity implements CardSitoCultu
 
         Bundle b = getIntent().getExtras();
 
-        if(BasicMethod.isCuratore(b.getString("ruolo"))){
-            utente = new Visitatore();
-        }else{
-            utente = new Curatore();
-        }
+        utente = new Utente();
 
         utente.setUid(b.getString("uid"));
         utente.setNome(b.getString("nome"));
@@ -57,188 +44,30 @@ public class AggiungiPercorso extends AppCompatActivity implements CardSitoCultu
         utente.setEmail(b.getString("email"));
         utente.setRuolo(b.getString("ruolo"));
 
-        EditText valoreDiRicerca = findViewById(R.id.editCercaSitoCitta);
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.containerRicercaSiti, new FragmentRicercaSiti() );
+        fragmentTransaction.commit();
 
-        // TODO - OTTENERE LE CARD IN TEMPO REALE
-        // TODO ----------------------------------------------------------
-
-        valoreDiRicerca.addTextChangedListener(new TextWatcher() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // None
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // None
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                popolaSitiInRecyclerView(editable.toString());
+            public void onClick(View v) {
+                //in questo modo recupero il fragment in uso, così se l'utente spinge back torno al passo precedente
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.containerRicercaSiti);
+                if(currentFragment instanceof FragmentRicercaSiti){
+                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentRicercaSiti");
+                    Intent HomePage = BasicMethod.putUtenteExtrasInIntent(AggiungiPercorso.this,utente,HomePage.class);
+                    startActivity(HomePage);
+                }
             }
         });
 
-        // TODO ----------------------------------------------------------
     }
     /** FINE onCreate()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
-    /***
-     * Al click sulla Card, passa i dati alla Activity: SelezionaOpere
-     *
-     * @param position: paramentro che indica la Card cliccata
-     */
-    @Override
-    public void onEventClick(int position) {
-        Intent detailIntent =new Intent (this, SelezionaOpere.class);
-        CardSitoCulturale clickedEvent = cardSitiCulturali.get(position);
-
-        detailIntent.putExtra("uidUtente", utente.getUid());
-        detailIntent.putExtra("ruoloUtente", utente.getRuolo());
-
-        detailIntent.putExtra("idSito", clickedEvent.getId());
-        detailIntent.putExtra("nomeSito", clickedEvent.getNome());
-        detailIntent.putExtra("orarioAperturaSito", clickedEvent.getOrarioApertura());
-        detailIntent.putExtra("orarioChiusuraSito", clickedEvent.getOrarioChiusura());
-        detailIntent.putExtra("indirizzoSito", clickedEvent.getIndirizzo());
-        detailIntent.putExtra("costoBigliettoSito", clickedEvent.getCostoBiglietto());
-        detailIntent.putExtra("cittaSito", clickedEvent.getCitta());
-
-        startActivity(detailIntent);
-
+    public Utente getUtente(){
+        return utente;
     }
-
-    /***
-     * Popola la RecyclerView con i Siti Culturali cercati
-     */
-    public void popolaSitiInRecyclerView(String valoreDiRicerca){
-
-        RecyclerView rvCardsSiti = (RecyclerView) findViewById(R.id.recyclerViewSiti);
-
-        if(!valoreDiRicerca.isEmpty()){
-            cardSitiCulturali = getSitoFromDB(valoreDiRicerca);
-        }
-
-        // Crea un adapter passando i siti trovati
-        CardSitoCulturaleAdapter adapter = new CardSitoCulturaleAdapter(cardSitiCulturali);
-
-        // Lega l'Adapter alla recyclerview per popolare i Siti
-        rvCardsSiti.setAdapter(adapter);
-        adapter.setOnEventClickListener(this);
-
-        // SetLayoutManager posiziona i Siti trovati nel Layout
-        rvCardsSiti.setLayoutManager(new LinearLayoutManager(this));
-    }
-    /** FINE popolaSitiInRecyclerView()
-     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-    /***
-     * Ottiene tutti gli attributi di un Sito
-     *
-     * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà un Sito od una Città)
-     * @return
-     */
-    private ArrayList<CardSitoCulturale> getSitoFromDB(String valoreDiRicerca) {
-
-        ArrayList<CardSitoCulturale> cardSitiCulturali = new ArrayList<>();
-
-        cardSitiCulturali = getSitoFromDBOrderByNome(valoreDiRicerca);
-
-        return cardSitiCulturali;
-    }
-    /** FINE getSitoFromDB()
-     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-    /***
-     * Ottiene tutti gli attributi di un Sito, cercando per Nome
-     *
-     * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà un Sito)
-     */
-    public ArrayList<CardSitoCulturale> getSitoFromDBOrderByNome(String valoreDiRicerca) {
-
-        final ArrayList<CardSitoCulturale>[] CardSitiCulturali = new ArrayList[]{new ArrayList<>()};
-        Query recentPostsQuery;
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef = database.getReference("/");
-
-        //-------------------------------------------------------------------------------------
-        // Ricerca per Nome
-
-        recentPostsQuery = myRef.child("Siti").orderByChild("nome").startAt(valoreDiRicerca).endAt(valoreDiRicerca+'\uf8ff');     //SELECT * FROM Siti WHERE nome LIKE "xyz"
-        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
-                    Log.e("RISULTATO DB NOME: ",cardSitoCulturale.getNome());
-                    CardSitiCulturali[0].add(cardSitoCulturale);
-                }
-
-                // Se non trova nulla nella ricerca per nome ...
-                if(CardSitiCulturali[0].isEmpty()){
-                    Log.e("SEI DENTRO ALLA CITTA ","  ");
-                    getSitoFromDBOrderByCitta(valoreDiRicerca, CardSitiCulturali);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Getting Post failed, log a message
-                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
-            }
-        });
-
-        return CardSitiCulturali[0];
-
-    }
-    /** FINE getSitoFromDBOrderByNome()
-     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-    /***
-     * Ottiene tutti gli attributi di un Sito, cercando per Città
-     *
-     * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà una Città)
-     */
-    public ArrayList<CardSitoCulturale> getSitoFromDBOrderByCitta(String valoreDiRicerca, ArrayList<CardSitoCulturale>[] CardSitiCulturali) {
-
-        Query recentPostsQuery;
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef = database.getReference("/");
-
-        //-------------------------------------------------------------------------------------
-        // Ricerca per Città
-
-        recentPostsQuery = myRef.child("Siti").orderByChild("citta").startAt(valoreDiRicerca).endAt(valoreDiRicerca+'\uf8ff');     //SELECT * FROM Siti WHERE nome LIKE "xyz"
-        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
-                    Log.e("RISULTATO DB CITTA: ",cardSitoCulturale.getNome());
-                    CardSitiCulturali[0].add(cardSitoCulturale);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Getting Post failed, log a message
-                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
-            }
-        });
-
-        return CardSitiCulturali[0];
-
-    }
-    /** FINE getSitoFromDBOrderByCitta()
-     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 }
