@@ -1,10 +1,13 @@
 package com.uniba.capitool.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
 
 public class BasicMethod {
@@ -115,5 +118,23 @@ public class BasicMethod {
         if(ruolo.equals("curatore")){ return true; }
         return false;
     }
+
+    /***
+     *
+     * @param activity: Activity dove viene chiamato il metodo
+     * @param utente: l'utente valorizzato dei suoi dati
+     * @param activityDiDestinazione: Activity di destinazione
+     * @return intent: Restituisce l'intent con il bundle
+     */
+    public static Intent putUtenteExtrasInIntent(Context activity, Utente utente, Class activityDiDestinazione){
+        Intent intent = new Intent(activity, activityDiDestinazione);
+        intent.putExtra("uid", utente.getUid()); //Optional parameters
+        intent.putExtra("nome", utente.getNome()); //Optional parameters
+        intent.putExtra("cognome", utente.getCognome()); //Optional parameters
+        intent.putExtra("email", utente.getEmail()); //Optional parameters
+        intent.putExtra("ruolo", utente.getRuolo()); //Optional parameters
+        return intent;
+    }
+
 
 }

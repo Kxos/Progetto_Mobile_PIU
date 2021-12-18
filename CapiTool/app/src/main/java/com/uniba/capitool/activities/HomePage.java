@@ -124,10 +124,10 @@ public class HomePage extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
 
         if(BasicMethod.isCuratore(b.getString("ruolo"))){
-            utente = new Visitatore();
+            utente = new Curatore();
             navigationView.inflateMenu(R.menu.navigation_curatore_menu);
         }else{
-            utente = new Curatore();
+            utente = new Visitatore();
             navigationView.inflateMenu(R.menu.navigation_visitatore_menu);
         }
 

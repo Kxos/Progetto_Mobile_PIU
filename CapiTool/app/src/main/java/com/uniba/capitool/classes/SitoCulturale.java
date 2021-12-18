@@ -21,7 +21,11 @@ public class SitoCulturale {
 
     }
 
+
+
+
     public SitoCulturale(String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, String costoBiglietto, String citta, Image foto, ArrayList<Zona> zone, String uidCuratore) {
+
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
@@ -34,7 +38,9 @@ public class SitoCulturale {
         this.uidCuratore = uidCuratore;
     }
 
+
     public SitoCulturale(String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, String costoBiglietto, String citta, String uidCuratore) {
+
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;

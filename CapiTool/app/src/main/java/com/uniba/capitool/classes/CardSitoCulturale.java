@@ -5,6 +5,7 @@ import android.media.Image;
 public class CardSitoCulturale {
 
     private Image foto;
+    private String id;
     private String nome;
     private String indirizzo;
     private String orarioApertura;
@@ -16,8 +17,9 @@ public class CardSitoCulturale {
     public CardSitoCulturale() {
     }
 
-    public CardSitoCulturale(Image foto, String nome, String indirizzo, String orarioApertura, String orarioChiusura, Long costoBiglietto, String citta) {
+    public CardSitoCulturale(Image foto, String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, Long costoBiglietto, String citta) {
         this.foto = foto;
+        this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.orarioApertura = orarioApertura;
@@ -30,6 +32,8 @@ public class CardSitoCulturale {
         return foto;
     }
 
+    public String getId() { return id; }
+
     public String getNome() {
         return nome;
     }
@@ -38,9 +42,7 @@ public class CardSitoCulturale {
         return indirizzo;
     }
 
-    public String getCitta() {
-        return citta;
-    }
+    public String getCitta() { return citta; }
 
     public Long getCostoBiglietto() { return costoBiglietto; }
 
@@ -63,6 +65,8 @@ public class CardSitoCulturale {
     public void setCitta(String citta) {
         this.citta = citta;
     }
+
+    public void setId(String id) { this.id = id; }
 
     public void setOrarioApertura(String orarioApertura) { this.orarioApertura = orarioApertura; }
 

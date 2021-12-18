@@ -5,6 +5,7 @@
 
     <string name="siteManagement">Gestione Sito</string>
     <string name="mySite">Il mio sito</string>
+    <string name="site">Sito</string>
     <string name="settingSite">Impostazioni Sito</string>
 
     <string name="myRoutes">I miei Percorsi</string>
@@ -12,5 +13,7 @@
     <string name="recommendedRoutes">Consigliati dalle Guide</string>
     <string name="profile">Profilo</string>
     <string name="logout">Disconnetti</string>
+    <string name="searchSites">Cerca per Siti o per Città</string>
+    <string name="addSite">Crea un nuovo percorso</string>
 
 </resources>

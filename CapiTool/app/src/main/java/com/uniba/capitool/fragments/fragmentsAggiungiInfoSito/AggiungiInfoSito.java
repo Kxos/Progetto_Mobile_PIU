@@ -283,11 +283,12 @@ public class AggiungiInfoSito extends Fragment {
 
     }
 
+    // TODO - VERIFICARE ERRORE SULL'ISTANZIAZIONE DI SITO ( (int)counterIndex )
     public void insertQuery(long counterIndex,  FirebaseDatabase database, DatabaseReference myRef){
 
-
-
         String key = myRef.push().getKey();
+
+
         //INSERT di un nuovo oggetto
         SitoCulturale sito= new SitoCulturale(key,nomeSito, indirizzo.getText().toString(), orarioApertura.getText().toString(),
                                                 orarioChiusura.getText().toString(), costoIngresso.getText().toString(),
@@ -317,7 +318,9 @@ public class AggiungiInfoSito extends Fragment {
 
             }
         });
+
     }
+
 
 }
 
