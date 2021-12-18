@@ -22,6 +22,8 @@
         android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -51,33 +53,31 @@
         android:id="@+id/checkBox"
         android:layout_width="325dp"
         android:layout_height="33dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
         android:text="@string/checkInfoConfermed"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/edit_text_password"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_password" />
 
     <Button
         android:id="@+id/button_annulla_delega"
         android:layout_width="131dp"
         android:layout_height="47dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="140dp"
         android:background="@drawable/rounded_style"
         android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <Button
         android:id="@+id/button_conferma_delega"
         android:layout_width="131dp"
         android:layout_height="47dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
         android:background="@drawable/rounded_style"
         android:text="@string/confirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

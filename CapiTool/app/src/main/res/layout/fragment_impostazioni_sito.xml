@@ -12,7 +12,7 @@
         android:id="@+id/text_elimina_sito"
         android:layout_width="382dp"
         android:layout_height="63dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/rounded_style"
         android:fontFamily="sans-serif"
         android:text="@string/deleteSite"
@@ -20,12 +20,10 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_delega_sito"
-        app:layout_constraintVertical_bias="0.649" />
+        app:layout_constraintTop_toBottomOf="@+id/text_delega_sito" />
 
     <TextView
         android:id="@+id/text_delega_sito"
@@ -40,7 +38,7 @@
         android:textSize="16sp"
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
