@@ -5,30 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
+
 
     <TextView
         android:id="@+id/text_sub_elimina_sito"
         android:layout_width="319dp"
         android:layout_height="63dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="52dp"
         android:text="Sei sicuro di voler eliminare definitivamente il tuo Sito Culturale ?"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/text_inserisci_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="68dp"
         android:text="Inserisci la tua password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_sub_elimina_sito" />
-
 
     <EditText
         android:id="@+id/edit_text_password"
@@ -48,7 +53,7 @@
         android:layout_width="274dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="100dp"
         android:text="Confermo di aver letto l'informativa *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_password" />
@@ -57,8 +62,8 @@
         android:id="@+id/button_annulla_delega"
         android:layout_width="131dp"
         android:layout_height="47dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="176dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/rounded_style"
         android:text="Annulla"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,8 +73,8 @@
         android:id="@+id/button_conferma_delega"
         android:layout_width="131dp"
         android:layout_height="47dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="176dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/rounded_style"
         android:text="Conferma"
         app:layout_constraintBottom_toBottomOf="parent"

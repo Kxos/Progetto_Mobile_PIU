@@ -7,11 +7,12 @@
     android:visibility="visible"
     tools:context=".fragments.fragmentsNavDrawnBar.FragmentImpostazioniSito">
 
+
     <TextView
         android:id="@+id/text_elimina_sito"
         android:layout_width="382dp"
         android:layout_height="63dp"
-        android:layout_marginBottom="428dp"
+        android:layout_marginBottom="380dp"
         android:background="@drawable/rounded_style"
         android:fontFamily="sans-serif"
         android:text="Elimina Sito"
@@ -21,15 +22,16 @@
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_delega_sito"
+        app:layout_constraintVertical_bias="0.649" />
 
     <TextView
-        android:id="@+id/text_sub_delega_sito"
+        android:id="@+id/text_delega_sito"
         android:layout_width="382dp"
         android:layout_height="63dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="128dp"
         android:background="@drawable/rounded_style"
         android:contentDescription="Delega il mio sito ad un altro curatore"
         android:fontFamily="sans-serif"
@@ -39,20 +41,21 @@
         android:textSize="16sp"
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_delega_sito"
+        android:id="@+id/text_sub_delega_sito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="76dp"
         android:text="Delega il tuo sito ad un altro curatore"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/text_sub_delega_sito"
-        app:layout_constraintStart_toStartOf="@+id/text_sub_delega_sito"
-        app:layout_constraintTop_toTopOf="@+id/text_sub_delega_sito"
-        app:layout_constraintVertical_bias="0.804" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_delega_sito"
+        app:layout_constraintStart_toStartOf="@+id/text_delega_sito"
+        app:layout_constraintTop_toTopOf="@+id/text_delega_sito"
+        app:layout_constraintVertical_bias="0.704" />
 
     <TextView
         android:id="@+id/text_sub_elimina_sito"
@@ -61,6 +64,7 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="32dp"
         android:text="Elimina l'intero Sito Culturale ed i suoi dati "
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@+id/text_elimina_sito"
         app:layout_constraintTop_toTopOf="@+id/text_elimina_sito" />
 
@@ -71,26 +75,26 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_sharp_output_24"
-        app:layout_constraintBottom_toBottomOf="@+id/text_sub_delega_sito"
-        app:layout_constraintStart_toStartOf="@+id/text_sub_delega_sito" />
+        app:layout_constraintBottom_toBottomOf="@+id/text_delega_sito"
+        app:layout_constraintStart_toStartOf="@+id/text_delega_sito" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/button_delega_sito"
-        android:layout_width="34dp"
-        android:layout_height="27dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="41dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/white"
         android:src="@drawable/ic_baseline_navigate_next_24"
-        app:layout_constraintBottom_toBottomOf="@+id/text_sub_delega_sito"
-        app:layout_constraintEnd_toEndOf="@+id/text_sub_delega_sito" />
+        app:layout_constraintBottom_toBottomOf="@+id/text_delega_sito"
+        app:layout_constraintEnd_toEndOf="@+id/text_delega_sito" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/button_elimina_sito"
-        android:layout_width="35dp"
-        android:layout_height="36dp"
+        android:layout_width="41dp"
+        android:layout_height="34dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/white"
         android:src="@drawable/ic_baseline_navigate_next_24"
         app:layout_constraintBottom_toBottomOf="@+id/text_elimina_sito"
@@ -98,12 +102,12 @@
 
     <ImageView
         android:id="@+id/image_elimina_sito"
-        android:layout_width="40dp"
-        android:layout_height="47dp"
+        android:layout_width="41dp"
+        android:layout_height="34dp"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/white"
-        android:src="@android:drawable/ic_menu_delete"
+        android:src="@drawable/ic_outline_delete_24"
         app:layout_constraintBottom_toBottomOf="@+id/text_elimina_sito"
         app:layout_constraintStart_toStartOf="@+id/text_elimina_sito" />
 
