@@ -50,6 +50,16 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.textfield_email);
         password = findViewById(R.id.textfield_password);
 
+        /**
+         *
+         * Set di email e password di curatore così accediamo più facilemnte
+         *
+         * */
+        // TODO -- DA RIMUOVERE
+        email.setText("Curatore@gmail.com");
+        password.setText("Cur123/");
+
+        
         TextView registrati;
         registrati = findViewById(R.id.textView_register);
         registrati.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);

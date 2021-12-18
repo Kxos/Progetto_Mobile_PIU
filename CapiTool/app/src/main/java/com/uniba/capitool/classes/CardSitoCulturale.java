@@ -10,14 +10,14 @@ public class CardSitoCulturale {
     private String indirizzo;
     private String orarioApertura;
     private String orarioChiusura;
-    private Long costoBiglietto;
+    private String costoBiglietto;
     private String citta;
 
 
     public CardSitoCulturale() {
     }
 
-    public CardSitoCulturale(Image foto, String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, Long costoBiglietto, String citta) {
+    public CardSitoCulturale(Image foto, String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, String costoBiglietto, String citta) {
         this.foto = foto;
         this.id = id;
         this.nome = nome;
@@ -44,7 +44,7 @@ public class CardSitoCulturale {
 
     public String getCitta() { return citta; }
 
-    public Long getCostoBiglietto() { return costoBiglietto; }
+    public String getCostoBiglietto() { return costoBiglietto; }
 
     public String getOrarioChiusura() { return orarioChiusura; }
 
@@ -72,5 +72,5 @@ public class CardSitoCulturale {
 
     public void setOrarioChiusura(String orarioChiusura) { this.orarioChiusura = orarioChiusura; }
 
-    public void setCostoBiglietto(Long costoBiglietto) { this.costoBiglietto = costoBiglietto; }
+    public void setCostoBiglietto(String costoBiglietto) { this.costoBiglietto = costoBiglietto; }
 }

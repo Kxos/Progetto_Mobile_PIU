@@ -11,7 +11,7 @@ public class SitoCulturale {
     private String indirizzo;
     private String orarioApertura;
     private String orarioChiusura;
-    private float costoBiglietto;
+    private String costoBiglietto;
     private String citta;
     private Image foto;
     private ArrayList<Zona> zone = new ArrayList<>();
@@ -21,7 +21,11 @@ public class SitoCulturale {
 
     }
 
-    public SitoCulturale(String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, float costoBiglietto, String citta, Image foto, ArrayList<Zona> zone, String uidCuratore) {
+
+
+
+    public SitoCulturale(String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, String costoBiglietto, String citta, Image foto, ArrayList<Zona> zone, String uidCuratore) {
+
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
@@ -34,7 +38,9 @@ public class SitoCulturale {
         this.uidCuratore = uidCuratore;
     }
 
-    public SitoCulturale(String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, float costoBiglietto, String citta, String uidCuratore) {
+
+    public SitoCulturale(String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, String costoBiglietto, String citta, String uidCuratore) {
+
         this.id = id;
         this.nome = nome;
         this.indirizzo = indirizzo;
@@ -74,7 +80,7 @@ public class SitoCulturale {
 
     public void setOrarioChiusura(String orarioChiusura) { this.orarioChiusura = orarioChiusura; }
 
-    public void setCostoBiglietto(float costoBiglietto) { this.costoBiglietto = costoBiglietto; }
+    public void setCostoBiglietto(String costoBiglietto) { this.costoBiglietto = costoBiglietto; }
 
     public void setCitta(String citta) { this.citta = citta; }
 
@@ -90,7 +96,7 @@ public class SitoCulturale {
 
     public String getOrarioChiusura() { return orarioChiusura; }
 
-    public float getCostoBiglietto() { return costoBiglietto; }
+    public String getCostoBiglietto() { return costoBiglietto; }
 
     public String getCitta() { return citta; }
 

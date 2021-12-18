@@ -113,8 +113,10 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
 
         RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewSiti);
 
-        if(!valoreDiRicerca.isEmpty()){
+        if(!valoreDiRicerca.equals("")){
             cardSitiCulturali = getSitoFromDB(valoreDiRicerca);
+        } else {
+            cardSitiCulturali.clear();
         }
 
         // Crea un adapter passando i siti trovati

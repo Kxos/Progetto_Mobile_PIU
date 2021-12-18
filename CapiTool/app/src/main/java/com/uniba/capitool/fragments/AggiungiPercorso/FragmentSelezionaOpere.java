@@ -38,7 +38,7 @@ public class FragmentSelezionaOpere extends Fragment {
 
         toolbar = ((AggiungiPercorso)getActivity()).getToolbar();
 
-        //leggere il file SharedPreferences
+        // Leggo dal file SharedPreferences
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         if(sharedPreferences!=null){
@@ -47,7 +47,7 @@ public class FragmentSelezionaOpere extends Fragment {
 
             sitoCulturale.setId(sharedPreferences.getString("idSito", ""));
             sitoCulturale.setNome(sharedPreferences.getString("nomeSito", ""));
-            
+
             toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
 
         }else{
