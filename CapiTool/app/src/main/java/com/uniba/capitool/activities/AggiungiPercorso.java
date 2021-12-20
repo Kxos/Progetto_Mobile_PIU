@@ -12,14 +12,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.uniba.capitool.R;
-import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.Utente;
-import com.uniba.capitool.classes.Visitatore;
-import com.uniba.capitool.fragments.AggiungiPercorso.FragmentRicercaSiti;
-import com.uniba.capitool.fragments.AggiungiPercorso.FragmentSelezionaOpere;
-import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraCredenziali;
-import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraDatiPersonali;
-import com.uniba.capitool.fragments.fragmentsRegistrazione.FragmentRegistraRuolo;
+import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentRicercaSiti;
+import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentSelezionaOpere;
 
 public class AggiungiPercorso extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.uniba.capitool.fragments.AggiungiPercorso;
+package com.uniba.capitool.fragments.fragmentsAggiungiPercorso;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.classes.SitoCulturale;
-import com.uniba.capitool.classes.Utente;
 
 /**
  */

@@ -1,4 +1,4 @@
-package com.uniba.capitool.fragments.AggiungiPercorso;
+package com.uniba.capitool.fragments.fragmentsAggiungiPercorso;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -31,7 +31,6 @@ import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.CardSitoCulturaleAdapter;
 import com.uniba.capitool.classes.Utente;
-import com.uniba.capitool.classes.Visitatore;
 
 import java.util.ArrayList;
 
