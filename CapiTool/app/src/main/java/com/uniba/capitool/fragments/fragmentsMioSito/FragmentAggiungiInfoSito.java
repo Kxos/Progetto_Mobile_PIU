@@ -29,9 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
-
-import com.uniba.capitool.activities.AggiungiSito;
-
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.SitoCulturale;
