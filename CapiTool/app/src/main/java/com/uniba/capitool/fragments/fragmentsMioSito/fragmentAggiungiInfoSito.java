@@ -29,6 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
+
+import com.uniba.capitool.activities.AggiungiSito;
+
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.SitoCulturale;
@@ -288,9 +291,9 @@ public class FragmentAggiungiInfoSito extends Fragment {
 
 
         //INSERT di un nuovo oggetto
-        SitoCulturale sito= new SitoCulturale(key,nomeSito, indirizzo.getText().toString(), orarioApertura.getText().toString(),
+        SitoCulturale sito= new SitoCulturale(key,BasicMethod.toLower(nomeSito), indirizzo.getText().toString(), orarioApertura.getText().toString(),
                                                 orarioChiusura.getText().toString(), costoIngresso.getText().toString(),
-                                                nomeCitta.getText().toString(), mAuth.getCurrentUser().getUid());
+                                                    BasicMethod.toLower(nomeCitta.getText().toString()), mAuth.getCurrentUser().getUid());
 
 
 
