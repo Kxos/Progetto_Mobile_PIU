@@ -3,6 +3,7 @@ package com.uniba.capitool.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -18,14 +19,19 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Utente;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomePage extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
-
     Utente utente;
 
     @Override
@@ -153,15 +159,43 @@ public class HomePage extends AppCompatActivity {
         TextView headerNome    = headerView.findViewById(R.id.headerNome);
         TextView headerCognome = headerView.findViewById(R.id.headerCognome);
         TextView headerEmail   = headerView.findViewById(R.id.headerEmail);
+        CircleImageView headerFotoProfilo = headerView.findViewById(R.id.imageProfile);
 
         headerNome.setText(utente.getNome());
         headerCognome.setText(utente.getCognome());
         headerEmail.setText(utente.getEmail());
+        /**
+         * Leggo l'immagine del profilo utente e la inserisco nella foto del navigation drawer
+         * */
+        letturaImmagineDB(headerFotoProfilo);
 
     }
 
     public Utente getUtente(){
         return utente;
     }
+
+    public void letturaImmagineDB(CircleImageView headerCircleImageView){
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference dateRef = storageRef.child("/fotoUtenti/" + utente.getUid());
+
+        /**
+         * Scarica il "DownloadURL" che ci serve per leggere l'immagine dal DB e metterla in una ImageView
+         * */
+        dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+        {
+            @Override
+            public void onSuccess(Uri downloadUrl)
+            {
+                //do something with downloadurl
+                Glide.with(HomePage.this)
+                        .load(downloadUrl)
+                        .into(headerCircleImageView);
+            }
+        });
+
+    }
+
 
 }
