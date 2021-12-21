@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiSito;
+import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.Utente;
 

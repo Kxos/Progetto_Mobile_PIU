@@ -29,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
