@@ -286,12 +286,9 @@ public class BasicMethod extends AppCompatActivity {
         return utente;
     }
 
-<<<<<<< HEAD
-    public static String toLower(String phrase){
-=======
 
-    public String toLower(String phrase){
->>>>>>> 3caf85be684c1ab18989707834fbc5f3e443974f
+    public static String toLower(String phrase){
+
         StringBuilder phraseLower = new StringBuilder(phrase);
 
         for(int i=0; i<phraseLower.length(); i++){
