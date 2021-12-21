@@ -1,10 +1,9 @@
 package com.uniba.capitool.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.uniba.capitool.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.uniba.capitool.classes.Curatore;
 
 public class InfoSitoAssociato extends AppCompatActivity {
@@ -28,6 +27,6 @@ public class InfoSitoAssociato extends AppCompatActivity {
             */
         }
 
-        setContentView(R.layout.activity_info_sito_associato);
+//        setContentView(R.layout.activity_info_sito_associato);
     }
 }

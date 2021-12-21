@@ -45,7 +45,7 @@ public class AggiungiSito extends AppCompatActivity {
 
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new fragmentAggiungiNomeSito() );
+        fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new FragmentAggiungiNomeSito() );
         fragmentTransaction.commit();
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -53,7 +53,7 @@ public class AggiungiSito extends AppCompatActivity {
             public void onClick(View v) {
                 //in questo modo recupero il fragment in uso, così se l'utente spinge back torno al passo precedente
                 Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerAggiungiSito);
-                if(currentFragment instanceof fragmentAggiungiNomeSito){
+                if(currentFragment instanceof FragmentAggiungiNomeSito){
                     Log.d( "--------------------FRAGMENT IN USE: ", "Registrati1");
                     Intent homePage = new Intent(AggiungiSito.this, HomePage.class);
                     homePage.putExtra("cognome",utente.getCognome());
@@ -65,11 +65,11 @@ public class AggiungiSito extends AppCompatActivity {
 
 
 
-                }else if(currentFragment instanceof fragmentAggiungiInfoSito){
+                }else if(currentFragment instanceof FragmentAggiungiInfoSito){
                     Log.d( "--------------------FRAGMENT IN USE: ", "Registrati2");
                     FragmentManager fragmentManager= getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new fragmentAggiungiNomeSito() );
+                    fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new FragmentAggiungiNomeSito() );
                     fragmentTransaction.commit();
                     // toolbar.setNavigationIcon(R.drawable.ic_android_black_24dp);
                 }

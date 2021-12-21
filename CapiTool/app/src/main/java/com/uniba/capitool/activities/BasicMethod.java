@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -37,6 +35,7 @@ public class BasicMethod extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     static Utente utente;
+    static NavController navController;
 
     public static void alertDialog(Activity activity, String messaggio, String titolo, String messaggioBottone){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -176,7 +175,7 @@ public class BasicMethod extends AppCompatActivity {
 
         setNavLateralMenuOnUserRole(navigationView,activity);
 
-        NavController navController = Navigation.findNavController(activity, R.id.navHostFragment);
+        navController = Navigation.findNavController(activity, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView, navController);
 
         // In base al nome del Fragment, cambia il Titolo sulla Toolbar
@@ -287,7 +286,12 @@ public class BasicMethod extends AppCompatActivity {
         return utente;
     }
 
+<<<<<<< HEAD
     public static String toLower(String phrase){
+=======
+
+    public String toLower(String phrase){
+>>>>>>> 3caf85be684c1ab18989707834fbc5f3e443974f
         StringBuilder phraseLower = new StringBuilder(phrase);
 
         for(int i=0; i<phraseLower.length(); i++){
