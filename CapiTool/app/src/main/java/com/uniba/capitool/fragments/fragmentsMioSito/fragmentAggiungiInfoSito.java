@@ -29,17 +29,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
-import com.uniba.capitool.activities.AggiungiSito;
+import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.SitoCulturale;
-import com.uniba.capitool.classes.Visitatore;
+import com.uniba.capitool.classes.Utente;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class fragmentAggiungiInfoSito extends Fragment {
+public class FragmentAggiungiInfoSito extends Fragment {
     SitoCulturale sitoCulturale;
     String nomeSito;
     EditText nomeCitta;
@@ -301,7 +301,9 @@ public class fragmentAggiungiInfoSito extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Visitatore utente = ((AggiungiSito)getActivity()).getUtente();
+                Utente utente = BasicMethod.getUtente();
+
+                Log.e("**************", ""+utente.getCognome());
                 Intent homePage = new Intent(getActivity(), HomePage.class);
                 homePage.putExtra("cognome",utente.getCognome());
                 homePage.putExtra("nome",utente.getNome());

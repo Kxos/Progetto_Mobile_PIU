@@ -5,14 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.uniba.capitool.R;
 
-public class fragmentAggiungiNomeSito extends Fragment {
+public class FragmentAggiungiNomeSito extends Fragment {
     private static final int SELECT_IMAGE_CODE = 1;
     ImageView selectedImage;
 
@@ -61,7 +58,7 @@ public class fragmentAggiungiNomeSito extends Fragment {
             public void onClick(View view) {
                 FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new fragmentAggiungiInfoSito());
+                fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new FragmentAggiungiInfoSito());
                 fragmentTransaction.commit();
 
                 //scrivere nel file SharedPreferences
