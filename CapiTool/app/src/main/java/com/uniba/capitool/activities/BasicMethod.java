@@ -191,7 +191,7 @@ public class BasicMethod extends AppCompatActivity {
                     case R.id.disconnetti:
                         Intent myIntent = new Intent(activity, Login.class);
                         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(myIntent);
+                        activity.startActivity(myIntent);
                         break;
                 }
             }

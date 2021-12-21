@@ -40,5 +40,10 @@
         android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentDisconnettiti"
         android:label="Disconnetti"
         tools:layout="@layout/fragment_disconnettiti" />
+    <fragment
+        android:id="@+id/infoMioSito"
+        android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentInfoMioSito"
+        android:label="Mio Sito"
+        tools:layout="@layout/fragment_info_mio_sito" />
 
 </navigation>

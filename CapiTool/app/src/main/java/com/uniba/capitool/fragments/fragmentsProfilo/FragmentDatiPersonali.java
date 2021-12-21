@@ -67,7 +67,7 @@ public class FragmentDatiPersonali extends Fragment {
 
         Button conferma= view.findViewById(R.id.confermaModifiche);
 
-        utente=((HomePage)getActivity()).getUtente();    //recupero l'utente che ha fatto il login dalla activity HomePage
+        utente=BasicMethod.getUtente();    //recupero l'utente che ha fatto il login dalla activity HomePage
         email.setText(utente.getEmail());
         nome.setText(utente.getNome());
         cognome.setText(utente.getCognome());

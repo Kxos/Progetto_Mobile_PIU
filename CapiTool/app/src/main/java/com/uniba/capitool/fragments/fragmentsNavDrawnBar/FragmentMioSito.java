@@ -33,8 +33,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class FragmentMioSito extends Fragment {
-    SitoCulturale sito = new SitoCulturale();
-    DatabaseReference myRef;
+
     public FragmentMioSito() {
 
     }
@@ -43,93 +42,30 @@ public class FragmentMioSito extends Fragment {
    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       Utente utente = ((HomePage)getActivity()).getUtente();
+       Utente utente = BasicMethod.getUtente();
        View v = inflater.inflate(R.layout.fragment_mio_sito, container, false);
        FloatingActionButton addSito = v.findViewById(R.id.buttonAddSito);
 
-       controllaSitoAssociato (utente.getUid());
-        //Log.e("PRIMA DELL'IF", ""+sito.getNome());
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.e("SONO DOPO ONDATA CHANGE",""+sito.getNome());
-                if(!sito.getNome().equals("")){
-                    addSito.setVisibility(View.INVISIBLE);
-                    Log.e("*****!!!!*****","SONO QUIIII!!!");
-                    Intent infoSitoAssociato = new Intent(getActivity(), InfoSitoAssociato.class);
-                    getActivity().startActivity(infoSitoAssociato);
+       addSito.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
 
+               Intent aggiungiSito = new Intent(getActivity(), AggiungiSito.class);
+               aggiungiSito.putExtra("cognome", utente.getCognome());
+               aggiungiSito.putExtra("nome", utente.getNome());
+               aggiungiSito.putExtra("uid", utente.getUid());
+               aggiungiSito.putExtra("email", utente.getEmail());
+               aggiungiSito.putExtra("ruolo", utente.getRuolo());
+               getActivity().startActivity(aggiungiSito);
 
-                }else{
-                    // Inflate the layout for this fragment
-                    addSito.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                            Intent aggiungiSito = new Intent(getActivity(), AggiungiSito.class);
-                            aggiungiSito.putExtra("cognome",utente.getCognome());
-                            aggiungiSito.putExtra("nome",utente.getNome());
-                            aggiungiSito.putExtra("uid",utente.getUid());
-                            aggiungiSito.putExtra("email",utente.getEmail());
-                            aggiungiSito.putExtra("ruolo",utente.getRuolo());
-                            getActivity().startActivity(aggiungiSito);
-                        }
-                    });
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
+           }
+       });
 
 
 
        return v;
-   }
-
-   public void controllaSitoAssociato (String uidUtente){
-       Log.e("*****!!!!*****","SONO IN CONTROLLASITOASSOCIATO!!!");
-        Query recentPostsQuery;
-
-       FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-       myRef = database.getReference("/");
-
-       //-------------------------------------------------------------------------------------
-       // Ricerca per Nome
-
-       recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(uidUtente);     //SELECT * FROM Siti WHERE getUid LIKE "..."
-       recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<SitoCulturale> siti = new ArrayList<>();
-               // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
-               for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                   Log.e("*****!!!!*****","SONO NEL FOR!!!");
-                   siti.add(snapshot.getValue(SitoCulturale.class));
-
-               }
-               Log.e("****SITI_0*****", siti.get(0).getNome());
-               setSito(siti.get(0));
-
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
-               // Getting Post failed, log a message
-               Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
-           }
-       });
 
    }
 
-   public void setSito(SitoCulturale sito1){
-        Log.e("SITO1****!!!", ""+sito1.getNome());
-        this.sito = sito1;
 
-    }
 }
