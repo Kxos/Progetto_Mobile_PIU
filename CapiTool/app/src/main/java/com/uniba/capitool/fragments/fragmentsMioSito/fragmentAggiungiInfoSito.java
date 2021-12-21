@@ -1,4 +1,4 @@
-package com.uniba.capitool.fragments.fragmentsAggiungiInfoSito;
+package com.uniba.capitool.fragments.fragmentsMioSito;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +36,10 @@ import com.uniba.capitool.classes.Visitatore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
-public class AggiungiInfoSito extends Fragment {
+public class fragmentAggiungiInfoSito extends Fragment {
     SitoCulturale sitoCulturale;
     String nomeSito;
     EditText nomeCitta;

@@ -1,14 +1,9 @@
-package com.uniba.capitool.fragments.fragmentsAggiungiInfoSito;
+package com.uniba.capitool.fragments.fragmentsMioSito;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Camera;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 
@@ -18,7 +13,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,12 +20,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.uniba.capitool.R;
-import com.uniba.capitool.activities.AggiungiSito;
 
-public class AggiungiNomeSito extends Fragment {
+public class fragmentAggiungiNomeSito extends Fragment {
     private static final int SELECT_IMAGE_CODE = 1;
     ImageView selectedImage;
 
@@ -69,7 +61,7 @@ public class AggiungiNomeSito extends Fragment {
             public void onClick(View view) {
                 FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new AggiungiInfoSito());
+                fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new fragmentAggiungiInfoSito());
                 fragmentTransaction.commit();
 
                 //scrivere nel file SharedPreferences

@@ -11,7 +11,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerAggiungiSito"
-        android:name="com.uniba.capitool.fragments.fragmentsAggiungiInfoSito.AggiungiInfoSito"
+        android:name="com.uniba.capitool.fragments.fragmentsMioSito.fragmentAggiungiInfoSito"
         android:layout_width="match_parent"
         android:layout_height="787dp"
         android:layout_below="@+id/toolbar"

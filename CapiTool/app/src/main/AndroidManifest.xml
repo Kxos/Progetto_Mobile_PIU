@@ -12,15 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".activities.InfoSitoAssociato"
+            android:exported="true" />
+        <activity
             android:name=".activities.EliminaSito"
             android:exported="true" />
         <activity
             android:name=".activities.DelegaSito"
             android:exported="true" />
-
-            android:name=".activities.SelezionaOpere"
-            android:exported="false" />
-
         <activity
             android:name=".activities.AggiungiPercorso"
             android:exported="false" />
