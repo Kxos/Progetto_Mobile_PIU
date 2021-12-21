@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -31,47 +32,40 @@ public class FragmentMioSito extends Fragment {
     DatabaseReference myRef;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_mio_sito, container, false);
 
+        View v = inflater.inflate(R.layout.fragment_mio_sito, container, false);
         controllaSitoAssociato (BasicMethod.getUtente().getUid());
         //Log.e("PRIMA DELL'IF", ""+sito.getNome());
-        myRef.addValueEventListener(new ValueEventListener() {
+
+       /* myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.e("SONO DOPO ONDATA CHANGE",""+sito);
-
-                if(BasicMethod.getUtente().getRuolo().equals("curatore") && sito.getUidCuratore() != null ){
-                    Log.e("*****!!!!*****","SITO ASSOCIATOOO DEFINITIVO");
-
-                    FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentInfoSito() );
-                    fragmentTransaction.commit();
-
-                }else{
-                    Log.e("*****!!!!*****","SITO NON ASSOCIATOOO NON DEFINITIVO");
-                    FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentCreaMioSito() );
-                    fragmentTransaction.commit();
-
-                }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {*/
 
 
-            }
+
+           /* }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-
+        });*/
         return v;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
 
     public void controllaSitoAssociato (String uidUtente){
         Log.e("*****!!!!*****","SONO IN CONTROLLASITOASSOCIATO!!!");
@@ -97,10 +91,14 @@ public class FragmentMioSito extends Fragment {
                 if(siti.size() != 0){
                     Log.e("****SITI_0*****", siti.get(0).getNome());
                     setSito(siti.get(0));
+                }else{
+                    setCreaSito();
                 }
 
 
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -115,6 +113,30 @@ public class FragmentMioSito extends Fragment {
         Log.e("SITO1****!!!", ""+sito1.getNome());
         this.sito = sito1;
 
+        Log.e("SONO DOPO ONDATA CHANGE",""+sito);
+
+        if(BasicMethod.getUtente().getRuolo().equals("curatore") && sito.getUidCuratore() != null ){
+            Log.e("*****!!!!*****","SITO ASSOCIATOOO DEFINITIVO"+BasicMethod.getUtente().getUid()+""+sito.getUidCuratore());
+
+            FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentInfoSito() );
+            fragmentTransaction.commit();
+
+        }else{
+
+
+
+        }
+
+    }
+
+    private void setCreaSito() {
+        Log.e("*****!!!!*****","SITO NON ASSOCIATOOO NON DEFINITIVO"+BasicMethod.getUtente().getUid()+""+sito.getUidCuratore() );
+        FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentCreaMioSito() );
+        fragmentTransaction.commit();
     }
 
 }
