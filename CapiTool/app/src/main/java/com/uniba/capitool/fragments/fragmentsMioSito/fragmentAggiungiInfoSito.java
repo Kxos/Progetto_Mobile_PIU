@@ -304,6 +304,8 @@ public class FragmentAggiungiInfoSito extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+             //   Handler handler= new Handler();
                 Utente utente = BasicMethod.getUtente();
 
                 Log.e("**************", ""+utente.getCognome());
@@ -313,6 +315,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
                 homePage.putExtra("uid",utente.getUid());
                 homePage.putExtra("email",utente.getEmail());
                 homePage.putExtra("ruolo",utente.getRuolo());
+                //handler.removeCallbacksAndMessages(null);
                 getActivity().startActivity(homePage);
             }
 

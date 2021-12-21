@@ -31,6 +31,8 @@ public class HomePage extends AppCompatActivity {
         Toolbar toolbar = startToolbarDrawerLayout();
         NavController navController = basicMethod.startNavLateralMenu(toolbar, this);
 
+
+
     }
 
     /***
