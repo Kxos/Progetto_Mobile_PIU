@@ -29,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
@@ -103,7 +104,9 @@ public class FragmentDatiPersonali extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 1){
+
+        if(requestCode == 1 && data!=null){
+            Log.e("***********************************************************","");
             imageUri=data.getData();
             if(imageUri!=null){
                 fotoProfilo.setImageURI(imageUri);
