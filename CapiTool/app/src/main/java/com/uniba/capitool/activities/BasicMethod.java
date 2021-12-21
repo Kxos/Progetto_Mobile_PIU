@@ -286,8 +286,15 @@ public class BasicMethod extends AppCompatActivity {
         return utente;
     }
 
-    public static NavController getNavController(){
-        return navController;
+
+    public String toLower(String phrase){
+        StringBuilder phraseLower = new StringBuilder(phrase);
+
+        for(int i=0; i<phraseLower.length(); i++){
+            phraseLower.setCharAt(i,Character.toLowerCase(phraseLower.charAt(i)));
+        }
+
+        return phraseLower.toString();
     }
 
 }
