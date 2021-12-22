@@ -28,6 +28,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
+import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.CardSitoCulturaleAdapter;
 import com.uniba.capitool.classes.Utente;
@@ -113,7 +114,7 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
         RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewSiti);
 
         if(!valoreDiRicerca.equals("")){
-            cardSitiCulturali = getSitiFromDB(valoreDiRicerca);
+            cardSitiCulturali = getSitiFromDB(BasicMethod.toLower(valoreDiRicerca));
         } else {
             cardSitiCulturali.clear();
         }
