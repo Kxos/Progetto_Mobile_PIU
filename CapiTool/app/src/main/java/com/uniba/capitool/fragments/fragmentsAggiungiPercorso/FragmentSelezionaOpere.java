@@ -112,9 +112,13 @@ public class FragmentSelezionaOpere extends Fragment {
     /** FINE recuperaZoneFromDBOrderByZoneId()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
+    /***
+     *
+     *
+     * @param listaZone: Lista delle Zone valorizzate in recuperaZoneFromDBOrderByZoneId()
+     */
     public void mostraOperePerZone(ArrayList<Zona> listaZone){
-        Log.e("WEJFYGBSAUYFGSDCYUBFSVAYU",listaZone.get(0).getNome());
+        
     }
-
 
 }
