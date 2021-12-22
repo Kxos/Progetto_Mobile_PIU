@@ -40,7 +40,6 @@ public class HomePage extends AppCompatActivity {
     @Override
     public void onBackPressed() { drawerLayout.closeDrawers(); }
 
-
     /***
      * Inizializza la Toolbar ed il Drawer laterale vuoto (Bianco)
      *

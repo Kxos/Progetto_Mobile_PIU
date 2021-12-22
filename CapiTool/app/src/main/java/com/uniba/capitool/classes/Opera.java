@@ -5,12 +5,11 @@ import android.media.Image;
 public class Opera {
 
 
-    private int id ;
+    private String id ;
     private String titolo ;
     private String descrizione ;
     private Image foto ;
     private Image qrCode ;
-    private Image iotCode ;
 
     private static int countId = 0 ;
 
@@ -21,17 +20,16 @@ public class Opera {
         this.descrizione = descrizione ;
         this.foto = foto ;
         this.qrCode = null ;
-        this.iotCode = null ;
     }
 
 
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -67,11 +65,4 @@ public class Opera {
         this.qrCode = qrCode;
     }
 
-    public Image getIotCode() {
-        return iotCode;
-    }
-
-    public void setIotCode(Image iotCode) {
-        this.iotCode = iotCode;
-    }
 }

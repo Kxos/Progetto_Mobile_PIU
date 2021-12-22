@@ -113,7 +113,7 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
         RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewSiti);
 
         if(!valoreDiRicerca.equals("")){
-            cardSitiCulturali = getSitoFromDB(valoreDiRicerca);
+            cardSitiCulturali = getSitiFromDB(valoreDiRicerca);
         } else {
             cardSitiCulturali.clear();
         }
@@ -132,16 +132,16 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
-     * Ottiene tutti gli attributi di un Sito
+     * Ottiene tutti i Siti, cercando con il valoreDiRicerca
      *
      * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà un Sito od una Città)
      * @return
      */
-    private ArrayList<CardSitoCulturale> getSitoFromDB(String valoreDiRicerca) {
+    private ArrayList<CardSitoCulturale> getSitiFromDB(String valoreDiRicerca) {
 
         ArrayList<CardSitoCulturale> cardSitiCulturali = new ArrayList<>();
 
-        cardSitiCulturali = getSitoFromDBOrderByNome(valoreDiRicerca);
+        cardSitiCulturali = getSitiFromDBOrderByNome(valoreDiRicerca);
 
         return cardSitiCulturali;
     }
@@ -149,11 +149,11 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
-     * Ottiene tutti gli attributi di un Sito, cercando per Nome
+     * Ottiene tutti Siti esistenti, cercando per Nome
      *
      * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà un Sito)
      */
-    public ArrayList<CardSitoCulturale> getSitoFromDBOrderByNome(String valoreDiRicerca) {
+    public ArrayList<CardSitoCulturale> getSitiFromDBOrderByNome(String valoreDiRicerca) {
 
         final ArrayList<CardSitoCulturale>[] CardSitiCulturali = new ArrayList[]{new ArrayList<>()};
         Query recentPostsQuery;
@@ -179,7 +179,7 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
                 // Se non trova nulla nella ricerca per nome ...
                 if(CardSitiCulturali[0].isEmpty()){
                     //Log.e("SEI DENTRO ALLA CITTA ","  ");
-                    getSitoFromDBOrderByCitta(valoreDiRicerca, CardSitiCulturali);
+                    getSitiFromDBOrderByCitta(valoreDiRicerca, CardSitiCulturali);
                 }
 
             }
@@ -194,15 +194,15 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
         return CardSitiCulturali[0];
 
     }
-    /** FINE getSitoFromDBOrderByNome()
+    /** FINE getSitiFromDBOrderByNome()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
-     * Ottiene tutti gli attributi di un Sito, cercando per Città
+     * Ottiene tutti Siti esistenti, cercando per Città
      *
      * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà una Città)
      */
-    public ArrayList<CardSitoCulturale> getSitoFromDBOrderByCitta(String valoreDiRicerca, ArrayList<CardSitoCulturale>[] CardSitiCulturali) {
+    public ArrayList<CardSitoCulturale> getSitiFromDBOrderByCitta(String valoreDiRicerca, ArrayList<CardSitoCulturale>[] CardSitiCulturali) {
 
         Query recentPostsQuery;
 
@@ -236,7 +236,7 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
         return CardSitiCulturali[0];
 
     }
-    /** FINE getSitoFromDBOrderByCitta()
+    /** FINE getSitiFromDBOrderByCitta()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 }

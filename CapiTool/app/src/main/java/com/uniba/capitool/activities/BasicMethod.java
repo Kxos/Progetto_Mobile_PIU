@@ -162,6 +162,8 @@ public class BasicMethod extends AppCompatActivity {
         return intent;
     }
 
+    /** CREAZIONE DELLA NAVIGATION DRAWER BAR -----------------------------------------------------------------------------*/
+
     /***
      *
      * Inizializza il Drawer laterale con gli item di navigation_RUOLO_menu
@@ -278,8 +280,10 @@ public class BasicMethod extends AppCompatActivity {
 
     }
 
+    /** FINE CREAZIONE DELLA NAVIGATION DRAWER BAR -----------------------------------------------------------------------------*/
+
     /***
-     * Ottiene le info dell'utente, valorizzte in fase di Login
+     * Ottiene le info dell'utente, valorizzate in fase di Login
      *
      * @return utente: E' l'utente valorizzato in fase di Login
      */
