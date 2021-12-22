@@ -3,16 +3,15 @@ package com.uniba.capitool.fragments.fragmentsAggiungiPercorso;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,12 +21,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
-import com.uniba.capitool.classes.CardSitoCulturale;
+import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Zona;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class FragmentSelezionaOpere extends Fragment {
 
@@ -113,7 +111,16 @@ public class FragmentSelezionaOpere extends Fragment {
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     public void mostraOperePerZone(ArrayList<Zona> listaZone){
-        Log.e("WEJFYGBSAUYFGSDCYUBFSVAYU",listaZone.get(0).getNome());
+        Log.e("WEJFYGBSAUYFGSDCYUBFSVAYU",""+listaZone.get(0).getOpere()+""+listaZone.get(0).getOpere().size());
+
+        int count=0;
+        for (Opera opera : listaZone.get(0).getOpere()) {
+            if(count!=0){
+                Log.e("WEJFYGBSAUYFGSDCYUBFSVAYU",""+opera.getTitolo());
+            }
+            count++;
+
+        }
     }
 
 
