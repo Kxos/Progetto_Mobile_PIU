@@ -13,7 +13,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 
 import com.uniba.capitool.R;
-import com.uniba.capitool.classes.Utente;
 
 public class HomePage extends AppCompatActivity {
 
@@ -31,6 +30,8 @@ public class HomePage extends AppCompatActivity {
 
         Toolbar toolbar = startToolbarDrawerLayout();
         NavController navController = basicMethod.startNavLateralMenu(toolbar, this);
+
+
 
     }
 
@@ -64,15 +65,6 @@ public class HomePage extends AppCompatActivity {
         });
 
         return toolbar;
-    }
-
-    /***
-     * Ottiene le info dell'utente da BasicMethod
-     *
-     * @return utente: E' l'utente valorizzato in fase di Login
-     */
-    public Utente getUtente(){
-        return BasicMethod.getUtente();
     }
 
 }
