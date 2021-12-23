@@ -36,6 +36,7 @@ import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.CardSitoCulturaleAdapter;
+import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
 
 import java.util.ArrayList;
@@ -177,9 +178,13 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
 
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
-                    //Log.e("RISULTATO DB NOME: ",cardSitoCulturale.getNome());
-                    CardSitiCulturali[0].add(cardSitoCulturale);
+                    SitoCulturale sitoCulturale = snapshot.getValue(SitoCulturale.class);
+
+                    if(sitoCulturale.getZone().size() != 0){
+                        CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
+                        //Log.e("RISULTATO DB NOME: ",cardSitoCulturale.getNome());
+                        CardSitiCulturali[0].add(cardSitoCulturale);
+                    }
                 }
 
                 // Se non trova nulla nella ricerca per nome ...
@@ -225,9 +230,13 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
 
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
-                    //Log.e("RISULTATO DB CITTA: ",cardSitoCulturale.getNome());
-                    CardSitiCulturali[0].add(cardSitoCulturale);
+                    SitoCulturale sitoCulturale = snapshot.getValue(SitoCulturale.class);
+
+                    if(sitoCulturale.getZone().size() != 0){
+                        CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
+                        //Log.e("RISULTATO DB CITTA: ",cardSitoCulturale.getNome());
+                        CardSitiCulturali[0].add(cardSitoCulturale);
+                    }
                 }
 
             }
