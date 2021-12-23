@@ -257,7 +257,6 @@ public class BasicMethod extends AppCompatActivity {
 
     }
 
-
     /***
      *
      * @param headerCircleImageView: Immagine da impostare nel Drawer Laterale
@@ -307,35 +306,130 @@ public class BasicMethod extends AppCompatActivity {
         return phraseLower.toString();
     }
 
-    public static void apriCalendario(Activity activity, EditText dataNascita){
 
-        final Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+    /***
+     * Controlla se una stringa è formata solo da cifre
+     * @param costoIngresso
+     * @return boolean: true --> costoIngresso è valido
+     *                  false --> costoIngresso non è valido
+     */
+    public static boolean stringIsInteger(String costoIngresso) {
+        StringBuilder costoBuilder = new StringBuilder(costoIngresso);
 
-            @Override
-            public void onDateSet(DatePicker view, int anno, int mese,
-                                  int giorno) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, anno);
-                myCalendar.set(Calendar.MONTH, mese);
-                myCalendar.set(Calendar.DAY_OF_MONTH, giorno);
-                updateEditTextDataNascita(myCalendar, dataNascita);
+        for (int i=0; i<costoBuilder.length(); i++) {
+            if(costoBuilder.charAt(i) == '0' || costoBuilder.charAt(i) == '1' || costoBuilder.charAt(i) == '2'||
+                    costoBuilder.charAt(i) == '3' || costoBuilder.charAt(i) == '4' ||costoBuilder.charAt(i) == '5' ||
+                    costoBuilder.charAt(i) == '6' || costoBuilder.charAt(i) == '7' ||costoBuilder.charAt(i) == '8' ||costoBuilder.charAt(i) == '9') {
+
+            }else {return false;}
+        }
+        return true;
+    }
+
+    /***
+     * Controlla che un nome sia valido
+     * @param name
+     * @return boolean: true --> name è valido
+     *                  false --> name non è valido
+     */
+    public static boolean checkIfNameIsAcceptable (String name) {
+        StringBuilder nameBuilder = new StringBuilder(name);
+
+        if(nameBuilder.charAt(0) == ' ' ) {
+            return false;
+        }
+        for(int i=0; i<nameBuilder.length(); i++) {
+            if(!isLetter(nameBuilder.charAt(i))) {
+                return false;
             }
+        }
 
-        };
+        return true;
+    }
 
-        new DatePickerDialog(activity, date, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    /***
+     * Controlla che un indirizzo sia valido
+     * @param address
+     * @return boolean: true --> address è valido
+     *                  false --> address non è valido
+     */
+    public static boolean checkIfAddressIsAcceptable (String address) {
+        StringBuilder addressBuilder = new StringBuilder(address);
+        char carattere=' ';
+        if(!isLetter(addressBuilder.charAt(0)) || addressBuilder.charAt(0) == ' ') {
+            return false;
+        }
+
+        for(int i=1; i<addressBuilder.length(); i++) {
+            if(!isLetter(addressBuilder.charAt(i))) {
+                if(stringIsInteger(String.valueOf(addressBuilder.charAt(i)))) {
+                    int j=i-1;
+
+                    while( stringIsInteger(String.valueOf(addressBuilder.charAt(j)))) {
+                        if(!stringIsInteger(String.valueOf(addressBuilder.charAt(j-1)))) {
+                            carattere = addressBuilder.charAt(j-1);
+                        }
+
+                        j--;
+                    }
+                    if(carattere != ' ') {
+                        return false;
+                    }
+                }else {
+                    if(addressBuilder.charAt(i) != ' ') {
+                        return false;
+                    }
+
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    public static boolean isLetter (char lettera) {
+        StringBuilder letteraBuilder = new StringBuilder();
+        letteraBuilder.append(toLower(String.valueOf(lettera)));
+
+        return letteraBuilder.charAt(0) == 'a' || letteraBuilder.charAt(0) == 'b' || letteraBuilder.charAt(0) == 'c' || letteraBuilder.charAt(0) == 'd'
+                || letteraBuilder.charAt(0) == 'e' || letteraBuilder.charAt(0) == 'f' || letteraBuilder.charAt(0) == 'g' || letteraBuilder.charAt(0) == 'h'
+                || letteraBuilder.charAt(0) == 'i' || letteraBuilder.charAt(0) == 'j' || letteraBuilder.charAt(0) == 'k' || letteraBuilder.charAt(0) == 'l'
+                || letteraBuilder.charAt(0) == 'm' || letteraBuilder.charAt(0) == 'n' || letteraBuilder.charAt(0) == 'o' || letteraBuilder.charAt(0) == 'p'
+                || letteraBuilder.charAt(0) == 'q' || letteraBuilder.charAt(0) == 'r' || letteraBuilder.charAt(0) == 's' || letteraBuilder.charAt(0) == 't'
+                || letteraBuilder.charAt(0) == 'u' || letteraBuilder.charAt(0) == 'v' || letteraBuilder.charAt(0) == 'w' || letteraBuilder.charAt(0) == 'x'
+                || letteraBuilder.charAt(0) == 'y' || letteraBuilder.charAt(0) == 'z';
+    }
+        public static void apriCalendario (Activity activity, EditText dataNascita){
+
+            final Calendar myCalendar = Calendar.getInstance();
+            DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int anno, int mese,
+                                      int giorno) {
+                    // TODO Auto-generated method stub
+                    myCalendar.set(Calendar.YEAR, anno);
+                    myCalendar.set(Calendar.MONTH, mese);
+                    myCalendar.set(Calendar.DAY_OF_MONTH, giorno);
+                    updateEditTextDataNascita(myCalendar, dataNascita);
+                }
+
+            };
+
+            new DatePickerDialog(activity, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
 
-    private static void updateEditTextDataNascita(Calendar myCalendar, EditText dataNascita) {
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
+        private static void updateEditTextDataNascita (Calendar myCalendar, EditText dataNascita){
+            String myFormat = "dd/MM/yyyy"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
 
-        dataNascita.setText(sdf.format(myCalendar.getTime()));
+            dataNascita.setText(sdf.format(myCalendar.getTime()));
 
+
+        }
     }
 
-}
