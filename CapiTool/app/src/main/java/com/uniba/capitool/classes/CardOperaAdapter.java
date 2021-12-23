@@ -1,6 +1,7 @@
 package com.uniba.capitool.classes;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 
 import java.util.ArrayList;
@@ -58,7 +63,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
 
         // Set item views based on your views and data model
         ImageView cardFotoOpera = holder.foto;
-        cardFotoOpera.setImageURI(cardOpera.getFoto());
+        setImmagineOperaFromDB(cardOpera.getId(), holder.itemView.getContext(), cardFotoOpera);
 
         TextView cardIdOpera = holder.id;
         cardIdOpera.setText(cardOpera.getId());
@@ -90,7 +95,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            foto = (ImageView) itemView.findViewById(R.id.itemImmagineSito);
+            foto = (ImageView) itemView.findViewById(R.id.itemImmagineOpera);
             id = (TextView) itemView.findViewById(R.id.itemIdOpera);
             titolo = (TextView) itemView.findViewById(R.id.itemNomeOpera);
 
@@ -107,6 +112,28 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
             });
 
         }
+    }
+
+    /***
+     * Imposta l'immagine dell'opera
+     */
+    public void setImmagineOperaFromDB(String idOpera, Context context, ImageView cardFotoSito){
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference dateRef = storageRef.child("/fotoOpere/" + idOpera);
+
+        /**
+         * Scarica il "DownloadURL" che ci serve per leggere l'immagine dal DB e metterla in una ImageView
+         * */
+        dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+        {
+            @Override
+            public void onSuccess(Uri downloadUrl)
+            {
+                Glide.with(context).load(downloadUrl).into(cardFotoSito);
+            }
+        });
+
     }
 
 }

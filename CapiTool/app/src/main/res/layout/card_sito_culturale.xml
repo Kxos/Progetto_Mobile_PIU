@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/itemImmagineSito"
+            android:id="@+id/itemImmagineOpera"
             android:layout_width="145dp"
             android:layout_height="145dp"
             android:layout_margin="8dp"
@@ -31,7 +31,7 @@
             android:text="Sito di Prova 1"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineOpera"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_marginTop="5dp"
             android:text="Bari"
             android:textStyle="italic"
-            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineOpera"
             app:layout_constraintTop_toBottomOf="@+id/itemNomeOpera" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Apertura: "
-            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineOpera"
             app:layout_constraintTop_toBottomOf="@+id/itemLableCostoBigliettoSito" />
 
         <TextView
@@ -81,7 +81,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Costo Biglietto: "
-            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineOpera"
             app:layout_constraintTop_toBottomOf="@+id/itemCittaSito" />
 
         <TextView
@@ -127,7 +127,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Indirizzo: "
-            app:layout_constraintStart_toEndOf="@+id/itemImmagineSito"
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineOpera"
             app:layout_constraintTop_toBottomOf="@+id/itemLableOrarioAperturaSito" />
 
         <TextView

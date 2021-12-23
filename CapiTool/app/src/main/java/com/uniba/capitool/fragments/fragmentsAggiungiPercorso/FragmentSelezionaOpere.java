@@ -65,7 +65,7 @@ public class FragmentSelezionaOpere extends Fragment {
             sitoCulturale.setId(sharedPreferences.getString("idSito", ""));
             sitoCulturale.setNome(sharedPreferences.getString("nomeSito", ""));
 
-            toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
+            toolbar.setTitle(getString(R.string.site) + ": " + sitoCulturale.getNome());
 
             // TODO: CAMBIARE IL PARAMETRO idSito da "1" all'idSito recuperato
             recuperaZoneFromDBOrderByZoneId("1");

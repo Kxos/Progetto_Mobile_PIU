@@ -115,7 +115,7 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            foto = (ImageView) itemView.findViewById(R.id.itemImmagineSito);
+            foto = (ImageView) itemView.findViewById(R.id.itemImmagineOpera);
             id = (TextView) itemView.findViewById(R.id.itemIdSito);
             nome = (TextView) itemView.findViewById(R.id.itemNomeOpera);
             indirizzo = (TextView) itemView.findViewById(R.id.itemIndirizzoSito);
