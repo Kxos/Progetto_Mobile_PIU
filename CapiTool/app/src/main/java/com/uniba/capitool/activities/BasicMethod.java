@@ -400,6 +400,26 @@ public class BasicMethod extends AppCompatActivity {
                 || letteraBuilder.charAt(0) == 'u' || letteraBuilder.charAt(0) == 'v' || letteraBuilder.charAt(0) == 'w' || letteraBuilder.charAt(0) == 'x'
                 || letteraBuilder.charAt(0) == 'y' || letteraBuilder.charAt(0) == 'z';
     }
+
+    /***
+     * Rende grande ogni carattere inziale di ogni parola all'interno di una frase
+     * @param phrase
+     * @return phraseBuilder.toString()
+     */
+    public static String setUpperPhrase(String phrase) {
+        StringBuilder phraseBuilder = new StringBuilder(phrase);
+
+        for(int i=0; i<phraseBuilder.length(); i++) {
+            if(i==0) {
+                phraseBuilder.setCharAt(i, Character.toUpperCase(phraseBuilder.charAt(i)));
+            }
+
+            if (i>0 && phraseBuilder.charAt(i-1) == ' ') {
+                phraseBuilder.setCharAt(i, Character.toUpperCase(phraseBuilder.charAt(i)));
+            }
+        }
+        return phraseBuilder.toString();
+    }
         public static void apriCalendario (Activity activity, EditText dataNascita){
 
             final Calendar myCalendar = Calendar.getInstance();

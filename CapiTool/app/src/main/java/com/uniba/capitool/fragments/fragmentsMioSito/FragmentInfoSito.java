@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.SitoCulturale;
 
 public class FragmentInfoSito extends Fragment {
@@ -47,7 +48,7 @@ public class FragmentInfoSito extends Fragment {
         Bundle bundle = getArguments();
         sito = (SitoCulturale) bundle.getSerializable("sito");
 
-        nomeSito.setText(sito.getNome());
+        nomeSito.setText(BasicMethod.setUpperPhrase(sito.getNome())); 
         letturaImmagineSito(fotoSito, getActivity());
         indirizzo.setText(sito.getIndirizzo());
         orarioSito.setText(sito.getOrarioApertura() + " - " + sito.getOrarioChiusura());
