@@ -30,6 +30,8 @@
             android:layout_width="286dp"
             android:layout_height="238dp"
             android:layout_marginTop="64dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:background="@drawable/rounded_style"
             android:clickable="true"
             android:src="@drawable/ic_baseline_account_balance_24"

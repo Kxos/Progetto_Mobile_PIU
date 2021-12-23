@@ -350,7 +350,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
 
         myRef.setValue(sito);
 
-        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoSiti").child(mAuth.getCurrentUser().getUid());
+        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoSiti").child(key);
 
         final ProgressDialog pd = new ProgressDialog(getActivity());
         pd.setMessage("Caricamento");

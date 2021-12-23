@@ -40,12 +40,7 @@ public class FragmentCreaMioSito extends Fragment {
 
            }
        });
-/*
-       FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
-       FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-       fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentInfoMioSito() );
-       fragmentTransaction.commit();
-*/
+
 
 
        return v;
