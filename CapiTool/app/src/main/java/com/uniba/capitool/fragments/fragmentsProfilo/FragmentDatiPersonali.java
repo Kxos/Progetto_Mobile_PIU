@@ -15,7 +15,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,7 +80,6 @@ public class FragmentDatiPersonali extends Fragment {
         TextInputEditText patentino= view.findViewById(R.id.text_numeroPatentino);
         fotoProfilo = view.findViewById(R.id.imageProfile);
         progressBar = view.findViewById(R.id.progress_circularDatiPersonali);
-        ScrollView scrollView=view.findViewById(R.id.scrollViewDatiPersonali);
 
         conferma= view.findViewById(R.id.confermaModifiche);
         conferma.setEnabled(false);
@@ -107,7 +105,6 @@ public class FragmentDatiPersonali extends Fragment {
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone(constraintLayout);
             constraintSet.connect(R.id.confermaModifiche,ConstraintSet.TOP,R.id.layout_dataNascita,ConstraintSet.BOTTOM,30);
-           // constraintSet.connect(R.id.imageView,ConstraintSet.TOP,R.id.check_answer2, ConstraintSet.TOP,0);
             constraintSet.applyTo(constraintLayout);
         }
 
@@ -217,7 +214,7 @@ public class FragmentDatiPersonali extends Fragment {
                 progressBar.setVisibility(View.GONE);
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 conferma.setEnabled(false);
-                //TODO non compare il toast
+
                 Toast.makeText(((HomePage)getActivity()), "Dati personali aggiornati correttamente", Toast.LENGTH_LONG).show();
 
                 TextView nomeNavDrawer= getActivity().findViewById(R.id.headerNome);
@@ -241,19 +238,13 @@ public class FragmentDatiPersonali extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-       // CircleImageView fotoNavHeader = getActivity().findViewById(R.id.imageProfile);
-
         if(requestCode == 1 && data!=null){
-            Log.e("***********************************************************",""+fotoProfilo);
+
             imageUri=data.getData();
             if(imageUri!=null){
                 fotoProfilo.setImageURI(imageUri);
-             //   fotoNavHeader.setImageURI(imageUri);
-                Log.e("Prima di ONDATACHANGE", imageUri.toString());
 
                 StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoUtenti").child(utente.getUid());
-
-               // CircleImageView fotoNavHeader = getActivity().findViewById(R.id.imageProfile);
 
                 final ProgressDialog pd = new ProgressDialog(getActivity());
                 pd.setMessage("Caricamento");
@@ -268,15 +259,9 @@ public class FragmentDatiPersonali extends Fragment {
                         Toast.makeText(((HomePage)getActivity()), "Foto del profilo aggiornata correttamente", Toast.LENGTH_LONG).show();
                         pd.dismiss();
 
-                       // fotoNavHeader.setImageURI(imageUri);
-                        Log.e("Dopo di ONDATACHANGE", imageUri.toString());
-
+                        //Reinstanzio la navigation view per aggiornare l'immagine del profilo nel navigation header
                         NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.Home_Nav_Menu);
-
                         BasicMethod.setNavLateralMenuOnUserRole(navigationView,getActivity());
-//                        Glide.with(getContext())
-//                                .load(imageUri)
-//                                .into(fotoNavHeader);
                     }
                 });
             }
@@ -313,6 +298,7 @@ public class FragmentDatiPersonali extends Fragment {
                 }
             });
     }
+
 
     private void setDataNascita(String dataN) {
         dataNascita.setText(dataN);
