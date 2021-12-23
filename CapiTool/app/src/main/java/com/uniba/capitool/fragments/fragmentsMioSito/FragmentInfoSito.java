@@ -23,6 +23,9 @@ import com.uniba.capitool.classes.SitoCulturale;
 public class FragmentInfoSito extends Fragment {
     SitoCulturale sito;
     TextView nomeSito;
+    TextView orarioSito;
+    TextView indirizzo;
+    TextView costoIngresso;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class FragmentInfoSito extends Fragment {
 
         ImageView fotoSito= view.findViewById(R.id.immagineSito2);
         nomeSito = view.findViewById(R.id.titoloNomeSito);
+        indirizzo = view.findViewById(R.id.Via);
+        orarioSito = view.findViewById(R.id.Orario);
+        costoIngresso = view.findViewById(R.id.Costo);
 
         //recupero il bundle (ovvero l'oggetto SitoCculturale associato all'utente) passato dal fragment FragmentMioSito
         Bundle bundle = getArguments();
@@ -43,6 +49,9 @@ public class FragmentInfoSito extends Fragment {
 
         nomeSito.setText(sito.getNome());
         letturaImmagineSito(fotoSito, getActivity());
+        indirizzo.setText(sito.getIndirizzo());
+        orarioSito.setText(sito.getOrarioApertura() + " - " + sito.getOrarioChiusura());
+        costoIngresso.setText(sito.getCostoBiglietto() + "€");
 
     }
     public void letturaImmagineSito(ImageView imageView, Activity activity){
