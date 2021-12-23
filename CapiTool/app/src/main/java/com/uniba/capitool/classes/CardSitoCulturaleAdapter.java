@@ -1,6 +1,7 @@
 package com.uniba.capitool.classes;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 
 import java.util.ArrayList;
@@ -60,6 +65,9 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         TextView cardIdSito = holder.id;
         cardIdSito.setText(cardSitoCulturale.getId());
 
+        ImageView cardFotoSito = holder.foto;
+        setImmagineSitoFromDB(cardSitoCulturale.getId(), holder.itemView.getContext(), cardFotoSito);
+
         TextView cardNomeSito = holder.nome;
         cardNomeSito.setText(cardSitoCulturale.getNome());
 
@@ -109,7 +117,7 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
 
             foto = (ImageView) itemView.findViewById(R.id.itemImmagineSito);
             id = (TextView) itemView.findViewById(R.id.itemIdSito);
-            nome = (TextView) itemView.findViewById(R.id.itemNomeSito);
+            nome = (TextView) itemView.findViewById(R.id.itemNomeOpera);
             indirizzo = (TextView) itemView.findViewById(R.id.itemIndirizzoSito);
             orarioApertura = (TextView) itemView.findViewById(R.id.itemOrarioAperturaSito);
             orarioChiusura = (TextView) itemView.findViewById(R.id.itemOrarioChiusuraSito);
@@ -129,6 +137,28 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             });
 
         }
+    }
+
+    /***
+     * Imposta l'immagine del Sito cercato
+     */
+    public void setImmagineSitoFromDB(String idSito, Context context, ImageView cardFotoSito){
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference dateRef = storageRef.child("/fotoSiti/" + idSito);
+
+        /**
+         * Scarica il "DownloadURL" che ci serve per leggere l'immagine dal DB e metterla in una ImageView
+         * */
+        dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+        {
+            @Override
+            public void onSuccess(Uri downloadUrl)
+            {
+                Glide.with(context).load(downloadUrl).into(cardFotoSito);
+            }
+        });
+
     }
 
 
