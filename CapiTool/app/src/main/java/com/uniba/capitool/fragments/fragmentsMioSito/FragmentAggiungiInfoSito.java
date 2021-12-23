@@ -196,7 +196,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
                 }
 
 
-                
+
                 if(orarioChiusura.getText().toString().equals("")){
                     orarioChiusura.setError("Inserisci l'orario di chiusura");
                     erroreDatiPersonali=true;

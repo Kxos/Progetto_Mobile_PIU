@@ -1,12 +1,15 @@
 package com.uniba.capitool.activities;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +31,10 @@ import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -206,7 +213,7 @@ public class BasicMethod extends AppCompatActivity {
      *
      * @param navigationView: Viene passata la navigationView legata alla Toolbar
      */
-    public void setNavLateralMenuOnUserRole(NavigationView navigationView, Activity activity){
+    public static void setNavLateralMenuOnUserRole(NavigationView navigationView, Activity activity){
         navigationView.getMenu().clear();
 
         Bundle b = activity.getIntent().getExtras();
@@ -229,9 +236,9 @@ public class BasicMethod extends AppCompatActivity {
             utente.setEmail(b.getString("email"));
             utente.setRuolo(b.getString("ruolo"));
         }else{
-            BasicMethod.alertDialog(this, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
+            BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
             Intent login= new Intent(activity, Login.class);
-            this.startActivity(login);
+            activity.startActivity(login);
 
         }
 
@@ -257,7 +264,7 @@ public class BasicMethod extends AppCompatActivity {
      *
      * @param headerCircleImageView: Immagine da impostare nel Drawer Laterale
      */
-    public void letturaImmagineDB(CircleImageView headerCircleImageView, Activity activity){
+    public static void letturaImmagineDB(CircleImageView headerCircleImageView, Activity activity){
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference dateRef = storageRef.child("/fotoUtenti/" + utente.getUid());
@@ -301,6 +308,7 @@ public class BasicMethod extends AppCompatActivity {
 
         return phraseLower.toString();
     }
+
 
     /***
      * Controlla se una stringa è formata solo da cifre
@@ -387,13 +395,57 @@ public class BasicMethod extends AppCompatActivity {
         StringBuilder letteraBuilder = new StringBuilder();
         letteraBuilder.append(toLower(String.valueOf(lettera)));
 
-        return letteraBuilder.charAt(0) == 'a' || letteraBuilder.charAt(0) == 'b' || letteraBuilder.charAt(0) == 'c'|| letteraBuilder.charAt(0) == 'd'
-                || letteraBuilder.charAt(0) == 'e'|| letteraBuilder.charAt(0) == 'f'|| letteraBuilder.charAt(0) == 'g'|| letteraBuilder.charAt(0) == 'h'
-                || letteraBuilder.charAt(0) == 'i'|| letteraBuilder.charAt(0) == 'j'|| letteraBuilder.charAt(0) == 'k'|| letteraBuilder.charAt(0) == 'l'
-                || letteraBuilder.charAt(0) == 'm'|| letteraBuilder.charAt(0) == 'n'|| letteraBuilder.charAt(0) == 'o'|| letteraBuilder.charAt(0) == 'p'
-                || letteraBuilder.charAt(0) == 'q'|| letteraBuilder.charAt(0) == 'r'|| letteraBuilder.charAt(0) == 's'|| letteraBuilder.charAt(0) == 't'
-                || letteraBuilder.charAt(0) == 'u'|| letteraBuilder.charAt(0) == 'v'|| letteraBuilder.charAt(0) == 'w'|| letteraBuilder.charAt(0) == 'x'
-                || letteraBuilder.charAt(0) == 'y'|| letteraBuilder.charAt(0) == 'z';
+        return letteraBuilder.charAt(0) == 'a' || letteraBuilder.charAt(0) == 'b' || letteraBuilder.charAt(0) == 'c' || letteraBuilder.charAt(0) == 'd'
+                || letteraBuilder.charAt(0) == 'e' || letteraBuilder.charAt(0) == 'f' || letteraBuilder.charAt(0) == 'g' || letteraBuilder.charAt(0) == 'h'
+                || letteraBuilder.charAt(0) == 'i' || letteraBuilder.charAt(0) == 'j' || letteraBuilder.charAt(0) == 'k' || letteraBuilder.charAt(0) == 'l'
+                || letteraBuilder.charAt(0) == 'm' || letteraBuilder.charAt(0) == 'n' || letteraBuilder.charAt(0) == 'o' || letteraBuilder.charAt(0) == 'p'
+                || letteraBuilder.charAt(0) == 'q' || letteraBuilder.charAt(0) == 'r' || letteraBuilder.charAt(0) == 's' || letteraBuilder.charAt(0) == 't'
+                || letteraBuilder.charAt(0) == 'u' || letteraBuilder.charAt(0) == 'v' || letteraBuilder.charAt(0) == 'w' || letteraBuilder.charAt(0) == 'x'
+                || letteraBuilder.charAt(0) == 'y' || letteraBuilder.charAt(0) == 'z';
+    }
+        public static void apriCalendario (Activity activity, EditText dataNascita){
+
+            final Calendar myCalendar = Calendar.getInstance();
+            DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int anno, int mese,
+                                      int giorno) {
+                    // TODO Auto-generated method stub
+                    myCalendar.set(Calendar.YEAR, anno);
+                    myCalendar.set(Calendar.MONTH, mese);
+                    myCalendar.set(Calendar.DAY_OF_MONTH, giorno);
+                    updateEditTextDataNascita(myCalendar, dataNascita);
+                }
+
+            };
+
+            new DatePickerDialog(activity, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+      /*  new DatePickerDialog(activity, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int anno, int mese,
+                                  int giorno) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, anno);
+                myCalendar.set(Calendar.MONTH, mese);
+                myCalendar.set(Calendar.DAY_OF_MONTH, giorno);
+                updateEditTextDataNascita(myCalendar, dataNascita);
+            }
+        },Calendar.YEAR, myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH) ).show();*/
+
+        }
+
+        private static void updateEditTextDataNascita (Calendar myCalendar, EditText dataNascita){
+            String myFormat = "dd/MM/yyyy"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
+
+            dataNascita.setText(sdf.format(myCalendar.getTime()));
+
+
+        }
     }
 
-}

@@ -1,24 +1,37 @@
 package com.uniba.capitool.fragments.fragmentsProfilo;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +58,9 @@ public class FragmentDatiPersonali extends Fragment {
     CircleImageView fotoProfilo;
     TextInputEditText dataNascita;
     Utente utente;
+    ProgressBar progressBar;
+    Button conferma;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,11 +77,14 @@ public class FragmentDatiPersonali extends Fragment {
         TextInputEditText nome= view.findViewById(R.id.text_nome);
         TextInputEditText cognome= view.findViewById(R.id.text_cognome);
         dataNascita= view.findViewById(R.id.text_dataNascita);
+        TextInputLayout layoutPatentino= view.findViewById(R.id.layout_numeroPatentino);
         TextInputEditText patentino= view.findViewById(R.id.text_numeroPatentino);
         fotoProfilo = view.findViewById(R.id.imageProfile);
+        progressBar = view.findViewById(R.id.progress_circularDatiPersonali);
+        ScrollView scrollView=view.findViewById(R.id.scrollViewDatiPersonali);
 
-
-        Button conferma= view.findViewById(R.id.confermaModifiche);
+        conferma= view.findViewById(R.id.confermaModifiche);
+        conferma.setEnabled(false);
 
         utente=BasicMethod.getUtente();    //recupero l'utente che ha fatto il login dalla activity HomePage
         email.setText(utente.getEmail());
@@ -79,10 +98,17 @@ public class FragmentDatiPersonali extends Fragment {
         letturaImmagineDB();
 
         if(!utente.getRuolo().equals("guida")){
-            patentino.setHint("");
+            layoutPatentino.setHint("");
             patentino.setEnabled(false);
             patentino.setBackground(null);
             patentino.setFocusable(false);
+
+            ConstraintLayout constraintLayout = view.findViewById(R.id.constraint_layout);
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(constraintLayout);
+            constraintSet.connect(R.id.confermaModifiche,ConstraintSet.TOP,R.id.layout_dataNascita,ConstraintSet.BOTTOM,30);
+           // constraintSet.connect(R.id.imageView,ConstraintSet.TOP,R.id.check_answer2, ConstraintSet.TOP,0);
+            constraintSet.applyTo(constraintLayout);
         }
 
         setDataNascitaUtente(utente.getEmail());
@@ -98,20 +124,136 @@ public class FragmentDatiPersonali extends Fragment {
             }
         });
 
+        nome.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(nome.getText().toString().equals("")){
+                    nome.setError("Inserisci un nome valido");
+                    conferma.setEnabled(false);
+                }else{
+                    conferma.setEnabled(true);
+                }
+            }
+        });
+
+        cognome.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(cognome.getText().toString().equals("")){
+                    cognome.setError("Inserisci un cognome valido");
+                    conferma.setEnabled(false);
+                }else{
+                    conferma.setEnabled(true);
+                }
+            }
+        });
+
+        dataNascita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Check if no view has focus else hide KEYBOARD
+                View view = getActivity().getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+
+                BasicMethod.apriCalendario(getActivity(), dataNascita);
+                conferma.setEnabled(true);
+            }
+        });
+
+        conferma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                updateDatiUtente(nome.getText().toString(), cognome.getText().toString(), dataNascita.getText().toString());
+            }
+        });
+
     }
+
+
+    private void updateDatiUtente(String nome, String cognome, String dataNascita) {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef;
+
+        myRef=database.getReference("/Utenti/"+utente.getUid()+"/nome");
+        myRef.setValue(nome);
+
+        myRef=database.getReference("/Utenti/"+utente.getUid()+"/cognome");
+        myRef.setValue(cognome);
+
+        myRef=database.getReference("/Utenti/"+utente.getUid()+"/dataNascita");
+        myRef.setValue(dataNascita);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                progressBar.setVisibility(View.GONE);
+                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                conferma.setEnabled(false);
+                //TODO non compare il toast
+                Toast.makeText(((HomePage)getActivity()), "Dati personali aggiornati correttamente", Toast.LENGTH_LONG).show();
+
+                TextView nomeNavDrawer= getActivity().findViewById(R.id.headerNome);
+                TextView cognomeNavDrawer= getActivity().findViewById(R.id.headerCognome);
+                nomeNavDrawer.setText(nome);
+                cognomeNavDrawer.setText(cognome);
+
+                utente.setNome(nome);
+                utente.setNome(cognome);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+       // CircleImageView fotoNavHeader = getActivity().findViewById(R.id.imageProfile);
 
         if(requestCode == 1 && data!=null){
-            Log.e("***********************************************************","");
+            Log.e("***********************************************************",""+fotoProfilo);
             imageUri=data.getData();
             if(imageUri!=null){
                 fotoProfilo.setImageURI(imageUri);
+             //   fotoNavHeader.setImageURI(imageUri);
+                Log.e("Prima di ONDATACHANGE", imageUri.toString());
 
                 StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoUtenti").child(utente.getUid());
+
+               // CircleImageView fotoNavHeader = getActivity().findViewById(R.id.imageProfile);
 
                 final ProgressDialog pd = new ProgressDialog(getActivity());
                 pd.setMessage("Caricamento");
@@ -123,7 +265,18 @@ public class FragmentDatiPersonali extends Fragment {
                 fileReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        Toast.makeText(((HomePage)getActivity()), "Foto del profilo aggiornata correttamente", Toast.LENGTH_LONG).show();
                         pd.dismiss();
+
+                       // fotoNavHeader.setImageURI(imageUri);
+                        Log.e("Dopo di ONDATACHANGE", imageUri.toString());
+
+                        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.Home_Nav_Menu);
+
+                        BasicMethod.setNavLateralMenuOnUserRole(navigationView,getActivity());
+//                        Glide.with(getContext())
+//                                .load(imageUri)
+//                                .into(fotoNavHeader);
                     }
                 });
             }
@@ -183,6 +336,7 @@ public class FragmentDatiPersonali extends Fragment {
                         .load(downloadUrl)
                         .into(fotoProfilo);
             }
+
         });
 
     }
