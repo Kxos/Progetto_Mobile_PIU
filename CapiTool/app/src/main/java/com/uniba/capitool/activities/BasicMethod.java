@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -39,8 +38,7 @@ import java.util.Locale;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BasicMethod extends AppCompatActivity {
-
-    DrawerLayout drawerLayout;
+    
     static Utente utente;
     static NavController navController;
 
@@ -329,19 +327,6 @@ public class BasicMethod extends AppCompatActivity {
         new DatePickerDialog(activity, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-
-      /*  new DatePickerDialog(activity, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int anno, int mese,
-                                  int giorno) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, anno);
-                myCalendar.set(Calendar.MONTH, mese);
-                myCalendar.set(Calendar.DAY_OF_MONTH, giorno);
-                updateEditTextDataNascita(myCalendar, dataNascita);
-            }
-        },Calendar.YEAR, myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH) ).show();*/
 
     }
 
