@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CapiToolStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/dark_grey_50</item>
+        <item name="colorControlActivated">@color/orangeCapiTool</item>
+        <item name="colorControlHighlight">@color/orangeCapiTool</item>
+    </style>
+
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:datePickerStyle">@style/CapiToolStyle</item>
+    </style>
+
+    <style name="DialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="colorAccent">@color/orangeCapiTool</item>
+    </style>
+</resources>

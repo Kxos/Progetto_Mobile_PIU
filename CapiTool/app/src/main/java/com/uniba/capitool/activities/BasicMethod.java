@@ -330,6 +330,19 @@ public class BasicMethod extends AppCompatActivity {
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
+      /*  new DatePickerDialog(activity, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int anno, int mese,
+                                  int giorno) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, anno);
+                myCalendar.set(Calendar.MONTH, mese);
+                myCalendar.set(Calendar.DAY_OF_MONTH, giorno);
+                updateEditTextDataNascita(myCalendar, dataNascita);
+            }
+        },Calendar.YEAR, myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH) ).show();*/
+
     }
 
     private static void updateEditTextDataNascita(Calendar myCalendar, EditText dataNascita) {

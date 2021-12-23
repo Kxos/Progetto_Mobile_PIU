@@ -8,8 +8,10 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +40,7 @@ public class Login extends AppCompatActivity {
 
     EditText email;
     TextInputEditText password;
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,8 @@ public class Login extends AppCompatActivity {
 
         email = findViewById(R.id.textfield_email);
         password = findViewById(R.id.textfield_password);
+
+        progressBar=findViewById(R.id.progressLogin);
 
         /**
          *
@@ -78,6 +82,9 @@ public class Login extends AppCompatActivity {
 
         button_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();

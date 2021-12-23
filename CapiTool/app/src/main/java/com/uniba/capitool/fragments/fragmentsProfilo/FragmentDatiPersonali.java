@@ -41,6 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
 
@@ -215,7 +216,7 @@ public class FragmentDatiPersonali extends Fragment {
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 conferma.setEnabled(false);
                 //TODO non compare il toast
-                Toast.makeText(getActivity().getApplicationContext(), "Dati personali aggiornati", Toast.LENGTH_LONG).show();
+                Toast.makeText(((HomePage)getActivity()), "Dati personali aggiornati", Toast.LENGTH_LONG).show();
 
             }
 

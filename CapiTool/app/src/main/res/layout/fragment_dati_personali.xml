@@ -58,7 +58,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageProfile">
+                app:layout_constraintTop_toBottomOf="@+id/imageProfile"
+                android:theme="@style/CapiToolStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_email"
@@ -79,7 +80,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_email">
+                app:layout_constraintTop_toBottomOf="@+id/layout_email"
+                android:theme="@style/CapiToolStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_nome"
@@ -97,7 +99,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_nome">
+                app:layout_constraintTop_toBottomOf="@+id/layout_nome"
+                android:theme="@style/CapiToolStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_cognome"
@@ -115,7 +118,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_cognome">
+                app:layout_constraintTop_toBottomOf="@+id/layout_cognome"
+                android:theme="@style/CapiToolStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_dataNascita"
@@ -134,7 +138,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_dataNascita">
+                app:layout_constraintTop_toBottomOf="@+id/layout_dataNascita"
+                android:theme="@style/CapiToolStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_numeroPatentino"

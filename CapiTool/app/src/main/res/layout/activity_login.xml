@@ -4,7 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Login">
+    tools:context=".activities.Login"
+   >
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        android:visibility="gone"
+        app:indicatorColor="#EC5424"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img_museum"
@@ -14,7 +31,6 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="146dp"
         android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/textfield_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +49,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+        app:layout_constraintTop_toBottomOf="@+id/button_login"/>
 
     <Button
         android:id="@+id/button_login"
@@ -72,7 +88,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_museum">
+        app:layout_constraintTop_toBottomOf="@+id/img_museum"
+        android:theme="@style/CapiToolStyle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textfield_email"
@@ -93,13 +110,15 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_email"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:theme="@style/CapiToolStyle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textfield_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
