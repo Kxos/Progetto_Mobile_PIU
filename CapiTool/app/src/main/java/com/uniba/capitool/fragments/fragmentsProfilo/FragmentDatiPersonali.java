@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -216,8 +218,15 @@ public class FragmentDatiPersonali extends Fragment {
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 conferma.setEnabled(false);
                 //TODO non compare il toast
-                Toast.makeText(((HomePage)getActivity()), "Dati personali aggiornati", Toast.LENGTH_LONG).show();
+                Toast.makeText(((HomePage)getActivity()), "Dati personali aggiornati correttamente", Toast.LENGTH_LONG).show();
 
+                TextView nomeNavDrawer= getActivity().findViewById(R.id.headerNome);
+                TextView cognomeNavDrawer= getActivity().findViewById(R.id.headerCognome);
+                nomeNavDrawer.setText(nome);
+                cognomeNavDrawer.setText(cognome);
+
+                utente.setNome(nome);
+                utente.setNome(cognome);
             }
 
             @Override
@@ -232,14 +241,19 @@ public class FragmentDatiPersonali extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+       // CircleImageView fotoNavHeader = getActivity().findViewById(R.id.imageProfile);
 
         if(requestCode == 1 && data!=null){
-            Log.e("***********************************************************","");
+            Log.e("***********************************************************",""+fotoProfilo);
             imageUri=data.getData();
             if(imageUri!=null){
                 fotoProfilo.setImageURI(imageUri);
+             //   fotoNavHeader.setImageURI(imageUri);
+                Log.e("Prima di ONDATACHANGE", imageUri.toString());
 
                 StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoUtenti").child(utente.getUid());
+
+               // CircleImageView fotoNavHeader = getActivity().findViewById(R.id.imageProfile);
 
                 final ProgressDialog pd = new ProgressDialog(getActivity());
                 pd.setMessage("Caricamento");
@@ -251,7 +265,18 @@ public class FragmentDatiPersonali extends Fragment {
                 fileReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        Toast.makeText(((HomePage)getActivity()), "Foto del profilo aggiornata correttamente", Toast.LENGTH_LONG).show();
                         pd.dismiss();
+
+                       // fotoNavHeader.setImageURI(imageUri);
+                        Log.e("Dopo di ONDATACHANGE", imageUri.toString());
+
+                        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.Home_Nav_Menu);
+
+                        BasicMethod.setNavLateralMenuOnUserRole(navigationView,getActivity());
+//                        Glide.with(getContext())
+//                                .load(imageUri)
+//                                .into(fotoNavHeader);
                     }
                 });
             }

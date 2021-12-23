@@ -213,7 +213,7 @@ public class BasicMethod extends AppCompatActivity {
      *
      * @param navigationView: Viene passata la navigationView legata alla Toolbar
      */
-    public void setNavLateralMenuOnUserRole(NavigationView navigationView, Activity activity){
+    public static void setNavLateralMenuOnUserRole(NavigationView navigationView, Activity activity){
         navigationView.getMenu().clear();
 
         Bundle b = activity.getIntent().getExtras();
@@ -236,9 +236,9 @@ public class BasicMethod extends AppCompatActivity {
             utente.setEmail(b.getString("email"));
             utente.setRuolo(b.getString("ruolo"));
         }else{
-            BasicMethod.alertDialog(this, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
+            BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
             Intent login= new Intent(activity, Login.class);
-            this.startActivity(login);
+            activity.startActivity(login);
 
         }
 
@@ -264,7 +264,7 @@ public class BasicMethod extends AppCompatActivity {
      *
      * @param headerCircleImageView: Immagine da impostare nel Drawer Laterale
      */
-    public void letturaImmagineDB(CircleImageView headerCircleImageView, Activity activity){
+    public static void letturaImmagineDB(CircleImageView headerCircleImageView, Activity activity){
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference dateRef = storageRef.child("/fotoUtenti/" + utente.getUid());
