@@ -26,6 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.BasicMethod;
 
 public class FragmentAggiungiNomeSito extends Fragment {
     private static final int SELECT_IMAGE_CODE = 1;
@@ -70,10 +71,11 @@ public class FragmentAggiungiNomeSito extends Fragment {
             public void onClick(View view) {
                 boolean erroreDatiPersonali = false;
 
-                if(nome.getText().toString().equals("")){
-                    nome.setError("Inserisci il nome del tuo sito");
+                if(nome.getText().toString().equals("") || !BasicMethod.checkIfNameIsAcceptable(nome.getText().toString()) ){
+                    nome.setError("Inserisci un nome che sia valido e non vuoto");
                     erroreDatiPersonali=true;
                 }
+
 
                 if(erroreDatiPersonali==false){
                     FragmentManager fragmentManager= getActivity().getSupportFragmentManager();

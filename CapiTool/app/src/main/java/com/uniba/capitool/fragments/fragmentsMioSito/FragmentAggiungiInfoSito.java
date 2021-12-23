@@ -190,11 +190,13 @@ public class FragmentAggiungiInfoSito extends Fragment {
             public void onClick(View view) {
                 boolean erroreDatiPersonali=false;
 
-                if(nomeCitta.getText().toString().equals("")){
-                    nomeCitta.setError("Inserisci il nome della città");
+                if(nomeCitta.getText().toString().equals("") || !BasicMethod.checkIfNameIsAcceptable(nomeCitta.getText().toString())){
+                    nomeCitta.setError("Inserisci un nome della città che sia valido e non vuoto");
                     erroreDatiPersonali=true;
                 }
 
+
+                
                 if(orarioChiusura.getText().toString().equals("")){
                     orarioChiusura.setError("Inserisci l'orario di chiusura");
                     erroreDatiPersonali=true;
@@ -205,15 +207,21 @@ public class FragmentAggiungiInfoSito extends Fragment {
                     erroreDatiPersonali=true;
                 }
 
-                if(costoIngresso.getText().toString().equals("") ){
+                if(costoIngresso.getText().toString().equals("")){
                     costoIngresso.setError("Inserisci il costo d'ingresso");
                     erroreDatiPersonali=true;
                 }
 
-                if(indirizzo.getText().toString().equals("")) {
-                    indirizzo.setError("Inserisci l'indirizzo");
+                if(!BasicMethod.stringIsInteger(costoIngresso.getText().toString())){
+                    costoIngresso.setError("Inserisci un costo d'ingresso valido");
                     erroreDatiPersonali=true;
                 }
+
+                if(indirizzo.getText().toString().equals("") || !BasicMethod.checkIfAddressIsAcceptable(indirizzo.getText().toString())) {
+                    indirizzo.setError("Inserisci un indirizzo che sia valido e non vuoto");
+                    erroreDatiPersonali=true;
+                }
+
 
                 if(erroreDatiPersonali==false){
                     addSitoOnLastPosition();
