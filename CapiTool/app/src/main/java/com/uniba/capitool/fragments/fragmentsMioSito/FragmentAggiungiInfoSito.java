@@ -1,11 +1,13 @@
 package com.uniba.capitool.fragments.fragmentsMioSito;
 
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +23,8 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.HomePage;
@@ -42,6 +49,7 @@ import java.util.Date;
 public class FragmentAggiungiInfoSito extends Fragment {
     SitoCulturale sitoCulturale;
     String nomeSito;
+    String imageUriString;
     EditText nomeCitta;
     TextView orarioChiusura;
     TextView  orarioApertura;
@@ -70,13 +78,18 @@ public class FragmentAggiungiInfoSito extends Fragment {
             String costoIngressoTrovato =  sharedPreferences.getString("costoIngresso", "");
             String indirizzoTrovato = sharedPreferences.getString("indirizzo", "");
             nomeSito = sharedPreferences.getString("nome","");
-
             nomeCitta.setText(cittaTrovata);
             orarioChiusura.setText(orarioChiusuraTrovato);
             orarioApertura.setText(orarioAperturaTrovato);
             costoIngresso.setText(costoIngressoTrovato);
             indirizzo.setText(indirizzoTrovato);
 
+            try {
+                imageUriString = sharedPreferences.getString("url", "");
+            } catch (IllegalArgumentException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
         }else{
             Log.e( "onCreateView: ", "SharedPreferences non trovato");
@@ -171,12 +184,43 @@ public class FragmentAggiungiInfoSito extends Fragment {
 
 
 
+
         btnConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addSitoOnLastPosition();
-                datiSito.clear();
-                datiSito.commit();
+                boolean erroreDatiPersonali=false;
+
+                if(nomeCitta.getText().toString().equals("")){
+                    nomeCitta.setError("Inserisci il nome della città");
+                    erroreDatiPersonali=true;
+                }
+
+                if(orarioChiusura.getText().toString().equals("")){
+                    orarioChiusura.setError("Inserisci l'orario di chiusura");
+                    erroreDatiPersonali=true;
+                }
+
+                if(orarioApertura.getText().toString().equals("")){
+                    orarioApertura.setError("Inserisci l'orario di apertura");
+                    erroreDatiPersonali=true;
+                }
+
+                if(costoIngresso.getText().toString().equals("") ){
+                    costoIngresso.setError("Inserisci il costo d'ingresso");
+                    erroreDatiPersonali=true;
+                }
+
+                if(indirizzo.getText().toString().equals("")) {
+                    indirizzo.setError("Inserisci l'indirizzo");
+                    erroreDatiPersonali=true;
+                }
+
+                if(erroreDatiPersonali==false){
+                    addSitoOnLastPosition();
+                    datiSito.clear();
+                    datiSito.commit();
+                }
+
             }
         });
 
@@ -297,6 +341,21 @@ public class FragmentAggiungiInfoSito extends Fragment {
         myRef=database.getReference("Siti").child(key);
 
         myRef.setValue(sito);
+
+        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoSiti").child(mAuth.getCurrentUser().getUid());
+
+        final ProgressDialog pd = new ProgressDialog(getActivity());
+        pd.setMessage("Caricamento");
+        pd.show();
+
+
+
+        fileReference.putFile(Uri.parse(imageUriString)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                pd.dismiss();
+            }
+        });
         /*Log.e("******* ID *******", myRef.push().getKey() );*/
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
