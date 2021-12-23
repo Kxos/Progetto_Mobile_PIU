@@ -2,9 +2,10 @@ package com.uniba.capitool.classes;
 
 import android.media.Image;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SitoCulturale {
+public class SitoCulturale implements Serializable {
 
     private String id;
     private String nome;

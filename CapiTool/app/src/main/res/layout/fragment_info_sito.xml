@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/titoloNomeSito"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:padding="8dp"

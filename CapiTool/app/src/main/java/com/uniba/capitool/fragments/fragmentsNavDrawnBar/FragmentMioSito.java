@@ -43,21 +43,7 @@ public class FragmentMioSito extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_mio_sito, container, false);
         controllaSitoAssociato (BasicMethod.getUtente().getUid());
-        //Log.e("PRIMA DELL'IF", ""+sito.getNome());
 
-       /* myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {*/
-
-
-
-           /* }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
         return v;
     }
 
@@ -68,7 +54,7 @@ public class FragmentMioSito extends Fragment {
     }
 
     public void controllaSitoAssociato (String uidUtente){
-        Log.e("*****!!!!*****","SONO IN CONTROLLASITOASSOCIATO!!!");
+
         Query recentPostsQuery;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -84,21 +70,15 @@ public class FragmentMioSito extends Fragment {
                 ArrayList<SitoCulturale> siti = new ArrayList<>();
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Log.e("*****!!!!*****","SONO NEL FOR!!!");
                     siti.add(snapshot.getValue(SitoCulturale.class));
 
                 }
                 if(siti.size() != 0){
-                    Log.e("****SITI_0*****", siti.get(0).getNome());
                     setSito(siti.get(0));
                 }else{
                     setCreaSito();
                 }
-
-
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -110,22 +90,30 @@ public class FragmentMioSito extends Fragment {
     }
 
     public void setSito(SitoCulturale sito1){
-        Log.e("SITO1****!!!", ""+sito1.getNome());
+
         this.sito = sito1;
 
-        Log.e("SONO DOPO ONDATA CHANGE",""+sito);
-
         if(BasicMethod.getUtente().getRuolo().equals("curatore") && sito.getUidCuratore() != null ){
-            Log.e("*****!!!!*****","SITO ASSOCIATOOO DEFINITIVO"+BasicMethod.getUtente().getUid()+""+sito.getUidCuratore());
+          //  Log.e("*****!!!!*****","SITO ASSOCIATOOO DEFINITIVO"+BasicMethod.getUtente().getUid()+""+sito.getUidCuratore());
 
-            FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentInfoSito() );
+//            FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+//            FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+//            fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentInfoSito() );
+//            fragmentTransaction.commit();
+
+            FragmentTransaction fragmentTransaction =  getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            FragmentInfoSito fragmentInfoSito = new FragmentInfoSito();
+
+            Bundle bundle = new Bundle();
+            SitoCulturale sitoCulturale = sito;
+            bundle.putSerializable("sito", sitoCulturale);
+            fragmentInfoSito.setArguments(bundle);
+            fragmentTransaction.replace(R.id.fragmentContainerSito, fragmentInfoSito);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
         }else{
-
-
 
         }
 
@@ -137,6 +125,10 @@ public class FragmentMioSito extends Fragment {
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentCreaMioSito() );
         fragmentTransaction.commit();
+    }
+
+    public SitoCulturale getSito(){
+        return sito;
     }
 
 }
