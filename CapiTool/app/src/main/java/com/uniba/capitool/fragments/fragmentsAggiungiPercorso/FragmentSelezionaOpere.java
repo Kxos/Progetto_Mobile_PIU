@@ -69,7 +69,7 @@ public class FragmentSelezionaOpere extends Fragment {
             toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
 
             // TODO: CAMBIARE IL PARAMETRO idSito da "1" all'idSito recuperato
-            recuperaZoneFromDBOrderByZoneId("1");
+            recuperaZoneFromDBOrderByZoneId(sitoCulturale.getId());
 
 
         }else{
