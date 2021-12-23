@@ -19,79 +19,64 @@ import com.uniba.capitool.R;
 
 import java.util.ArrayList;
 
-public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCulturaleAdapter.ViewHolder>{
+public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.ViewHolder>{
 
     // Store a member variable
-    private ArrayList<CardSitoCulturale> sitiCulturali;
-    private OnEventClickListener mListener;
+    private ArrayList<CardOpera> listaOpere;
+    private CardOperaAdapter.OnEventClickListener mListener;
 
     public interface OnEventClickListener{
         void onEventClick (int position);
     }
 
-    public void setOnEventClickListener(OnEventClickListener listener){
+    public void setOnEventClickListener(CardOperaAdapter.OnEventClickListener listener){
         mListener=listener;
     }
 
     // Pass in the array into the constructor
-    public CardSitoCulturaleAdapter(ArrayList<CardSitoCulturale> sitiCulturali) {
-        this.sitiCulturali = sitiCulturali;
+    public CardOperaAdapter(ArrayList<CardOpera> listaOpere) {
+        this.listaOpere = listaOpere;
     }
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CardOperaAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.card_sito_culturale, parent, false);
+        View contactView = inflater.inflate(R.layout.card_opera, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        CardOperaAdapter.ViewHolder viewHolder = new CardOperaAdapter.ViewHolder(contactView);
         return viewHolder;
 
     }
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardOperaAdapter.ViewHolder holder, int position) {
 
         // Get the data model based on position
-        CardSitoCulturale cardSitoCulturale = sitiCulturali.get(position);
+        CardOpera cardOpera = listaOpere.get(position);
 
         // Set item views based on your views and data model
-        TextView cardIdSito = holder.id;
-        cardIdSito.setText(cardSitoCulturale.getId());
+        ImageView cardFotoOpera = holder.foto;
+        setImmagineOperaFromDB(cardOpera.getId(), holder.itemView.getContext(), cardFotoOpera);
 
-        ImageView cardFotoSito = holder.foto;
-        setImmagineSitoFromDB(cardSitoCulturale.getId(), holder.itemView.getContext(), cardFotoSito);
+        TextView cardIdOpera = holder.id;
+        cardIdOpera.setText(cardOpera.getId());
 
-        TextView cardNomeSito = holder.nome;
-        cardNomeSito.setText(cardSitoCulturale.getNome());
-
-        TextView cardIndirizzoSito = holder.indirizzo;
-        cardIndirizzoSito.setText(cardSitoCulturale.getIndirizzo());
-
-        TextView cardOrarioAperturaSito = holder.orarioApertura;
-        cardOrarioAperturaSito.setText(cardSitoCulturale.getOrarioApertura());
-
-        TextView cardOrarioChiusuraSito = holder.orarioChiusura;
-        cardOrarioChiusuraSito.setText(cardSitoCulturale.getOrarioChiusura());
-
-        TextView cardCostoBigliettoSito = holder.costoBiglietto;
-        cardCostoBigliettoSito.setText(cardSitoCulturale.getCostoBiglietto().toString());
-
-        TextView cardCittaSito = holder.citta;
-        cardCittaSito.setText(cardSitoCulturale.getCitta());
+        TextView cardTitoloOpera = holder.titolo;
+        cardTitoloOpera.setText(cardOpera.getTitolo());
 
     }
 
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
-        return sitiCulturali.size();
+        return listaOpere.size();
     }
 
     // Provide a direct reference to each of the views within a data item
@@ -101,12 +86,7 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         // for any view that will be set as you render a row
         public ImageView foto;
         public TextView id;
-        public TextView nome;
-        public TextView indirizzo;
-        public TextView orarioApertura;
-        public TextView orarioChiusura;
-        public TextView costoBiglietto;
-        public TextView citta;
+        public TextView titolo;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -116,13 +96,8 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             super(itemView);
 
             foto = (ImageView) itemView.findViewById(R.id.itemImmagineOpera);
-            id = (TextView) itemView.findViewById(R.id.itemIdSito);
-            nome = (TextView) itemView.findViewById(R.id.itemNomeOpera);
-            indirizzo = (TextView) itemView.findViewById(R.id.itemIndirizzoSito);
-            orarioApertura = (TextView) itemView.findViewById(R.id.itemOrarioAperturaSito);
-            orarioChiusura = (TextView) itemView.findViewById(R.id.itemOrarioChiusuraSito);
-            costoBiglietto = (TextView) itemView.findViewById(R.id.itemCostoBigliettoSito);
-            citta = (TextView) itemView.findViewById(R.id.itemCittaSito);
+            id = (TextView) itemView.findViewById(R.id.itemIdOpera);
+            titolo = (TextView) itemView.findViewById(R.id.itemNomeOpera);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -140,12 +115,12 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
     }
 
     /***
-     * Imposta l'immagine del Sito cercato
+     * Imposta l'immagine dell'opera
      */
-    public void setImmagineSitoFromDB(String idSito, Context context, ImageView cardFotoSito){
+    public void setImmagineOperaFromDB(String idOpera, Context context, ImageView cardFotoSito){
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference dateRef = storageRef.child("/fotoSiti/" + idSito);
+        StorageReference dateRef = storageRef.child("/fotoOpere/" + idOpera);
 
         /**
          * Scarica il "DownloadURL" che ci serve per leggere l'immagine dal DB e metterla in una ImageView
@@ -160,6 +135,5 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         });
 
     }
-
 
 }

@@ -9,13 +9,13 @@ android {
     defaultConfig {
         applicationId "com.uniba.capitool"
         minSdk 27
-        targetSdk 31
+        targetSdk 27
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         minSdkVersion 27
-        targetSdkVersion 30
+        targetSdkVersion 31
     }
 
     buildTypes {
