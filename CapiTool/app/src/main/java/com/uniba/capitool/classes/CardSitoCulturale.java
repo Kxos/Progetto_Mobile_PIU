@@ -1,10 +1,10 @@
 package com.uniba.capitool.classes;
 
-import android.media.Image;
+import android.net.Uri;
 
 public class CardSitoCulturale {
 
-    private Image foto;
+    private Uri foto;
     private String id;
     private String nome;
     private String indirizzo;
@@ -17,7 +17,7 @@ public class CardSitoCulturale {
     public CardSitoCulturale() {
     }
 
-    public CardSitoCulturale(Image foto, String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, String costoBiglietto, String citta) {
+    public CardSitoCulturale(Uri foto, String id, String nome, String indirizzo, String orarioApertura, String orarioChiusura, String costoBiglietto, String citta) {
         this.foto = foto;
         this.id = id;
         this.nome = nome;
@@ -28,7 +28,7 @@ public class CardSitoCulturale {
         this.citta = citta;
     }
 
-    public Image getFoto() {
+    public Uri getFoto() {
         return foto;
     }
 
@@ -50,7 +50,7 @@ public class CardSitoCulturale {
 
     public String getOrarioApertura() { return orarioApertura; }
 
-    public void setFoto(Image foto) {
+    public void setFoto(Uri foto) {
         this.foto = foto;
     }
 

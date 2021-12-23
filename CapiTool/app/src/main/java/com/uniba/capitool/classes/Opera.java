@@ -1,6 +1,7 @@
 package com.uniba.capitool.classes;
 
 import android.media.Image;
+import android.net.Uri;
 
 public class Opera {
 
@@ -8,14 +9,14 @@ public class Opera {
     private String id ;
     private String titolo ;
     private String descrizione ;
-    private Image foto ;
+    private Uri foto ;
     private Image qrCode ;
 
     private static int countId = 0 ;
 
     public Opera(){} ;
 
-    public Opera (String titolo, String descrizione, Image foto){
+    public Opera (String titolo, String descrizione, Uri foto){
         this.titolo = titolo;
         this.descrizione = descrizione ;
         this.foto = foto ;
@@ -49,11 +50,11 @@ public class Opera {
         this.descrizione = descrizione;
     }
 
-    public Image getFoto() {
+    public Uri getFoto() {
         return foto;
     }
 
-    public void setFoto(Image foto) {
+    public void setFoto(Uri foto) {
         this.foto = foto;
     }
 
