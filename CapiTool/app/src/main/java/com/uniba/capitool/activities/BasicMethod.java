@@ -1,12 +1,15 @@
 package com.uniba.capitool.activities;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +31,10 @@ import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -300,6 +307,37 @@ public class BasicMethod extends AppCompatActivity {
         }
 
         return phraseLower.toString();
+    }
+
+    public static void apriCalendario(Activity activity, EditText dataNascita){
+
+        final Calendar myCalendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int anno, int mese,
+                                  int giorno) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, anno);
+                myCalendar.set(Calendar.MONTH, mese);
+                myCalendar.set(Calendar.DAY_OF_MONTH, giorno);
+                updateEditTextDataNascita(myCalendar, dataNascita);
+            }
+
+        };
+
+        new DatePickerDialog(activity, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+    }
+
+    private static void updateEditTextDataNascita(Calendar myCalendar, EditText dataNascita) {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
+
+        dataNascita.setText(sdf.format(myCalendar.getTime()));
+
     }
 
 }
