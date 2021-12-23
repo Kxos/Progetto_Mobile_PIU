@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,7 +66,7 @@ public class FragmentSelezionaOpere extends Fragment {
             sitoCulturale.setId(sharedPreferences.getString("idSito", ""));
             sitoCulturale.setNome(sharedPreferences.getString("nomeSito", ""));
 
-            toolbar.setTitle(getString(R.string.site) + ": " + sitoCulturale.getNome());
+            toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
 
             // TODO: CAMBIARE IL PARAMETRO idSito da "1" all'idSito recuperato
             recuperaZoneFromDBOrderByZoneId("1");
@@ -152,6 +153,8 @@ public class FragmentSelezionaOpere extends Fragment {
         TextView nomeZona = view.findViewById(R.id.lableNomeZona);
         nomeZona.setText(listaZone.get(0).getNome());
 
+        Button buttonPrecedenteZona = view.findViewById(R.id.buttonPrecedenteZona);
+        buttonPrecedenteZona.setVisibility(View.INVISIBLE);
         popolaOpereInRecyclerView(view, listaOpere[0]);
 
         // TODO: Pulsanti Avanti e Indietro (Modificano il contatore, ripulendo volta per volta la RecycleView)
@@ -162,6 +165,8 @@ public class FragmentSelezionaOpere extends Fragment {
     /***
      * Popola la RecyclerView con le Opere di una Zona
      *
+     * @param view: view di riferimento
+     * @param listaOpere: Lita di tutte le opere di una Zona
      */
     public void popolaOpereInRecyclerView(View view, ArrayList<CardOpera> listaOpere){
 
