@@ -25,11 +25,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
-import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.CardOperaAdapter;
-import com.uniba.capitool.classes.CardSitoCulturale;
-import com.uniba.capitool.classes.CardSitoCulturaleAdapter;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Zona;
@@ -39,7 +36,9 @@ import java.util.ArrayList;
 public class FragmentSelezionaOpere extends Fragment {
 
     private Toolbar toolbar;
-    private View view;
+    private View viewActivity;
+    private static int numeroZoneSIZE = 100;
+    int countZone = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +51,7 @@ public class FragmentSelezionaOpere extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.view = view;
+        this.viewActivity = view;
 
         toolbar = ((AggiungiPercorso)getActivity()).getToolbar();
 
@@ -128,9 +127,15 @@ public class FragmentSelezionaOpere extends Fragment {
     public void mostraOperePerZone(ArrayList<Zona> listaZone){
 
         int numeroOpere =  listaZone.get(0).getOpere().size() -1; // -1 Perchè inizia da 0
-        ArrayList<CardOpera>[] listaOpere = new ArrayList[]{new ArrayList<>()};
+        ArrayList<CardOpera>[] listaOpere = new ArrayList[numeroZoneSIZE];
+
+        // Inizializzo listaOpere
+        for (int i = 0; i < numeroZoneSIZE; i++) {
+            listaOpere[i] = new ArrayList<CardOpera>();
+        }
 
         Log.e("Numero di Opere trovate: ",""+numeroOpere);
+        Log.e("Numero di Zone trovate: ",""+listaZone.size());
 
         int count=0;
         for(int countZone = 0; countZone!=listaZone.size();countZone++){
@@ -145,30 +150,62 @@ public class FragmentSelezionaOpere extends Fragment {
                 }
                 count++;
             }
-
+            count=0;
         }
 
-        TextView nomeZona = view.findViewById(R.id.lableNomeZona);
-        nomeZona.setText(listaZone.get(0).getNome());
+        TextView nomeZona = viewActivity.findViewById(R.id.lableNomeZona);
+        nomeZona.setText(listaZone.get(countZone).getNome());
 
-        Button buttonPrecedenteZona = view.findViewById(R.id.buttonPrecedenteZona);
+        Button buttonPrecedenteZona = viewActivity.findViewById(R.id.buttonPrecedenteZona);
+        Button buttonSuccessivaZona = viewActivity.findViewById(R.id.buttonSuccessivaZona);
         buttonPrecedenteZona.setVisibility(View.INVISIBLE);
-        popolaOpereInRecyclerView(view, listaOpere[0]);
+
+        popolaOpereInRecyclerView(listaOpere[0]);
 
         // TODO: Pulsanti Avanti e Indietro (Modificano il contatore, ripulendo volta per volta la RecycleView)
 
+        // Pulsante Avanti
+        buttonSuccessivaZona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               //Log.e("CONTATORE: ",""+countZone);
+
+                if(countZone +1 < listaZone.size()){
+                    countZone = countZone +1;
+                    popolaOpereInRecyclerView(listaOpere[countZone]);
+                    buttonPrecedenteZona.setVisibility(View.VISIBLE);
+                    nomeZona.setText(listaZone.get(countZone).getNome());
+                }
+
+            }
+        });
+
+        // Pulsante Indietro
+        buttonPrecedenteZona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log.e("CONTATORE: ",""+countZone);
+
+                if(countZone -1 >= 0){
+                    countZone = countZone -1;
+                    popolaOpereInRecyclerView(listaOpere[countZone]);
+                    nomeZona.setText(listaZone.get(countZone).getNome());
+                    if(countZone == 0){ buttonPrecedenteZona.setVisibility(View.INVISIBLE); }
+                }
+
+            }
+        });
 
     }
 
     /***
      * Popola la RecyclerView con le Opere di una Zona
      *
-     * @param view: view di riferimento
      * @param listaOpere: Lita di tutte le opere di una Zona
      */
-    public void popolaOpereInRecyclerView(View view, ArrayList<CardOpera> listaOpere){
+    public void popolaOpereInRecyclerView(ArrayList<CardOpera> listaOpere){
 
-        RecyclerView rvCardsOpere = (RecyclerView) view.findViewById(R.id.recyclerViewOpere);
+        RecyclerView rvCardsOpere = (RecyclerView) viewActivity.findViewById(R.id.recyclerViewOpere);
 
         if(!listaOpere.isEmpty()){
 

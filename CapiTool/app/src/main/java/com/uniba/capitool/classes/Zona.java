@@ -8,14 +8,14 @@ public class Zona {
 
     private String id ;
     private String nome ;
-    private ArrayList<Opera> opere;
+    private ArrayList<Opera> Opere;
 
 
     public Zona(){} ;
 
     public Zona (String nome){
         this.nome = nome ;
-        opere = new ArrayList<Opera>() ;
+        Opere = new ArrayList<Opera>() ;
     }
 
 
@@ -29,7 +29,7 @@ public class Zona {
     }
 
     public ArrayList<Opera> getOpere() {
-        return opere;
+        return Opere;
     }
 
     public void setId(String id) {
@@ -41,14 +41,14 @@ public class Zona {
     }
 
     public void setOpere(ArrayList<Opera> opere) {
-        this.opere = opere;
+        this.Opere = opere;
     }
 
     protected boolean aggiungiOpera(Opera opera) {
-        return opere.add(opera);
+        return Opere.add(opera);
     }
 
     protected boolean rimuoviOpera(Opera opera){
-        return opere.remove(opera);
+        return Opere.remove(opera);
     }
 }

@@ -30,7 +30,7 @@
             android:layout_height="400sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/buttonProssimaZona"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSuccessivaZona"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lableNomeZona">
@@ -45,7 +45,7 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/buttonProssimaZona"
+            android:id="@+id/buttonSuccessivaZona"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
