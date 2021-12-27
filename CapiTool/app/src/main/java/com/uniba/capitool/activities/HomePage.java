@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.Utente;
 
 public class HomePage extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
+        Utente utente = getUserInfo();
         SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         sharedPreferences.edit().clear().commit();
 
@@ -65,6 +66,24 @@ public class HomePage extends AppCompatActivity {
         });
 
         return toolbar;
+    }
+
+    /***
+     * Ottiene i dati dell'utente loggato
+     *
+     * @return utente: Ritorna l'utente valorizzato delle sue informazioni
+     */
+    public Utente getUserInfo(){
+
+        Utente utente = new Utente();
+
+        utente.setUid(getIntent().getExtras().getString("uid"));
+        utente.setNome(getIntent().getExtras().getString("nome"));
+        utente.setCognome(getIntent().getExtras().getString("cognome"));
+        utente.setEmail(getIntent().getExtras().getString("email"));
+        utente.setRuolo(getIntent().getExtras().getString("ruolo"));
+
+        return utente;
     }
 
 }
