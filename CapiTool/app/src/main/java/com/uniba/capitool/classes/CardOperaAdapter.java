@@ -2,9 +2,11 @@ package com.uniba.capitool.classes;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,9 +23,10 @@ import java.util.ArrayList;
 
 public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.ViewHolder>{
 
-    // Store a member variable
     private ArrayList<CardOpera> listaOpere;
+    private ArrayList<CardOpera> listaOpereChecked;
     private CardOperaAdapter.OnEventClickListener mListener;
+    private CheckBox cardCheckBoxOpera;
 
     public interface OnEventClickListener{
         void onEventClick (int position);
@@ -36,6 +39,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
     // Pass in the array into the constructor
     public CardOperaAdapter(ArrayList<CardOpera> listaOpere) {
         this.listaOpere = listaOpere;
+        listaOpereChecked = new ArrayList<>();
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -71,6 +75,24 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         TextView cardTitoloOpera = holder.titolo;
         cardTitoloOpera.setText(cardOpera.getTitolo());
 
+        // TODO: LA CHECKBOX VIENE ANNULLATA AD OGNI ISTANZA
+        cardCheckBoxOpera = holder.checkBox;
+        cardCheckBoxOpera.setChecked(cardOpera.getCheckBox().isChecked());
+        cardCheckBoxOpera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final boolean isChecked = cardCheckBoxOpera.isChecked();
+
+                cardOpera.setCheckBox(cardCheckBoxOpera);
+                if(isChecked){
+                    listaOpereChecked.add(cardOpera);
+                }else{
+                    listaOpereChecked.remove(cardOpera);
+                }
+
+            }
+        });
+
     }
 
     // Returns the total count of items in the list
@@ -87,6 +109,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         public ImageView foto;
         public TextView id;
         public TextView titolo;
+        public CheckBox checkBox;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -98,6 +121,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
             foto = (ImageView) itemView.findViewById(R.id.itemImmagineOpera);
             id = (TextView) itemView.findViewById(R.id.itemIdOpera);
             titolo = (TextView) itemView.findViewById(R.id.itemNomeOpera);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkOperaSelezionata);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,8 +138,13 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         }
     }
 
+
     /***
-     * Imposta l'immagine dell'opera
+     * Imposta l'immagine dell'opera nella card
+     *
+     * @param idOpera
+     * @param context
+     * @param cardFotoSito
      */
     public void setImmagineOperaFromDB(String idOpera, Context context, ImageView cardFotoSito){
 
@@ -134,6 +163,10 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
             }
         });
 
+    }
+
+    public ArrayList<CardOpera> getListaOpereChecked() {
+        return listaOpereChecked;
     }
 
 }
