@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -75,23 +76,53 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         TextView cardTitoloOpera = holder.titolo;
         cardTitoloOpera.setText(cardOpera.getTitolo());
 
-        // TODO: LA CHECKBOX VIENE ANNULLATA AD OGNI ISTANZA
         cardCheckBoxOpera = holder.checkBox;
         cardCheckBoxOpera.setChecked(cardOpera.getCheckBox().isChecked());
+        cardCheckBoxOpera.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                boolean isChecked = b;
+
+                cardOpera.setCheckBox(cardCheckBoxOpera);
+
+                Log.e("AAAAAAAAAAA: ", ""+b);
+                //Log.e("POSIZIONE: ", ""+position);
+
+                if(isChecked){
+                    listaOpereChecked.add(cardOpera);
+                }else {
+                    listaOpereChecked.remove(cardOpera);
+                }
+
+                Log.e("Esistono opere checked: ", ""+cardOpera);
+                Log.e("Esistono opere checked2222: ", ""+listaOpereChecked);
+            }
+        });
+
+        /**
         cardCheckBoxOpera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 final boolean isChecked = cardCheckBoxOpera.isChecked();
 
                 cardOpera.setCheckBox(cardCheckBoxOpera);
+
+                Log.e("AAAAAAAAAAA: ", ""+isChecked);
+                //Log.e("POSIZIONE: ", ""+position);
+
                 if(isChecked){
                     listaOpereChecked.add(cardOpera);
-                }else{
+                }else {
                     listaOpereChecked.remove(cardOpera);
                 }
 
+                Log.e("Esistono opere checked: ", ""+cardOpera);
+                Log.e("Esistono opere checked2222: ", ""+listaOpereChecked);
+
             }
         });
+         */
 
     }
 

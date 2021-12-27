@@ -104,7 +104,6 @@ public class FragmentSelezionaOpere extends Fragment {
                     Zona zona = snapshot.getValue(Zona.class);
                     //Log.e("RISULTATO DB NOME: ",zona.getNome());
                     listaZone.add(zona);
-
                 }
 
                 mostraOperePerZone(listaZone);
@@ -148,6 +147,9 @@ public class FragmentSelezionaOpere extends Fragment {
                     cardOpera.setId(opera.getId());
                     cardOpera.setTitolo(opera.getTitolo());
                     cardOpera.setFoto(opera.getFoto());
+
+                    View cardOperaView = getLayoutInflater().inflate(R.layout.card_opera, null);
+                    cardOpera.setCheckBox(cardOperaView.findViewById(R.id.checkOperaSelezionata));
                     listaOpere[countZone].add(cardOpera);
                 }
                 count++;
@@ -173,7 +175,8 @@ public class FragmentSelezionaOpere extends Fragment {
                //Log.e("CONTATORE: ",""+countZone);
 
                 if(countZone +1 < listaZone.size()){
-
+                    
+                    // TODO: INCORRETTA GESTIONE DI addAll()
                     if(adapter != null){
                         if(listaOpereChecked != null){
                             listaOpereChecked.addAll(adapter.getListaOpereChecked());
@@ -183,7 +186,7 @@ public class FragmentSelezionaOpere extends Fragment {
                     }
 
                     Log.e("Esistono opere checked: ", ""+listaOpereChecked);
-                    listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
+                    //listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
 
                     countZone = countZone +1;
                     adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
@@ -202,6 +205,7 @@ public class FragmentSelezionaOpere extends Fragment {
 
                 if(countZone -1 >= 0){
 
+                    // TODO: INCORRETTA GESTIONE DI addAll()
                     if(adapter != null){
                         if(listaOpereChecked != null){
                             listaOpereChecked.addAll(adapter.getListaOpereChecked());
@@ -211,7 +215,7 @@ public class FragmentSelezionaOpere extends Fragment {
                     }
 
                     Log.e("Esistono opere checked: ", ""+listaOpereChecked);
-                    listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
+                    //listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
 
                     countZone = countZone -1;
                     adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
