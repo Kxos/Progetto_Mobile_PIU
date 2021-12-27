@@ -38,7 +38,9 @@ public class FragmentSelezionaOpere extends Fragment {
     private Toolbar toolbar;
     private View viewActivity;
     private static int numeroZoneSIZE = 100;
-    int countZone = 0;
+    private int countZone = 0;
+    private CardOperaAdapter adapter;
+    private ArrayList<CardOpera> listaOpereChecked;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -160,7 +162,7 @@ public class FragmentSelezionaOpere extends Fragment {
         Button buttonSuccessivaZona = viewActivity.findViewById(R.id.buttonSuccessivaZona);
         buttonPrecedenteZona.setVisibility(View.INVISIBLE);
 
-        popolaOpereInRecyclerView(listaOpere[0]);
+        adapter = popolaOpereInRecyclerView(listaOpere[0]);
 
         // TODO: Pulsanti Avanti e Indietro (Modificano il contatore, ripulendo volta per volta la RecycleView)
 
@@ -171,8 +173,20 @@ public class FragmentSelezionaOpere extends Fragment {
                //Log.e("CONTATORE: ",""+countZone);
 
                 if(countZone +1 < listaZone.size()){
+
+                    if(adapter != null){
+                        if(listaOpereChecked != null){
+                            listaOpereChecked.addAll(adapter.getListaOpereChecked());
+                        }else{
+                            listaOpereChecked = adapter.getListaOpereChecked();
+                        }
+                    }
+
+                    Log.e("Esistono opere checked: ", ""+listaOpereChecked);
+                    listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
+
                     countZone = countZone +1;
-                    popolaOpereInRecyclerView(listaOpere[countZone]);
+                    adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
                     buttonPrecedenteZona.setVisibility(View.VISIBLE);
                     nomeZona.setText(listaZone.get(countZone).getNome());
                 }
@@ -187,9 +201,22 @@ public class FragmentSelezionaOpere extends Fragment {
                 //Log.e("CONTATORE: ",""+countZone);
 
                 if(countZone -1 >= 0){
+
+                    if(adapter != null){
+                        if(listaOpereChecked != null){
+                            listaOpereChecked.addAll(adapter.getListaOpereChecked());
+                        }else{
+                            listaOpereChecked = adapter.getListaOpereChecked();
+                        }
+                    }
+
+                    Log.e("Esistono opere checked: ", ""+listaOpereChecked);
+                    listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
+
                     countZone = countZone -1;
-                    popolaOpereInRecyclerView(listaOpere[countZone]);
+                    adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
                     nomeZona.setText(listaZone.get(countZone).getNome());
+
                     if(countZone == 0){ buttonPrecedenteZona.setVisibility(View.INVISIBLE); }
                 }
 
@@ -198,12 +225,34 @@ public class FragmentSelezionaOpere extends Fragment {
 
     }
 
+    private ArrayList<CardOpera> spuntaCheckboxDelleOpereChecked(ArrayList<CardOpera> listaOpere, ArrayList<CardOpera> listaOpereChecked, CardOperaAdapter adapter) {
+
+      if(listaOpereChecked.get(0).getCheckBox().isChecked()){
+          listaOpereChecked.get(0).getCheckBox().setChecked(true);
+      }
+
+      for(int i = 0; i < listaOpere.size(); i++){
+
+          for(int j = 0; j < listaOpereChecked.size(); j++){
+
+              if(listaOpere.contains(listaOpereChecked.get(j))){
+                  Log.e("UELAAAAAAAAAAAAAAA>: ","");
+                  listaOpere.get(listaOpere.indexOf(listaOpereChecked.get(j))).getCheckBox().setChecked(true);
+              }
+
+          }
+
+      }
+
+        return listaOpere;
+    }
+
     /***
      * Popola la RecyclerView con le Opere di una Zona
      *
      * @param listaOpere: Lita di tutte le opere di una Zona
      */
-    public void popolaOpereInRecyclerView(ArrayList<CardOpera> listaOpere){
+    public CardOperaAdapter popolaOpereInRecyclerView(ArrayList<CardOpera> listaOpere){
 
         RecyclerView rvCardsOpere = (RecyclerView) viewActivity.findViewById(R.id.recyclerViewOpere);
 
@@ -219,8 +268,10 @@ public class FragmentSelezionaOpere extends Fragment {
             // SetLayoutManager posiziona i Siti trovati nel Layout
             rvCardsOpere.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+            return adapter;
         }
 
+        return null;
     }
     /** FINE popolaOpereInRecyclerView()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
