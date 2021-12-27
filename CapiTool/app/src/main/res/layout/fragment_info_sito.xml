@@ -6,152 +6,176 @@
     android:layout_height="match_parent"
     tools:context=".fragments.fragmentsMioSito.FragmentInfoSito">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <ImageView
-            android:id="@+id/immagineSito2"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="238dp"
-            android:adjustViewBounds="true"
-            android:clickable="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_baseline_account_balance_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/titoloNomeSito"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#90000000"
-            android:padding="8dp"
-            android:text="MIOSITO"
-            android:textColor="#FFF"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/immagineSito2" />
-
-        <TextView
-            android:id="@+id/Via"
-            android:layout_width="333dp"
-            android:layout_height="31dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginEnd="203dp"
-            android:text="Via del Sito"
-            android:textColor="#000"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-        <TextView
-            android:id="@+id/Orario"
-            android:layout_width="333dp"
-            android:layout_height="31dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginEnd="203dp"
-            android:text="Orario Sito"
-            android:textColor="#000"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-        <TextView
-            android:id="@+id/textViewZoneOpere"
-            android:layout_width="333dp"
-            android:layout_height="31dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="55dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginBottom="152dp"
-            android:text="Visualizza Zone e Opere>"
-            android:textColor="#000"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Costo" />
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="103dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="281dp"
-            android:text="Orari"
-            android:textColor="#000"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Via" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="124dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="281dp"
-            android:text="Costo Ingresso"
-            android:textColor="#000"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Orario" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="103dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="37dp"
-            android:layout_marginEnd="281dp"
-            android:text="Indirizzo"
-            android:textColor="#000"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/immagineSito2" />
-
-        <TextView
-            android:id="@+id/Costo"
-            android:layout_width="333dp"
-            android:layout_height="31dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginEnd="51dp"
-            android:text="Costo Ingresso"
-            android:textColor="#000"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/buttonEditSito"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginBottom="659dp"
-            android:clickable="true"
-            app:backgroundTint="#EC5424"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_edit" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginTop="0dp">
 
+
+            <ImageView
+                android:id="@+id/immagineSito2"
+                android:layout_width="match_parent"
+                android:layout_height="238dp"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_account_balance_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titoloNomeSito"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#90000000"
+                android:padding="8dp"
+                android:text="MIOSITO"
+                android:textColor="#FFF"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/immagineSito2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/constraintLayout"
+            android:layout_marginTop="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            tools:layout_editor_absoluteX="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Via"
+                    android:layout_width="333dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginEnd="203dp"
+                    android:text="Via del Sito"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+                <TextView
+                    android:id="@+id/Orario"
+                    android:layout_width="333dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginEnd="203dp"
+                    android:text="Orario Sito"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+                <TextView
+                    android:id="@+id/textViewZoneOpere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginBottom="30dp"
+                    android:drawableRight="@drawable/ic_baseline_arrow_right_alt_24"
+                    android:text="Visualizza Zone e Opere"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Costo" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="103dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="281dp"
+                    android:text="Orari"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Via" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="124dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="281dp"
+                    android:text="Costo Ingresso"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Orario" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="103dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="281dp"
+                    android:text="Indirizzo"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/Costo"
+                    android:layout_width="333dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginEnd="51dp"
+                    android:text="Costo Ingresso"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/buttonEditSito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="16dp"
+                    android:layout_marginEnd="44dp"
+                    android:layout_marginBottom="659dp"
+                    android:clickable="true"
+                    app:backgroundTint="#EC5424"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_edit" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+</RelativeLayout>
 </FrameLayout>

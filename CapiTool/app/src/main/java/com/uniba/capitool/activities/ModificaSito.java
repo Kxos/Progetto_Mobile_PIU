@@ -14,8 +14,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
-import com.uniba.capitool.fragments.fragmentsMioSito.FragmentModificaInfoSito;
-import com.uniba.capitool.fragments.fragmentsMioSito.FragmentModificaNomeSito;
+import com.uniba.capitool.fragments.fragmentsModificaSito.FragmentModificaInfoSito;
+import com.uniba.capitool.fragments.fragmentsModificaSito.FragmentModificaNomeSito;
 
 public class ModificaSito extends AppCompatActivity {
     Utente utente = new Utente();

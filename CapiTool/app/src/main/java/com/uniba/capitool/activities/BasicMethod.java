@@ -179,10 +179,11 @@ public class BasicMethod extends AppCompatActivity {
         NavigationView navigationView = activity.findViewById(R.id.Home_Nav_Menu);
         navigationView.setItemIconTintList(toolbar.getBackgroundTintList());
         navigationView.setItemTextColor(null);
+//        Navigation.findNavController()
+//                .navigate(R.id.action_firstFragment_to_secondFragment);
 
         setNavLateralMenuOnUserRole(navigationView,activity);
 
-        navController = Navigation.findNavController(activity, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView, navController);
 
         // In base al nome del Fragment, cambia il Titolo sulla Toolbar
@@ -218,10 +219,22 @@ public class BasicMethod extends AppCompatActivity {
 
         if(BasicMethod.isCuratore(b.getString("ruolo"))){
             // utente = new Curatore();
+          //  navController.setGraph(R.navigation.main);
+            navController = Navigation.findNavController(activity, R.id.navHostFragmentCuratore);
+
+            View navHostVisitatore = activity.findViewById(R.id.navHostFragmentVisitatore);
+            navHostVisitatore.setVisibility(View.GONE);
+
             navigationView.inflateMenu(R.menu.navigation_curatore_menu);
         }else{
             //  utente = new Visitatore();
+            navController = Navigation.findNavController(activity, R.id.navHostFragmentVisitatore);
+
+            //nascondo la view del curatore altrimenti andrebbe in sovraimpressione a quella del Visitatore, perché hanno start-fragment differenti
+            View navHostCuratore = activity.findViewById(R.id.navHostFragmentCuratore);
+            navHostCuratore.setVisibility(View.GONE);
             navigationView.inflateMenu(R.menu.navigation_visitatore_menu);
+
         }
 
         if(b!=null){
@@ -233,6 +246,7 @@ public class BasicMethod extends AppCompatActivity {
             utente.setCognome(b.getString("cognome"));
             utente.setEmail(b.getString("email"));
             utente.setRuolo(b.getString("ruolo"));
+
         }else{
             BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
             Intent login= new Intent(activity, Login.class);

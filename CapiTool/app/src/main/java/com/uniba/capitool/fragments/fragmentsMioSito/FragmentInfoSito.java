@@ -22,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.ModificaSito;
+import com.uniba.capitool.activities.VisualizzaZoneSito;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
 
@@ -61,10 +62,12 @@ public class FragmentInfoSito extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ImageView fotoSito= view.findViewById(R.id.immagineSito2);
+        TextView visualizzaZone = view.findViewById(R.id.textViewZoneOpere);
         nomeSito = view.findViewById(R.id.titoloNomeSito);
         indirizzo = view.findViewById(R.id.Via);
         orarioSito = view.findViewById(R.id.Orario);
         costoIngresso = view.findViewById(R.id.Costo);
+
 
         //recupero il bundle (ovvero l'oggetto SitoCculturale associato all'utente) passato dal fragment FragmentMioSito
         Bundle bundle = getArguments();
@@ -75,6 +78,20 @@ public class FragmentInfoSito extends Fragment {
         indirizzo.setText(sito.getIndirizzo());
         orarioSito.setText(sito.getOrarioApertura() + " - " + sito.getOrarioChiusura());
         costoIngresso.setText(sito.getCostoBiglietto() + "€");
+
+        visualizzaZone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent visualizzaZone = new Intent(getActivity(), VisualizzaZoneSito.class);
+                Bundle dati = new Bundle();
+                dati.putSerializable("utente", BasicMethod.getUtente());
+                dati.putSerializable("sito", sito);
+                visualizzaZone.putExtras(dati);
+                getActivity().startActivity(visualizzaZone);
+
+            }
+        });
+
 
     }
     public void letturaImmagineSito(ImageView imageView, Activity activity){

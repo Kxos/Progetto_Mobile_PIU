@@ -9,7 +9,8 @@
         android:id="@+id/mioSito"
         android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMioSito"
         android:label="Mio Sito"
-        tools:layout="@layout/fragment_mio_sito" />
+        tools:layout="@layout/fragment_mio_sito" >
+    </fragment>
     <fragment
         android:id="@+id/mieiPercorsi"
         android:name="com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMieiPercorsi"

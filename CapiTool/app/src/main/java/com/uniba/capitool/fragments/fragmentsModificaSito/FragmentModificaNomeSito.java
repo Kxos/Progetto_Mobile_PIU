@@ -1,4 +1,4 @@
-package com.uniba.capitool.fragments.fragmentsMioSito;
+package com.uniba.capitool.fragments.fragmentsModificaSito;
 
 import android.app.Activity;
 import android.net.Uri;
