@@ -1,6 +1,8 @@
 package com.uniba.capitool.classes;
 
-public class Utente {
+import java.io.Serializable;
+
+public class Utente implements Serializable {
 
     private String uid;
     private String nome;

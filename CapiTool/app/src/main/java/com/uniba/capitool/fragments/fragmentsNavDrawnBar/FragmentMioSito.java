@@ -42,7 +42,9 @@ public class FragmentMioSito extends Fragment {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_mio_sito, container, false);
-        controllaSitoAssociato (BasicMethod.getUtente().getUid());
+
+        //BasicMethod.getUtente() da valore nullo perchè forse non è ancora valorizzato, dato che MioSito è il primo fragment che viene creato all'avvio di HomePage. La soluzione è leggere con il Bundle
+        controllaSitoAssociato (getActivity().getIntent().getExtras().getString("uid"));
 
         return v;
     }

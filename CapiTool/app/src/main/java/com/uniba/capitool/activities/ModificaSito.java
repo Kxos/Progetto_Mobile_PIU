@@ -1,27 +1,25 @@
 package com.uniba.capitool.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
-import com.uniba.capitool.classes.Visitatore;
-import com.uniba.capitool.fragments.fragmentsMioSito.FragmentAggiungiInfoSito;
-import com.uniba.capitool.fragments.fragmentsMioSito.FragmentAggiungiNomeSito;
 import com.uniba.capitool.fragments.fragmentsMioSito.FragmentModificaInfoSito;
 import com.uniba.capitool.fragments.fragmentsMioSito.FragmentModificaNomeSito;
 
 public class ModificaSito extends AppCompatActivity {
     Utente utente = new Utente();
-
+    SitoCulturale sito = new SitoCulturale();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +27,10 @@ public class ModificaSito extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
 
         if(b!=null){
-            utente.setUid(b.getString("uid"));
-            utente.setNome(b.getString("nome"));
-            utente.setCognome(b.getString("cognome"));
-            utente.setEmail(b.getString("email"));
-            utente.setRuolo(b.getString("ruolo"));
+          sito = (SitoCulturale) b.getSerializable("sito");
+          utente = (Utente) b.getSerializable("utente");
+
+          Log.e("***********", ""+utente+" / "+sito);
         }else{
            /* BasicMethod.alertDialog(this, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
             Intent login= new Intent(HomePage.this, Login.class);
@@ -81,6 +78,14 @@ public class ModificaSito extends AppCompatActivity {
             }
         });
 
+    }
+
+    public Utente getUtente(){
+        return utente;
+    }
+
+    public SitoCulturale getSito(){
+        return sito;
     }
 
 

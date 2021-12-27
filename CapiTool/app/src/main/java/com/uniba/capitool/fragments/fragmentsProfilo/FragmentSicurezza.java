@@ -33,6 +33,6 @@ public class FragmentSicurezza extends Fragment {
 
         conferma.setEnabled(false);
 
-        
+
     }
 }

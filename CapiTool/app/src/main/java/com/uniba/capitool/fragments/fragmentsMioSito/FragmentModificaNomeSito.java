@@ -3,22 +3,22 @@ package com.uniba.capitool.fragments.fragmentsMioSito;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.ModificaSito;
 import com.uniba.capitool.classes.SitoCulturale;
 
 public class FragmentModificaNomeSito extends Fragment {
@@ -39,7 +39,7 @@ public class FragmentModificaNomeSito extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
-        sito = (SitoCulturale) bundle.getSerializable("sito");
+        sito = ((ModificaSito)getActivity()).getSito();
 
         fotoSito = view.findViewById(R.id.modificaImmagineSito);
         nome = view.findViewById(R.id.modificaNomeSito);

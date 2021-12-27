@@ -1,26 +1,18 @@
 package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
-import com.uniba.capitool.activities.AggiungiSito;
 import com.uniba.capitool.activities.BasicMethod;
-import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.Utente;
-import com.uniba.capitool.classes.Visitatore;
-
-import java.util.zip.Inflater;
 
 /**
 
@@ -32,7 +24,9 @@ public class FragmentMieiPercorsi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Utente utente = getUserInfo();
+       // Utente utente =getUserInfo();
+
+        Utente utente = BasicMethod.getUtente();
 
         View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
         FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
@@ -50,7 +44,9 @@ public class FragmentMieiPercorsi extends Fragment {
     }
 
     /***
-     * Ottiene i dati dell'utente loggato
+     * Ottiene i dati dell'utente loggato (abbiamo impostato come primo fragment MioSito per il Curatore. Al momento questo metodo per leggere il Bundle non serve. Vedremo con il visitatore.
+     *                                      Il problema riscontato è che se il fragment in questione è il primo ad essere istanziato della HomePage, BasicMethod.getUtente() da valore nullo.
+     *                                      Forse non viene valorizzato in tempo)
      *
      * @return utente: Ritorna l'utente valorizzato delle sue informazioni
      */

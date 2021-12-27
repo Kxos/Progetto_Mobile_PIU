@@ -13,8 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,7 +24,6 @@ import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.ModificaSito;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
-import com.uniba.capitool.classes.Visitatore;
 
 public class FragmentInfoSito extends Fragment {
     SitoCulturale sito;
@@ -46,13 +43,11 @@ public class FragmentInfoSito extends Fragment {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle dati = new Bundle();
+                dati.putSerializable("sito", sito);
+                dati.putSerializable("utente", utente);
                 Intent modificaSito = new Intent(getActivity(), ModificaSito.class);
-                modificaSito.putExtra("cognome",utente.getCognome());
-                modificaSito.putExtra("nome",utente.getNome());
-                modificaSito.putExtra("uid",utente.getUid());
-                modificaSito.putExtra("email",utente.getEmail());
-                modificaSito.putExtra("ruolo",utente.getRuolo());
-                modificaSito.putExtra("sito", sito);
+                modificaSito.putExtras(dati);
                 getActivity().startActivity(modificaSito);
 
             }
