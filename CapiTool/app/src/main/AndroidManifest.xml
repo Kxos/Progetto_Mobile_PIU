@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".activities.ModificaSito"
+            android:exported="true" />
+        <activity
             android:name=".activities.InfoSitoAssociato"
             android:exported="true" />
         <activity
