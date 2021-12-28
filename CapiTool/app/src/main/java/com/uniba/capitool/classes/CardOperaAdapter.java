@@ -26,6 +26,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
 
     private ArrayList<CardOpera> listaOpere;
     private ArrayList<CardOpera> listaOpereChecked;
+    private ArrayList<CardOpera> listaOpereUnchecked;
     private CardOperaAdapter.OnEventClickListener mListener;
     private CheckBox cardCheckBoxOpera;
 
@@ -40,7 +41,8 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
     // Pass in the array into the constructor
     public CardOperaAdapter(ArrayList<CardOpera> listaOpere) {
         this.listaOpere = listaOpere;
-        listaOpereChecked = new ArrayList<>();
+        this.listaOpereChecked = new ArrayList<>();
+        this.listaOpereUnchecked = new ArrayList<>();
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -77,52 +79,27 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         cardTitoloOpera.setText(cardOpera.getTitolo());
 
         cardCheckBoxOpera = holder.checkBox;
-        cardCheckBoxOpera.setChecked(cardOpera.getCheckBox().isChecked());
         cardCheckBoxOpera.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-                boolean isChecked = b;
-
-                cardOpera.setCheckBox(cardCheckBoxOpera);
-
-                Log.e("AAAAAAAAAAA: ", ""+b);
+                //Log.e("AAAAAAAAAAA: ", ""+isChecked);
                 //Log.e("POSIZIONE: ", ""+position);
 
                 if(isChecked){
+                    cardOpera.setCheckBoxCheckedStatus(true);
                     listaOpereChecked.add(cardOpera);
                 }else {
+                    cardOpera.setCheckBoxCheckedStatus(false);
+                    listaOpereUnchecked.add(cardOpera);
                     listaOpereChecked.remove(cardOpera);
                 }
 
-                Log.e("Esistono opere checked: ", ""+cardOpera);
-                Log.e("Esistono opere checked2222: ", ""+listaOpereChecked);
+                //Log.e("Esistono opere checked SINGOLO ITEM: ", ""+cardOpera);
+                //Log.e("Esistono opere checked NELLA LISTA: ", ""+listaOpereChecked);
             }
         });
-
-        /**
-        cardCheckBoxOpera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                final boolean isChecked = cardCheckBoxOpera.isChecked();
-
-                cardOpera.setCheckBox(cardCheckBoxOpera);
-
-                Log.e("AAAAAAAAAAA: ", ""+isChecked);
-                //Log.e("POSIZIONE: ", ""+position);
-
-                if(isChecked){
-                    listaOpereChecked.add(cardOpera);
-                }else {
-                    listaOpereChecked.remove(cardOpera);
-                }
-
-                Log.e("Esistono opere checked: ", ""+cardOpera);
-                Log.e("Esistono opere checked2222: ", ""+listaOpereChecked);
-
-            }
-        });
-         */
+        cardCheckBoxOpera.setChecked(cardOpera.getCheckBox().isChecked());
 
     }
 
@@ -198,6 +175,10 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
 
     public ArrayList<CardOpera> getListaOpereChecked() {
         return listaOpereChecked;
+    }
+
+        public ArrayList<CardOpera> getListaOpereUnchecked() {
+        return listaOpereUnchecked;
     }
 
 }
