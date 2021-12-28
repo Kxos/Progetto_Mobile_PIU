@@ -175,7 +175,7 @@ public class FragmentSelezionaOpere extends Fragment {
                //Log.e("CONTATORE: ",""+countZone);
 
                 if(countZone +1 < listaZone.size()){
-                    
+
                     // TODO: INCORRETTA GESTIONE DI addAll()
                     if(adapter != null){
                         if(listaOpereChecked != null){
@@ -185,8 +185,7 @@ public class FragmentSelezionaOpere extends Fragment {
                         }
                     }
 
-                    Log.e("Esistono opere checked: ", ""+listaOpereChecked);
-                    //listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
+                    Log.e("Esistono opere checked FUORI: ", ""+listaOpereChecked);
 
                     countZone = countZone +1;
                     adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
@@ -214,8 +213,7 @@ public class FragmentSelezionaOpere extends Fragment {
                         }
                     }
 
-                    Log.e("Esistono opere checked: ", ""+listaOpereChecked);
-                    //listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
+                    Log.e("Esistono opere checked FUORI: ", ""+listaOpereChecked);
 
                     countZone = countZone -1;
                     adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
@@ -227,28 +225,6 @@ public class FragmentSelezionaOpere extends Fragment {
             }
         });
 
-    }
-
-    private ArrayList<CardOpera> spuntaCheckboxDelleOpereChecked(ArrayList<CardOpera> listaOpere, ArrayList<CardOpera> listaOpereChecked, CardOperaAdapter adapter) {
-
-      if(listaOpereChecked.get(0).getCheckBox().isChecked()){
-          listaOpereChecked.get(0).getCheckBox().setChecked(true);
-      }
-
-      for(int i = 0; i < listaOpere.size(); i++){
-
-          for(int j = 0; j < listaOpereChecked.size(); j++){
-
-              if(listaOpere.contains(listaOpereChecked.get(j))){
-                  Log.e("UELAAAAAAAAAAAAAAA>: ","");
-                  listaOpere.get(listaOpere.indexOf(listaOpereChecked.get(j))).getCheckBox().setChecked(true);
-              }
-
-          }
-
-      }
-
-        return listaOpere;
     }
 
     /***

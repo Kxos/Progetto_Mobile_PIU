@@ -52,4 +52,6 @@ public class CardOpera {
         this.checkBox = checkBox;
     }
 
+    public void setCheckBoxCheckedStatus(boolean status){ this.checkBox.setChecked(status); }
+
 }
