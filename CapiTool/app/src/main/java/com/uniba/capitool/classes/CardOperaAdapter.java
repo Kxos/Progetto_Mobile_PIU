@@ -81,9 +81,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-                //cardOpera.setCheckBox(cardCheckBoxOpera);
-
-                Log.e("AAAAAAAAAAA: ", ""+isChecked);
+                //Log.e("AAAAAAAAAAA: ", ""+isChecked);
                 //Log.e("POSIZIONE: ", ""+position);
 
                 if(isChecked){
@@ -94,11 +92,10 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
                     listaOpereChecked.remove(cardOpera);
                 }
 
-                Log.e("Esistono opere checked SINGOLO ITEM: ", ""+cardOpera);
-                Log.e("Esistono opere checked NELLA LISTA: ", ""+listaOpereChecked);
+                //Log.e("Esistono opere checked SINGOLO ITEM: ", ""+cardOpera);
+                //Log.e("Esistono opere checked NELLA LISTA: ", ""+listaOpereChecked);
             }
         });
-
         cardCheckBoxOpera.setChecked(cardOpera.getCheckBox().isChecked());
 
     }

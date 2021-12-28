@@ -166,8 +166,6 @@ public class FragmentSelezionaOpere extends Fragment {
 
         adapter = popolaOpereInRecyclerView(listaOpere[0]);
 
-        // TODO: Pulsanti Avanti e Indietro (Modificano il contatore, ripulendo volta per volta la RecycleView)
-
         // Pulsante Avanti
         buttonSuccessivaZona.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,16 +174,16 @@ public class FragmentSelezionaOpere extends Fragment {
 
                 if(countZone +1 < listaZone.size()){
 
-                    // TODO: INCORRETTA GESTIONE DI addAll()
                     if(adapter != null){
                         if(listaOpereChecked != null){
-                            listaOpereChecked.addAll(adapter.getListaOpereChecked());
+                            listaOpereChecked = adapter.getListaOpereChecked();
                         }else{
                             listaOpereChecked = adapter.getListaOpereChecked();
                         }
+                        //Log.e("Lista ottenuta dall'ADAPTER: ", ""+adapter.getListaOpereChecked());
                     }
 
-                    Log.e("Esistono opere checked FUORI: ", ""+listaOpereChecked);
+                    //Log.e("Esistono opere checked FUORI: ", ""+listaOpereChecked);
 
                     countZone = countZone +1;
                     adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
@@ -211,9 +209,10 @@ public class FragmentSelezionaOpere extends Fragment {
                         }else{
                             listaOpereChecked = adapter.getListaOpereChecked();
                         }
+                        //Log.e("Lista ottenuta dall'ADAPTER: ", ""+adapter.getListaOpereChecked());
                     }
 
-                    Log.e("Esistono opere checked FUORI: ", ""+listaOpereChecked);
+                    //Log.e("Esistono opere checked FUORI: ", ""+listaOpereChecked);
 
                     countZone = countZone -1;
                     adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
