@@ -62,12 +62,12 @@ public class FragmentAggiungiInfoSito extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_aggiungi_info_sito, container, false);
-        nomeCitta = v.findViewById(R.id.modificaCittà);
-        orarioChiusura =v.findViewById(R.id.modificaTimer2);
-        orarioApertura =v.findViewById(R.id.modificaTimer);
-        costoIngresso =v.findViewById(R.id.modificaCostoIngresso);
-        indirizzo =v.findViewById(R.id.modificaIndirizzo);
-        Button btnConferma = v.findViewById(R.id.btnModifica);
+        nomeCitta = v.findViewById(R.id.Città);
+        orarioChiusura =v.findViewById(R.id.Timer2);
+        orarioApertura =v.findViewById(R.id.Timer);
+        costoIngresso =v.findViewById(R.id.CostoIngresso);
+        indirizzo =v.findViewById(R.id.Indirizzo);
+        Button btnConferma = v.findViewById(R.id.btnConferma);
         sitoCulturale = new SitoCulturale();
 
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);

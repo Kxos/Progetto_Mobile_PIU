@@ -348,13 +348,17 @@ public class BasicMethod extends AppCompatActivity {
      */
     public static boolean checkIfNameIsAcceptable (String name) {
         StringBuilder nameBuilder = new StringBuilder(name);
-
-        if(nameBuilder.charAt(0) == ' ' ) {
+        if(nameBuilder.charAt(0) == ' ') {
             return false;
         }
         for(int i=0; i<nameBuilder.length(); i++) {
             if(!isLetter(nameBuilder.charAt(i))) {
-                return false;
+                if(i<nameBuilder.length()-1 && nameBuilder.charAt(i) == ' ' && isLetter(nameBuilder.charAt(i+1)) && isLetter(nameBuilder.charAt(i-1)) ) {
+
+                }else {
+                    return false;
+                }
+
             }
         }
 

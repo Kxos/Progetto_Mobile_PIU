@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/modificaCostoIngresso"
+            android:id="@+id/CostoIngresso"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="22dp"
@@ -19,11 +19,11 @@
             android:ems="10"
             android:hint="Costo Ingresso"
             android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="@+id/modificaTimer"
-            app:layout_constraintTop_toBottomOf="@+id/modificaTimer" />
+            app:layout_constraintStart_toStartOf="@+id/Timer"
+            app:layout_constraintTop_toBottomOf="@+id/Timer" />
 
         <EditText
-            android:id="@+id/modificaCittà"
+            android:id="@+id/Città"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="73dp"
@@ -31,12 +31,12 @@
             android:ems="10"
             android:hint="Città"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/modificaIndirizzo"
-            app:layout_constraintStart_toStartOf="@+id/modificaIndirizzo"
+            app:layout_constraintEnd_toEndOf="@+id/Indirizzo"
+            app:layout_constraintStart_toStartOf="@+id/Indirizzo"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/modificaIndirizzo"
+            android:id="@+id/Indirizzo"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="48dp"
@@ -44,22 +44,22 @@
             android:ems="10"
             android:hint="Indirizzo"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/modificaTimer2"
-            app:layout_constraintStart_toStartOf="@+id/modificaTimer"
-            app:layout_constraintTop_toBottomOf="@+id/modificaCittà" />
+            app:layout_constraintEnd_toEndOf="@+id/Timer2"
+            app:layout_constraintStart_toStartOf="@+id/Timer"
+            app:layout_constraintTop_toBottomOf="@+id/Città" />
 
         <Button
-            android:id="@+id/btnModifica"
+            android:id="@+id/btnConferma"
             android:layout_width="131dp"
             android:layout_height="48dp"
             android:layout_marginTop="105dp"
             android:background="@drawable/rounded_style"
             android:text="Conferma"
-            app:layout_constraintEnd_toEndOf="@+id/modificaTimer2"
-            app:layout_constraintTop_toBottomOf="@+id/modificaCostoIngresso" />
+            app:layout_constraintEnd_toEndOf="@+id/Timer2"
+            app:layout_constraintTop_toBottomOf="@+id/CostoIngresso" />
 
         <TextView
-            android:id="@+id/modificaTimer"
+            android:id="@+id/Timer"
             android:layout_width="112dp"
             android:layout_height="89dp"
             android:layout_marginTop="31dp"
@@ -71,15 +71,15 @@
             android:hint="Orario Apertura"
             android:textSize="18dp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/modificaCostoIngresso"
-            app:layout_constraintEnd_toStartOf="@+id/modificaTimer2"
+            app:layout_constraintBottom_toTopOf="@+id/CostoIngresso"
+            app:layout_constraintEnd_toStartOf="@+id/Timer2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/modificaIndirizzo"
+            app:layout_constraintTop_toBottomOf="@+id/Indirizzo"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/modificaTimer2"
+            android:id="@+id/Timer2"
             android:layout_width="112dp"
             android:layout_height="89dp"
             android:layout_marginTop="31dp"
@@ -91,11 +91,11 @@
             android:hint="Orario Chiusura"
             android:textSize="18dp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/btnModifica"
+            app:layout_constraintBottom_toTopOf="@+id/btnConferma"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/modificaTimer"
-            app:layout_constraintTop_toBottomOf="@+id/modificaIndirizzo"
+            app:layout_constraintStart_toEndOf="@+id/Timer"
+            app:layout_constraintTop_toBottomOf="@+id/Indirizzo"
             app:layout_constraintVertical_bias="1.0" />
 
 

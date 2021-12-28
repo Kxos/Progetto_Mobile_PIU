@@ -1,6 +1,7 @@
 package com.uniba.capitool.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.uniba.capitool.fragments.fragmentsModificaSito.FragmentModificaNomeSi
 public class ModificaSito extends AppCompatActivity {
     Utente utente = new Utente();
     SitoCulturale sito = new SitoCulturale();
+    Uri imageUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,7 @@ public class ModificaSito extends AppCompatActivity {
                     homePage.putExtra("uid",utente.getUid());
                     homePage.putExtra("email",utente.getEmail());
                     homePage.putExtra("ruolo",utente.getRuolo());
+                    finish();
                     startActivity(homePage);
 
 
@@ -88,5 +91,15 @@ public class ModificaSito extends AppCompatActivity {
         return sito;
     }
 
+    public void setSito(SitoCulturale sito) {
+        this.sito = sito;
+    }
 
+    public Uri getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(Uri imageUri) {
+        this.imageUri = imageUri;
+    }
 }

@@ -21,6 +21,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.activities.ModificaSito;
 import com.uniba.capitool.activities.VisualizzaZoneSito;
 import com.uniba.capitool.classes.SitoCulturale;
@@ -49,7 +50,9 @@ public class FragmentInfoSito extends Fragment {
                 dati.putSerializable("utente", utente);
                 Intent modificaSito = new Intent(getActivity(), ModificaSito.class);
                 modificaSito.putExtras(dati);
+                ((HomePage)getActivity()).finish();
                 getActivity().startActivity(modificaSito);
+
 
             }
         });
