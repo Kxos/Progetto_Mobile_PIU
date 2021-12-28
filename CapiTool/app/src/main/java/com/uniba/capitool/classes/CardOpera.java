@@ -15,7 +15,6 @@ public class CardOpera {
         this.titolo = titolo;
         this.foto = foto;
         this.checkBox = checkBox;
-        checkBox.setChecked(false);
     }
 
     public CardOpera() {
@@ -52,5 +51,7 @@ public class CardOpera {
     public void setCheckBox(CheckBox checkBox) {
         this.checkBox = checkBox;
     }
+
+    public void setCheckBoxCheckedStatus(boolean status){ this.checkBox.setChecked(status); }
 
 }

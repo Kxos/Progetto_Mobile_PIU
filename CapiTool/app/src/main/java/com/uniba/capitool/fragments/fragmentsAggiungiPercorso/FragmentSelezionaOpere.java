@@ -104,7 +104,6 @@ public class FragmentSelezionaOpere extends Fragment {
                     Zona zona = snapshot.getValue(Zona.class);
                     //Log.e("RISULTATO DB NOME: ",zona.getNome());
                     listaZone.add(zona);
-
                 }
 
                 mostraOperePerZone(listaZone);
@@ -148,6 +147,9 @@ public class FragmentSelezionaOpere extends Fragment {
                     cardOpera.setId(opera.getId());
                     cardOpera.setTitolo(opera.getTitolo());
                     cardOpera.setFoto(opera.getFoto());
+
+                    View cardOperaView = getLayoutInflater().inflate(R.layout.card_opera, null);
+                    cardOpera.setCheckBox(cardOperaView.findViewById(R.id.checkOperaSelezionata));
                     listaOpere[countZone].add(cardOpera);
                 }
                 count++;
@@ -164,8 +166,6 @@ public class FragmentSelezionaOpere extends Fragment {
 
         adapter = popolaOpereInRecyclerView(listaOpere[0]);
 
-        // TODO: Pulsanti Avanti e Indietro (Modificano il contatore, ripulendo volta per volta la RecycleView)
-
         // Pulsante Avanti
         buttonSuccessivaZona.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,21 +174,17 @@ public class FragmentSelezionaOpere extends Fragment {
 
                 if(countZone +1 < listaZone.size()){
 
-                    if(adapter != null){
-                        if(listaOpereChecked != null){
-                            listaOpereChecked.addAll(adapter.getListaOpereChecked());
-                        }else{
-                            listaOpereChecked = adapter.getListaOpereChecked();
-                        }
-                    }
-
-                    Log.e("Esistono opere checked: ", ""+listaOpereChecked);
-                    listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
+                    gestioneCheckboxInListaOpereChecked(adapter);
+                    //Log.e("Esistono opere checked FUORI: ", ""+listaOpereChecked);
 
                     countZone = countZone +1;
                     adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
                     buttonPrecedenteZona.setVisibility(View.VISIBLE);
                     nomeZona.setText(listaZone.get(countZone).getNome());
+                }else {
+                    listaOpereChecked.addAll(adapter.getListaOpereChecked());
+                    Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked);
+                    // TODO - CREAZIONE DEL PERCORSO
                 }
 
             }
@@ -202,16 +198,8 @@ public class FragmentSelezionaOpere extends Fragment {
 
                 if(countZone -1 >= 0){
 
-                    if(adapter != null){
-                        if(listaOpereChecked != null){
-                            listaOpereChecked.addAll(adapter.getListaOpereChecked());
-                        }else{
-                            listaOpereChecked = adapter.getListaOpereChecked();
-                        }
-                    }
-
-                    Log.e("Esistono opere checked: ", ""+listaOpereChecked);
-                    listaOpere[countZone] = spuntaCheckboxDelleOpereChecked(listaOpere[countZone], listaOpereChecked, adapter);
+                    gestioneCheckboxInListaOpereChecked(adapter);
+                    //Log.e("Esistono opere checked FUORI: ", ""+listaOpereChecked);
 
                     countZone = countZone -1;
                     adapter = popolaOpereInRecyclerView(listaOpere[countZone]);
@@ -223,28 +211,6 @@ public class FragmentSelezionaOpere extends Fragment {
             }
         });
 
-    }
-
-    private ArrayList<CardOpera> spuntaCheckboxDelleOpereChecked(ArrayList<CardOpera> listaOpere, ArrayList<CardOpera> listaOpereChecked, CardOperaAdapter adapter) {
-
-      if(listaOpereChecked.get(0).getCheckBox().isChecked()){
-          listaOpereChecked.get(0).getCheckBox().setChecked(true);
-      }
-
-      for(int i = 0; i < listaOpere.size(); i++){
-
-          for(int j = 0; j < listaOpereChecked.size(); j++){
-
-              if(listaOpere.contains(listaOpereChecked.get(j))){
-                  Log.e("UELAAAAAAAAAAAAAAA>: ","");
-                  listaOpere.get(listaOpere.indexOf(listaOpereChecked.get(j))).getCheckBox().setChecked(true);
-              }
-
-          }
-
-      }
-
-        return listaOpere;
     }
 
     /***
@@ -275,5 +241,33 @@ public class FragmentSelezionaOpere extends Fragment {
     }
     /** FINE popolaOpereInRecyclerView()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+    /***
+     * Aggiunge e Rimuove dalla listaOpereChecked le opere selezionate e deselezionate
+     *
+     * @param adapter: Adapter della Card per la RecyclerView
+     */
+    public void gestioneCheckboxInListaOpereChecked(CardOperaAdapter adapter){
+
+        if(adapter != null){
+            if(listaOpereChecked != null){
+
+                for(int i = 0; i < adapter.getListaOpereChecked().size(); i++){
+                    if(!listaOpereChecked.contains(adapter.getListaOpereChecked().get(i))){
+                        listaOpereChecked.add(adapter.getListaOpereChecked().get(i));
+                    }
+                }
+                for(int i = 0; i < adapter.getListaOpereUnchecked().size(); i++){
+                    if(listaOpereChecked.contains(adapter.getListaOpereUnchecked().get(i))){
+                        listaOpereChecked.remove(adapter.getListaOpereUnchecked().get(i));
+                    }
+                }
+
+            }else{
+                listaOpereChecked = adapter.getListaOpereChecked();
+            }
+            //Log.e("Lista ottenuta dall'ADAPTER: ", ""+adapter.getListaOpereChecked());
+        }
+    }
 
 }
