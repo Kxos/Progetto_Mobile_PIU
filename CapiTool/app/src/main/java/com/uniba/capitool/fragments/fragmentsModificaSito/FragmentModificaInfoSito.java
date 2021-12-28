@@ -341,7 +341,7 @@ public class FragmentModificaInfoSito extends Fragment {
                 homePage.putExtra("uid",utente.getUid());
                 homePage.putExtra("email",utente.getEmail());
                 homePage.putExtra("ruolo",utente.getRuolo());
-                homePage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                //homePage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 //handler.removeCallbacksAndMessages(null);
                 getActivity().startActivity(homePage);
             }

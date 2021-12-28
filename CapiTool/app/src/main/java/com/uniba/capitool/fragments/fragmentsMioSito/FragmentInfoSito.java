@@ -33,6 +33,7 @@ public class FragmentInfoSito extends Fragment {
     TextView orarioSito;
     TextView indirizzo;
     TextView costoIngresso;
+    ImageView fotoSito;
     Utente utente = new Utente();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +51,6 @@ public class FragmentInfoSito extends Fragment {
                 dati.putSerializable("utente", utente);
                 Intent modificaSito = new Intent(getActivity(), ModificaSito.class);
                 modificaSito.putExtras(dati);
-                ((HomePage)getActivity()).finish();
                 getActivity().startActivity(modificaSito);
 
 
@@ -64,7 +64,7 @@ public class FragmentInfoSito extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageView fotoSito= view.findViewById(R.id.immagineSito2);
+        fotoSito= view.findViewById(R.id.immagineSito2);
         TextView visualizzaZone = view.findViewById(R.id.textViewZoneOpere);
         nomeSito = view.findViewById(R.id.titoloNomeSito);
         indirizzo = view.findViewById(R.id.Via);
@@ -118,5 +118,12 @@ public class FragmentInfoSito extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        letturaImmagineSito(fotoSito,getActivity());
     }
 }
