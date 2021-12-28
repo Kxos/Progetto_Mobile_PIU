@@ -26,6 +26,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
 
     private ArrayList<CardOpera> listaOpere;
     private ArrayList<CardOpera> listaOpereChecked;
+    private ArrayList<CardOpera> listaOpereUnchecked;
     private CardOperaAdapter.OnEventClickListener mListener;
     private CheckBox cardCheckBoxOpera;
 
@@ -40,7 +41,8 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
     // Pass in the array into the constructor
     public CardOperaAdapter(ArrayList<CardOpera> listaOpere) {
         this.listaOpere = listaOpere;
-        listaOpereChecked = new ArrayList<>();
+        this.listaOpereChecked = new ArrayList<>();
+        this.listaOpereUnchecked = new ArrayList<>();
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -89,6 +91,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
                     listaOpereChecked.add(cardOpera);
                 }else {
                     cardOpera.setCheckBoxCheckedStatus(false);
+                    listaOpereUnchecked.add(cardOpera);
                     listaOpereChecked.remove(cardOpera);
                 }
 
@@ -172,6 +175,10 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
 
     public ArrayList<CardOpera> getListaOpereChecked() {
         return listaOpereChecked;
+    }
+
+        public ArrayList<CardOpera> getListaOpereUnchecked() {
+        return listaOpereUnchecked;
     }
 
 }
