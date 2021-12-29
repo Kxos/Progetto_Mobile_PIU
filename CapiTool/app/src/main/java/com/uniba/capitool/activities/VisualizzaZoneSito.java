@@ -44,9 +44,8 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.kebab_menu, menu);
         return super.onCreateOptionsMenu(menu);
-
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
