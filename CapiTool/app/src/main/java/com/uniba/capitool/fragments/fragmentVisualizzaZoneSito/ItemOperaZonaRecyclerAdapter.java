@@ -66,6 +66,7 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
        ImageView fotoOpera;
        TextView titoloOpera;
        OnOperaListener onOperaListener;
+
         public ItemOperaZonaViewHolder(@NonNull View itemView, OnOperaListener onOperaListener) {
             super(itemView);
             fotoOpera=itemView.findViewById(R.id.item_immagineOpera);
@@ -77,7 +78,7 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
 
         @Override
         public void onClick(View v) {
-            onOperaListener.onOperaClick(getAdapterPosition());
+            onOperaListener.onOperaClick(getAdapterPosition(), titoloOpera.getText().toString());
         }
     }
 
@@ -108,6 +109,10 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
     }
 
     public interface OnOperaListener{
-        void onOperaClick(int position);
+        void onOperaClick(int position, String layoutPosition);
+    }
+
+    public String getZona(int posizione){
+        return listaOpereZona.get(posizione).getIdZona();
     }
 }

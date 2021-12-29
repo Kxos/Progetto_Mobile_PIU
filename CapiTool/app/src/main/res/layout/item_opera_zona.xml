@@ -36,6 +36,12 @@
                 android:layout_alignBottom="@+id/item_immagineOpera"
                 android:layout_marginBottom="0dp" />
 
+            <TextView
+                android:id="@+id/item_idZona"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
