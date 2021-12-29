@@ -20,6 +20,11 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     private List<AllZone> allZoneList;
 
 
+    /***
+     * Metodo costruttore
+     * @param context
+     * @param allZoneList
+     */
     public MainRecyclerAdapter(Context context, List<AllZone> allZoneList) {
         this.context = context;
         this.allZoneList = allZoneList;
@@ -58,24 +63,24 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
             nomeZona=itemView.findViewById(R.id.nomeZona);
             opereRecycler=itemView.findViewById(R.id.opere_recycler);
 
-            nomeZona.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("nomeZona", ""+getAdapterPosition());
-
-                }
-            });
-//            int itemPosition = opereRecycler.getChildLayoutPosition(itemView);
-//           // String item = mList.get(itemPosition);
-//            Log.e("RECYCLER", ""+itemPosition);
+//            nomeZona.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Log.e("nomeZona", ""+getAdapterPosition());
+//
+//                }
+//            });
         }
 
+        /***
+         * Listner del click quando clicco il nome della zona o il layout del item Zona
+         * @param v
+         */
         @Override
         public void onClick(View v) {
             Log.e("RECYCLER", ""+getAdapterPosition());
 
         }
-
 
     }
 
@@ -85,25 +90,32 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(itemOperaZonaRecyclerAdapter);
 
-
-
     }
 
 
     @Override
-    public void onOperaClick(int position, String layoutPosition) {
+    public void onOperaClick(int posizioneOpera, String idZona) {
 
-        Log.e("CLICCATO", ""+position+""+layoutPosition);
-
-
-    }
-
-    public void getRecycler(int position) {
-
-        Log.e("CLICCATO", ""+position);
-
+        int posizioneZona=getIndexZona(allZoneList, idZona);
+        Log.e("CLICCATO", ""+allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera).getDescrizione());
 
     }
 
+    /***
+     * Cerca la posizione (int) corrispondente all'idZona
+     * @param allZoneList
+     * @param idZona
+     * @return
+     */
+    public int getIndexZona(List<AllZone> allZoneList, String idZona){
+        int index=-1;
 
+        for(int i=0; i<allZoneList.size(); i++){
+            if(allZoneList.get(i).getId().equals(idZona)){
+                index=i;
+                break;
+            }
+        }
+        return index;
+    }
 }

@@ -41,19 +41,11 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
     @Override
     public void onBindViewHolder(@NonNull ItemOperaZonaViewHolder holder, int position) {
 
-        //holder.fotoOpera.setImageURI(listaOpereZona.get(position).getFoto());
-//        Glide.with(holder.itemView.getContext()).load(listaOpereZona.get(position).getFoto()).into(holder.fotoOpera);
-
-        setImmagineOperaFromDB(listaOpereZona.get(position).getId(), holder.itemView.getContext(), holder.fotoOpera);
+        setImmagineOperaFromDB(listaOpereZona.get(position).getIdOpera(), holder.itemView.getContext(), holder.fotoOpera);
         holder.titoloOpera.setText(listaOpereZona.get(position).getTitolo());
 
-     /*   holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
+        //setto in una TextVew invisibile l'id della Zona in modo da avere un riferimento quando clicco sull'opera (brutto ma efficace)
+        holder.idZona.setText(listaOpereZona.get(position).getIdZona());
     }
 
     @Override
@@ -65,20 +57,26 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
 
        ImageView fotoOpera;
        TextView titoloOpera;
+       TextView idZona;
        OnOperaListener onOperaListener;
 
         public ItemOperaZonaViewHolder(@NonNull View itemView, OnOperaListener onOperaListener) {
             super(itemView);
             fotoOpera=itemView.findViewById(R.id.item_immagineOpera);
             titoloOpera=itemView.findViewById(R.id.item_nomeOpera);
+            idZona =itemView.findViewById(R.id.item_idZona);
 
             this.onOperaListener=onOperaListener;
             itemView.setOnClickListener(this);
         }
 
+        /***
+         * Quando avviene il clic di una item Opera passo la posizione dell'opera nella recycler view e l'id della Zona (salvata in una TextView non visibile)
+         * @param v
+         */
         @Override
         public void onClick(View v) {
-            onOperaListener.onOperaClick(getAdapterPosition(), titoloOpera.getText().toString());
+            onOperaListener.onOperaClick(getAdapterPosition(), idZona.getText().toString());
         }
     }
 
@@ -109,10 +107,7 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
     }
 
     public interface OnOperaListener{
-        void onOperaClick(int position, String layoutPosition);
+        void onOperaClick(int posizioneOpera, String idZona);
     }
 
-    public String getZona(int posizione){
-        return listaOpereZona.get(posizione).getIdZona();
-    }
 }

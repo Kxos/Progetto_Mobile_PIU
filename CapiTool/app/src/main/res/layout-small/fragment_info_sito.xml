@@ -84,9 +84,8 @@
                     android:layout_width="282dp"
                     android:layout_height="37dp"
                     android:layout_marginStart="27dp"
-                    android:layout_marginTop="58dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginEnd="150dp"
-                    android:layout_marginBottom="133dp"
                     android:text="Visualizza Zone e Opere >"
                     android:textColor="#000"
                     android:textSize="24sp"
@@ -154,21 +153,22 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/buttonEditSito"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom|right"
-                    android:layout_margin="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:clickable="true"
-                    app:backgroundTint="#EC5424"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_edit" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
 
+
 </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonEditSito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:clickable="true"
+        app:backgroundTint="#EC5424"
+        app:srcCompat="@drawable/ic_edit" />
 </FrameLayout>

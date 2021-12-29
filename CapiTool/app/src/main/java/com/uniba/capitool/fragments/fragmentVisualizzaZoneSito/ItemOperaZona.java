@@ -3,14 +3,15 @@ package com.uniba.capitool.fragments.fragmentVisualizzaZoneSito;
 import android.net.Uri;
 
 public class ItemOperaZona {
-    String id;
+    String idOpera;
     String titolo;
     String descrizione;
-    String idZona;
+    String idZona;  //salvo l'id della zona per avere un riferimento quando poi clicco nella recycler view delle opere, altrimenti ho la posizione dell'opera
+                    // ma non la posizione della zona nella recycler view "Main"
     Uri foto;
 
     public ItemOperaZona(String id, String titolo, String descrizione, String idZona) {
-        this.id = id;
+        this.idOpera = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.idZona=idZona;
@@ -32,12 +33,12 @@ public class ItemOperaZona {
         this.descrizione = descrizione;
     }
 
-    public String getId() {
-        return id;
+    public String getIdOpera() {
+        return idOpera;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdOpera(String idOpera) {
+        this.idOpera = idOpera;
     }
 
     public String getTitolo() {

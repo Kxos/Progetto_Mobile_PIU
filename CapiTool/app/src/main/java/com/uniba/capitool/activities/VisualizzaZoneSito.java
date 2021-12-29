@@ -36,8 +36,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
     MainRecyclerAdapter mainRecyclerAdapter;
     SitoCulturale sito;
     Utente utente;
-    List<AllZone> allZoneList;
-    List<Zona> zone;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,8 +66,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        // Al click dell'Hamburgher, apre il Menù laterale
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,57 +74,46 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         });
 
         leggiZoneFromFirebase();
-/*
-        List<ItemOperaZona> listaOpereZona = new ArrayList<>();
-        listaOpereZona.add(new ItemOperaZona("1", "Titolo1"));
-        listaOpereZona.add(new ItemOperaZona("2", "Titolo2"));
-        listaOpereZona.add(new ItemOperaZona("3", "Titolo3"));
-        listaOpereZona.add(new ItemOperaZona("4", "Titolo4"));
-
-        List<AllZone> allZoneList=new ArrayList<>();
-        allZoneList.add(new AllZone("Architettura", listaOpereZona));
-        allZoneList.add(new AllZone("Informatica", listaOpereZona));
-        allZoneList.add(new AllZone("Arte", listaOpereZona));
-
-        setZoneRecycler(allZoneList);
-*/
 
     }
 
     private void leggiZoneFromFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+       //TODO mettere l'id del sito nel path e togliere 1
         DatabaseReference myRef = database.getReference("/Siti/1");
-
-        // Query recentPostsQuery = myRef.child("Utenti").orderByChild("username").equalTo("andreax5000");
 
         Query recentPostsQuery = myRef.child("Zone");     //SELECT * FROM Utenti WHERE ruolo="visitatore"
         recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-              //  List<ItemOperaZona> listaOpereZona = new ArrayList<>();
-                allZoneList=new ArrayList<>();
-                zone=new ArrayList<>();
+                List<AllZone> allZoneList=new ArrayList<>();
+                List<Zona> zone=new ArrayList<>();
 
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i valori trovati dalla query, anche se è 1 solo
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i risultati della query e li formatta esattamente come se fossero oggetti di classe Zona
                     Zona zona=snapshot.getValue(Zona.class);
                     zone.add(zona);
                 }
 
+                /***
+                 * Passo gli oggetti salvati nella lista zone, nella lista allZoneList
+                 * Il primo for scorre le zone
+                 * Il secondo for scorre tutte le opere della relativa zona
+                 * Salto il salvataggio della prima opera perchè è null
+                 */
                 for(int i=0; i<zone.size(); i++){
                     int contatore=0;
                     List<ItemOperaZona> listaOpereZona = new ArrayList<>();
                     for(Opera opera: zone.get(i).getOpere()){
                         if(contatore==0){
-                            Log.e("SKIP", "SKIP");
+                            Log.e("SKIP", "Skip dell'opera null");
                         }else{
-                            listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getNome()));
+                            listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId()));
                             Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
                         }
                         contatore++;
                     }
                     allZoneList.add(new AllZone(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona));
-
 
                 }
 
@@ -153,6 +138,10 @@ public class VisualizzaZoneSito extends AppCompatActivity{
 
     }
 
+    /***
+     * Effettua la creazione della recycler view innsetata e andrà a inserire tutti gli oggetti presenti nella lista allZoneList
+     * @param allZoneList
+     */
     private void setZoneRecycler(List<AllZone> allZoneList){
         mainZoneRecycler = findViewById(R.id.main_recycler);
         RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(this);
@@ -161,14 +150,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         mainRecyclerAdapter=new MainRecyclerAdapter(this, allZoneList);
         mainZoneRecycler.setAdapter(mainRecyclerAdapter);
 
-
-
-
-
     }
 
-//    @Override
-//    public void onOperaClick(int position) {
-//        Toast.makeText(this, allZoneList.get(0).getListaOpereZona().get(position).getDescrizione(), Toast.LENGTH_LONG).show();
-//    }
 }
