@@ -19,6 +19,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     private Context context;
     private List<AllZone> allZoneList;
 
+
     public MainRecyclerAdapter(Context context, List<AllZone> allZoneList) {
         this.context = context;
         this.allZoneList = allZoneList;
@@ -44,13 +45,15 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     }
 
 
-    public static final class MainViewHolder extends RecyclerView.ViewHolder{
+    public static final class MainViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView nomeZona;
         RecyclerView opereRecycler;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(this);
 
             nomeZona=itemView.findViewById(R.id.nomeZona);
             opereRecycler=itemView.findViewById(R.id.opere_recycler);
@@ -59,9 +62,21 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
                 @Override
                 public void onClick(View v) {
                     Log.e("nomeZona", ""+getAdapterPosition());
+
                 }
             });
+//            int itemPosition = opereRecycler.getChildLayoutPosition(itemView);
+//           // String item = mList.get(itemPosition);
+//            Log.e("RECYCLER", ""+itemPosition);
         }
+
+        @Override
+        public void onClick(View v) {
+            Log.e("RECYCLER", ""+getAdapterPosition());
+
+        }
+
+
     }
 
     private void setOpereZonaRecycler(RecyclerView recyclerView, List<ItemOperaZona> listaOpereZona){
@@ -70,10 +85,25 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(itemOperaZonaRecyclerAdapter);
 
+
+
     }
 
+
     @Override
-    public void onOperaClick(int position) {
-        Log.e("CLICCATO", ""+position);
+    public void onOperaClick(int position, String layoutPosition) {
+
+        Log.e("CLICCATO", ""+position+""+layoutPosition);
+
+
     }
+
+    public void getRecycler(int position) {
+
+        Log.e("CLICCATO", ""+position);
+
+
+    }
+
+
 }
