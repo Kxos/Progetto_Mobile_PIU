@@ -28,12 +28,14 @@ import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapt
 import java.util.ArrayList;
 import java.util.List;
 
-public class VisualizzaZoneSito extends AppCompatActivity {
+public class VisualizzaZoneSito extends AppCompatActivity{
 
     RecyclerView mainZoneRecycler;
     MainRecyclerAdapter mainRecyclerAdapter;
     SitoCulturale sito;
     Utente utente;
+    List<AllZone> allZoneList;
+    List<Zona> zone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +98,8 @@ public class VisualizzaZoneSito extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
               //  List<ItemOperaZona> listaOpereZona = new ArrayList<>();
-                List<AllZone> allZoneList=new ArrayList<>();
-                List<Zona> zone=new ArrayList<>();
+                allZoneList=new ArrayList<>();
+                zone=new ArrayList<>();
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i valori trovati dalla query, anche se è 1 solo
                     Zona zona=snapshot.getValue(Zona.class);
@@ -111,7 +113,7 @@ public class VisualizzaZoneSito extends AppCompatActivity {
                         if(contatore==0){
                             Log.e("SKIP", "SKIP");
                         }else{
-                            listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo()));
+                            listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getNome()));
                             Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
                         }
                         contatore++;
@@ -149,5 +151,15 @@ public class VisualizzaZoneSito extends AppCompatActivity {
 
         mainRecyclerAdapter=new MainRecyclerAdapter(this, allZoneList);
         mainZoneRecycler.setAdapter(mainRecyclerAdapter);
+
+
+
+
+
     }
+
+//    @Override
+//    public void onOperaClick(int position) {
+//        Toast.makeText(this, allZoneList.get(0).getListaOpereZona().get(position).getDescrizione(), Toast.LENGTH_LONG).show();
+//    }
 }

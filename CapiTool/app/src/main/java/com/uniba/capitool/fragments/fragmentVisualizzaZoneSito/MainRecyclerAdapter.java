@@ -1,6 +1,7 @@
 package com.uniba.capitool.fragments.fragmentVisualizzaZoneSito;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import com.uniba.capitool.R;
 
 import java.util.List;
 
-public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder> {
+public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder>  implements ItemOperaZonaRecyclerAdapter.OnOperaListener {
     private Context context;
     private List<AllZone> allZoneList;
 
@@ -34,12 +35,14 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
         holder.nomeZona.setText(allZoneList.get(position).getNomeZona());
         setOpereZonaRecycler(holder.opereRecycler, allZoneList.get(position).getListaOpereZona());
+
     }
 
     @Override
     public int getItemCount() {
         return allZoneList.size();
     }
+
 
     public static final class MainViewHolder extends RecyclerView.ViewHolder{
 
@@ -51,13 +54,26 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
             nomeZona=itemView.findViewById(R.id.nomeZona);
             opereRecycler=itemView.findViewById(R.id.opere_recycler);
+
+            nomeZona.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("nomeZona", ""+getAdapterPosition());
+                }
+            });
         }
     }
 
     private void setOpereZonaRecycler(RecyclerView recyclerView, List<ItemOperaZona> listaOpereZona){
 
-        ItemOperaZonaRecyclerAdapter itemOperaZonaRecyclerAdapter = new ItemOperaZonaRecyclerAdapter(context, listaOpereZona);
+        ItemOperaZonaRecyclerAdapter itemOperaZonaRecyclerAdapter = new ItemOperaZonaRecyclerAdapter(context, listaOpereZona,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(itemOperaZonaRecyclerAdapter);
+
+    }
+
+    @Override
+    public void onOperaClick(int position) {
+        Log.e("CLICCATO", ""+position);
     }
 }

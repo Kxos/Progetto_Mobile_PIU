@@ -24,16 +24,18 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
 
     private Context context;
     private List<ItemOperaZona> listaOpereZona;
+    private OnOperaListener mOnOperaListener;
 
-    public ItemOperaZonaRecyclerAdapter(Context context, List<ItemOperaZona> listaOpereZona) {
+    public ItemOperaZonaRecyclerAdapter(Context context, List<ItemOperaZona> listaOpereZona, OnOperaListener onOperaListener) {
         this.context = context;
         this.listaOpereZona = listaOpereZona;
+        this.mOnOperaListener = onOperaListener;
     }
 
     @NonNull
     @Override
     public ItemOperaZonaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ItemOperaZonaViewHolder(LayoutInflater.from(context).inflate(R.layout.item_opera_zona, parent, false));
+        return new ItemOperaZonaViewHolder(LayoutInflater.from(context).inflate(R.layout.item_opera_zona, parent, false), mOnOperaListener);
     }
 
     @Override
@@ -45,6 +47,13 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
         setImmagineOperaFromDB(listaOpereZona.get(position).getId(), holder.itemView.getContext(), holder.fotoOpera);
         holder.titoloOpera.setText(listaOpereZona.get(position).getTitolo());
 
+     /*   holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
+
     }
 
     @Override
@@ -52,14 +61,23 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
         return listaOpereZona.size();
     }
 
-    public static final class ItemOperaZonaViewHolder extends RecyclerView.ViewHolder{
+    public static final class ItemOperaZonaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
        ImageView fotoOpera;
        TextView titoloOpera;
-        public ItemOperaZonaViewHolder(@NonNull View itemView) {
+       OnOperaListener onOperaListener;
+        public ItemOperaZonaViewHolder(@NonNull View itemView, OnOperaListener onOperaListener) {
             super(itemView);
             fotoOpera=itemView.findViewById(R.id.item_immagineOpera);
             titoloOpera=itemView.findViewById(R.id.item_nomeOpera);
+
+            this.onOperaListener=onOperaListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onOperaListener.onOperaClick(getAdapterPosition());
         }
     }
 
@@ -87,5 +105,9 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
             }
         });
 
+    }
+
+    public interface OnOperaListener{
+        void onOperaClick(int position);
     }
 }

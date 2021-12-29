@@ -5,11 +5,31 @@ import android.net.Uri;
 public class ItemOperaZona {
     String id;
     String titolo;
+    String descrizione;
+    String idZona;
     Uri foto;
 
-    public ItemOperaZona(String id, String titolo) {
+    public ItemOperaZona(String id, String titolo, String descrizione, String idZona) {
         this.id = id;
         this.titolo = titolo;
+        this.descrizione = descrizione;
+        this.idZona=idZona;
+    }
+
+    public String getIdZona() {
+        return idZona;
+    }
+
+    public void setIdZona(String idZona) {
+        this.idZona = idZona;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
     public String getId() {
