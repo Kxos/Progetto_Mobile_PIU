@@ -18,6 +18,11 @@
     <string name="searchSites">Search for Sites or Cities</string>
     <string name="addSite">Create new Route</string>
 
+    <string name="siteSetting">Site Settings</string>
+
+    <string name="toolbarDelegateSite">Delegate Site</string>
+    <string name="toolbarDeleteSite">Delete Site</string>
+
     <string name="deleteSite">Delete site</string>
     <string name="deleteSite_subtext">Delete the entire cultural site and its data</string>
     <string name="delegateSite">Delegate site</string>
@@ -29,8 +34,11 @@
 
     <string name="howToDeletePassword">Enter your password and confirm to delete your cultural site</string>
     <string name="insertYourPassword">Insert your password</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="toastDelegateSito">Delegate site not available: you do not have an associated site</string>
+    <string name="toastDeleteSito">Delete site non disponibile: you do not have an associated site</string>
+
+
 
 
 </resources>

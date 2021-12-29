@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_inserisci_password" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/boxInfoDelegate"
         android:layout_width="325dp"
         android:layout_height="33dp"
         android:layout_marginTop="100dp"
@@ -64,8 +64,8 @@
         android:layout_marginTop="140dp"
         android:background="@drawable/rounded_style"
         android:text="@string/cancel"
-        app:layout_constraintStart_toStartOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintStart_toStartOf="@+id/boxInfoDelegate"
+        app:layout_constraintTop_toBottomOf="@+id/boxInfoDelegate" />
 
     <Button
         android:id="@+id/button_conferma_delega"
@@ -76,7 +76,7 @@
         android:background="@drawable/rounded_style"
         android:text="@string/confirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/boxInfoDelegate" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

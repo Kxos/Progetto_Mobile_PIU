@@ -1,8 +1,9 @@
 package com.uniba.capitool.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Visitatore {
+public class Visitatore implements Serializable {
 
     //non usare spazi nei nomi delle variabili nel db e le variabili in java devonbo avere lo stesso nome degli attributi!
     private String uid;
