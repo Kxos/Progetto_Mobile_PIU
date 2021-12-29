@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,9 @@ public class ModificaSito extends AppCompatActivity {
     Utente utente = new Utente();
     SitoCulturale sito = new SitoCulturale();
     Uri imageUri;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,7 @@ public class ModificaSito extends AppCompatActivity {
             this.startActivity(login);
             */
         }
+
 
 
 
