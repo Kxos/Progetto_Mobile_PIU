@@ -157,7 +157,7 @@
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/buttonEditSito"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="bottom|right"
                     android:layout_margin="16dp"
                     android:layout_marginEnd="16dp"
