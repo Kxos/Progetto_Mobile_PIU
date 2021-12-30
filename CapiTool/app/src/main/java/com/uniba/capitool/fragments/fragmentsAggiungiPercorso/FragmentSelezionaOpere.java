@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,9 +33,10 @@ import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Zona;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FragmentSelezionaOpere extends Fragment {
+public class FragmentSelezionaOpere extends Fragment implements Serializable {
 
     private Toolbar toolbar;
     private View viewActivity;
@@ -184,7 +187,23 @@ public class FragmentSelezionaOpere extends Fragment {
                 }else {
                     listaOpereChecked.addAll(adapter.getListaOpereChecked());
                     Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked);
+
                     // TODO - CREAZIONE DEL PERCORSO
+
+                    SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    // put the objects to send to our fragment in a bundle
+                    FragmentDatiPercorso fragmentDatiPercorso = new FragmentDatiPercorso();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("listaOpereSelezionate",  listaOpereChecked);
+                    fragmentDatiPercorso.setArguments(bundle);
+
+                    FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentDatiPercorso );
+                    fragmentTransaction.commit();
+
                 }
 
             }
