@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Search"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/aggiungiZona"
+        android:icon="@drawable/add_icon"
+        android:title="Aggiungi Zona"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/eliminaZone"
+        android:title="Elimina Zone"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/ordinaZone"
+        android:title="Ordina Zone"
+        app:showAsAction="never"/>
+
+
+</menu>

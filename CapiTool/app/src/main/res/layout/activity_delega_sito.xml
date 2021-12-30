@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_scegli_delegato" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/boxInfoDelegate"
         android:layout_width="322dp"
         android:layout_height="46dp"
         android:layout_marginTop="116dp"
@@ -60,8 +60,8 @@
         android:layout_marginTop="144dp"
         android:background="@drawable/rounded_style"
         android:text="@string/cancel"
-        app:layout_constraintStart_toStartOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintStart_toStartOf="@+id/boxInfoDelegate"
+        app:layout_constraintTop_toBottomOf="@+id/boxInfoDelegate" />
 
     <Button
         android:id="@+id/button_conferma_delega"
@@ -72,6 +72,6 @@
         android:background="@drawable/rounded_style"
         android:text="@string/confirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/boxInfoDelegate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

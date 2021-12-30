@@ -27,14 +27,20 @@
 
             <TextView
                 android:id="@+id/item_nomeOpera"
-                android:background="#90000000"
-                android:textColor="#FFF"
-                android:textStyle="bold"
-                android:paddingLeft="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/item_immagineOpera"
-                android:layout_marginBottom="0dp" />
+                android:layout_marginBottom="0dp"
+                android:background="#90000000"
+                android:paddingLeft="5dp"
+                android:textColor="#FFF"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_idZona"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

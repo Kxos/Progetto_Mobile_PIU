@@ -19,6 +19,11 @@
     <string name="searchSites">Cerca per Siti o per Città</string>
     <string name="addSite">Crea un nuovo percorso</string>
 
+    <string name="siteSetting">Impostazioni Sito</string>
+
+    <string name="toolbarDelegateSite">Delega Sito</string>
+    <string name="toolbarDeleteSite">Elimina Sito</string>
+
     <string name="deleteSite">Elimina sito</string>
     <string name="deleteSite_subtext">Elimina l\'intero sito culturale ed i suoi dati </string>
     <string name="delegateSite">Delega sito</string>
@@ -30,6 +35,10 @@
 
     <string name="howToDeletePassword">Inserisci la tua password e conferma per eliminare il tuo Sito</string>
     <string name="insertYourPassword">Inserisci la tua password</string>
+
+    <string name="toastDelegateSito">Delega sito non disponibile: non hai un sito associato</string>
+    <string name="toastDeleteSito">Elimina sito non disponibile: non hai un sito associato</string>
+
 
 
 

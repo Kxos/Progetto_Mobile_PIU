@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Visitatore;
 import com.uniba.capitool.fragments.fragmentsMioSito.FragmentInfoSito;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -53,31 +55,39 @@ public class FragmentImpostazioniSito extends Fragment {
         // Inflate the layout for this fragment
         Visitatore utente = getUserInfo();
 
+
         View v = inflater.inflate(R.layout.fragment_impostazioni_sito, container, false);
         TextView delega_sito = (TextView) v.findViewById(R.id.text_delega_sito) ;
         TextView elimina_sito = v.findViewById(R.id.text_elimina_sito) ;
 
 
+        checkSitoAssociatoAlCuratore(utente.getUid());
+
             delega_sito.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    checkSitoAssociatoAlCuratore(utente.getUid());
+                   // checkSitoAssociatoAlCuratore(utente.getUid()); inserito prima dell' onClick
                     Log.e("controlloSito", "Ho controllato se è associato il sito");
 
                     if(sito == null){
-                    Toast.makeText(getActivity().getApplicationContext(), "Operazione non eseguibile: non è associato alcun sito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.toastDelegateSito, Toast.LENGTH_SHORT).show();
                     Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
-                    }else {
+                    }else{
 
-                    Log.e("sitoAssociato", "il curatore ha già un sito associato");
+                    Log.e("sitoAssociato", "il curatore ha un sito associato");
 
                     Intent intentDelegaSito = new Intent(getActivity(), DelegaSito.class);
-                    intentDelegaSito.putExtra("uid", utente.getUid()); //Optional parameters
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("utente", (Serializable) utente);
+                    intentDelegaSito.putExtras(bundle) ;
+
+                    /*intentDelegaSito.putExtra("uid", utente.getUid()); //Optional parameters
                     intentDelegaSito.putExtra("nome", utente.getNome()); //Optional parameters
                     intentDelegaSito.putExtra("cognome", utente.getCognome()); //Optional parameters
                     intentDelegaSito.putExtra("email", utente.getEmail()); //Optional parameters
-                    intentDelegaSito.putExtra("ruolo", utente.getRuolo()); //Optional parameters
+                    intentDelegaSito.putExtra("ruolo", utente.getRuolo()); //Optional parameters*/
+
                     getActivity().startActivity(intentDelegaSito);
                     }
 
@@ -89,20 +99,25 @@ public class FragmentImpostazioniSito extends Fragment {
             elimina_sito.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    checkSitoAssociatoAlCuratore(utente.getUid());
                     Log.e("controlloSito", "Ho controllato se è associato il sito");
 
                     if(sito == null){
-                        Toast.makeText(getActivity().getApplicationContext(), "Operazione non eseguibile: non è associato alcun sito", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.toastDeleteSito, Toast.LENGTH_SHORT).show();
                         Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
                     }else {
 
                         Intent intentEliminaSito = new Intent(getActivity(), EliminaSito.class);
-                        intentEliminaSito.putExtra("uid", utente.getUid()); //Optional parameters
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("utente", (Serializable) utente);
+                        intentEliminaSito.putExtras(bundle) ;
+
+
+                        /*intentEliminaSito.putExtra("uid", utente.getUid()); //Optional parameters
                         intentEliminaSito.putExtra("nome", utente.getNome()); //Optional parameters
                         intentEliminaSito.putExtra("cognome", utente.getCognome()); //Optional parameters
                         intentEliminaSito.putExtra("email", utente.getEmail()); //Optional parameters
-                        intentEliminaSito.putExtra("ruolo", utente.getRuolo()); //Optional parameters
+                        intentEliminaSito.putExtra("ruolo", utente.getRuolo()); //Optional parameters*/
+
                         getActivity().startActivity(intentEliminaSito);
                     }
                 }
