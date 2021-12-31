@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+<<<<<<< HEAD
             android:name=".activities.VisualizzaOpera"
+=======
+            android:name=".activities.DelegaSito"
+>>>>>>> 48e6d75aef8982775a7e2a6c5d1aeb56e083509c
             android:exported="true" />
         <activity
             android:name=".activities.VisualizzaZoneSito"
@@ -25,9 +29,6 @@
             android:exported="true" />
         <activity
             android:name=".activities.EliminaSito"
-            android:exported="true" />
-        <activity
-            android:name=".activities.DelegaSito"
             android:exported="true" />
         <activity
             android:name=".activities.AggiungiPercorso"
