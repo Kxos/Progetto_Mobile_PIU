@@ -28,8 +28,8 @@ import java.util.ArrayList;
 
 public class DelegaSito extends AppCompatActivity {
 
-    Utente delegato ;
-    SitoCulturale sitoDaDelegare ;
+    Utente delegato;
+    SitoCulturale sitoDaDelegare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,27 +42,27 @@ public class DelegaSito extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        Bundle bundle = getIntent().getExtras() ;
-        Curatore utente = (Curatore) bundle.getSerializable("utente") ;
+        Bundle bundle = getIntent().getExtras();
+        Curatore utente = (Curatore) bundle.getSerializable("utente");
 
-        EditText editEmailDelegato  = findViewById(R.id.edit_text_email) ;
+        EditText editEmailDelegato = findViewById(R.id.edit_text_email);
         CheckBox boxInfo = findViewById(R.id.boxInfoDelegate);
-        Button buttonConferma = findViewById(R.id.button_conferma_delega) ;
-        Button buttonAnnulla = findViewById(R.id.button_annulla_delega) ;
+        Button buttonConferma = findViewById(R.id.button_conferma_delega);
+        Button buttonAnnulla = findViewById(R.id.button_annulla_delega);
 
-        String emailDelegato = editEmailDelegato.getText().toString() ;
+        String emailDelegato = editEmailDelegato.getText().toString();
 
 
         buttonConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailDelegato = editEmailDelegato.getText().toString() ;
+                String emailDelegato = editEmailDelegato.getText().toString();
 
-                if(emailDelegato.isEmpty()){
+                if (emailDelegato.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Non hai inserito nessuna email", Toast.LENGTH_SHORT).show();
-                }else if(!boxInfo.isChecked()){
+                } else if (!boxInfo.isChecked()) {
                     Toast.makeText(getApplicationContext(), "Devi confermare di aver letto l'informativa per procedere com la delega", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
                     DatabaseReference myRef = database.getReference("/");
                     /***
@@ -161,18 +161,12 @@ public class DelegaSito extends AppCompatActivity {
                     });
 
 
-
                 }
-
-
-
-
 
 
             }
 
         });
-
 
 
     }
