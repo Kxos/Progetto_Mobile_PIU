@@ -1,14 +1,17 @@
 package com.uniba.capitool.fragments.fragmentVisualizzaZoneSito;
 
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 
-public class ItemOperaZona {
+import java.io.Serializable;
+
+public class ItemOperaZona implements Serializable {
     String idOpera;
     String titolo;
     String descrizione;
     String idZona;  //salvo l'id della zona per avere un riferimento quando poi clicco nella recycler view delle opere, altrimenti ho la posizione dell'opera
                     // ma non la posizione della zona nella recycler view "Main"
-    Uri foto;
+
+    Drawable foto;
 
     public ItemOperaZona(String id, String titolo, String descrizione, String idZona) {
         this.idOpera = id;
@@ -49,11 +52,11 @@ public class ItemOperaZona {
         this.titolo = titolo;
     }
 
-    public Uri getFoto() {
+    public Drawable getFoto() {
         return foto;
     }
 
-    public void setFoto(Uri foto) {
+    public void setFoto(Drawable foto) {
         this.foto = foto;
     }
 }
