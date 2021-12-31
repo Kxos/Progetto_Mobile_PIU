@@ -38,7 +38,10 @@
     <string name="toastDelegateSito">Delegate site not available: you do not have an associated site</string>
     <string name="toastDeleteSito">Delete site non disponibile: you do not have an associated site</string>
 
+<<<<<<< HEAD
     <string name="toastNessunaOpera">No opera selected!</string>
 
+=======
+>>>>>>> cc7f016a41a84b0b8b09f3178d614acaa313f2e9
 
 </resources>

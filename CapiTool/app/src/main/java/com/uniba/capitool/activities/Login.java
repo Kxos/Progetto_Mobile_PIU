@@ -40,7 +40,8 @@ public class Login extends AppCompatActivity {
 
     EditText email;
     TextInputEditText password;
-    ProgressBar progressBar;
+    ProgressBar progressCircle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.textfield_email);
         password = findViewById(R.id.textfield_password);
 
-        progressBar=findViewById(R.id.progressLogin);
+        progressCircle =findViewById(R.id.progressLogin);
 
         /**
          *
@@ -82,7 +83,7 @@ public class Login extends AppCompatActivity {
 
         button_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
+                progressCircle.setVisibility(View.VISIBLE);
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
@@ -152,6 +153,8 @@ public class Login extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if(user == null){
             BasicMethod.alertDialog(this, "Controlla i dati inseriti e riprova", "Account non trovato", "Ok");
+            progressCircle.setVisibility(View.GONE);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
 
         if(user != null) {
