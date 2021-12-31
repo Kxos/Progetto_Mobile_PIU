@@ -76,7 +76,7 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
          */
         @Override
         public void onClick(View v) {
-            onOperaListener.onOperaClick(getAdapterPosition(), idZona.getText().toString());
+            onOperaListener.onOperaClick(getAdapterPosition(), idZona.getText().toString(), v);
         }
     }
 
@@ -107,7 +107,7 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
     }
 
     public interface OnOperaListener{
-        void onOperaClick(int posizioneOpera, String idZona);
+        void onOperaClick(int posizioneOpera, String idZona, View v);
     }
 
 }

@@ -27,6 +27,7 @@ public class FragmentDatiPercorso extends Fragment {
 
     private Toolbar toolbar;
     private View viewActivity;
+    private static ArrayList<CardOpera> listaOpereChecked;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,9 +50,9 @@ public class FragmentDatiPercorso extends Fragment {
         if(sharedPreferences!=null){
 
             Bundle args = getArguments();;
-            ArrayList<CardOpera> listaOpereChecked = (ArrayList<CardOpera>)args.getSerializable("listaOpereSelezionate");
+            listaOpereChecked = (ArrayList<CardOpera>)args.getSerializable("listaOpereSelezionate");
 
-            Log.e("SEI IN DATI PERCORSO: ", ""+listaOpereChecked);
+            //Log.e("SEI IN DATI PERCORSO: ", ""+listaOpereChecked);
 
             //toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
 
@@ -61,5 +62,9 @@ public class FragmentDatiPercorso extends Fragment {
             Log.e( "onCreateView: ", "SharedPreferences non trovato");
         }
 
+    }
+
+    public static ArrayList<CardOpera> getListaOpereChecked(){
+        return listaOpereChecked;
     }
 }

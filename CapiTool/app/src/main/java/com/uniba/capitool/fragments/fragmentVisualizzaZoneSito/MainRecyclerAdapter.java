@@ -1,6 +1,9 @@
 package com.uniba.capitool.fragments.fragmentVisualizzaZoneSito;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.VisualizzaOpera;
+import com.uniba.capitool.activities.VisualizzaZoneSito;
 
 import java.util.List;
 
@@ -94,10 +99,30 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
 
     @Override
-    public void onOperaClick(int posizioneOpera, String idZona) {
+    public void onOperaClick(int posizioneOpera, String idZona, View v) {
 
         int posizioneZona=getIndexZona(allZoneList, idZona);
         Log.e("CLICCATO", ""+allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera).getDescrizione());
+
+        ItemOperaZona operaCliccata=allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera);
+        Intent visualizzaOpera = new Intent(v.getContext(), VisualizzaOpera.class);
+        Bundle itemSelected = new Bundle();
+        itemSelected.putSerializable("opera", operaCliccata);
+        visualizzaOpera.putExtras(itemSelected);
+        Bundle transazione= ActivityOptions.makeSceneTransitionAnimation((VisualizzaZoneSito)v.getContext()).toBundle();
+        //visualizzaOpera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ((VisualizzaZoneSito)v.getContext()).startActivity(visualizzaOpera, transazione);
+
+//      ((VisualizzaZoneSito)v.getContext()).overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_from_top);
+
+
+//        View fc= ((VisualizzaZoneSito)v.getContext()).findViewById(R.id.fragmentContainerOpera);
+//        fc.setVisibility(View.VISIBLE);
+//        FragmentManager fragmentManager= ((VisualizzaZoneSito)v.getContext()).getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.fragmentContainerOpera, new FragmentRegistraCredenziali() );
+//        fragmentTransaction.setCustomAnimations(R.anim.slide_from_bottom, R.anim.slide_from_top, R.anim.slide_from_bottom, R.anim.slide_from_top);
+//        fragmentTransaction.commit();
 
     }
 

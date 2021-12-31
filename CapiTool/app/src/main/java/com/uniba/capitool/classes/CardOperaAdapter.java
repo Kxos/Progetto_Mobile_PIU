@@ -45,6 +45,13 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         this.listaOpereUnchecked = new ArrayList<>();
     }
 
+    // Pass in the array into the constructor
+    public CardOperaAdapter(ArrayList<CardOpera> listaOpere, ArrayList<CardOpera> listaOpereChecked) {
+        this.listaOpere = listaOpere;
+        this.listaOpereChecked = listaOpereChecked;
+        this.listaOpereUnchecked = new ArrayList<>();
+    }
+
     // Usually involves inflating a layout from XML and returning the holder
     @Override
     public CardOperaAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
