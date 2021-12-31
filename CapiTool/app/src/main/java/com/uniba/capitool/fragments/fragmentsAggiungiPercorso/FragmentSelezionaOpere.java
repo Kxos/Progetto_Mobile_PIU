@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,6 +72,11 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
             sitoCulturale.setNome(sharedPreferences.getString("nomeSito", ""));
 
             toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
+
+            Bundle args = getArguments();
+            if(args != null){
+                listaOpereChecked = (ArrayList<CardOpera>)args.getSerializable("listaOpereSelezionate");
+            }
 
             recuperaZoneFromDBOrderByZoneId(sitoCulturale.getId());
 
@@ -185,24 +191,33 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                     buttonPrecedenteZona.setVisibility(View.VISIBLE);
                     nomeZona.setText(listaZone.get(countZone).getNome());
                 }else {
+                    // Ottenuta la lista finale delle opere scelte, passaggio finale
                     listaOpereChecked.addAll(adapter.getListaOpereChecked());
-                    Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked);
+                    //Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked.size());
 
-                    // TODO - CREAZIONE DEL PERCORSO
+                    // Se l'utente non ha selezionato alcuna opera
+                    if(listaOpereChecked.size()==0){
 
-                    SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastNessunaOpera), Toast.LENGTH_SHORT).show();
+                        Log.e("LISTA OPERE VUOTA: ", "utyu");
 
-                    // put the objects to send to our fragment in a bundle
-                    FragmentDatiPercorso fragmentDatiPercorso = new FragmentDatiPercorso();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("listaOpereSelezionate",  listaOpereChecked);
-                    fragmentDatiPercorso.setArguments(bundle);
+                    } else{
 
-                    FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentDatiPercorso );
-                    fragmentTransaction.commit();
+                        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        // put the objects to send to our fragment in a bundle
+                        FragmentDatiPercorso fragmentDatiPercorso = new FragmentDatiPercorso();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("listaOpereSelezionate",  listaOpereChecked);
+                        fragmentDatiPercorso.setArguments(bundle);
+
+                        FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentDatiPercorso );
+                        fragmentTransaction.commit();
+
+                    }
 
                 }
 
@@ -287,6 +302,10 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
             }
             //Log.e("Lista ottenuta dall'ADAPTER: ", ""+adapter.getListaOpereChecked());
         }
+    }
+
+    public ArrayList<CardOpera> getListaOpereChecked(){
+        return listaOpereChecked;
     }
 
 }

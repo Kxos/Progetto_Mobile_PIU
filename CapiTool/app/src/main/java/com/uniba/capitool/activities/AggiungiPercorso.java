@@ -65,10 +65,19 @@ public class AggiungiPercorso extends AppCompatActivity {
                     fragmentTransaction.commit();
                 } else if (currentFragment instanceof FragmentDatiPercorso){
                     Log.d( "--------------------FRAGMENT IN USE: ", "FragmentSelezionaOpere");
+
+                    FragmentSelezionaOpere fragmentSelezionaOpere = new FragmentSelezionaOpere();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("listaOpereSelezionate",  FragmentDatiPercorso.getListaOpereChecked());
+                    fragmentSelezionaOpere.setArguments(bundle);
+
+                    //Log.e( "LISTA IN RITORNO: ", ""+FragmentDatiPercorso.getListaOpereChecked());
+
                     FragmentManager fragmentManager= getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerRicercaSiti, new FragmentSelezionaOpere() );
+                    fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentSelezionaOpere );
                     fragmentTransaction.commit();
+
                 }
             }
         });
