@@ -50,13 +50,14 @@ public class DelegaSito extends AppCompatActivity {
         Button buttonConferma = findViewById(R.id.button_conferma_delega);
         Button buttonAnnulla = findViewById(R.id.button_annulla_delega);
 
-        String emailDelegato = editEmailDelegato.getText().toString();
+
 
 
         buttonConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String emailDelegato = editEmailDelegato.getText().toString();
+                daDelegare = null ;
 
                 if (emailDelegato.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Non hai inserito nessuna email", Toast.LENGTH_SHORT).show();
@@ -86,11 +87,11 @@ public class DelegaSito extends AppCompatActivity {
 
 
                                 delegato = utenti.get(0);
+                                Log.e("***utente trovato***", "email: " + delegato.getEmail() + " --- ruolo: " + delegato.getRuolo() );
 
 
-                                if (delegato.getRuolo() != "curatore") {
-                                    Toast.makeText(getApplicationContext(), "Non puoi delegare un sito ad un utente non curatore", Toast.LENGTH_SHORT).show();
-                                } else {
+
+                                 if(delegato.getRuolo().equals("curatore")){
                                     /**
                                      * Trovato il curatore a cui delegare il sito, controllo che non abbia già un sito associato
                                      */
@@ -103,13 +104,15 @@ public class DelegaSito extends AppCompatActivity {
                                             ArrayList<SitoCulturale> siti = new ArrayList<>();
                                             // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                Log.e("*****!!!!*****", "SONO NEL FOR!!!");
+
                                                 siti.add(snapshot.getValue(SitoCulturale.class));
+                                                Log.e("*****!!!!*****", "c'è un sito");
                                             }
+                                            Log.e("*****!!!!*****", "procedo");
 
                                             if (siti.size() != 0) {
                                                 Toast.makeText(getApplicationContext(), "Non è possibile delegare il sito ad un curatore che ne ha già associato uno", Toast.LENGTH_SHORT).show();
-                                            } else {
+                                            }else{
                                                 Log.e("*****!!!!*****", "Non ha un sito quindi posso delegare");
 
 
@@ -125,10 +128,18 @@ public class DelegaSito extends AppCompatActivity {
                                                         }
 
 
-                                                        if (siti.size() != 0) {
+                                                        if (!siti.isEmpty()) {
+
+
                                                             sitoDaDelegare = siti.get(0);
                                                             sitoDaDelegare.setUidCuratore(delegato.getUid());
+
+                                                            /***
+                                                             * TODO inserire query per effetiva delega del sito
+                                                             */
                                                             Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
+                                                        }else{
+                                                            Toast.makeText(getApplicationContext(), "Errore nella delega :(", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
 
@@ -149,6 +160,9 @@ public class DelegaSito extends AppCompatActivity {
                                         }
                                     });
 
+                                }else{
+                                    Toast.makeText(getApplicationContext(), "Non puoi delegare un sito ad un utente non curatore", Toast.LENGTH_SHORT).show();
+                                    Log.e("non è un curatore", "ruolo: " + delegato.getRuolo());
                                 }
                             }
                         }
