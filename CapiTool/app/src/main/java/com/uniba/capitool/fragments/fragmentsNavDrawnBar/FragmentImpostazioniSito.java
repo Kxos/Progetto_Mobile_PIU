@@ -42,6 +42,7 @@ public class FragmentImpostazioniSito extends Fragment {
 
     SitoCulturale sito = null ;
     DatabaseReference myRef ;
+    String inutile ;
 
 
     public FragmentImpostazioniSito() {
