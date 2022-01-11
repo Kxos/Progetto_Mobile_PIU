@@ -57,7 +57,7 @@ public class DelegaSito extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String emailDelegato = editEmailDelegato.getText().toString();
-                daDelegare = null ;
+                sitoDaDelegare = null ;
 
                 if (emailDelegato.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Non hai inserito nessuna email", Toast.LENGTH_SHORT).show();
