@@ -137,7 +137,7 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
     public void mostraOperePerZone(ArrayList<Zona> listaZone){
 
         int numeroOpere =  listaZone.get(0).getOpere().size() -1; // -1 Perchè inizia da 0
-        ArrayList<CardOpera>[] listaOpere = new ArrayList[numeroZoneSIZE];
+        final ArrayList<CardOpera>[] listaOpere = new ArrayList[numeroZoneSIZE];
 
         // Inizializzo listaOpere
         for (int i = 0; i < numeroZoneSIZE; i++) {
@@ -173,7 +173,13 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
         Button buttonSuccessivaZona = viewActivity.findViewById(R.id.buttonSuccessivaZona);
         buttonPrecedenteZona.setVisibility(View.INVISIBLE);
 
+        if(listaOpereChecked != null){
+            setListaOpereFromFragmentDatiPercorso(listaZone, listaOpere);
+            listaOpereChecked = null;
+        }
+
         adapter = popolaOpereInRecyclerView(listaOpere[0]);
+
 
         // Pulsante Avanti
         buttonSuccessivaZona.setOnClickListener(new View.OnClickListener() {
@@ -245,6 +251,31 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
             }
         });
 
+    }
+
+    /***
+     * Restitusisce le opere, con le checkbox già selezionate in precedenza
+     *
+     * @param listaZone
+     * @param listaOpere
+     * @return listaOpere: Con le checkbox settate correttamente
+     */
+    private ArrayList<CardOpera>[] setListaOpereFromFragmentDatiPercorso(ArrayList listaZone, ArrayList<CardOpera>[] listaOpere ) {
+
+        for(int countZone = 0; countZone!=listaZone.size();countZone++){
+            for(int i = 0; i < listaOpereChecked.size(); i++){
+                for(int j = 0; j < listaOpere[countZone].size(); j++){
+
+                    if(listaOpere[countZone].get(j).getTitolo().equals(listaOpereChecked.get(i).getTitolo())){
+                        listaOpere[countZone].get(j).setCheckBoxCheckedStatus(true);
+                    }
+
+                }
+
+            }
+
+        }
+        return listaOpere;
     }
 
     /***
