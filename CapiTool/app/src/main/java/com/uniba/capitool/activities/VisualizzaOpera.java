@@ -69,8 +69,10 @@ public class VisualizzaOpera extends AppCompatActivity {
     }
 
     @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_from_top,R.anim.slide_in_top);
+    public void onBackPressed() {
+        super.onBackPressed();
+      //  overridePendingTransition(R.anim.slide_from_top, R.anim.slide_in_top);
+
     }
+
 }
