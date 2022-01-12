@@ -29,7 +29,8 @@ import java.util.ArrayList;
 public class DelegaSito extends AppCompatActivity {
 
     Utente delegato;
-    SitoCulturale sitoDaDelegare;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +54,12 @@ public class DelegaSito extends AppCompatActivity {
 
 
 
+
+
         buttonConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String emailDelegato = editEmailDelegato.getText().toString();
-                sitoDaDelegare = null ;
 
                 if (emailDelegato.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Non hai inserito nessuna email", Toast.LENGTH_SHORT).show();
@@ -69,6 +71,7 @@ public class DelegaSito extends AppCompatActivity {
                     /***
                      * Controllo nel database se c'è un curatore a cui è associata l'email inserita nel'editText
                      */
+
                     Query recentPostsQuery = myRef.child("Utenti").orderByChild("email").equalTo(emailDelegato);
                     recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -87,7 +90,7 @@ public class DelegaSito extends AppCompatActivity {
 
 
                                 delegato = utenti.get(0);
-                                Log.e("***utente trovato***", "email: " + delegato.getEmail() + " --- ruolo: " + delegato.getRuolo() );
+                                Log.e("***utente trovato***", "email: " + delegato.getEmail() + " --- ruolo: " + delegato.getRuolo() + " --- uid: " + delegato.getUid() );
 
 
 
@@ -110,7 +113,7 @@ public class DelegaSito extends AppCompatActivity {
                                             }
                                             Log.e("*****!!!!*****", "procedo");
 
-                                            if (siti.size() != 0) {
+                                            if (!siti.isEmpty()) {
                                                 Toast.makeText(getApplicationContext(), "Non è possibile delegare il sito ad un curatore che ne ha già associato uno", Toast.LENGTH_SHORT).show();
                                             }else{
                                                 Log.e("*****!!!!*****", "Non ha un sito quindi posso delegare");
@@ -129,14 +132,14 @@ public class DelegaSito extends AppCompatActivity {
 
 
                                                         if (!siti.isEmpty()) {
+                                                            SitoCulturale sitoDaDelegare = siti.get(0);
+                                                            //sitoDaDelegare.setUidCuratore(delegato.getUid());
 
 
-                                                            sitoDaDelegare = siti.get(0);
-                                                            sitoDaDelegare.setUidCuratore(delegato.getUid());
+                                                            myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid()); ;
+                                                            Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
 
-                                                            /***
-                                                             * TODO inserire query per effetiva delega del sito
-                                                             */
+
                                                             Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
                                                         }else{
                                                             Toast.makeText(getApplicationContext(), "Errore nella delega :(", Toast.LENGTH_SHORT).show();
