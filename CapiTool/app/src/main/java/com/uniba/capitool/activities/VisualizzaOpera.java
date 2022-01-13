@@ -27,14 +27,15 @@ public class VisualizzaOpera extends AppCompatActivity {
 
         ImageView immagine = findViewById(R.id.imageViewVisualizzaOpera);
         TextView testo = findViewById(R.id.textView12);
-
+        TextView titoloOpera = findViewById(R.id.titoloNomeOpera);
         Bundle dati = getIntent().getExtras();
 
         if(dati!=null){
             ItemOperaZona opera = (ItemOperaZona) dati.getSerializable("opera");
             Glide.with(this).load(opera.getFoto()).into(immagine);
            // immagine.setImageDrawable(opera.getFoto());
-            testo.setText(opera.getIdOpera()+"\n"+opera.getTitolo()+"\n"+opera.getDescrizione());
+            titoloOpera.setText(opera.getTitolo());
+            testo.setText(opera.getDescrizione());
 
             setImmagineOperaFromDB(opera.getIdOpera(), this, immagine);
         }else{
