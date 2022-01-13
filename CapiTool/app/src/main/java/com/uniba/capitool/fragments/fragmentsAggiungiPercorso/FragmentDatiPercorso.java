@@ -8,11 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
@@ -55,6 +58,24 @@ public class FragmentDatiPercorso extends Fragment {
             //Log.e("SEI IN DATI PERCORSO: ", ""+listaOpereChecked);
 
             //toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
+
+            Button bottoneIndietro = view.findViewById(R.id.buttonIndietro);
+            bottoneIndietro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentSelezionaOpere fragmentSelezionaOpere = new FragmentSelezionaOpere();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("listaOpereSelezionate",  listaOpereChecked);
+                    fragmentSelezionaOpere.setArguments(bundle);
+
+                    //Log.e( "LISTA IN RITORNO: ", ""+FragmentDatiPercorso.getListaOpereChecked());
+
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentSelezionaOpere );
+                    fragmentTransaction.commit();
+                }
+            });
 
 
 

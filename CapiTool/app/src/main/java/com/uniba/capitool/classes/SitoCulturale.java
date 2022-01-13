@@ -15,7 +15,7 @@ public class SitoCulturale implements Serializable {
     private String costoBiglietto;
     private String citta;
     private Image foto;
-    private ArrayList<Zona> zone = new ArrayList<>();
+    private ArrayList<Zona> Zone = new ArrayList<>();
     private String uidCuratore;
 
     public SitoCulturale(){
@@ -32,7 +32,7 @@ public class SitoCulturale implements Serializable {
         this.costoBiglietto = costoBiglietto;
         this.citta = citta;
         this.foto = foto;
-        this.zone = zone;
+        this.Zone = zone;
         this.uidCuratore = uidCuratore;
     }
 
@@ -53,11 +53,11 @@ public class SitoCulturale implements Serializable {
 
 
     protected boolean aggiungiZona(Zona zona) {
-        return zone.add(zona);
+        return Zone.add(zona);
     }
 
     protected boolean rimuoviZona(Zona zona) {
-        return zone.remove(zona);
+        return Zone.remove(zona);
     }
 
     // Getter - Setter
@@ -78,7 +78,7 @@ public class SitoCulturale implements Serializable {
 
     public void setFoto(Image foto) { this.foto = foto; }
 
-    public void setZone (ArrayList<Zona> zone){ this.zone = zone ;}
+    public void setZone (ArrayList<Zona> zone){ this.Zone = zone ;}
 
     public void setUidCuratore(String uidCuratore){ this.uidCuratore = uidCuratore ;}
 
@@ -101,7 +101,7 @@ public class SitoCulturale implements Serializable {
     public Image getFoto() { return foto; }
 
     public ArrayList<Zona> getZone() {
-        return zone;
+        return Zone;
     }
 
     public String getUidCuratore(){return uidCuratore ;}
