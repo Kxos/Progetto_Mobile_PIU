@@ -1,12 +1,24 @@
 package com.uniba.capitool.activities;
 
+
+import android.content.DialogInterface;
+
+import android.content.Intent;
+
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.EditText;
+
+import android.app.Activity;
+
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,6 +44,7 @@ import java.util.List;
 
 public class VisualizzaZoneSito extends AppCompatActivity{
 
+    private String nuovaZona = "";
     RecyclerView mainZoneRecycler;
     MainRecyclerAdapter mainRecyclerAdapter;
     SitoCulturale sito;
@@ -88,6 +101,8 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                     zone.add(zona);
                 }
 
+
+
                 /***
                  * Passo gli oggetti salvati nella lista zone, nella lista allZoneList
                  * Il primo for scorre le zone
@@ -96,17 +111,26 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                  */
                 for(int i=0; i<zone.size(); i++){
                     int contatore=0;
+                    Log.e("", ""+zone.get(i).getNome());
+
                     List<ItemOperaZona> listaOpereZona = new ArrayList<>();
-                    for(Opera opera: zone.get(i).getOpere()){
-                        if(contatore==0){
-                            Log.e("SKIP", "Skip dell'opera null");
-                        }else{
-                            listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId()));
-                            Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
+                    try{
+                        for(Opera opera: zone.get(i).getOpere()){
+                            if(contatore==0){
+                                Log.e("SKIP", "Skip dell'opera null");
+                            }else{
+                                listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId()));
+                                Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
+                            }
+                            contatore++;
                         }
-                        contatore++;
+                        allZoneList.add(new AllZone(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona));
+                    }catch (Exception e){
+                        Log.e("","Erroreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+
+                        allZoneList.add(new AllZone(zone.get(i).getId(), zone.get(i).getNome(), null));
                     }
-                    allZoneList.add(new AllZone(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona));
+
 
                 }
 
@@ -163,10 +187,43 @@ public class VisualizzaZoneSito extends AppCompatActivity{
 
         switch (item.getItemId()){
             case R.id.aggiungiZona:
-                Log.e("ITEMSELECTED", "AGGIUNGI ZONA");
+
+
+
+               // Log.e("ITEMSELECTED", "AGGIUNGI ZONA");
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Scrivi il nome della nuova zona");
+
+                // Set up the input
+                final EditText input = new EditText(this);
+                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+
+                // Set up the buttons
+                builder.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        nuovaZona = input.getText().toString();
+                        Log.e("ITEMSELECTED", ""+ nuovaZona);
+                        inserisciNuovaZona(nuovaZona);
+                    }
+                });
+                builder.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
                 break;
 
             case R.id.eliminaZone:
+
+                Intent eliminaZone = new Intent(this, EliminaZone.class);
+                startActivity(eliminaZone);
+
                 break;
 
             case R.id.ordinaZone:
@@ -175,6 +232,37 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void inserisciNuovaZona(String nuovaZona) {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        String key = myRef.push().getKey();
+
+        Zona zona= new Zona(nuovaZona);
+        zona.setId(key);
+
+        //TODO - togliere 1 di default e mettere sito.getId()
+        myRef=database.getReference("Siti/1"+"/Zone").child(key);
+        Log.e("*****************", ""+myRef);
+        myRef.setValue(zona);
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.e("Completato", "");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
     }
 
 }

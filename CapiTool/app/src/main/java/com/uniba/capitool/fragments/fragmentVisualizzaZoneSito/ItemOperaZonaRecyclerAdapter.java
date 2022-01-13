@@ -46,11 +46,23 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
 
         //setto in una TextVew invisibile l'id della Zona in modo da avere un riferimento quando clicco sull'opera (brutto ma efficace)
         holder.idZona.setText(listaOpereZona.get(position).getIdZona());
+
     }
 
+    /***
+     *Se listaOpereZona è null significa che quella zona è stata creata ma che non ha nessun opera ancora al suo interno
+     * Per gestire la situazione creo un if che restituisce 0 in caso di lista vuota
+     * @return
+     */
     @Override
     public int getItemCount() {
-        return listaOpereZona.size();
+
+        if (listaOpereZona==null){
+            return 0;
+        }else{
+            return listaOpereZona.size();
+        }
+
     }
 
     public static final class ItemOperaZonaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

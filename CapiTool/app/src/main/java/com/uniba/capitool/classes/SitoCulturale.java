@@ -4,6 +4,7 @@ import android.media.Image;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SitoCulturale implements Serializable {
 
@@ -15,7 +16,7 @@ public class SitoCulturale implements Serializable {
     private String costoBiglietto;
     private String citta;
     private Image foto;
-    private ArrayList<Zona> Zone = new ArrayList<>();
+    private List<Zona> Zone ;
     private String uidCuratore;
 
     public SitoCulturale(){
@@ -46,7 +47,7 @@ public class SitoCulturale implements Serializable {
         this.orarioChiusura = orarioChiusura;
         this.costoBiglietto = costoBiglietto;
         this.citta = citta;
-
+        Zone = new ArrayList<>();
         this.uidCuratore = uidCuratore;
     }
 
@@ -100,7 +101,7 @@ public class SitoCulturale implements Serializable {
 
     public Image getFoto() { return foto; }
 
-    public ArrayList<Zona> getZone() {
+    public List getZone() {
         return Zone;
     }
 

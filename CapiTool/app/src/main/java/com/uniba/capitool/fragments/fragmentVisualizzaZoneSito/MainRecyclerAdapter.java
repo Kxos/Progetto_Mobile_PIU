@@ -47,6 +47,14 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         holder.nomeZona.setText(allZoneList.get(position).getNomeZona());
         setOpereZonaRecycler(holder.opereRecycler, allZoneList.get(position).getListaOpereZona());
 
+        /***
+         * Se listaOpereZona è null significa che quella zona è stata creata ma che non ha nessun opera ancora al suo interno
+         * Mostro un messaggio all'utente all'interno della recycler view
+         */
+        if(allZoneList.get(position).getListaOpereZona()==null){
+           holder.emptyZona.setVisibility(View.VISIBLE);
+       }
+
     }
 
     @Override
@@ -59,7 +67,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
         TextView nomeZona;
         RecyclerView opereRecycler;
-
+        TextView emptyZona;
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -67,14 +75,15 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
             nomeZona=itemView.findViewById(R.id.nomeZona);
             opereRecycler=itemView.findViewById(R.id.opere_recycler);
+            emptyZona=itemView.findViewById(R.id.textViewEmptyZona);
 
-//            nomeZona.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Log.e("nomeZona", ""+getAdapterPosition());
-//
-//                }
-//            });
+            emptyZona.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("nomeZona", ""+getAdapterPosition());
+
+                }
+            });
         }
 
         /***
@@ -102,7 +111,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     public void onOperaClick(int posizioneOpera, String idZona, View v) {
 
         int posizioneZona=getIndexZona(allZoneList, idZona);
-        Log.e("CLICCATO", ""+allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera).getDescrizione());
+
+        //Log.e("CLICCATO", ""+allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera).getDescrizione());
 
         ItemOperaZona operaCliccata=allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera);
         Intent visualizzaOpera = new Intent(v.getContext(), VisualizzaOpera.class);
@@ -110,19 +120,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         itemSelected.putSerializable("opera", operaCliccata);
         visualizzaOpera.putExtras(itemSelected);
         Bundle transazione= ActivityOptions.makeSceneTransitionAnimation((VisualizzaZoneSito)v.getContext()).toBundle();
-        //visualizzaOpera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         ((VisualizzaZoneSito)v.getContext()).startActivity(visualizzaOpera, transazione);
-
-//      ((VisualizzaZoneSito)v.getContext()).overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_from_top);
-
-
-//        View fc= ((VisualizzaZoneSito)v.getContext()).findViewById(R.id.fragmentContainerOpera);
-//        fc.setVisibility(View.VISIBLE);
-//        FragmentManager fragmentManager= ((VisualizzaZoneSito)v.getContext()).getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragmentContainerOpera, new FragmentRegistraCredenziali() );
-//        fragmentTransaction.setCustomAnimations(R.anim.slide_from_bottom, R.anim.slide_from_top, R.anim.slide_from_bottom, R.anim.slide_from_top);
-//        fragmentTransaction.commit();
 
     }
 
