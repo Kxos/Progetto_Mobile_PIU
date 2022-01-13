@@ -1,10 +1,12 @@
 package com.uniba.capitool.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -167,6 +169,8 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                 break;
 
             case R.id.eliminaZone:
+                Intent eliminaZone = new Intent(this, EliminaZone.class);
+                startActivity(eliminaZone);
                 break;
 
             case R.id.ordinaZone:
