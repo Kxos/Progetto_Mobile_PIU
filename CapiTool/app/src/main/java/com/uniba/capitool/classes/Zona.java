@@ -1,6 +1,7 @@
 package com.uniba.capitool.classes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Zona {
@@ -8,14 +9,14 @@ public class Zona {
 
     private String id ;
     private String nome ;
-    private ArrayList<Opera> Opere;
+    private List<Opera> Opere;
 
 
     public Zona(){} ;
 
     public Zona (String nome){
         this.nome = nome ;
-        Opere = new ArrayList<Opera>() ;
+        Opere = new ArrayList<>() ;
     }
 
 
@@ -28,7 +29,7 @@ public class Zona {
         return nome;
     }
 
-    public ArrayList<Opera> getOpere() {
+    public List<Opera> getOpere() {
         return Opere;
     }
 
