@@ -3,7 +3,9 @@ package com.uniba.capitool.classes;
 import android.net.Uri;
 import android.widget.CheckBox;
 
-public class CardOpera {
+import java.io.Serializable;
+
+public class CardOpera implements Serializable {
 
     private String id ;
     private String titolo ;

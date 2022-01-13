@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Utente;
+import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentDatiPercorso;
 import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentRicercaSiti;
 import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentSelezionaOpere;
 
@@ -62,6 +63,21 @@ public class AggiungiPercorso extends AppCompatActivity {
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerRicercaSiti, new FragmentRicercaSiti() );
                     fragmentTransaction.commit();
+                } else if (currentFragment instanceof FragmentDatiPercorso){
+                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentSelezionaOpere");
+
+                    FragmentSelezionaOpere fragmentSelezionaOpere = new FragmentSelezionaOpere();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("listaOpereSelezionate",  FragmentDatiPercorso.getListaOpereChecked());
+                    fragmentSelezionaOpere.setArguments(bundle);
+
+                    //Log.e( "LISTA IN RITORNO: ", ""+FragmentDatiPercorso.getListaOpereChecked());
+
+                    FragmentManager fragmentManager= getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentSelezionaOpere );
+                    fragmentTransaction.commit();
+
                 }
             }
         });

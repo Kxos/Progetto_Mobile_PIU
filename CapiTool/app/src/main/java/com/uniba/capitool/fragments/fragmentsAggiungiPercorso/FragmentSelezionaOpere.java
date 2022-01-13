@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,9 +34,10 @@ import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Zona;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FragmentSelezionaOpere extends Fragment {
+public class FragmentSelezionaOpere extends Fragment implements Serializable {
 
     private Toolbar toolbar;
     private View viewActivity;
@@ -68,6 +72,11 @@ public class FragmentSelezionaOpere extends Fragment {
             sitoCulturale.setNome(sharedPreferences.getString("nomeSito", ""));
 
             toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
+
+            Bundle args = getArguments();
+            if(args != null){
+                listaOpereChecked = (ArrayList<CardOpera>)args.getSerializable("listaOpereSelezionate");
+            }
 
             recuperaZoneFromDBOrderByZoneId(sitoCulturale.getId());
 
@@ -128,7 +137,7 @@ public class FragmentSelezionaOpere extends Fragment {
     public void mostraOperePerZone(ArrayList<Zona> listaZone){
 
         int numeroOpere =  listaZone.get(0).getOpere().size() -1; // -1 Perchè inizia da 0
-        ArrayList<CardOpera>[] listaOpere = new ArrayList[numeroZoneSIZE];
+        final ArrayList<CardOpera>[] listaOpere = new ArrayList[numeroZoneSIZE];
 
         // Inizializzo listaOpere
         for (int i = 0; i < numeroZoneSIZE; i++) {
@@ -164,7 +173,13 @@ public class FragmentSelezionaOpere extends Fragment {
         Button buttonSuccessivaZona = viewActivity.findViewById(R.id.buttonSuccessivaZona);
         buttonPrecedenteZona.setVisibility(View.INVISIBLE);
 
+        if(listaOpereChecked != null){
+            setListaOpereFromFragmentDatiPercorso(listaZone, listaOpere);
+            listaOpereChecked = null;
+        }
+
         adapter = popolaOpereInRecyclerView(listaOpere[0]);
+
 
         // Pulsante Avanti
         buttonSuccessivaZona.setOnClickListener(new View.OnClickListener() {
@@ -182,9 +197,34 @@ public class FragmentSelezionaOpere extends Fragment {
                     buttonPrecedenteZona.setVisibility(View.VISIBLE);
                     nomeZona.setText(listaZone.get(countZone).getNome());
                 }else {
+                    // Ottenuta la lista finale delle opere scelte, passaggio finale
                     listaOpereChecked.addAll(adapter.getListaOpereChecked());
-                    Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked);
-                    // TODO - CREAZIONE DEL PERCORSO
+                    //Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked.size());
+
+                    // Se l'utente non ha selezionato alcuna opera
+                    if(listaOpereChecked.size()==0){
+
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastNessunaOpera), Toast.LENGTH_SHORT).show();
+                        Log.e("LISTA OPERE VUOTA: ", "utyu");
+
+                    } else{
+
+                        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        // put the objects to send to our fragment in a bundle
+                        FragmentDatiPercorso fragmentDatiPercorso = new FragmentDatiPercorso();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("listaOpereSelezionate",  listaOpereChecked);
+                        fragmentDatiPercorso.setArguments(bundle);
+
+                        FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentDatiPercorso );
+                        fragmentTransaction.commit();
+
+                    }
+
                 }
 
             }
@@ -211,6 +251,31 @@ public class FragmentSelezionaOpere extends Fragment {
             }
         });
 
+    }
+
+    /***
+     * Restitusisce le opere, con le checkbox già selezionate in precedenza
+     *
+     * @param listaZone
+     * @param listaOpere
+     * @return listaOpere: Con le checkbox settate correttamente
+     */
+    private ArrayList<CardOpera>[] setListaOpereFromFragmentDatiPercorso(ArrayList listaZone, ArrayList<CardOpera>[] listaOpere ) {
+
+        for(int countZone = 0; countZone!=listaZone.size();countZone++){
+            for(int i = 0; i < listaOpereChecked.size(); i++){
+                for(int j = 0; j < listaOpere[countZone].size(); j++){
+
+                    if(listaOpere[countZone].get(j).getTitolo().equals(listaOpereChecked.get(i).getTitolo())){
+                        listaOpere[countZone].get(j).setCheckBoxCheckedStatus(true);
+                    }
+
+                }
+
+            }
+
+        }
+        return listaOpere;
     }
 
     /***
@@ -268,6 +333,10 @@ public class FragmentSelezionaOpere extends Fragment {
             }
             //Log.e("Lista ottenuta dall'ADAPTER: ", ""+adapter.getListaOpereChecked());
         }
+    }
+
+    public ArrayList<CardOpera> getListaOpereChecked(){
+        return listaOpereChecked;
     }
 
 }

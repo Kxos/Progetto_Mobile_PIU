@@ -12,5 +12,9 @@
 
     <style name="DialogTheme" parent="android:Theme.Material.Light.Dialog">
         <item name="colorAccent">@color/orangeCapiTool</item>
+        
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/transition_animation</item>
+        <item name="android:windowExitTransition">@transition/transition_animation</item>
     </style>
 </resources>
