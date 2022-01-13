@@ -40,7 +40,7 @@
     <string name="toastDeleteSito">Elimina sito non disponibile: non hai un sito associato</string>
 
     <string name="toastNessunaOpera">Nessuna opera selezionata!</string>
-
+    <string name="toastDatiPercorso">Controlla il nome del Percorso!</string>
 
 
 

@@ -205,7 +205,7 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                     if(listaOpereChecked.size()==0){
 
                         Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastNessunaOpera), Toast.LENGTH_SHORT).show();
-                        Log.e("LISTA OPERE VUOTA: ", "utyu");
+                        //Log.e("LISTA OPERE VUOTA: ", "utyu");
 
                     } else{
 
