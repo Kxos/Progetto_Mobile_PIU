@@ -4,12 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 public class DelegaSito extends AppCompatActivity {
 
     Utente delegato;
-
+    Dialog dialog ;
 
 
     @Override
@@ -136,11 +137,42 @@ public class DelegaSito extends AppCompatActivity {
                                                             //sitoDaDelegare.setUidCuratore(delegato.getUid());
 
 
-                                                            myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid()); ;
-                                                            Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
+                                                            dialog = new Dialog(DelegaSito.this) ;
+                                                            dialog.setContentView(R.layout.delega_dialog);
+                                                            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_background));
+                                                            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                            dialog.setCancelable(false);
+
+                                                            Button dialog_confirm = dialog.findViewById(R.id.btn_confirm) ;
+                                                            Button dialog_cancel = dialog.findViewById(R.id.btn_cancel) ;
+
+                                                            dialog_confirm.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View v) {
+                                                                    //myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
+                                                                    Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
+                                                                    Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
+
+                                                                    dialog.dismiss();
+                                                                }
+                                                            });
+
+                                                            dialog_cancel.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View v) {
+                                                                    dialog.dismiss();
+                                                                }
+                                                            });
 
 
-                                                            Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
+                                                            dialog.show();
+
+
+                                                            //myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
+                                                            //Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
+                                                            //Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
+
+
                                                         }else{
                                                             Toast.makeText(getApplicationContext(), "Errore nella delega :(", Toast.LENGTH_SHORT).show();
                                                         }
