@@ -80,7 +80,7 @@ public class DelegaSito extends AppCompatActivity {
                             ArrayList<Utente> utenti = new ArrayList<>();
                             // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                Log.e("*****!!!!*****", "SONO NEL FOR!!!");
+                                Log.e("*****!!!!*****", "SONO NEL FOR!!!" + "uid tramite KEY***** " + snapshot.getKey());
                                 utenti.add(snapshot.getValue(Utente.class));
 
                             }
