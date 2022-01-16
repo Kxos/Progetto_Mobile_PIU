@@ -1,9 +1,5 @@
 package com.uniba.capitool.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +9,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -73,24 +73,25 @@ public class DelegaSito extends AppCompatActivity {
                      * Controllo nel database se c'è un curatore a cui è associata l'email inserita nel'editText
                      */
 
-                    Query recentPostsQuery = myRef.child("Utenti").orderByChild("email").equalTo(emailDelegato);
+                    Query recentPostsQuery = myRef.child("Utenti").orderByChild("email").equalTo(emailDelegato).limitToFirst(1);
                     recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            ArrayList<Utente> utenti = new ArrayList<>();
+                            Utente utenteTrovato = new Utente();
                             // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 Log.e("*****!!!!*****", "SONO NEL FOR!!!" + "uid tramite KEY***** " + snapshot.getKey());
-                                utenti.add(snapshot.getValue(Utente.class));
 
+                                utenteTrovato=snapshot.getValue(Utente.class);
+                                utenteTrovato.setUid(snapshot.getKey());
                             }
 
-                            if (utenti.isEmpty()) {
+                            if (utenteTrovato==null) {
                                 Toast.makeText(getApplicationContext(), "Nessun utente trovato", Toast.LENGTH_SHORT).show();
                             } else {
 
 
-                                delegato = utenti.get(0);
+                                delegato = utenteTrovato;
                                 Log.e("***utente trovato***", "email: " + delegato.getEmail() + " --- ruolo: " + delegato.getRuolo() + " --- uid: " + delegato.getUid() );
 
 
@@ -149,7 +150,7 @@ public class DelegaSito extends AppCompatActivity {
                                                             dialog_confirm.setOnClickListener(new View.OnClickListener() {
                                                                 @Override
                                                                 public void onClick(View v) {
-                                                                    //myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
+                                                                    myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
                                                                     Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
                                                                     Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
 
