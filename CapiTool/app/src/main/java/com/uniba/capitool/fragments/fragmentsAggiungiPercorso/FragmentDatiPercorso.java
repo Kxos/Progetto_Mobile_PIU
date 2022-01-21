@@ -16,7 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.classes.CardOpera;
@@ -77,12 +83,54 @@ public class FragmentDatiPercorso extends Fragment {
                 }
             });
 
+            EditText nomePercorso = view.findViewById(R.id.textfield_nomePercorso);
+            EditText descrizionePercorso = view.findViewById(R.id.textfield_descrizionePercorso);
+            Switch pubblicoPercorso = view.findViewById(R.id.switchPubblicoPercorso);
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+            DatabaseReference myRef = database.getReference("/");
+
+            Button bottoneAvanti = view.findViewById(R.id.buttonAvanti);
+            bottoneAvanti.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(nomePercorsoIsValorized(nomePercorso)){
+
+                        // TODO - SALVARE IL PERCORSO SU FIREBASE
+
+                        Log.e("AAAAAAAA","hjhjgh");
+                        Log.e("dgfdghfdghdfhdfh",""+pubblicoPercorso.isChecked());
+                        /**
+
+                        String key = myRef.push().getKey();
+                        myRef = database.getReference("Percorsi").child(key);
+                        myRef.setValue(percorso);
+                         */
+                    }else{
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastDatiPercorso), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
 
         }else{
             Log.e( "onCreateView: ", "SharedPreferences non trovato");
         }
 
+    }
+
+    /***
+     * Controlla che il nome del Percorso sia valorizzato
+     *
+     * @param nomePercorso
+     * @return boolean: Valore di verità
+     */
+    public boolean nomePercorsoIsValorized(EditText nomePercorso){
+        if(!nomePercorso.getText().toString().matches("")){
+            return true;
+        }
+        return false;
     }
 
     public static ArrayList<CardOpera> getListaOpereChecked(){

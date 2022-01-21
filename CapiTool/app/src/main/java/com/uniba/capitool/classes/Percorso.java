@@ -9,13 +9,15 @@ public class Percorso {
     private ArrayList<Zona> zoneScelte;
     private int idSitoAssociato;
     private String descrizione;
+    private boolean pubblico;
 
-    public Percorso(int id, String nome, ArrayList<Zona> zoneScelte, int idSitoAssociato, String descrizione) {
+    public Percorso(int id, String nome, ArrayList<Zona> zoneScelte, int idSitoAssociato, String descrizione, boolean pubblico) {
         this.id = id;
         this.nome = nome;
         this.zoneScelte = zoneScelte;
         this.idSitoAssociato = idSitoAssociato;
         this.descrizione = descrizione;
+        this.pubblico = pubblico;
     }
 
     protected void aggiornaPercorso(){
@@ -75,5 +77,14 @@ public class Percorso {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
+
+    public boolean isPubblico() {
+        return pubblico;
+    }
+
+    public void setPubblico(boolean pubblico) {
+        this.pubblico = pubblico;
+    }
+
 
 }
