@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -25,6 +26,12 @@ import androidx.navigation.ui.NavigationUI;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
@@ -32,7 +39,9 @@ import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -41,6 +50,7 @@ public class BasicMethod extends AppCompatActivity {
     
     static Utente utente;
     static NavController navController;
+    public List<String> indiciZone;
 
     public static void alertDialog(Activity activity, String messaggio, String titolo, String messaggioBottone){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -468,6 +478,43 @@ public class BasicMethod extends AppCompatActivity {
             dataNascita.setText(sdf.format(myCalendar.getTime()));
 
 
+        }
+
+        public void letturaZoneSito(String idSito){
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+
+            DatabaseReference myRef = database.getReference("/Siti/"+idSito+"/Zone");
+
+            Query recentPostsQuery = myRef.orderByChild("id");
+            recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    List<String> indiciZone= new ArrayList<>();
+
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                        indiciZone.add(snapshot.getKey());
+
+                    }
+
+                    for(int i=0; i<indiciZone.size(); i++){
+                        Log.e("indice", ""+indiciZone.get(i));
+                    }
+                  setIndiciZone(indiciZone);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Getting Post failed, log a message
+                    Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+                }
+            });
+        }
+
+        public void setIndiciZone(List<String> indiciZone){
+                this.indiciZone=indiciZone;
         }
 
     }
