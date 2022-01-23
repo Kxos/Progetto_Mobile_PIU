@@ -159,7 +159,9 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                     CardOpera cardOpera = new CardOpera();
                     cardOpera.setId(opera.getId());
                     cardOpera.setTitolo(opera.getTitolo());
+                    cardOpera.setDescrizione(opera.getDescrizione());
                     cardOpera.setFoto(opera.getFoto());
+                    cardOpera.setIdZona(listaZone.get(countZone).getId());
 
                     View cardOperaView = getLayoutInflater().inflate(R.layout.card_opera, null);
                     cardOpera.setCheckBox(cardOperaView.findViewById(R.id.checkOperaSelezionata));

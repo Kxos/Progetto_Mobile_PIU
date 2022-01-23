@@ -6,7 +6,7 @@ public class Percorso {
 
     private String id;
     private String nome;
-    private ArrayList<Zona> zoneScelte;
+    private ArrayList<Opera> opereScelte;
     private String idSitoAssociato;
     private String idUtente;
     private String descrizione;
@@ -16,10 +16,10 @@ public class Percorso {
 
     }
 
-    public Percorso(String id, String nome, ArrayList<Zona> zoneScelte, String idSitoAssociato, String idUtente, String descrizione, boolean pubblico) {
+    public Percorso(String id, String nome, ArrayList<Opera> zoneScelte, String idSitoAssociato, String idUtente, String descrizione, boolean pubblico) {
         this.id = id;
         this.nome = nome;
-        this.zoneScelte = zoneScelte;
+        this.opereScelte = zoneScelte;
         this.idSitoAssociato = idSitoAssociato;
         this.idUtente = idUtente;
         this.descrizione = descrizione;
@@ -34,12 +34,12 @@ public class Percorso {
 
     }
 
-    protected boolean aggiungiZonaScelta(Zona zonaScelta){
-        return zoneScelte.add(zonaScelta);
+    protected boolean aggiungiZonaScelta(Opera zonaScelta){
+        return opereScelte.add(zonaScelta);
     }
 
     protected boolean rimuoviZonaScelta(Zona zonaScelta){
-        return zoneScelte.remove(zonaScelta);
+        return opereScelte.remove(zonaScelta);
     }
 
 
@@ -60,12 +60,12 @@ public class Percorso {
         this.nome = nome;
     }
 
-    public ArrayList<Zona> getZoneScelte() {
-        return zoneScelte;
+    public ArrayList<Opera> getOpereScelte() {
+        return opereScelte;
     }
 
-    public void setZoneScelte(ArrayList<Zona> zoneScelte) {
-        this.zoneScelte = zoneScelte;
+    public void setOpereScelte(ArrayList<Opera> opereScelte) {
+        this.opereScelte = opereScelte;
     }
 
     public String getIdSitoAssociato() {
