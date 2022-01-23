@@ -4,18 +4,24 @@ import  java.util.ArrayList;
 
 public class Percorso {
 
-    private int id;
+    private String id;
     private String nome;
-    private ArrayList<Zona> zoneScelte;
-    private int idSitoAssociato;
+    private ArrayList<Opera> opereScelte;
+    private String idSitoAssociato;
+    private String idUtente;
     private String descrizione;
     private boolean pubblico;
 
-    public Percorso(int id, String nome, ArrayList<Zona> zoneScelte, int idSitoAssociato, String descrizione, boolean pubblico) {
+    public Percorso(){
+
+    }
+
+    public Percorso(String id, String nome, ArrayList<Opera> zoneScelte, String idSitoAssociato, String idUtente, String descrizione, boolean pubblico) {
         this.id = id;
         this.nome = nome;
-        this.zoneScelte = zoneScelte;
+        this.opereScelte = zoneScelte;
         this.idSitoAssociato = idSitoAssociato;
+        this.idUtente = idUtente;
         this.descrizione = descrizione;
         this.pubblico = pubblico;
     }
@@ -28,21 +34,21 @@ public class Percorso {
 
     }
 
-    protected boolean aggiungiZonaScelta(Zona zonaScelta){
-        return zoneScelte.add(zonaScelta);
+    protected boolean aggiungiZonaScelta(Opera zonaScelta){
+        return opereScelte.add(zonaScelta);
     }
 
     protected boolean rimuoviZonaScelta(Zona zonaScelta){
-        return zoneScelte.remove(zonaScelta);
+        return opereScelte.remove(zonaScelta);
     }
 
 
     //METODI GETTER & SETTER
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -54,19 +60,19 @@ public class Percorso {
         this.nome = nome;
     }
 
-    public ArrayList<Zona> getZoneScelte() {
-        return zoneScelte;
+    public ArrayList<Opera> getOpereScelte() {
+        return opereScelte;
     }
 
-    public void setZoneScelte(ArrayList<Zona> zoneScelte) {
-        this.zoneScelte = zoneScelte;
+    public void setOpereScelte(ArrayList<Opera> opereScelte) {
+        this.opereScelte = opereScelte;
     }
 
-    public int getIdSitoAssociato() {
+    public String getIdSitoAssociato() {
         return idSitoAssociato;
     }
 
-    public void setIdSitoAssociato(int idSitoAssociato) {
+    public void setIdSitoAssociato(String idSitoAssociato) {
         this.idSitoAssociato = idSitoAssociato;
     }
 
@@ -84,6 +90,14 @@ public class Percorso {
 
     public void setPubblico(boolean pubblico) {
         this.pubblico = pubblico;
+    }
+
+    public String getIdUtente() {
+        return idUtente;
+    }
+
+    public void setIdUtente(String idUtente) {
+        this.idUtente = idUtente;
     }
 
 

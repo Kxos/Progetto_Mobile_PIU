@@ -159,7 +159,9 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                     CardOpera cardOpera = new CardOpera();
                     cardOpera.setId(opera.getId());
                     cardOpera.setTitolo(opera.getTitolo());
+                    cardOpera.setDescrizione(opera.getDescrizione());
                     cardOpera.setFoto(opera.getFoto());
+                    cardOpera.setIdZona(listaZone.get(countZone).getId());
 
                     View cardOperaView = getLayoutInflater().inflate(R.layout.card_opera, null);
                     cardOpera.setCheckBox(cardOperaView.findViewById(R.id.checkOperaSelezionata));
@@ -184,6 +186,7 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
 
         adapter = popolaOpereInRecyclerView(listaOpere[0]);
 
+        listaOpereChecked = new ArrayList<>();
 
         // Pulsante Avanti
         buttonSuccessivaZona.setOnClickListener(new View.OnClickListener() {
@@ -202,8 +205,9 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                     nomeZona.setText(listaZone.get(countZone).getNome());
                 }else {
                     // Ottenuta la lista finale delle opere scelte, passaggio finale
+
                     listaOpereChecked.addAll(adapter.getListaOpereChecked());
-                    //Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked.size());
+                    //Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked);
 
                     // Se l'utente non ha selezionato alcuna opera
                     if(listaOpereChecked.size()==0){

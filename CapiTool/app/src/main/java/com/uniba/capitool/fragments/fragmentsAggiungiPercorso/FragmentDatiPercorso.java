@@ -26,6 +26,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.classes.CardOpera;
+import com.uniba.capitool.classes.Opera;
+import com.uniba.capitool.classes.Percorso;
+import com.uniba.capitool.classes.Utente;
 
 import java.util.ArrayList;
 
@@ -36,6 +39,8 @@ public class FragmentDatiPercorso extends Fragment {
 
     private Toolbar toolbar;
     private View viewActivity;
+    Utente utente;
+    DatabaseReference myRef;
     private static ArrayList<CardOpera> listaOpereChecked;
 
     @Override
@@ -51,6 +56,7 @@ public class FragmentDatiPercorso extends Fragment {
 
         this.viewActivity = view;
 
+        utente = ((AggiungiPercorso)getActivity()).getUtente();
         toolbar = ((AggiungiPercorso)getActivity()).getToolbar();
 
         // Leggo dal file SharedPreferences
@@ -88,7 +94,7 @@ public class FragmentDatiPercorso extends Fragment {
             Switch pubblicoPercorso = view.findViewById(R.id.switchPubblicoPercorso);
 
             FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-            DatabaseReference myRef = database.getReference("/");
+            myRef = database.getReference("/");
 
             Button bottoneAvanti = view.findViewById(R.id.buttonAvanti);
             bottoneAvanti.setOnClickListener(new View.OnClickListener() {
@@ -99,14 +105,42 @@ public class FragmentDatiPercorso extends Fragment {
 
                         // TODO - SALVARE IL PERCORSO SU FIREBASE
 
-                        Log.e("AAAAAAAA","hjhjgh");
-                        Log.e("dgfdghfdghdfhdfh",""+pubblicoPercorso.isChecked());
+                        //Log.e("NomePercorso: ",""+nomePercorso.getText());
+                        //Log.e("DescrizionePercorso: ",""+descrizionePercorso.getText());
+                        //Log.e("StatoPubblico",""+pubblicoPercorso.isChecked());
+                        //Log.e("Lista Opere",""+listaOpereChecked);
+                        //Log.e("UID UTENTE",""+utente.getUid());
+                        //Log.e("ID SITO ASSOCIATO",""+sharedPreferences.getString("idSito", ""));
 
-                        /**
+
                         String key = myRef.push().getKey();
-                        myRef = database.getReference("Percorsi").child(key);
+
+                        Percorso percorso = new Percorso();
+                        percorso.setId(key);
+                        percorso.setNome(nomePercorso.getText().toString());
+                        percorso.setDescrizione(descrizionePercorso.getText().toString());
+                        percorso.setPubblico(pubblicoPercorso.isChecked());
+                        percorso.setIdSitoAssociato(sharedPreferences.getString("idSito", ""));
+                        percorso.setIdUtente(utente.getUid());
+
+                        ArrayList<Opera> listaOpere = new ArrayList<>();
+
+                        // TODO - DA FINIRE!!!!!!!!!!!!!!!
+
+                        for(int i = 0; i < listaOpereChecked.size(); i++){
+                            //listaOpere.add(i,null);
+                            listaOpere.get(i).setId(listaOpereChecked.get(i).getId());
+                            listaOpere.get(i).setTitolo(listaOpereChecked.get(i).getTitolo());
+                            listaOpere.get(i).setDescrizione(listaOpereChecked.get(i).getDescrizione());
+                            listaOpere.get(i).setIdZona(listaOpereChecked.get(i).getIdZona());
+                        }
+
+                        myRef = database.getReference("/Percorsi/"+key);
                         myRef.setValue(percorso);
-                         */
+
+                        myRef = database.getReference("/Percorsi/"+key+"/OpereScelte");
+                        myRef.setValue(listaOpere);
+
                     }else{
                         Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastDatiPercorso), Toast.LENGTH_SHORT).show();
                     }

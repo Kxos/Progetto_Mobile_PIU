@@ -9,14 +9,18 @@ public class CardOpera implements Serializable {
 
     private String id ;
     private String titolo ;
+    private String descrizione;
     private Uri foto;
     private CheckBox checkBox;
+    private String idZona;
 
-    public CardOpera(String id, String titolo, Uri foto, CheckBox checkBox) {
+    public CardOpera(String id, String titolo, String descrizione, Uri foto, CheckBox checkBox, String idZona) {
         this.id = id;
         this.titolo = titolo;
+        this.descrizione = descrizione;
         this.foto = foto;
         this.checkBox = checkBox;
+        this.idZona = idZona;
     }
 
     public CardOpera() {
@@ -55,5 +59,21 @@ public class CardOpera implements Serializable {
     }
 
     public void setCheckBoxCheckedStatus(boolean status){ this.checkBox.setChecked(status); }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public String getIdZona() {
+        return idZona;
+    }
+
+    public void setIdZona(String idZona) {
+        this.idZona = idZona;
+    }
 
 }

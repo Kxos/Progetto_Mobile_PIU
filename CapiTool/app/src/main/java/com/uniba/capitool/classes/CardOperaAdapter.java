@@ -85,6 +85,12 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         TextView cardTitoloOpera = holder.titolo;
         cardTitoloOpera.setText(cardOpera.getTitolo());
 
+        TextView cardDescrizioneOpera = holder.descrizione;
+        cardDescrizioneOpera.setText(cardOpera.getDescrizione());
+
+        TextView cardIdZona = holder.idZona;
+        cardIdZona.setText(cardOpera.getIdZona());
+
         cardCheckBoxOpera = holder.checkBox;
         cardCheckBoxOpera.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -124,7 +130,9 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         public ImageView foto;
         public TextView id;
         public TextView titolo;
+        public TextView descrizione;
         public CheckBox checkBox;
+        public TextView idZona;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -136,7 +144,9 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
             foto = (ImageView) itemView.findViewById(R.id.itemImmagineOpera);
             id = (TextView) itemView.findViewById(R.id.itemIdOpera);
             titolo = (TextView) itemView.findViewById(R.id.itemNomeOpera);
+            descrizione = (TextView) itemView.findViewById(R.id.itemDescrizioneOpera);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkOperaSelezionata);
+            idZona = (TextView) itemView.findViewById(R.id.itemIdZona);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -184,7 +194,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         return listaOpereChecked;
     }
 
-        public ArrayList<CardOpera> getListaOpereUnchecked() {
+    public ArrayList<CardOpera> getListaOpereUnchecked() {
         return listaOpereUnchecked;
     }
 

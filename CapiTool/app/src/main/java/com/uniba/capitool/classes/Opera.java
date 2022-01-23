@@ -9,22 +9,38 @@ public class Opera {
     private String id ;
     private String titolo ;
     private String descrizione ;
-    private Uri foto ;
-    private Image qrCode ;
+    private Image qrCode;
+    private String idZona;
+    private Uri foto;
 
     private static int countId = 0 ;
 
     public Opera(){} ;
 
-    public Opera (String titolo, String descrizione, Uri foto){
+    public Opera(String id, String titolo, String descrizione, Image qrCode, String idZona, Uri foto) {
+        this.id = id;
         this.titolo = titolo;
-        this.descrizione = descrizione ;
-        this.foto = foto ;
-        this.qrCode = null ;
+        this.descrizione = descrizione;
+        this.qrCode = qrCode;
+        this.idZona = idZona;
+        this.foto = foto;
     }
 
+    public String getIdZona() {
+        return idZona;
+    }
 
+    public void setIdZona(String idZona) {
+        this.idZona = idZona;
+    }
 
+    public static int getCountId() {
+        return countId;
+    }
+
+    public static void setCountId(int countId) {
+        Opera.countId = countId;
+    }
 
     public String getId() {
         return id;
@@ -50,20 +66,20 @@ public class Opera {
         this.descrizione = descrizione;
     }
 
-    public Uri getFoto() {
-        return foto;
-    }
-
-    public void setFoto(Uri foto) {
-        this.foto = foto;
-    }
-
     public Image getQrCode() {
         return qrCode;
     }
 
     public void setQrCode(Image qrCode) {
         this.qrCode = qrCode;
+    }
+
+    public Uri getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Uri foto) {
+        this.foto = foto;
     }
 
 }
