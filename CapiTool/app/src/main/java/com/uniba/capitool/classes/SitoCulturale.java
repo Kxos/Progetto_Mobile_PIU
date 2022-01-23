@@ -16,7 +16,7 @@ public class SitoCulturale implements Serializable {
     private String costoBiglietto;
     private String citta;
     private Image foto;
-    private List<Zona> Zone ;
+    private List<Zona> Zone;
     private String uidCuratore;
 
     public SitoCulturale(){

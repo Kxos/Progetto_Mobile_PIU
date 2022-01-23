@@ -101,8 +101,8 @@ public class FragmentDatiPercorso extends Fragment {
 
                         Log.e("AAAAAAAA","hjhjgh");
                         Log.e("dgfdghfdghdfhdfh",""+pubblicoPercorso.isChecked());
-                        /**
 
+                        /**
                         String key = myRef.push().getKey();
                         myRef = database.getReference("Percorsi").child(key);
                         myRef.setValue(percorso);

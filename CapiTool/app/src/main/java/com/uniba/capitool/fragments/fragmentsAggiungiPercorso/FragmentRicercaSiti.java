@@ -32,8 +32,12 @@ import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.CardSitoCulturaleAdapter;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
+import com.uniba.capitool.classes.Zona;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -172,6 +176,16 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
 
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    Log.e("sdgsg", ""+snapshot.child("Zone").getChildrenCount());
+                    Log.e("sdgsg", ""+snapshot.child("Zone").child("4").child("Opere").getValue());
+
+                    for(int i=0; i<snapshot.child("Zone").getChildrenCount(); i++){
+                        if(snapshot.child("Zone").child("4").child("Opere").getValue() != null){
+
+                        }
+                    }
+
                     SitoCulturale sitoCulturale = snapshot.getValue(SitoCulturale.class);
 
                     if(sitoCulturale.getZone().size() != 0){
