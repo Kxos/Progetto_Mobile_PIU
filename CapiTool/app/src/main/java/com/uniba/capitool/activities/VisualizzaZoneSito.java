@@ -2,20 +2,14 @@ package com.uniba.capitool.activities;
 
 
 import android.content.DialogInterface;
-
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.EditText;
-
-import android.app.Activity;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +30,7 @@ import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Zona;
-import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZone;
+import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapter;
 
@@ -75,11 +70,24 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                VisualizzaZoneSito.super.onBackPressed();
             }
         });
 
         leggiZoneFromFirebase();
+
+        /***
+         * Scroll verso il baso per aggiornare la recycler
+         * (ad esempio dopo aver aggiunto un opere e essere tornati indietro)
+         */
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                leggiZoneFromFirebase();
+                pullToRefresh.setRefreshing(false);
+            }
+        });
 
     }
 
@@ -93,7 +101,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                List<AllZone> allZoneList=new ArrayList<>();
+                List<AllZona> allZoneList=new ArrayList<>();
                 List<Zona> zone=new ArrayList<>();
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i risultati della query e li formatta esattamente come se fossero oggetti di classe Zona
@@ -124,11 +132,11 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                             }
                             contatore++;
                         }
-                        allZoneList.add(new AllZone(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona));
+                        allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona));
                     }catch (Exception e){
                         Log.e("","Erroreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
-                        allZoneList.add(new AllZone(zone.get(i).getId(), zone.get(i).getNome(), null));
+                        allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), null));
                     }
 
 
@@ -159,7 +167,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
      * Effettua la creazione della recycler view innsetata e andrà a inserire tutti gli oggetti presenti nella lista allZoneList
      * @param allZoneList
      */
-    private void setZoneRecycler(List<AllZone> allZoneList){
+    private void setZoneRecycler(List<AllZona> allZoneList){
         mainZoneRecycler = findViewById(R.id.main_recycler);
         RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(this);
         mainZoneRecycler.setLayoutManager(layoutManager);
@@ -265,4 +273,17 @@ public class VisualizzaZoneSito extends AppCompatActivity{
 
     }
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        leggiZoneFromFirebase();
+//    }
+
+    public SitoCulturale getSito(){
+        return sito;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
 }

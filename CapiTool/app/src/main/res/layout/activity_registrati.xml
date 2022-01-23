@@ -12,7 +12,7 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:layout_width="match_parent"
-        android:layout_height="675dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="0dp" />
 

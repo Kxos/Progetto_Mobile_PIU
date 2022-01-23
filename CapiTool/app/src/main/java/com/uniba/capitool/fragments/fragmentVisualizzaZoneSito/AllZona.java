@@ -1,13 +1,14 @@
 package com.uniba.capitool.fragments.fragmentVisualizzaZoneSito;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AllZone {
+public class AllZona implements Serializable {
     String nomeZona;
     String id;
     List<ItemOperaZona> listaOpereZona;
 
-    public AllZone(String id, String nomeZona, List<ItemOperaZona> listaOpereZona) {
+    public AllZona(String id, String nomeZona, List<ItemOperaZona> listaOpereZona) {
         this.id=id;
         this.nomeZona = nomeZona;
         this.listaOpereZona=listaOpereZona;
