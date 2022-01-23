@@ -173,8 +173,11 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
 
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-
                     letturaZoneSito(snapshot.getKey(), snapshot, CardSitiCulturali, valoreDiRicerca);
+                }
+
+                if(dataSnapshot.getValue() == null){
+                    getSitiFromDBOrderByCitta(valoreDiRicerca, CardSitiCulturali);
                 }
 
             }
@@ -192,10 +195,14 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
     /** FINE getSitiFromDBOrderByNome()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
+
     /***
+     *
      * Ottiene tutti Siti esistenti, cercando per Città
      *
-     * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà una Città)
+     * @param valoreDiRicerca
+     * @param CardSitiCulturali
+     * @return
      */
     public ArrayList<CardSitoCulturale> getSitiFromDBOrderByCitta(String valoreDiRicerca, ArrayList<CardSitoCulturale>[] CardSitiCulturali) {
 
@@ -214,13 +221,7 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
 
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    SitoCulturale sitoCulturale = snapshot.getValue(SitoCulturale.class);
-
-                    if(sitoCulturale.getZone().size() != 0){
-                        CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
-                        //Log.e("RISULTATO DB CITTA: ",cardSitoCulturale.getNome());
-                        CardSitiCulturali[0].add(cardSitoCulturale);
-                    }
+                    letturaZoneSito(snapshot.getKey(), snapshot, CardSitiCulturali, valoreDiRicerca);
                 }
 
             }
@@ -238,11 +239,16 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
     /** FINE getSitiFromDBOrderByCitta()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
+
     /***
+     *
      * Ottiene gli id delle Zone di un sito
      *
      * @param idSito
      * @param snapshotPrecedente
+     * @param CardSitiCulturali
+     * @param valoreDiRicerca
+     * @return
      */
     public ArrayList<CardSitoCulturale> letturaZoneSito(String idSito, DataSnapshot snapshotPrecedente, ArrayList<CardSitoCulturale>[] CardSitiCulturali, String valoreDiRicerca){
 
@@ -258,7 +264,6 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 List<String> indiciZone= new ArrayList<>();
-                Log.e("onDataChange: ", "fsdgdfhfsdghfghfgh");
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
@@ -267,7 +272,7 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
                 }
 
                 for(int i=0; i<indiciZone.size(); i++){
-                    Log.e("indice", ""+indiciZone.get(i));
+                    //Log.e("indice", ""+indiciZone.get(i));
                 }
 
                 gestioneRicercaSiti(indiciZone,snapshotPrecedente, CardSitiCulturali, valoreDiRicerca);
@@ -284,20 +289,24 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
         return CardSitiCulturali[0];
     }
 
+
     /***
-     *  @param indiciZoneTrovate
+     *
+     * Se un Sito possiede almeno un'opera viene aggiunto alle CardSitiCulturali
+     *
+     * @param indiciZoneTrovate
      * @param snapshot
+     * @param CardSitiCulturali
+     * @param valoreDiRicerca
      * @return
      */
     public ArrayList<CardSitoCulturale> gestioneRicercaSiti(List<String> indiciZoneTrovate, DataSnapshot snapshot, ArrayList<CardSitoCulturale>[] CardSitiCulturali, String valoreDiRicerca){
-
-        Log.e("sdgsg", ""+snapshot.child("Zone").getChildrenCount());
 
         int trovato = 0;
 
         for(int i=0; i<snapshot.child("Zone").getChildrenCount(); i++){
             if(snapshot.child("Zone").child(indiciZoneTrovate.get(i)).child("Opere").getValue() != null){
-                Log.e("SEI DENTRO, LE OPERE ESISTONO!", "HH");
+                //Log.e("SEI DENTRO, LE OPERE ESISTONO!", "HH");
                 trovato = 1;
             }
         }
@@ -307,12 +316,6 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
             CardSitoCulturale cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class);
             //Log.e("RISULTATO DB NOME: ",cardSitoCulturale.getNome());
             CardSitiCulturali[0].add(cardSitoCulturale);
-        }
-
-        // Se non trova nulla nella ricerca per nome ...
-        if(CardSitiCulturali[0].isEmpty()){
-            //Log.e("SEI DENTRO ALLA CITTA ","  ");
-            getSitiFromDBOrderByCitta(valoreDiRicerca, CardSitiCulturali);
         }
 
         return CardSitiCulturali[0];
