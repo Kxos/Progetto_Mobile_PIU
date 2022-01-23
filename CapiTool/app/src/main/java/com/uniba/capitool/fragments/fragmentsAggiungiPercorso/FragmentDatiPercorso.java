@@ -26,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.classes.CardOpera;
+import com.uniba.capitool.classes.Percorso;
+import com.uniba.capitool.classes.Utente;
 
 import java.util.ArrayList;
 
@@ -36,6 +38,7 @@ public class FragmentDatiPercorso extends Fragment {
 
     private Toolbar toolbar;
     private View viewActivity;
+    Utente utente;
     private static ArrayList<CardOpera> listaOpereChecked;
 
     @Override
@@ -51,6 +54,7 @@ public class FragmentDatiPercorso extends Fragment {
 
         this.viewActivity = view;
 
+        utente = ((AggiungiPercorso)getActivity()).getUtente();
         toolbar = ((AggiungiPercorso)getActivity()).getToolbar();
 
         // Leggo dal file SharedPreferences
@@ -99,14 +103,26 @@ public class FragmentDatiPercorso extends Fragment {
 
                         // TODO - SALVARE IL PERCORSO SU FIREBASE
 
-                        Log.e("AAAAAAAA","hjhjgh");
-                        Log.e("dgfdghfdghdfhdfh",""+pubblicoPercorso.isChecked());
+                        //Log.e("NomePercorso: ",""+nomePercorso.getText());
+                        //Log.e("DescrizionePercorso: ",""+descrizionePercorso.getText());
+                        //Log.e("StatoPubblico",""+pubblicoPercorso.isChecked());
+                        Log.e("Lista Opere",""+listaOpereChecked);
+                        Log.e("UID UTENTE",""+utente.getUid());
 
-                        /**
                         String key = myRef.push().getKey();
-                        myRef = database.getReference("Percorsi").child(key);
-                        myRef.setValue(percorso);
-                         */
+
+                        Percorso percorso = new Percorso();
+                        percorso.setId(key);
+                        percorso.setNome(""+nomePercorso.getText());
+                        percorso.setDescrizione(""+descrizionePercorso.getText());
+                        percorso.setPubblico(pubblicoPercorso.isChecked());
+                        //percorso.setIdSitoAssociato();
+                        percorso.setIdUtente(utente.getUid());
+                        //percorso.setZoneScelte();
+
+                        //myRef = database.getReference("Percorsi").child(key);
+                        //myRef.setValue(percorso);
+
                     }else{
                         Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastDatiPercorso), Toast.LENGTH_SHORT).show();
                     }

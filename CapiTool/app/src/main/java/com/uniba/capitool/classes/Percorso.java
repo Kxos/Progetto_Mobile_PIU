@@ -4,18 +4,24 @@ import  java.util.ArrayList;
 
 public class Percorso {
 
-    private int id;
+    private String id;
     private String nome;
     private ArrayList<Zona> zoneScelte;
-    private int idSitoAssociato;
+    private String idSitoAssociato;
+    private String idUtente;
     private String descrizione;
     private boolean pubblico;
 
-    public Percorso(int id, String nome, ArrayList<Zona> zoneScelte, int idSitoAssociato, String descrizione, boolean pubblico) {
+    public Percorso(){
+
+    }
+
+    public Percorso(String id, String nome, ArrayList<Zona> zoneScelte, String idSitoAssociato, String idUtente, String descrizione, boolean pubblico) {
         this.id = id;
         this.nome = nome;
         this.zoneScelte = zoneScelte;
         this.idSitoAssociato = idSitoAssociato;
+        this.idUtente = idUtente;
         this.descrizione = descrizione;
         this.pubblico = pubblico;
     }
@@ -38,11 +44,11 @@ public class Percorso {
 
 
     //METODI GETTER & SETTER
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -62,11 +68,11 @@ public class Percorso {
         this.zoneScelte = zoneScelte;
     }
 
-    public int getIdSitoAssociato() {
+    public String getIdSitoAssociato() {
         return idSitoAssociato;
     }
 
-    public void setIdSitoAssociato(int idSitoAssociato) {
+    public void setIdSitoAssociato(String idSitoAssociato) {
         this.idSitoAssociato = idSitoAssociato;
     }
 
@@ -84,6 +90,14 @@ public class Percorso {
 
     public void setPubblico(boolean pubblico) {
         this.pubblico = pubblico;
+    }
+
+    public String getIdUtente() {
+        return idUtente;
+    }
+
+    public void setIdUtente(String idUtente) {
+        this.idUtente = idUtente;
     }
 
 
