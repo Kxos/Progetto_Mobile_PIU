@@ -184,7 +184,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         return listaOpereChecked;
     }
 
-        public ArrayList<CardOpera> getListaOpereUnchecked() {
+    public ArrayList<CardOpera> getListaOpereUnchecked() {
         return listaOpereUnchecked;
     }
 

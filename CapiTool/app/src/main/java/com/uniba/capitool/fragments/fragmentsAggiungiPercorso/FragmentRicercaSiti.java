@@ -252,8 +252,6 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
      */
     public ArrayList<CardSitoCulturale> letturaZoneSito(String idSito, DataSnapshot snapshotPrecedente, ArrayList<CardSitoCulturale>[] CardSitiCulturali, String valoreDiRicerca){
 
-        Log.e("onDataChange: ", ""+idSito);
-
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
 
         DatabaseReference myRef = database.getReference("/Siti/"+idSito+"/Zone");

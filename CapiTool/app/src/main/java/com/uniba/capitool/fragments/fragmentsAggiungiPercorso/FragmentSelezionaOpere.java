@@ -184,7 +184,6 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
 
         adapter = popolaOpereInRecyclerView(listaOpere[0]);
 
-
         // Pulsante Avanti
         buttonSuccessivaZona.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,8 +201,14 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                     nomeZona.setText(listaZone.get(countZone).getNome());
                 }else {
                     // Ottenuta la lista finale delle opere scelte, passaggio finale
-                    listaOpereChecked.addAll(adapter.getListaOpereChecked());
-                    //Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked.size());
+
+                    if(listaOpereChecked == null){
+                        listaOpereChecked = new ArrayList<>();
+                    }else {
+                        listaOpereChecked.addAll(adapter.getListaOpereChecked());
+                        Log.e("LISTA OPERE FINALE: ", ""+listaOpereChecked);
+                    }
+
 
                     // Se l'utente non ha selezionato alcuna opera
                     if(listaOpereChecked.size()==0){
