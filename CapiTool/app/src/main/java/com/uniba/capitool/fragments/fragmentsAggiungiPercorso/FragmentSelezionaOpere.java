@@ -112,7 +112,11 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Zona zona = snapshot.getValue(Zona.class);
                     //Log.e("RISULTATO DB NOME: ",zona.getNome());
-                    listaZone.add(zona);
+
+                    if(zona.getOpere() != null){
+                        listaZone.add(zona);
+                    }
+
                 }
 
                 mostraOperePerZone(listaZone);
