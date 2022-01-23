@@ -1,6 +1,7 @@
 package com.uniba.capitool.activities;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ public class DelegaSito extends AppCompatActivity {
     Dialog dialog ;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +50,9 @@ public class DelegaSito extends AppCompatActivity {
         Curatore utente = (Curatore) bundle.getSerializable("utente");
 
         EditText editEmailDelegato = findViewById(R.id.edit_text_email);
-        CheckBox boxInfo = findViewById(R.id.boxInfoDelegate);
+        CheckBox boxInfo = findViewById(R.id.boxInfoDelete);
         Button buttonConferma = findViewById(R.id.button_conferma_delega);
         Button buttonAnnulla = findViewById(R.id.button_annulla_delega);
-
-
-
-
-
 
         buttonConferma.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +132,6 @@ public class DelegaSito extends AppCompatActivity {
 
                                                         if (!siti.isEmpty()) {
                                                             SitoCulturale sitoDaDelegare = siti.get(0);
-                                                            //sitoDaDelegare.setUidCuratore(delegato.getUid());
 
 
                                                             dialog = new Dialog(DelegaSito.this) ;
@@ -154,7 +150,19 @@ public class DelegaSito extends AppCompatActivity {
                                                                     Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
                                                                     Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
 
+
+                                                                    Intent intent = new Intent (DelegaSito.this, HomePage.class) ;
+                                                                    Bundle bundle = new Bundle() ;
+                                                                    intent.putExtra("uid", utente.getUid()); //Optional parameters
+                                                                    intent.putExtra("nome", utente.getNome()); //Optional parameters
+                                                                    intent.putExtra("cognome", utente.getCognome()); //Optional parameters
+                                                                    intent.putExtra("email", utente.getEmail()); //Optional parametersù
+                                                                    intent.putExtra("ruolo", utente.getRuolo()); //Optional parameters
+                                                                    intent.putExtras(bundle);
+                                                                    startActivity(intent);
+
                                                                     dialog.dismiss();
+
                                                                 }
                                                             });
 
@@ -168,10 +176,6 @@ public class DelegaSito extends AppCompatActivity {
 
                                                             dialog.show();
 
-
-                                                            //myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
-                                                            //Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
-                                                            //Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
 
 
                                                         }else{
@@ -216,6 +220,32 @@ public class DelegaSito extends AppCompatActivity {
 
             }
 
+        });
+
+
+
+
+        buttonAnnulla.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (DelegaSito.this, HomePage.class) ;
+                Bundle bundle = new Bundle() ;
+                intent.putExtra("uid", utente.getUid()); //Optional parameters
+                intent.putExtra("nome", utente.getNome()); //Optional parameters
+                intent.putExtra("cognome", utente.getCognome()); //Optional parameters
+                intent.putExtra("email", utente.getEmail()); //Optional parametersù
+                intent.putExtra("ruolo", utente.getRuolo()); //Optional parameters
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             DelegaSito.super.onBackPressed();
+            }
         });
 
 
