@@ -40,5 +40,6 @@
 
     <string name="toastNessunaOpera">No opera selected!</string>
     <string name="toastDatiPercorso">Check your path name!</string>
+    <string name="toastPercorsoSalvato">Path saved successfully!</string>
 
 </resources>

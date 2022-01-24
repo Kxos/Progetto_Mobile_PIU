@@ -30,6 +30,7 @@ import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.Percorso;
 import com.uniba.capitool.classes.Utente;
+import com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMieiPercorsi;
 
 import java.util.ArrayList;
 
@@ -110,8 +111,6 @@ public class FragmentDatiPercorso extends Fragment {
 
                     if(nomePercorsoIsValorized(nomePercorso)){
 
-                        // TODO - SALVARE IL PERCORSO SU FIREBASE
-
                         //Log.e("NomePercorso: ",""+nomePercorso.getText());
                         //Log.e("DescrizionePercorso: ",""+descrizionePercorso.getText());
                         //Log.e("StatoPubblico",""+pubblicoPercorso.isChecked());
@@ -132,8 +131,6 @@ public class FragmentDatiPercorso extends Fragment {
 
                         ArrayList<Opera> listaOpere = new ArrayList<>();
 
-                        // TODO - DA FINIRE!!!!!!!!!!!!!!!
-
                         for(int i = 0; i < listaOpereChecked.size(); i++){
                             listaOpere.add(i,new Opera());
                             listaOpere.get(i).setId(listaOpereChecked.get(i).getId());
@@ -147,6 +144,13 @@ public class FragmentDatiPercorso extends Fragment {
 
                         myRef = database.getReference("/Percorsi/"+key+"/OpereScelte");
                         myRef.setValue(listaOpere);
+
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastPercorsoSalvato), Toast.LENGTH_SHORT).show();
+
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.containerRicercaSiti, new FragmentMieiPercorsi() );
+                        fragmentTransaction.commit();
 
                     }else{
                         Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastDatiPercorso), Toast.LENGTH_SHORT).show();
