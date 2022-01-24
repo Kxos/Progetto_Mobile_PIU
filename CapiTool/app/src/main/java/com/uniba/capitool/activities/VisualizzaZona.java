@@ -3,10 +3,13 @@ package com.uniba.capitool.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
@@ -92,5 +95,36 @@ public class VisualizzaZona extends AppCompatActivity {
                     VisualizzaZona.super.onBackPressed();
             }
         });
+    }
+
+    /***
+     * Istanzia nella toolbar il kebab menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.kebab_menu_visualizza_zona, menu);
+              return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.aggiungiOpera:
+
+                break;
+
+            case R.id.eliminaOpere:
+
+
+                break;
+
+            case R.id.rinominaZona:
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

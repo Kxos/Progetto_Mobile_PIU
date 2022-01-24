@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item android:id="@+id/searchOpera"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="Search"
+            app:showAsAction="always"/>
+
+    <item android:id="@+id/kebabMenu"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title="Search"
+        app:showAsAction="always">
+        <menu>
+    <item android:id="@+id/rinominaZona"
+            android:title="Rinomina Zona"
+            android:icon="@drawable/ic_baseline_create_24_black"
+            app:showAsAction="ifRoom"/>
+
+        <item
+            android:id="@+id/aggiungiOpera"
+            android:icon="@drawable/ic_baseline_add_circle_outline_24_black"
+            app:showAsAction="ifRoom"
+            android:title="Aggiungi Opera" />
+
+        <item android:id="@+id/eliminaOpere"
+            android:title="Elimina Opere"
+            android:icon="@drawable/ic_baseline_delete_24_black"
+            app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+
+
+
+
+    </menu>
