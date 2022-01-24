@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +30,9 @@ public class VisualizzaOpera extends AppCompatActivity {
         TextView testo = findViewById(R.id.textView12);
         TextView titoloOpera = findViewById(R.id.titoloNomeOpera);
         Bundle dati = getIntent().getExtras();
+        ImageView esci = findViewById(R.id.esci);
+        esci.setClickable(true);
+
 
         if(dati!=null){
             ItemOperaZona opera = (ItemOperaZona) dati.getSerializable("opera");
@@ -41,6 +45,13 @@ public class VisualizzaOpera extends AppCompatActivity {
         }else{
             Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
         }
+
+        esci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     public void setImmagineOperaFromDB(String idOpera, Context context, ImageView imageViewOpera){
@@ -75,5 +86,7 @@ public class VisualizzaOpera extends AppCompatActivity {
       //  overridePendingTransition(R.anim.slide_from_top, R.anim.slide_in_top);
 
     }
+
+
 
 }

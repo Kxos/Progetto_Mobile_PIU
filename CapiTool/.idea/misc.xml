@@ -15,12 +15,15 @@
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_login.xml" value="0.35104166666666664" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_modifica_sito.xml" value="0.36666666666666664" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_registrati.xml" value="0.24947916666666667" />
+        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_visualizza_modifica_opera.xml" value="0.33" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_visualizza_opera.xml" value="0.36666666666666664" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/activity_visualizza_zone_sito.xml" value="0.340625" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/delega_dialog.xml" value="0.3614583333333333" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_aggiungi_info_sito.xml" value="0.25364583333333335" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_aggiungi_nome_sito.xml" value="0.35733695652173914" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_crea_mio_sito.xml" value="0.34646739130434784" />
+        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_dati_percorso.xml" value="0.3625" />
+        <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_dati_personali.xml" value="0.3625" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_disconnettiti.xml" value="0.20520833333333333" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_impostazioni_sito.xml" value="0.35733695652173914" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/fragment_info_sito.xml" value="0.25" />
@@ -33,8 +36,14 @@
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/navigation_header.xml" value="0.25" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/layout/toolbar.xml" value="0.3223958333333333" />
         <entry key="..\:/ProgettoMobile/CapiTool/app/src/main/res/menu/navigation_curatore_menu.xml" value="0.25" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.38333333333333336" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/drawable/ic_baseline_add_circle_outline_24_black.xml" value="0.38333333333333336" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.38333333333333336" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/drawable/ic_baseline_arrow_right_alt_24.xml" value="0.38333333333333336" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/drawable/ic_baseline_create_24_black.xml" value="0.38333333333333336" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/drawable/ic_baseline_delete_24_black.xml" value="0.38333333333333336" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.38333333333333336" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/drawable/ic_baseline_sort_24_black.xml" value="0.38333333333333336" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_home_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_registrati.xml" value="0.36666666666666664" />
