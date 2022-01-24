@@ -28,6 +28,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
+import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.CardOperaAdapter;
 import com.uniba.capitool.classes.Opera;
@@ -216,9 +217,6 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                         //Log.e("LISTA OPERE VUOTA: ", "utyu");
 
                     } else{
-
-                        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
 
                         // put the objects to send to our fragment in a bundle
                         FragmentDatiPercorso fragmentDatiPercorso = new FragmentDatiPercorso();

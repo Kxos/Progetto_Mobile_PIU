@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -256,6 +257,8 @@ public class BasicMethod extends AppCompatActivity {
             utente.setCognome(b.getString("cognome"));
             utente.setEmail(b.getString("email"));
             utente.setRuolo(b.getString("ruolo"));
+            //Log.e("RUOLO UTENTE: ", ""+utente.getRuolo());
+
 
         }else{
             BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
