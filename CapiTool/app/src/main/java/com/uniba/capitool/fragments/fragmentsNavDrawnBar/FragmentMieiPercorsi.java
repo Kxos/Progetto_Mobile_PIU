@@ -2,6 +2,7 @@ package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,21 @@ public class FragmentMieiPercorsi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-       // Utente utente =getUserInfo();
+        Utente utente = new Utente();
 
-        Utente utente = BasicMethod.getUtente();
+        //BasicMethod.getUtente() da valore nullo perchè forse non è ancora valorizzato, dato che MioSito è il primo fragment
+        // che viene creato all'avvio di HomePage. La soluzione è leggere con il Bundle
+        utente.setUid(getActivity().getIntent().getExtras().getString("uid"));
+        utente.setNome(getActivity().getIntent().getExtras().getString("nome"));
+        utente.setCognome(getActivity().getIntent().getExtras().getString("cognome"));
+        utente.setEmail(getActivity().getIntent().getExtras().getString("email"));
+        utente.setRuolo(getActivity().getIntent().getExtras().getString("ruolo"));
 
         View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
         FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
+
+        //TODO - VEDERE SE CI SONO DEI PERCORSI GIA ESISTENTI DELL'UTENTE
+
 
         addPercorso.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -89,7 +89,6 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
     @Override
     public void onEventClick(int position) {
 
-        // TODO - SALVARE I DATI IN SHARED PREFERENCES
         CardSitoCulturale clickedEvent = cardSitiCulturali.get(position);
 
         // Scrivo nel file SharedPreferences per salvare i dati
