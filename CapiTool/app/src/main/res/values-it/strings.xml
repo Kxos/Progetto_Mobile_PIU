@@ -28,6 +28,10 @@
     <string name="deleteSite_subtext">Elimina l\'intero sito culturale ed i suoi dati </string>
     <string name="delegateSite">Delega sito</string>
     <string name="delegateSite_subtext">Delega il tuo sito ad un altro curatore</string>
+    <string name="open_Site">Apertura:</string>
+    <string name="close_Site">Chiusura:</string>
+    <string name="ticket_price">Costo biglietto: </string>
+    <string name="site_address">Indirizzo: </string>
 
     <string name="selectDelegate">Scegli a chi delegare il tuo sito</string>
     <string name="delegatedEmail">Inserisci l\'email del delegato </string>
@@ -42,7 +46,7 @@
     <string name="toastNessunaOpera">Nessuna opera selezionata!</string>
     <string name="toastDatiPercorso">Controlla il nome del Percorso!</string>
     <string name="toastPercorsoSalvato">Percorso salvato correttamente!</string>
-
+    <string name="cercaPercorso">Cerca per nome del Percorso</string>
 
 
 </resources>

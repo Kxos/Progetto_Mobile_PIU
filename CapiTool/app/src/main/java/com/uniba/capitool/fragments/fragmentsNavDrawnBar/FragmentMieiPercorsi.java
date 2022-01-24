@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -38,7 +39,6 @@ public class FragmentMieiPercorsi extends Fragment {
         View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
         FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
 
-        //TODO - VEDERE SE CI SONO DEI PERCORSI GIA ESISTENTI DELL'UTENTE
         cercaPercorsiFromDB(utente.getUid(), v);
 
         addPercorso.setOnClickListener(new View.OnClickListener() {
@@ -83,11 +83,16 @@ public class FragmentMieiPercorsi extends Fragment {
 
                 }
 
+                // Ha trovato dei Percorsi esistenti per l'utente corrente
                 if(stato[0]){
                     ConstraintLayout layoutImmagineNuovoPercorso = view.findViewById(R.id.layoutImmagineNuovoPercorso);
                     layoutImmagineNuovoPercorso.setVisibility(View.INVISIBLE);
 
-                    Log.e("SEI DENTROOOOOOOOOOOOOO: ", "BNVB");
+                    RelativeLayout layoutRecyclerViewPercorsi = view.findViewById(R.id.layoutRecyclerViewPercorsi);
+                    layoutRecyclerViewPercorsi.setVisibility(View.VISIBLE);
+
+                    //TODO - IMPLEMENTARE LA RECYCLERVIEW DELLE CARDS DEI PERCORSI
+
                 }
 
             }

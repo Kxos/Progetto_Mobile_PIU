@@ -46,26 +46,6 @@
             app:layout_constraintTop_toBottomOf="@+id/itemNomePercorso" />
 
         <TextView
-            android:id="@+id/itemLableOrarioAperturaSito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/open_Site"
-            app:layout_constraintStart_toEndOf="@+id/itemImmaginePercorso"
-            app:layout_constraintTop_toBottomOf="@+id/itemLableCostoBigliettoSito" />
-
-        <TextView
-            android:id="@+id/itemLableOrarioChiusuraSito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/close_Site"
-            app:layout_constraintStart_toEndOf="@+id/itemOrarioAperturaSito"
-            app:layout_constraintTop_toBottomOf="@+id/itemLableCostoBigliettoSito" />
-
-        <TextView
             android:id="@+id/itemIndirizzoSito"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -75,60 +55,13 @@
             app:layout_constraintTop_toBottomOf="@+id/itemLableDescrizionePercorso" />
 
         <TextView
-            android:id="@+id/itemLableCostoBigliettoSito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/ticket_price"
-            app:layout_constraintStart_toEndOf="@+id/itemImmaginePercorso"
-            app:layout_constraintTop_toBottomOf="@+id/itemNomeSitoAssociato" />
-
-        <TextView
-            android:id="@+id/itemCostoBigliettoSito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="62dp"
-            android:text="12"
-            app:layout_constraintStart_toEndOf="@+id/itemLableCostoBigliettoSito"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/itemOrarioAperturaSito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="10:00"
-            app:layout_constraintStart_toEndOf="@+id/itemLableOrarioAperturaSito"
-            app:layout_constraintTop_toBottomOf="@+id/itemLableCostoBigliettoSito" />
-
-        <TextView
-            android:id="@+id/itemOrarioChiusuraSito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="12:00"
-            app:layout_constraintStart_toEndOf="@+id/itemLableOrarioChiusuraSito"
-            app:layout_constraintTop_toBottomOf="@+id/itemCostoBigliettoSito" />
-
-        <TextView
-            android:id="@+id/LableEuro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="62dp"
-            android:text="€"
-            app:layout_constraintStart_toEndOf="@+id/itemCostoBigliettoSito"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/itemLableDescrizionePercorso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="@string/site_address"
             app:layout_constraintStart_toEndOf="@+id/itemImmaginePercorso"
-            app:layout_constraintTop_toBottomOf="@+id/itemLableOrarioAperturaSito" />
+            tools:layout_editor_absoluteY="69dp" />
 
         <TextView
             android:id="@+id/itemIdPercorso"
@@ -136,6 +69,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="13dp"
+            android:text="id Sito"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemIdSitoAssociato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="12dp"
             android:text="id Sito"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"

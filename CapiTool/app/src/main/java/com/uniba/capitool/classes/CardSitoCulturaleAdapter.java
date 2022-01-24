@@ -115,14 +115,14 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            foto = (ImageView) itemView.findViewById(R.id.itemImmagineOpera);
-            id = (TextView) itemView.findViewById(R.id.itemIdSito);
-            nome = (TextView) itemView.findViewById(R.id.itemNomeOpera);
+            foto = (ImageView) itemView.findViewById(R.id.itemImmaginePercorso);
+            id = (TextView) itemView.findViewById(R.id.itemIdPercorso);
+            nome = (TextView) itemView.findViewById(R.id.itemNomePercorso);
             indirizzo = (TextView) itemView.findViewById(R.id.itemIndirizzoSito);
             orarioApertura = (TextView) itemView.findViewById(R.id.itemOrarioAperturaSito);
             orarioChiusura = (TextView) itemView.findViewById(R.id.itemOrarioChiusuraSito);
             costoBiglietto = (TextView) itemView.findViewById(R.id.itemCostoBigliettoSito);
-            citta = (TextView) itemView.findViewById(R.id.itemCittaSito);
+            citta = (TextView) itemView.findViewById(R.id.itemNomeSitoAssociato);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
