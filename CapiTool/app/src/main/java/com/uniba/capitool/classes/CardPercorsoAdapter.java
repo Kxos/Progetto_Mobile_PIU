@@ -19,11 +19,11 @@ import com.uniba.capitool.R;
 
 import java.util.ArrayList;
 
-public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCulturaleAdapter.ViewHolder>{
+public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapter.ViewHolder>{
 
     // Store a member variable
-    private ArrayList<CardSitoCulturale> sitiCulturali;
-    private OnEventClickListener mListener;
+    private ArrayList<CardPercorso> listaPercorsi;
+    private CardPercorsoAdapter.OnEventClickListener mListener;
 
     public interface OnEventClickListener{
         void onEventClick (int position);
@@ -34,8 +34,8 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
     }
 
     // Pass in the array into the constructor
-    public CardSitoCulturaleAdapter(ArrayList<CardSitoCulturale> sitiCulturali) {
-        this.sitiCulturali = sitiCulturali;
+    public CardPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi) {
+        this.listaPercorsi = listaPercorsi;
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -46,10 +46,10 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.card_sito_culturale, parent, false);
+        View contactView = inflater.inflate(R.layout.card_percorso, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        CardPercorsoAdapter.ViewHolder viewHolder = new CardPercorsoAdapter.ViewHolder(contactView);
         return viewHolder;
 
     }
@@ -59,39 +59,36 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         // Get the data model based on position
-        CardSitoCulturale cardSitoCulturale = sitiCulturali.get(position);
+        CardPercorso cardPercorso = listaPercorsi.get(position);
 
         // Set item views based on your views and data model
-        TextView cardIdSito = holder.id;
-        cardIdSito.setText(cardSitoCulturale.getId());
+        TextView cardIdPercorso = holder.id;
+        cardIdPercorso.setText(cardPercorso.getId());
 
         ImageView cardFotoSito = holder.foto;
-        setImmagineSitoFromDB(cardSitoCulturale.getId(), holder.itemView.getContext(), cardFotoSito);
+        setImmagineSitoFromDB(cardPercorso.getIdSitoAssociato(), holder.itemView.getContext(), cardFotoSito);
 
-        TextView cardNomeSito = holder.nome;
-        cardNomeSito.setText(cardSitoCulturale.getNome());
+        TextView cardNomePercorso = holder.nome;
+        cardNomePercorso.setText(cardPercorso.getNome());
 
-        TextView cardIndirizzoSito = holder.indirizzo;
-        cardIndirizzoSito.setText(cardSitoCulturale.getIndirizzo());
+        TextView cardIdSitoAssociato = holder.idSitoAssociato;
+        cardIdSitoAssociato.setText(cardPercorso.getIdSitoAssociato());
 
-        TextView cardOrarioAperturaSito = holder.orarioApertura;
-        cardOrarioAperturaSito.setText(cardSitoCulturale.getOrarioApertura());
+        TextView cardNomeSitoAssociato = holder.nomeSitoAssociato;
+        cardNomeSitoAssociato.setText(cardPercorso.getNomeSitoAssociato());
 
-        TextView cardOrarioChiusuraSito = holder.orarioChiusura;
-        cardOrarioChiusuraSito.setText(cardSitoCulturale.getOrarioChiusura());
+        TextView cardDescrizionePercorso = holder.descrizione;
+        cardDescrizionePercorso.setText(cardPercorso.getDescrizione());
 
-        TextView cardCostoBigliettoSito = holder.costoBiglietto;
-        cardCostoBigliettoSito.setText(cardSitoCulturale.getCostoBiglietto().toString());
-
-        TextView cardCittaSito = holder.citta;
-        cardCittaSito.setText(cardSitoCulturale.getCitta());
+        TextView cardStatoPubblico = holder.pubblico;
+        cardStatoPubblico.setText(""+cardPercorso.isPubblico());
 
     }
 
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
-        return sitiCulturali.size();
+        return listaPercorsi.size();
     }
 
     // Provide a direct reference to each of the views within a data item
@@ -102,11 +99,10 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         public ImageView foto;
         public TextView id;
         public TextView nome;
-        public TextView indirizzo;
-        public TextView orarioApertura;
-        public TextView orarioChiusura;
-        public TextView costoBiglietto;
-        public TextView citta;
+        public TextView idSitoAssociato;
+        public TextView nomeSitoAssociato;
+        public TextView descrizione;
+        public TextView pubblico;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -118,11 +114,10 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
             foto = (ImageView) itemView.findViewById(R.id.itemImmaginePercorso);
             id = (TextView) itemView.findViewById(R.id.itemIdPercorso);
             nome = (TextView) itemView.findViewById(R.id.itemNomePercorso);
-            indirizzo = (TextView) itemView.findViewById(R.id.itemDescrizionePercorso);
-            orarioApertura = (TextView) itemView.findViewById(R.id.itemOrarioAperturaSito);
-            orarioChiusura = (TextView) itemView.findViewById(R.id.itemOrarioChiusuraSito);
-            costoBiglietto = (TextView) itemView.findViewById(R.id.itemCostoBigliettoSito);
-            citta = (TextView) itemView.findViewById(R.id.itemNomeSitoAssociato);
+            descrizione = (TextView) itemView.findViewById(R.id.itemDescrizionePercorso);
+            idSitoAssociato = (TextView) itemView.findViewById(R.id.itemIdSitoAssociato);
+            nomeSitoAssociato = (TextView) itemView.findViewById(R.id.itemNomeSitoAssociato);
+            pubblico = (TextView) itemView.findViewById(R.id.itemStatoPubblico);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -160,6 +155,5 @@ public class CardSitoCulturaleAdapter extends RecyclerView.Adapter<CardSitoCultu
         });
 
     }
-
 
 }

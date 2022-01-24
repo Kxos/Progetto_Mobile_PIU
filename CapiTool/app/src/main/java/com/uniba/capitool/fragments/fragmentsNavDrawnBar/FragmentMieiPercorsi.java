@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.classes.CardPercorso;
+import com.uniba.capitool.classes.CardPercorsoAdapter;
 import com.uniba.capitool.classes.Utente;
+
+import java.util.ArrayList;
 
 /**
 
@@ -61,8 +67,6 @@ public class FragmentMieiPercorsi extends Fragment {
      */
     private void cercaPercorsiFromDB(String idUtente, View view) {
 
-        final boolean[] stato = {false};
-
         Query recentPostsQuery;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -76,15 +80,18 @@ public class FragmentMieiPercorsi extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                ArrayList<CardPercorso> listaPercorsi = new ArrayList<>();
+
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
-                    stato[0] = true;
+                    CardPercorso cardPercorso = snapshot.getValue(CardPercorso.class);
+                    listaPercorsi.add(cardPercorso);
 
                 }
 
                 // Ha trovato dei Percorsi esistenti per l'utente corrente
-                if(stato[0]){
+                if(!listaPercorsi.isEmpty()){
                     ConstraintLayout layoutImmagineNuovoPercorso = view.findViewById(R.id.layoutImmagineNuovoPercorso);
                     layoutImmagineNuovoPercorso.setVisibility(View.INVISIBLE);
 
@@ -92,7 +99,7 @@ public class FragmentMieiPercorsi extends Fragment {
                     layoutRecyclerViewPercorsi.setVisibility(View.VISIBLE);
 
                     //TODO - IMPLEMENTARE LA RECYCLERVIEW DELLE CARDS DEI PERCORSI
-
+                    popolaPercorsiInRecyclerView(listaPercorsi,view);
                 }
 
             }
@@ -105,6 +112,34 @@ public class FragmentMieiPercorsi extends Fragment {
         });
 
     }
+
+    /***
+     * Popola la RecyclerView con i Percorsi dell'Utente
+     *
+     * @param listaPercorsi: Lita di tutti i Percorsi di un Utente
+     */
+    public CardPercorsoAdapter popolaPercorsiInRecyclerView(ArrayList<CardPercorso> listaPercorsi, View view){
+
+        RecyclerView rvCardsPercorsi = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
+
+        if(!listaPercorsi.isEmpty()){
+
+            // Crea un adapter passando i Percorsi trovati
+            CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi);
+
+            // Lega l'Adapter alla recyclerview per popolare i Percorsi
+            rvCardsPercorsi.setAdapter(adapter);
+
+            // SetLayoutManager posiziona i Percorsi trovati nel Layout
+            rvCardsPercorsi.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+            return adapter;
+        }
+
+        return null;
+    }
+    /** FINE popolaOpereInRecyclerView()
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
      * Ottiene i dati dell'utente loggato (abbiamo impostato come primo fragment MioSito per il Curatore).

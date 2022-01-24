@@ -101,15 +101,15 @@
         tools:context=".fragments.fragmentsAggiungiPercorso.FragmentRicercaSiti">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewSiti"
+            android:id="@+id/recyclerViewPercorsi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/editCercaSitoCitta"
+            android:layout_below="@+id/editCercaNomePercorso"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editCercaSitoCitta" />
+            app:layout_constraintTop_toBottomOf="@+id/editCercaNomePercorso" />
 
         <EditText
-            android:id="@+id/editCercaSitoCitta"
+            android:id="@+id/editCercaNomePercorso"
             android:layout_width="351dp"
             android:layout_height="54dp"
             android:layout_marginStart="20dp"
