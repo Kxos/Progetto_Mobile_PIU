@@ -13,6 +13,7 @@
         <menu>
     <item android:id="@+id/rinominaZona"
             android:title="Rinomina Zona"
+            android:icon="@drawable/ic_baseline_create_24_black"
             app:showAsAction="ifRoom"/>
 
         <item

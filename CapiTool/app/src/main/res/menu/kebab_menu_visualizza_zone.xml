@@ -6,19 +6,27 @@
         android:title="Search"
         app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/kebabMenu"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title="Search"
+        app:showAsAction="always">
+        <menu>
     <item
         android:id="@+id/aggiungiZona"
-        android:icon="@drawable/add_icon"
+        android:icon="@drawable/ic_baseline_add_circle_outline_24_black"
         android:title="Aggiungi Zona"
         app:showAsAction="never" />
 
     <item android:id="@+id/eliminaZone"
         android:title="Elimina Zone"
+        android:icon="@drawable/ic_baseline_delete_24_black"
         app:showAsAction="never"/>
 
     <item android:id="@+id/ordinaZone"
         android:title="Ordina Zone"
+        android:icon="@drawable/ic_baseline_sort_24_black"
         app:showAsAction="never"/>
-
+        </menu>
+    </item>
 
 </menu>
