@@ -38,6 +38,9 @@ public class FragmentMieiPercorsi extends Fragment {
         View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
         FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
 
+        //TODO - VEDERE SE CI SONO DEI PERCORSI GIA ESISTENTI DELL'UTENTE
+
+
         addPercorso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
