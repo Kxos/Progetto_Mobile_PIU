@@ -2,7 +2,6 @@ package com.uniba.capitool.classes;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,9 +140,9 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            foto = (ImageView) itemView.findViewById(R.id.itemImmagineOpera);
+            foto = (ImageView) itemView.findViewById(R.id.itemImmaginePercorso);
             id = (TextView) itemView.findViewById(R.id.itemIdOpera);
-            titolo = (TextView) itemView.findViewById(R.id.itemNomeOpera);
+            titolo = (TextView) itemView.findViewById(R.id.itemNomePercorso);
             descrizione = (TextView) itemView.findViewById(R.id.itemDescrizioneOpera);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkOperaSelezionata);
             idZona = (TextView) itemView.findViewById(R.id.itemIdZona);

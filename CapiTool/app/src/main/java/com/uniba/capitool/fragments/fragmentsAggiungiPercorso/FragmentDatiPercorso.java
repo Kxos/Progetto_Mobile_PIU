@@ -1,6 +1,7 @@
 package com.uniba.capitool.fragments.fragmentsAggiungiPercorso;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -25,10 +26,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
+import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.Percorso;
 import com.uniba.capitool.classes.Utente;
+import com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMieiPercorsi;
 
 import java.util.ArrayList;
 
@@ -93,6 +97,12 @@ public class FragmentDatiPercorso extends Fragment {
             EditText descrizionePercorso = view.findViewById(R.id.textfield_descrizionePercorso);
             Switch pubblicoPercorso = view.findViewById(R.id.switchPubblicoPercorso);
 
+                if(BasicMethod.getUtente().getRuolo().equals("guida")){
+                    pubblicoPercorso.setVisibility(View.VISIBLE);
+            }else{
+                pubblicoPercorso.setVisibility(View.INVISIBLE);
+            }
+
             FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
             myRef = database.getReference("/");
 
@@ -103,15 +113,12 @@ public class FragmentDatiPercorso extends Fragment {
 
                     if(nomePercorsoIsValorized(nomePercorso)){
 
-                        // TODO - SALVARE IL PERCORSO SU FIREBASE
-
                         //Log.e("NomePercorso: ",""+nomePercorso.getText());
                         //Log.e("DescrizionePercorso: ",""+descrizionePercorso.getText());
                         //Log.e("StatoPubblico",""+pubblicoPercorso.isChecked());
                         //Log.e("Lista Opere",""+listaOpereChecked);
                         //Log.e("UID UTENTE",""+utente.getUid());
                         //Log.e("ID SITO ASSOCIATO",""+sharedPreferences.getString("idSito", ""));
-
 
                         String key = myRef.push().getKey();
 
@@ -121,14 +128,13 @@ public class FragmentDatiPercorso extends Fragment {
                         percorso.setDescrizione(descrizionePercorso.getText().toString());
                         percorso.setPubblico(pubblicoPercorso.isChecked());
                         percorso.setIdSitoAssociato(sharedPreferences.getString("idSito", ""));
+                        percorso.setNomeSitoAssociato(sharedPreferences.getString("nomeSito", ""));
                         percorso.setIdUtente(utente.getUid());
 
                         ArrayList<Opera> listaOpere = new ArrayList<>();
 
-                        // TODO - DA FINIRE!!!!!!!!!!!!!!!
-
                         for(int i = 0; i < listaOpereChecked.size(); i++){
-                            //listaOpere.add(i,null);
+                            listaOpere.add(i,new Opera());
                             listaOpere.get(i).setId(listaOpereChecked.get(i).getId());
                             listaOpere.get(i).setTitolo(listaOpereChecked.get(i).getTitolo());
                             listaOpere.get(i).setDescrizione(listaOpereChecked.get(i).getDescrizione());
@@ -140,6 +146,12 @@ public class FragmentDatiPercorso extends Fragment {
 
                         myRef = database.getReference("/Percorsi/"+key+"/OpereScelte");
                         myRef.setValue(listaOpere);
+
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastPercorsoSalvato), Toast.LENGTH_SHORT).show();
+
+                        // Ritorna ad "I Miei Percorsi"
+                        getActivity().onBackPressed();
+
 
                     }else{
                         Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastDatiPercorso), Toast.LENGTH_SHORT).show();

@@ -27,6 +27,10 @@
     <string name="deleteSite_subtext">Delete the entire cultural site and its data</string>
     <string name="delegateSite">Delegate site</string>
     <string name="delegateSite_subtext">Delegate your site to another curator</string>
+    <string name="open_Site">Opening: </string>
+    <string name="close_Site">Closing: </string>
+    <string name="ticket_price">Ticket price: </string>
+    <string name="site_address">Address: </string>
 
     <string name="selectDelegate">Choose who to delegate your site</string>
     <string name="delegatedEmail">Enter the delegate\'s email</string>
@@ -40,5 +44,8 @@
 
     <string name="toastNessunaOpera">No opera selected!</string>
     <string name="toastDatiPercorso">Check your path name!</string>
+    <string name="toastPercorsoSalvato">Path saved successfully!</string>
+    <string name="cercaPercorso">Search for Path Name</string>
+    <string name="descrizionePercorso">Description:</string>
 
 </resources>

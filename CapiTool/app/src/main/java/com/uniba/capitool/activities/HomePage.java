@@ -4,6 +4,7 @@ package com.uniba.capitool.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.Utente;
 
 public class HomePage extends AppCompatActivity {
 
@@ -30,7 +32,7 @@ public class HomePage extends AppCompatActivity {
 
         Toolbar toolbar = startToolbarDrawerLayout();
 
-        //NOTA: L'utente viene settato nel metodo startNaLateralMenu in BasicMethod
+        //NOTA: L'utente viene settato nel metodo startNavLateralMenu in BasicMethod
         NavController navController = basicMethod.startNavLateralMenu(toolbar, this);
 
     }
