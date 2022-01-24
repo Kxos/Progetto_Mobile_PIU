@@ -37,6 +37,20 @@ import java.util.ArrayList;
 public class FragmentMieiPercorsi extends Fragment {
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        Utente utente = getUserInfo();
+        View view = getView(); // Riottengo la View
+
+        if (view != null) {
+            //Ricarico la RecyclerView
+            cercaPercorsiFromDB(utente.getUid(), view);
+        }
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -98,7 +112,6 @@ public class FragmentMieiPercorsi extends Fragment {
                     RelativeLayout layoutRecyclerViewPercorsi = view.findViewById(R.id.layoutRecyclerViewPercorsi);
                     layoutRecyclerViewPercorsi.setVisibility(View.VISIBLE);
 
-                    //TODO - IMPLEMENTARE LA RECYCLERVIEW DELLE CARDS DEI PERCORSI
                     popolaPercorsiInRecyclerView(listaPercorsi,view);
                 }
 
@@ -138,7 +151,7 @@ public class FragmentMieiPercorsi extends Fragment {
 
         return null;
     }
-    /** FINE popolaOpereInRecyclerView()
+    /** FINE popolaPercorsiInRecyclerView()
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
