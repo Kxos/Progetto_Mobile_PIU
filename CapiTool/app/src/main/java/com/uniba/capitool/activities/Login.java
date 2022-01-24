@@ -3,7 +3,9 @@ package com.uniba.capitool.activities;
 import static android.content.ContentValues.TAG;
 import static com.uniba.capitool.activities.BasicMethod.isEmailValid;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,10 +62,9 @@ public class Login extends AppCompatActivity {
          * Set di email e password di curatore così accediamo più facilemnte
          *
          * */
-        // TODO -- DA RIMUOVERE
+        // TODO -- DA RIMUOVERE, ACCESSO VELOCE IN LOGIN
         email.setText("Curatore@gmail.com");
         password.setText("Cur123/");
-
         
         TextView registrati;
         registrati = findViewById(R.id.textView_register);
@@ -89,15 +90,6 @@ public class Login extends AppCompatActivity {
 
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();
-
-
-                /**
-                // TODO - RIMUOVERE QUESTE 2 FUNZIONI, ACCESSO VELOCE IN LOGIN
-                // Passa alla HomePage
-                Intent myIntent = new Intent(Login.this, HomePage.class);
-                Login.this.startActivity(myIntent);
-                // TODO -------------------------------------------------------------------
-                 */
 
                 if(isEmailValid(email_value)){
                     signIn(email_value,password_value);
@@ -195,6 +187,7 @@ public class Login extends AppCompatActivity {
 
                 //Log.d("Lunghezza lista della query", String.valueOf(visitatori.size()));
                 goToHomePage(user.getUid(), visitatori.get(0).getNome(), visitatori.get(0).getCognome(), visitatori.get(0).getEmail(), visitatori.get(0).getRuolo());
+
             }
 
             @Override

@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
+import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.Percorso;
@@ -93,6 +94,12 @@ public class FragmentDatiPercorso extends Fragment {
             EditText descrizionePercorso = view.findViewById(R.id.textfield_descrizionePercorso);
             Switch pubblicoPercorso = view.findViewById(R.id.switchPubblicoPercorso);
 
+            if(BasicMethod.getUtente().getRuolo().equals("guida")){
+                pubblicoPercorso.setVisibility(View.VISIBLE);
+            }else{
+                pubblicoPercorso.setVisibility(View.INVISIBLE);
+            }
+
             FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
             myRef = database.getReference("/");
 
@@ -128,7 +135,7 @@ public class FragmentDatiPercorso extends Fragment {
                         // TODO - DA FINIRE!!!!!!!!!!!!!!!
 
                         for(int i = 0; i < listaOpereChecked.size(); i++){
-                            //listaOpere.add(i,null);
+                            listaOpere.add(i,new Opera());
                             listaOpere.get(i).setId(listaOpereChecked.get(i).getId());
                             listaOpere.get(i).setTitolo(listaOpereChecked.get(i).getTitolo());
                             listaOpere.get(i).setDescrizione(listaOpereChecked.get(i).getDescrizione());
