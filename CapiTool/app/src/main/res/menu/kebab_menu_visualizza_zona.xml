@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item android:id="@+id/searchOpera"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="Search"
+            app:showAsAction="ifRoom"/>
+
+        <item android:id="@+id/rinominaZona"
+            android:title="Rinomina Zona"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/aggiungiOpera"
+            android:icon="@drawable/add_icon"
+            android:title="Aggiungi Opera"
+            app:showAsAction="never" />
+
+        <item android:id="@+id/eliminaZone"
+            android:title="Elimina Opere"
+            android:icon="@drawable/ic_outline_delete_24"
+            app:showAsAction="never"/>
+
+
+
+
+    </menu>
