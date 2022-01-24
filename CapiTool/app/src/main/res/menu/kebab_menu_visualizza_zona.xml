@@ -4,22 +4,29 @@
         <item android:id="@+id/searchOpera"
             android:icon="@drawable/ic_baseline_search_24"
             android:title="Search"
-            app:showAsAction="ifRoom"/>
+            app:showAsAction="always"/>
 
-        <item android:id="@+id/rinominaZona"
+    <item android:id="@+id/kebabMenu"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title="Search"
+        app:showAsAction="always">
+        <menu>
+    <item android:id="@+id/rinominaZona"
             android:title="Rinomina Zona"
-            app:showAsAction="never"/>
+            app:showAsAction="ifRoom"/>
 
         <item
             android:id="@+id/aggiungiOpera"
-            android:icon="@drawable/add_icon"
-            android:title="Aggiungi Opera"
-            app:showAsAction="never" />
+            android:icon="@drawable/ic_baseline_add_circle_outline_24_black"
+            app:showAsAction="ifRoom"
+            android:title="Aggiungi Opera" />
 
-        <item android:id="@+id/eliminaZone"
+        <item android:id="@+id/eliminaOpere"
             android:title="Elimina Opere"
-            android:icon="@drawable/ic_outline_delete_24"
-            app:showAsAction="never"/>
+            android:icon="@drawable/ic_baseline_delete_24_black"
+            app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
 
 
 
