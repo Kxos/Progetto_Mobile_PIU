@@ -1,5 +1,6 @@
 package com.uniba.capitool.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,6 +66,12 @@ public class VisualizzaZona extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Log.e("Hai cliccato l'opera", ""+allZone.getListaOpereZona().get(position).getTitolo());
+                    Bundle opera = new Bundle();
+                    opera.putSerializable("opera",allZone.getListaOpereZona().get(position));
+                    opera.putString("idSito",sito.getId());
+                    Intent visualizzaModificaOpera = new Intent(VisualizzaZona.this,VisualizzaModificaOpera.class);
+                    visualizzaModificaOpera.putExtras(opera);
+                    startActivity(visualizzaModificaOpera);
                 }
             });
         }else{
