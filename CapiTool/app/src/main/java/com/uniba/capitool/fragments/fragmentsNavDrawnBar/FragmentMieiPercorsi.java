@@ -7,9 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.BasicMethod;
@@ -25,21 +33,13 @@ public class FragmentMieiPercorsi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Utente utente = new Utente();
-
-        //BasicMethod.getUtente() da valore nullo perchè forse non è ancora valorizzato, dato che MioSito è il primo fragment
-        // che viene creato all'avvio di HomePage. La soluzione è leggere con il Bundle
-        utente.setUid(getActivity().getIntent().getExtras().getString("uid"));
-        utente.setNome(getActivity().getIntent().getExtras().getString("nome"));
-        utente.setCognome(getActivity().getIntent().getExtras().getString("cognome"));
-        utente.setEmail(getActivity().getIntent().getExtras().getString("email"));
-        utente.setRuolo(getActivity().getIntent().getExtras().getString("ruolo"));
+        Utente utente = getUserInfo();
 
         View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
         FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
 
         //TODO - VEDERE SE CI SONO DEI PERCORSI GIA ESISTENTI DELL'UTENTE
-
+        cercaPercorsiFromDB(utente.getUid(), v);
 
         addPercorso.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,9 +54,57 @@ public class FragmentMieiPercorsi extends Fragment {
     }
 
     /***
-     * Ottiene i dati dell'utente loggato (abbiamo impostato come primo fragment MioSito per il Curatore. Al momento questo metodo per leggere il Bundle non serve. Vedremo con il visitatore.
+     * Se ci sono dei Percorsi creati dall'utente allora imposta la recycle View con le cards, altrimenti lascia l'immagine Predefinita
+     *
+     * @param idUtente
+     * @param view
+     */
+    private void cercaPercorsiFromDB(String idUtente, View view) {
+
+        final boolean[] stato = {false};
+
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        //-------------------------------------------------------------------------------------
+        // Ricerca per Zone
+
+        recentPostsQuery = myRef.child("Percorsi/").orderByChild("idUtente").equalTo(idUtente);     //SELECT Zone FROM Siti WHERE id = idSito
+        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    stato[0] = true;
+
+                }
+
+                if(stato[0]){
+                    ConstraintLayout layoutImmagineNuovoPercorso = view.findViewById(R.id.layoutImmagineNuovoPercorso);
+                    layoutImmagineNuovoPercorso.setVisibility(View.INVISIBLE);
+
+                    Log.e("SEI DENTROOOOOOOOOOOOOO: ", "BNVB");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+            }
+        });
+
+    }
+
+    /***
+     * Ottiene i dati dell'utente loggato (abbiamo impostato come primo fragment MioSito per il Curatore).
      *                                      Il problema riscontato è che se il fragment in questione è il primo ad essere istanziato della HomePage, BasicMethod.getUtente() da valore nullo.
-     *                                      Forse non viene valorizzato in tempo)
+     *                                      Non viene valorizzato in tempo)
      *
      * @return utente: Ritorna l'utente valorizzato delle sue informazioni
      */
