@@ -1,10 +1,11 @@
 package com.uniba.capitool.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Zona {
+public class Zona implements Serializable {
 
 
     private String id ;

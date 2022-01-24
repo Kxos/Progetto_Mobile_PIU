@@ -16,13 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.VisualizzaOpera;
+import com.uniba.capitool.activities.VisualizzaZona;
 import com.uniba.capitool.activities.VisualizzaZoneSito;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder>  implements ItemOperaZonaRecyclerAdapter.OnOperaListener {
     private Context context;
-    private List<AllZone> allZoneList;
+    private List<AllZona> allZoneList;
 
 
     /***
@@ -30,7 +32,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
      * @param context
      * @param allZoneList
      */
-    public MainRecyclerAdapter(Context context, List<AllZone> allZoneList) {
+    public MainRecyclerAdapter(Context context, List<AllZona> allZoneList) {
         this.context = context;
         this.allZoneList = allZoneList;
     }
@@ -54,6 +56,22 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         if(allZoneList.get(position).getListaOpereZona()==null){
            holder.emptyZona.setVisibility(View.VISIBLE);
        }
+
+        holder.nomeZona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("RECYCLER", ""+allZoneList.get(holder.getAdapterPosition()).getNomeZona());
+
+                Intent visualizzaZona = new Intent(v.getContext(), VisualizzaZona.class);
+                Bundle dati = new Bundle();
+                dati.putSerializable("sito", ((VisualizzaZoneSito)v.getContext()).getSito());
+                dati.putSerializable("utente", ((VisualizzaZoneSito)v.getContext()).getUtente());
+                dati.putSerializable("allZone", (Serializable) allZoneList.get(holder.getAdapterPosition()));
+                visualizzaZona.putExtras(dati);
+                ((VisualizzaZoneSito)v.getContext()).startActivity(visualizzaZona);
+            }
+        });
+
 
     }
 
@@ -92,9 +110,22 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
          */
         @Override
         public void onClick(View v) {
-            Log.e("RECYCLER", ""+getAdapterPosition());
+        //    Log.e("RECYCLER", ""+getAdapterPosition()+""+nomeZona.getText());
+
+//            Intent visualizzaZona = new Intent(v.getContext(), VisualizzaZona.class);
+//            Bundle dati = new Bundle();
+//            dati.putSerializable("sito", ((VisualizzaZoneSito)v.getContext()).getSito());
+//            dati.putSerializable("utente", ((VisualizzaZoneSito)v.getContext()).getUtente());
+//            dati.putString("nomeZona", nomeZona.getText().toString());
+//            visualizzaZona.putExtras(dati);
+//
+//
+//
+//            ((VisualizzaZoneSito)v.getContext()).startActivity(visualizzaZona);
 
         }
+
+
 
     }
 
@@ -131,7 +162,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
      * @param idZona
      * @return
      */
-    public int getIndexZona(List<AllZone> allZoneList, String idZona){
+    public int getIndexZona(List<AllZona> allZoneList, String idZona){
         int index=-1;
 
         for(int i=0; i<allZoneList.size(); i++){
