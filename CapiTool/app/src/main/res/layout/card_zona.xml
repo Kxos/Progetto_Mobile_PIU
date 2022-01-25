@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/itemImmaginePercorso"
+            android:id="@+id/itemImmagineZona"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
@@ -23,15 +23,15 @@
             app:srcCompat="@drawable/opera_image" />
 
         <TextView
-            android:id="@+id/itemNomePercorso"
+            android:id="@+id/itemNomeZona"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
-            android:text="Nome Opera 1"
+            android:text="Nome Zona 1"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/itemImmaginePercorso"
+            app:layout_constraintStart_toEndOf="@+id/itemImmagineZona"
             app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
@@ -58,18 +58,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/itemDescrizioneOpera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="55dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/checkZonaSelezionata"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/itemIdZona"
+            android:id="@+id/itemIdSito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"

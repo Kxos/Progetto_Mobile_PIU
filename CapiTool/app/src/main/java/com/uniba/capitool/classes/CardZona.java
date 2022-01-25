@@ -12,10 +12,9 @@ public class CardZona implements Serializable {
     private String nome ;
     private List<Opera> Opere;
     private CheckBox checkBox;
-    private Uri foto;
     private String idSito;
 
-    public CardZona (String id,String nome,CheckBox checkBox, Uri foto, String idSito){
+    public CardZona (String id,String nome,CheckBox checkBox, String idSito){
         this.nome = nome ;
         Opere = new ArrayList<>() ;
     }
@@ -52,14 +51,7 @@ public class CardZona implements Serializable {
         this.checkBox = checkBox;
     }
     public void setCheckBoxCheckedStatus(boolean status){ this.checkBox.setChecked(status); }
-    
-    public Uri getFoto() {
-        return foto;
-    }
 
-    public void setFoto(Uri foto) {
-        this.foto = foto;
-    }
 
     public String getIdSito() {
         return idSito;

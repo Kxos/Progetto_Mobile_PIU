@@ -45,6 +45,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
     SitoCulturale sito;
     Utente utente;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
