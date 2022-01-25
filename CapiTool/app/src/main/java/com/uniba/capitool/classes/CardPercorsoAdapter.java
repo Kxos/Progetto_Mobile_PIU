@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -108,17 +109,36 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
         }
 
+        ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
+        ImageView itemFavourite = holder.itemFavourite;
+
+        itemFavouriteBorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemFavouriteBorder.setVisibility(View.INVISIBLE);
+                itemFavourite.setVisibility(View.VISIBLE);
+                Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastAggiuntoPercorsoAiPreferiti), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        itemFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemFavouriteBorder.setVisibility(View.VISIBLE);
+                itemFavourite.setVisibility(View.INVISIBLE);
+                Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastRimossoPercorsoDaiPreferiti), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // Verifico che mi trovo in FragmentConsigliati
         if(fragment.equals("Consigliati")){
-            ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
             itemFavouriteBorder.setVisibility(View.VISIBLE);
         }else{
-            ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
-
-            ImageView itemFavourite = holder.itemFavourite;
             itemFavourite.setVisibility(View.INVISIBLE);
         }
+
+
 
     }
 
