@@ -51,4 +51,18 @@
     <string name="cercaPercorso">Cerca il nome del Percorso</string>
     <string name="descrizionePercorso">Descrizione:</string>
 
+
+    <string name="noPswInsert">Non hai inserito nessuna password</string>
+    <string name="boxInfoNotChecked">You must confirm thah you read the information</string>
+    <string name="SuccesfulDeleteSite">Sito eliminato con successo</string>
+
+    <string name="noEmailInsert">Non bai inserito nessuna e-mail</string>
+    <string name="userNotFound">Errore: utente non trovato</string>
+    <string name="userhaveAlreadySite">Errore: Non puoi delegare ad un curatore che ha già un sito</string>
+    <string name="SuccesfulDelegateSite">Site successfully delegated</string>
+
+
+
+
+
 </resources>

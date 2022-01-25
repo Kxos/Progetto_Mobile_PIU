@@ -40,7 +40,7 @@
     <string name="insertYourPassword">Insert your password</string>
 
     <string name="toastDelegateSito">Delegate site not available: you do not have an associated site</string>
-    <string name="toastDeleteSito">Delete site non disponibile: you do not have an associated site</string>
+    <string name="toastDeleteSito">Delete site non avaible: you do not have an associated site</string>
 
     <string name="toastNessunaOpera">No opera selected!</string>
     <string name="toastDatiPercorso">Check your path name!</string>
@@ -50,5 +50,22 @@
     <string name="cercaPercorso">Search Path Name</string>
     <string name="descrizionePercorso">Description:</string>
 
+<<<<<<< HEAD
+
+
+    <string name="noPswInsert">You don\'t insert any password</string>
+    <string name="boxInfoNotChecked">You must confirm thah you read the information</string>
+    <string name="SuccesfulDeleteSite">Site successfully deleted</string>
+
+    <string name="noEmailInsert">You don\'t insert any email</string>
+    <string name="userNotFound">Error: user not found</string>
+    <string name="userhaveAlreadySite">Error: You cannot delegate to a curator who already has a site </string>
+    <string name="SuccesfulDelegateSite">Site successfully delegated</string>
+
+
+
+
+=======
+>>>>>>> a27597b351c240eb0025c4c7e085c7314a2a761b
 
 </resources>
