@@ -89,13 +89,13 @@ public class FragmentConsigliati extends Fragment {
             listaPercorsi.clear();
         }
 
-        // Crea un adapter passando i siti trovati
-        CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi);
+        // Crea un adapter passando i Percorsi trovati
+        CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "Consigliati");
 
-        // Lega l'Adapter alla recyclerview per popolare i Siti
+        // Lega l'Adapter alla recyclerview per popolare i Percorsi
         rvCardsSiti.setAdapter(adapter);
 
-        // SetLayoutManager posiziona i Siti trovati nel Layout
+        // SetLayoutManager posiziona i Percorsi trovati nel Layout
         rvCardsSiti.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
     /** FINE popolaSitiInRecyclerView()
@@ -148,7 +148,7 @@ public class FragmentConsigliati extends Fragment {
                     }
 
                 }
-
+                // Ha trovato dei Percorsi esistenti
                 if(dataSnapshot.getValue() == null){
                     getPercorsiFromDBOrderByCittaSitoAssociato(valoreDiRicerca, listaPercorsi);
                 }

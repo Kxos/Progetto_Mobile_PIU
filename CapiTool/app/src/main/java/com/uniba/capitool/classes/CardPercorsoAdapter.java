@@ -23,6 +23,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
     // Store a member variable
     private ArrayList<CardPercorso> listaPercorsi;
+    private String fragment;
     private CardPercorsoAdapter.OnEventClickListener mListener;
 
     public interface OnEventClickListener{
@@ -36,6 +37,12 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
     // Pass in the array into the constructor
     public CardPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi) {
         this.listaPercorsi = listaPercorsi;
+        this.fragment = "";
+    }
+
+    public CardPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi, String fragment) {
+        this.listaPercorsi = listaPercorsi;
+        this.fragment = fragment;
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -101,6 +108,18 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
         }
 
+        // Verifico che mi trovo in FragmentConsigliati
+        if(fragment.equals("Consigliati")){
+            ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
+            itemFavouriteBorder.setVisibility(View.VISIBLE);
+        }else{
+            ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
+            itemFavouriteBorder.setVisibility(View.INVISIBLE);
+
+            ImageView itemFavourite = holder.itemFavourite;
+            itemFavourite.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     // Returns the total count of items in the list
@@ -124,6 +143,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         public TextView pubblico;
         public ImageView itemVisibilityTruePercorso;
         public ImageView itemVisibilityFalsePercorso;
+        public ImageView itemFavouriteBorder;
+        public ImageView itemFavourite;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -142,6 +163,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
             pubblico = (TextView) itemView.findViewById(R.id.itemStatoPubblico);
             itemVisibilityTruePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityTruePercorso);
             itemVisibilityFalsePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityFalsePercorso);
+            itemFavouriteBorder = (ImageView)itemView.findViewById(R.id.itemFavouriteBorder);
+            itemFavourite = (ImageView)itemView.findViewById(R.id.itemFavourite);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
