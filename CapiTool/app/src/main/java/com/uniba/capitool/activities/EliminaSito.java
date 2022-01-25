@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,10 +53,13 @@ public class EliminaSito extends AppCompatActivity {
         Curatore utente = (Curatore) bundle.getSerializable("utente");
 
 
-        EditText editPasswordCuratore = findViewById(R.id.edit_text_password);
+        TextInputEditText editPasswordCuratore = findViewById(R.id.edit_text_password);
         CheckBox boxInfo = findViewById(R.id.boxInfoDelete);
         Button buttonConferma = findViewById(R.id.button_conferma_delega);
         Button buttonAnnulla = findViewById(R.id.button_annulla_delega);
+
+
+        editPasswordCuratore.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +95,10 @@ public class EliminaSito extends AppCompatActivity {
 
 
                 if (passwordInserita.isEmpty()) {
-                    editPasswordCuratore.setError("Non hai inserito nessuna password");
+                    editPasswordCuratore.setError(getString(R.string.noPswInsert));
                     //Toast.makeText(getApplicationContext(), "Non hai inserito nessuna password", Toast.LENGTH_SHORT).show();
                 } else if (!boxInfo.isChecked()) {
-                    boxInfo.setError("Devi confermare di aver letto l'informativa per procedere all'eliminazione");
+                    boxInfo.setError(getString(R.string.boxInfoNotChecked));
                     //Toast.makeText(getApplicationContext(), "Devi confermare di aver letto l'informativa per procedere all'eliminazione", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -128,14 +136,17 @@ public class EliminaSito extends AppCompatActivity {
 
                                             if(sitoTrovato == null){
                                                 Log.e("Risultato ricerca sito", "SITO NON TROVATO") ;
-                                                //Toast.makeText(getApplicationContext(), "Nessun sito trovato", Toast.LENGTH_SHORT ) ;
                                             }else{
 
                                                 Log.e("Sito trovato", "Nome: " + sitoTrovato.getNome() + "----- idSito: " + sitoTrovato.getId());
 
-                                                myRef.child("Siti").child(sitoTrovato.getId()).setValue(null) ;
+                                                //myRef.child("Siti").child(sitoTrovato.getId()).setValue(null) ;
                                                 Log.e("Elimina sito", "Sito elimianto!") ;
-                                                Toast.makeText(getApplicationContext(),"Sito Eliminato con successo:)", Toast.LENGTH_SHORT).show();
+
+
+                                                BasicMethod.alertDialog(EliminaSito.this, "", "Sito eliminato con successo!", "");
+
+
 
                                                 Intent intent = new Intent (EliminaSito.this, HomePage.class) ;
                                                 Bundle bundle = new Bundle() ;
@@ -147,6 +158,8 @@ public class EliminaSito extends AppCompatActivity {
                                                 intent.putExtras(bundle);
                                                 startActivity(intent);
                                                 }
+
+
                                             }
 
                                         @Override

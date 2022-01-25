@@ -60,9 +60,11 @@ public class DelegaSito extends AppCompatActivity {
                 String emailDelegato = editEmailDelegato.getText().toString();
 
                 if (emailDelegato.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Non hai inserito nessuna email", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Non hai inserito nessuna email", Toast.LENGTH_SHORT).show();
+                    editEmailDelegato.setError(getString(R.string.noEmailInsert));
                 } else if (!boxInfo.isChecked()) {
-                    Toast.makeText(getApplicationContext(), "Devi confermare di aver letto l'informativa per procedere com la delega", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Devi confermare di aver letto l'informativa per procedere", Toast.LENGTH_SHORT).show();
+                    boxInfo.setError(getString(R.string.boxInfoNotChecked));
                 } else {
                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
                     DatabaseReference myRef = database.getReference("/");
@@ -84,7 +86,7 @@ public class DelegaSito extends AppCompatActivity {
                             }
 
                             if (utenteTrovato==null) {
-                                Toast.makeText(getApplicationContext(), "Nessun utente trovato", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.userNotFound), Toast.LENGTH_SHORT).show();
                             } else {
 
 
@@ -113,7 +115,7 @@ public class DelegaSito extends AppCompatActivity {
                                             Log.e("*****!!!!*****", "procedo");
 
                                             if (!siti.isEmpty()) {
-                                                Toast.makeText(getApplicationContext(), "Non è possibile delegare il sito ad un curatore che ne ha già associato uno", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(), getString(R.string.userhaveAlreadySite), Toast.LENGTH_SHORT).show();
                                             }else{
                                                 Log.e("*****!!!!*****", "Non ha un sito quindi posso delegare");
 
@@ -146,9 +148,9 @@ public class DelegaSito extends AppCompatActivity {
                                                             dialog_confirm.setOnClickListener(new View.OnClickListener() {
                                                                 @Override
                                                                 public void onClick(View v) {
-                                                                    myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
+                                                                    //myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
                                                                     Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
-                                                                    Toast.makeText(getApplicationContext(), "Sito Delegato con Successo ! :)", Toast.LENGTH_SHORT).show();
+                                                                    BasicMethod.alertDialog(DelegaSito.this, "", getString(R.string.SuccesfulDelegateSite), "");
 
 
                                                                     Intent intent = new Intent (DelegaSito.this, HomePage.class) ;

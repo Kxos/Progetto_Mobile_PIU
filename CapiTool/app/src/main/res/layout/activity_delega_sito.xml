@@ -31,6 +31,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="francesco.rossi@example.com"
+        android:theme="@style/CapiToolStyle"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="@+id/text_email_delegato"
         app:layout_constraintTop_toBottomOf="@+id/text_email_delegato" />
@@ -49,6 +50,7 @@
         android:layout_width="322dp"
         android:layout_height="46dp"
         android:layout_marginTop="116dp"
+        android:theme="@style/CapiToolStyle"
         android:text="@string/checkInfoConfermed"
         app:layout_constraintStart_toStartOf="@+id/edit_text_email"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_email" />

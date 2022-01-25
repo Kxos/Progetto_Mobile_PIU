@@ -37,13 +37,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_sub_elimina_sito" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edit_text_password"
         android:layout_width="349dp"
         android:layout_height="52dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="password"
+        android:theme="@style/CapiToolStyle"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/text_inserisci_password"
         app:layout_constraintTop_toBottomOf="@+id/text_inserisci_password" />
@@ -54,6 +55,7 @@
         android:layout_height="33dp"
         android:layout_marginTop="100dp"
         android:text="@string/checkInfoConfermed"
+        android:theme="@style/CapiToolStyle"
         app:layout_constraintStart_toStartOf="@+id/edit_text_password"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_password" />
 
