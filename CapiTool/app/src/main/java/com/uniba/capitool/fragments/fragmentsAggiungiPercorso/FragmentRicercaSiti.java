@@ -57,9 +57,6 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
         utente = ((AggiungiPercorso)getActivity()).getUtente();
         EditText valoreDiRicerca = view.findViewById(R.id.editCercaNomePercorso);
 
-        // TODO - OTTENERE LE CARD IN TEMPO REALE
-        // TODO ----------------------------------------------------------
-
         valoreDiRicerca.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -77,7 +74,6 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
             }
         });
 
-        // TODO ----------------------------------------------------------
     }
 
     /***
