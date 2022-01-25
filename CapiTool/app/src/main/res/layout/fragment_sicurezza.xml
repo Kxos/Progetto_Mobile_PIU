@@ -80,6 +80,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <CheckBox
+            android:id="@+id/mostraPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Mostra Password"
+            app:layout_constraintEnd_toEndOf="@+id/layout_ConfermaPassword"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/layout_ConfermaPassword"
+            app:layout_constraintTop_toBottomOf="@+id/layout_ConfermaPassword" />
+
         <Button
             android:id="@+id/confermaModificaPassword"
             android:layout_width="wrap_content"
@@ -88,7 +99,7 @@
             android:layout_marginEnd="30dp"
             android:text="Conferma"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_ConfermaPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/mostraPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

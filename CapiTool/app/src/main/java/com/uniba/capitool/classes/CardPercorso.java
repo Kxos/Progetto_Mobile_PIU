@@ -1,51 +1,26 @@
 package com.uniba.capitool.classes;
 
-import  java.util.ArrayList;
-
-public class Percorso {
+public class CardPercorso {
 
     private String id;
     private String nome;
-    private ArrayList<Opera> opereScelte;
     private String idSitoAssociato;
     private String nomeSitoAssociato;
-    private String idUtente;
     private String descrizione;
     private boolean pubblico;
 
-    public Percorso(){
-
-    }
-
-    public Percorso(String id, String nome, ArrayList<Opera> opereScelte, String idSitoAssociato, String nomeSitoAssociato, String idUtente, String descrizione, boolean pubblico) {
+    public CardPercorso(String id, String nome, String idSitoAssociato, String nomeSitoAssociato, String descrizione, boolean pubblico) {
         this.id = id;
         this.nome = nome;
-        this.opereScelte = opereScelte;
         this.idSitoAssociato = idSitoAssociato;
         this.nomeSitoAssociato = nomeSitoAssociato;
-        this.idUtente = idUtente;
         this.descrizione = descrizione;
         this.pubblico = pubblico;
     }
 
-    protected void aggiornaPercorso(){
-
+    public CardPercorso() {
     }
 
-    protected void eliminaPercorso(){
-
-    }
-
-    protected boolean aggiungiZonaScelta(Opera zonaScelta){
-        return opereScelte.add(zonaScelta);
-    }
-
-    protected boolean rimuoviZonaScelta(Zona zonaScelta){
-        return opereScelte.remove(zonaScelta);
-    }
-
-
-    //METODI GETTER & SETTER
     public String getId() {
         return id;
     }
@@ -60,14 +35,6 @@ public class Percorso {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public ArrayList<Opera> getOpereScelte() {
-        return opereScelte;
-    }
-
-    public void setOpereScelte(ArrayList<Opera> opereScelte) {
-        this.opereScelte = opereScelte;
     }
 
     public String getIdSitoAssociato() {
@@ -94,14 +61,6 @@ public class Percorso {
         this.pubblico = pubblico;
     }
 
-    public String getIdUtente() {
-        return idUtente;
-    }
-
-    public void setIdUtente(String idUtente) {
-        this.idUtente = idUtente;
-    }
-
     public String getNomeSitoAssociato() {
         return nomeSitoAssociato;
     }
@@ -109,5 +68,4 @@ public class Percorso {
     public void setNomeSitoAssociato(String nomeSitoAssociato) {
         this.nomeSitoAssociato = nomeSitoAssociato;
     }
-
 }

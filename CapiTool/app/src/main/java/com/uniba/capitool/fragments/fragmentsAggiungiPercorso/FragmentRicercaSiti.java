@@ -30,7 +30,6 @@ import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.CardSitoCulturaleAdapter;
-import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
 
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
         super.onViewCreated(view, savedInstanceState);
 
         utente = ((AggiungiPercorso)getActivity()).getUtente();
-        EditText valoreDiRicerca = view.findViewById(R.id.editCercaSitoCitta);
+        EditText valoreDiRicerca = view.findViewById(R.id.editCercaNomePercorso);
 
         // TODO - OTTENERE LE CARD IN TEMPO REALE
         // TODO ----------------------------------------------------------
@@ -111,7 +110,7 @@ public class FragmentRicercaSiti extends Fragment implements CardSitoCulturaleAd
      */
     public void popolaSitiInRecyclerView(String valoreDiRicerca, View view){
 
-        RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewSiti);
+        RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
 
         if(!valoreDiRicerca.equals("")){
             cardSitiCulturali = getSitiFromDB(BasicMethod.toLower(valoreDiRicerca));

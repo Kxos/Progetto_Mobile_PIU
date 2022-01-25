@@ -75,6 +75,9 @@ public class EliminaSito extends AppCompatActivity {
             }
         });
 
+        //TODO temporaneo, da eliminare
+        editPasswordCuratore.setText("Cur123/");
+        boxInfo.setChecked(true);
 
         buttonConferma.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,73 +97,71 @@ public class EliminaSito extends AppCompatActivity {
                     FirebaseUser datiUtente = FirebaseAuth.getInstance().getCurrentUser();
                     AuthCredential credential = EmailAuthProvider.getCredential(datiUtente.getEmail(), passwordInserita);
 
-                    Log.e("Dati trovati", "email: " + datiUtente.getEmail() + "-----  passord inserita: " + passwordInserita);
+                    Log.e("Dati trovati", "email: " + datiUtente.getEmail() + " ----- uid: " + datiUtente.getUid() +  " -----  passord inserita: " + passwordInserita);
 
                     datiUtente.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Log.e("Password inserita", "password corretta");
-                                passwordCorretta = true;
-                            } else {
-                                editPasswordCuratore.setError("Password errata");
-                                Log.e("Password inserita", "password ERRATA");
-                                passwordCorretta = false;
+                                Log.e("TASK", "completato con SUCCESSO, password CORRETTA") ;
 
+
+
+                                    Log.e("Elimina sito", "PWS CORETTA, ora passo all'eliminazione") ;
+
+
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                                    DatabaseReference myRef = database.getReference("/");
+
+                                    Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(datiUtente.getUid()).limitToFirst(1);
+                                    recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                            for (DataSnapshot shot : snapshot.getChildren()) {
+                                                sitoTrovato = (SitoCulturale) shot.getValue(SitoCulturale.class);
+                                                Log.e("FOR","Ho trovato il sito *");
+
+                                            }
+
+                                            //Log.e("Fuori fda FOR", "Nome: " + sitoTrovato.getNome() + "----- idSito: " + sitoTrovato.getId());
+
+                                            if(sitoTrovato == null){
+                                                Log.e("Risultato ricerca sito", "SITO NON TROVATO") ;
+                                                //Toast.makeText(getApplicationContext(), "Nessun sito trovato", Toast.LENGTH_SHORT ) ;
+                                            }else{
+
+                                                Log.e("Sito trovato", "Nome: " + sitoTrovato.getNome() + "----- idSito: " + sitoTrovato.getId());
+
+                                                myRef.child("Siti").child(sitoTrovato.getId()).setValue(null) ;
+                                                Log.e("Elimina sito", "Sito elimianto!") ;
+                                                Toast.makeText(getApplicationContext(),"Sito Eliminato con successo:)", Toast.LENGTH_SHORT).show();
+
+                                                Intent intent = new Intent (EliminaSito.this, HomePage.class) ;
+                                                Bundle bundle = new Bundle() ;
+                                                intent.putExtra("uid", utente.getUid()); //Optional parameters
+                                                intent.putExtra("nome", utente.getNome()); //Optional parameters
+                                                intent.putExtra("cognome", utente.getCognome()); //Optional parameters
+                                                intent.putExtra("email", utente.getEmail()); //Optional parametersù
+                                                intent.putExtra("ruolo", utente.getRuolo()); //Optional parameters
+                                                intent.putExtras(bundle);
+                                                startActivity(intent);
+                                                }
+                                            }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+                                        }
+
+                                    });
+
+                            } else {
+                                editPasswordCuratore.setError("Password ERRATA");
+                                Log.e("TASK", "TASK FALLITO, PASSWORD errata") ;
                             }
                         }
                     });
-
-                    Log.e("Valore di password corretta", passwordCorretta == true ? "corretta" : "non corretta") ;
-
-                    if (passwordCorretta) {
-                        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-                        DatabaseReference myRef = database.getReference("/Siti/");
-
-                        Query recentPostsQuery = myRef.orderByChild("uidCuratore").equalTo(datiUtente.getUid()).limitToFirst(1);
-                        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                                sitoTrovato = new SitoCulturale();
-
-                                for (DataSnapshot shot : snapshot.getChildren()) {
-                                    sitoTrovato = (SitoCulturale) shot.getValue(SitoCulturale.class);
-                                    sitoTrovato.setId(shot.getKey());
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
-                            }
-
-                        });
-
-                        if(sitoTrovato == null){
-                            Toast.makeText(getApplicationContext(), "NEssun sito trovato", Toast.LENGTH_SHORT ) ;
-                        }else{
-
-                            Log.e("Sito trovato", "Nome: " + sitoTrovato.getNome() + "----- idSito: " + sitoTrovato.getId());
-
-                            //myRef.child(sitoTrovato.getId()).setValue(null) ;
-                                   /* Log.e("Elimina sito", "Sito elimianto!") ;
-                                    Toast.makeText(getApplicationContext(),"Sito Eliminato con successo:)", Toast.LENGTH_SHORT).show();
-
-                                    Intent intent = new Intent (EliminaSito.this, HomePage.class) ;
-                                    Bundle bundle = new Bundle() ;
-                                    intent.putExtra("uid", utente.getUid()); //Optional parameters
-                                    intent.putExtra("nome", utente.getNome()); //Optional parameters
-                                    intent.putExtra("cognome", utente.getCognome()); //Optional parameters
-                                    intent.putExtra("email", utente.getEmail()); //Optional parametersù
-                                    intent.putExtra("ruolo", utente.getRuolo()); //Optional parameters
-                                    intent.putExtras(bundle);
-                                    startActivity(intent);*/
-                        }
-
-                    }else{
-                        Log.e("Azioni dopo password corretta", "Non ho fatto nient'altro !!! *** ");
-                    }
 
 
                 }
