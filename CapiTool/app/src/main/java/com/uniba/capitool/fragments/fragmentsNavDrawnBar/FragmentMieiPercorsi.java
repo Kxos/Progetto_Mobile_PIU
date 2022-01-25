@@ -3,12 +3,14 @@ package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.CardPercorsoAdapter;
 import com.uniba.capitool.classes.CardSitoCulturale;
+import com.uniba.capitool.classes.Percorso;
 import com.uniba.capitool.classes.Utente;
 
 import java.util.ArrayList;
@@ -39,6 +42,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class FragmentMieiPercorsi extends Fragment {
+
+    Utente utente;
 
     @Override
     public void onResume() {
@@ -58,7 +63,7 @@ public class FragmentMieiPercorsi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Utente utente = getUserInfo();
+        utente = getUserInfo();
         View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
 
         FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
@@ -103,6 +108,8 @@ public class FragmentMieiPercorsi extends Fragment {
      */
     public void cercaPercorsoFromDBDalNome(String nomePercorso, View view){
 
+        Log.e("NOME PERCORSO: ",nomePercorso );
+
         final ArrayList<CardPercorso> listaPercorsi = new ArrayList<>();
         Query recentPostsQuery;
 
@@ -120,8 +127,13 @@ public class FragmentMieiPercorsi extends Fragment {
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
-                    CardPercorso cardPercorso = snapshot.getValue(CardPercorso.class);
-                    listaPercorsi.add(cardPercorso);
+                    Percorso percorso = snapshot.getValue(Percorso.class);
+                    if(percorso.getIdUtente().equals(utente.getUid())){
+
+                        CardPercorso cardPercorso = snapshot.getValue(CardPercorso.class);
+                        listaPercorsi.add(cardPercorso);
+
+                    }
 
                 }
 
@@ -161,8 +173,13 @@ public class FragmentMieiPercorsi extends Fragment {
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
-                    CardPercorso cardPercorso = snapshot.getValue(CardPercorso.class);
-                    listaPercorsi.add(cardPercorso);
+                    Percorso percorso = snapshot.getValue(Percorso.class);
+                    if(percorso.getIdUtente().equals(utente.getUid())){
+
+                        CardPercorso cardPercorso = snapshot.getValue(CardPercorso.class);
+                        listaPercorsi.add(cardPercorso);
+
+                    }
 
                 }
 

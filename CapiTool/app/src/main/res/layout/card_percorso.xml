@@ -70,8 +70,8 @@
             android:id="@+id/itemIdPercorso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="13dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="64dp"
             android:text="id Sito"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,6 +98,28 @@
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/itemVisibilityTruePercorso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_visibility_24" />
+
+        <ImageView
+            android:id="@+id/itemVisibilityFalsePercorso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_visibility_off_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

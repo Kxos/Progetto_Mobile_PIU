@@ -83,6 +83,21 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         TextView cardStatoPubblico = holder.pubblico;
         cardStatoPubblico.setText(""+cardPercorso.isPubblico());
 
+        if(cardPercorso.isPubblico()){
+            ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
+            itemVisibilityTruePercorso.setVisibility(View.VISIBLE);
+
+            ImageView itemVisibilityFalsePercorso = holder.itemVisibilityFalsePercorso;
+            itemVisibilityFalsePercorso.setVisibility(View.INVISIBLE);
+        }else{
+            ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
+            itemVisibilityTruePercorso.setVisibility(View.INVISIBLE);
+
+            ImageView itemVisibilityFalsePercorso = holder.itemVisibilityFalsePercorso;
+            itemVisibilityFalsePercorso.setVisibility(View.VISIBLE);
+
+        }
+
     }
 
     // Returns the total count of items in the list
@@ -103,6 +118,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         public TextView nomeSitoAssociato;
         public TextView descrizione;
         public TextView pubblico;
+        public ImageView itemVisibilityTruePercorso;
+        public ImageView itemVisibilityFalsePercorso;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -118,6 +135,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
             idSitoAssociato = (TextView) itemView.findViewById(R.id.itemIdSitoAssociato);
             nomeSitoAssociato = (TextView) itemView.findViewById(R.id.itemNomeSitoAssociato);
             pubblico = (TextView) itemView.findViewById(R.id.itemStatoPubblico);
+            itemVisibilityTruePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityTruePercorso);
+            itemVisibilityFalsePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityFalsePercorso);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
