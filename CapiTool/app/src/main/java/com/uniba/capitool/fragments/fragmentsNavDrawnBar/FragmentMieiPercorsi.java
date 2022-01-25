@@ -2,10 +2,13 @@ package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -26,6 +29,7 @@ import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.CardPercorsoAdapter;
+import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.Utente;
 
 import java.util.ArrayList;
@@ -44,7 +48,7 @@ public class FragmentMieiPercorsi extends Fragment {
         View view = getView(); // Riottengo la View
 
         if (view != null) {
-            //Ricarico la RecyclerView
+            //Ricarico la RecyclerView dopo aver creato un nuovo percorso
             cercaPercorsiFromDB(utente.getUid(), view);
         }
 
@@ -55,12 +59,9 @@ public class FragmentMieiPercorsi extends Fragment {
                              Bundle savedInstanceState) {
 
         Utente utente = getUserInfo();
-
         View v = inflater.inflate(R.layout.fragment_miei_percorsi, container, false);
+
         FloatingActionButton addPercorso = v.findViewById(R.id.buttonAddPercorso);
-
-        cercaPercorsiFromDB(utente.getUid(), v);
-
         addPercorso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,8 +70,72 @@ public class FragmentMieiPercorsi extends Fragment {
             }
         });
 
+        cercaPercorsiFromDB(utente.getUid(), v);
+
+        EditText valoreDiRicercaPercorso = v.findViewById(R.id.editCercaNomePercorso);
+        valoreDiRicercaPercorso.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // None
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // None
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                cercaPercorsoFromDBDalNome(editable.toString(), v);
+            }
+        });
+
         // Inflate the layout for this fragment
         return v;
+    }
+
+    /***
+     * Cerca un singolo Percorso tramite il suo nome, per popolarlo singolarmente nella RecyclerView
+     *
+     * @param nomePercorso
+     * @param view
+     */
+    public void cercaPercorsoFromDBDalNome(String nomePercorso, View view){
+
+        final ArrayList<CardPercorso> listaPercorsi = new ArrayList<>();
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        //-------------------------------------------------------------------------------------
+        // Ricerca per Nome
+
+        recentPostsQuery = myRef.child("Percorsi").orderByChild("nome").startAt(nomePercorso).endAt(nomePercorso+'\uf8ff');     //SELECT * FROM Percorsi WHERE nome LIKE "nomePercorso"
+        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    CardPercorso cardPercorso = snapshot.getValue(CardPercorso.class);
+                    listaPercorsi.add(cardPercorso);
+
+                }
+
+                    popolaPercorsiInRecyclerView(listaPercorsi,view);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+            }
+        });
+
     }
 
     /***
@@ -86,10 +151,7 @@ public class FragmentMieiPercorsi extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef = database.getReference("/");
 
-        //-------------------------------------------------------------------------------------
-        // Ricerca per Zone
-
-        recentPostsQuery = myRef.child("Percorsi/").orderByChild("idUtente").equalTo(idUtente);     //SELECT Zone FROM Siti WHERE id = idSito
+        recentPostsQuery = myRef.child("Percorsi/").orderByChild("idUtente").equalTo(idUtente);
         recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

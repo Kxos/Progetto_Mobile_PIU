@@ -46,7 +46,7 @@
     <string name="toastNessunaOpera">Nessuna opera selezionata!</string>
     <string name="toastDatiPercorso">Controlla il nome del Percorso!</string>
     <string name="toastPercorsoSalvato">Percorso salvato correttamente!</string>
-    <string name="cercaPercorso">Cerca per nome del Percorso</string>
+    <string name="cercaPercorso">Cerca il nome del Percorso</string>
     <string name="descrizionePercorso">Descrizione:</string>
 
 </resources>
