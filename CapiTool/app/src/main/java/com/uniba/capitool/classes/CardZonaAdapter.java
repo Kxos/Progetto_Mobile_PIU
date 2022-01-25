@@ -22,6 +22,7 @@ import com.uniba.capitool.R;
 import java.util.ArrayList;
 
 public class CardZonaAdapter extends RecyclerView.Adapter<CardZonaAdapter.ViewHolder>{
+    private Context myContext;
     private ArrayList<CardZona> listaZone;
     private ArrayList<CardZona> listaZoneChecked;
     private ArrayList<CardZona> listaZoneUnchecked;
@@ -33,10 +34,10 @@ public class CardZonaAdapter extends RecyclerView.Adapter<CardZonaAdapter.ViewHo
     }
 
     // Pass in the array into the constructor
-    public CardZonaAdapter(ArrayList<CardZona> listaZone, ArrayList<CardZona> listaZoneChecked) {
+    public CardZonaAdapter(ArrayList<CardZona> listaZone, Context myContext) {
         this.listaZone = listaZone;
-        this.listaZoneChecked = listaZoneChecked;
         this.listaZoneUnchecked = new ArrayList<>();
+        this.myContext = myContext;
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -79,20 +80,20 @@ public class CardZonaAdapter extends RecyclerView.Adapter<CardZonaAdapter.ViewHo
                 //Log.e("AAAAAAAAAAA: ", ""+isChecked);
                 //Log.e("POSIZIONE: ", ""+position);
 
-                if(isChecked){
+               /* if(isChecked){
                     cardZona.setCheckBoxCheckedStatus(true);
                     listaZoneChecked.add(cardZona);
                 }else {
                     cardZona.setCheckBoxCheckedStatus(false);
                     listaZoneUnchecked.add(cardZona);
                     listaZoneChecked.remove(cardZona);
-                }
+                }*/
 
                 //Log.e("Esistono opere checked SINGOLO ITEM: ", ""+cardOpera);
                 //Log.e("Esistono opere checked NELLA LISTA: ", ""+listaOpereChecked);
             }
         });
-        cardCheckBoxZona.setChecked(cardZona.getCheckBox().isChecked());
+
 
     }
 
