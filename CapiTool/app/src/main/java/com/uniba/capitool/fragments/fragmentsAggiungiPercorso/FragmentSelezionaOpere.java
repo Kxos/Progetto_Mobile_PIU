@@ -28,7 +28,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
-import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.CardOperaAdapter;
 import com.uniba.capitool.classes.Opera;
@@ -165,7 +164,7 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
                     cardOpera.setIdZona(listaZone.get(countZone).getId());
 
                     View cardOperaView = getLayoutInflater().inflate(R.layout.card_opera, null);
-                    cardOpera.setCheckBox(cardOperaView.findViewById(R.id.checkOperaSelezionata));
+                    cardOpera.setCheckBox(cardOperaView.findViewById(R.id.checkZonaSelezionata));
                     listaOpere[countZone].add(cardOpera);
                 }
                 count++;

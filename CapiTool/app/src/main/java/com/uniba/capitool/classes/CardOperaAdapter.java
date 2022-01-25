@@ -141,10 +141,10 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
             super(itemView);
 
             foto = (ImageView) itemView.findViewById(R.id.itemImmaginePercorso);
-            id = (TextView) itemView.findViewById(R.id.itemIdOpera);
+            id = (TextView) itemView.findViewById(R.id.itemIdZonaCard);
             titolo = (TextView) itemView.findViewById(R.id.itemNomePercorso);
             descrizione = (TextView) itemView.findViewById(R.id.itemDescrizioneOpera);
-            checkBox = (CheckBox) itemView.findViewById(R.id.checkOperaSelezionata);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkZonaSelezionata);
             idZona = (TextView) itemView.findViewById(R.id.itemIdZona);
 
             itemView.setOnClickListener(new View.OnClickListener() {

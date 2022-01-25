@@ -34,6 +34,7 @@ import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,8 @@ public class VisualizzaZoneSito extends AppCompatActivity{
     MainRecyclerAdapter mainRecyclerAdapter;
     SitoCulturale sito;
     Utente utente;
+    List<AllZona> zoneSito;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +178,8 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         mainRecyclerAdapter=new MainRecyclerAdapter(this, allZoneList);
         mainZoneRecycler.setAdapter(mainRecyclerAdapter);
 
+        zoneSito=allZoneList;
+
     }
 
     /***
@@ -231,6 +236,10 @@ public class VisualizzaZoneSito extends AppCompatActivity{
             case R.id.eliminaZone:
 
                 Intent eliminaZone = new Intent(this, EliminaZone.class);
+                Bundle datiZona = new Bundle();
+                datiZona.putSerializable("zone", (Serializable) zoneSito);
+                datiZona.putSerializable("sito",sito);
+                eliminaZone.putExtras(datiZona);
                 startActivity(eliminaZone);
 
                 break;
