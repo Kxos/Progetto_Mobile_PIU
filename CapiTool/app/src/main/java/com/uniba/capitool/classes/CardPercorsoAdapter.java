@@ -77,6 +77,9 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         TextView cardNomeSitoAssociato = holder.nomeSitoAssociato;
         cardNomeSitoAssociato.setText(cardPercorso.getNomeSitoAssociato());
 
+        TextView cardCittaSitoAssociato = holder.cittaSitoAssociato;
+        cardCittaSitoAssociato.setText(cardPercorso.getCittaSitoAssociato());
+
         TextView cardDescrizionePercorso = holder.descrizione;
         cardDescrizionePercorso.setText(cardPercorso.getDescrizione());
 
@@ -116,6 +119,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         public TextView nome;
         public TextView idSitoAssociato;
         public TextView nomeSitoAssociato;
+        public TextView cittaSitoAssociato;
         public TextView descrizione;
         public TextView pubblico;
         public ImageView itemVisibilityTruePercorso;
@@ -134,6 +138,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
             descrizione = (TextView) itemView.findViewById(R.id.itemDescrizionePercorso);
             idSitoAssociato = (TextView) itemView.findViewById(R.id.itemIdSitoAssociato);
             nomeSitoAssociato = (TextView) itemView.findViewById(R.id.itemNomeSitoAssociato);
+            cittaSitoAssociato = (TextView) itemView.findViewById(R.id.itemCittaSitoAssociato);
             pubblico = (TextView) itemView.findViewById(R.id.itemStatoPubblico);
             itemVisibilityTruePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityTruePercorso);
             itemVisibilityFalsePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityFalsePercorso);

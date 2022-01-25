@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.fragmentsNavDrawnBar.FragmentConsigliati">
+    tools:context=".fragments.fragmentsAggiungiPercorso.FragmentRicercaSiti">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="352dp"
-        android:layout_marginEnd="104dp"
-        android:text="@string/recommendedRoutes"
-        android:textSize="20dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPercorsi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/editCercaNomePercorso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCercaNomePercorso" />
+
+    <EditText
+        android:id="@+id/editCercaNomePercorso"
+        android:layout_width="351dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:drawableRight="@drawable/ic_baseline_search_24"
+        android:ems="10"
+        android:hint="@string/searchSites"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/CapiToolStyle"/>
+</RelativeLayout>

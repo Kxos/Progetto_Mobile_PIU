@@ -129,6 +129,7 @@ public class FragmentDatiPercorso extends Fragment {
                         percorso.setPubblico(pubblicoPercorso.isChecked());
                         percorso.setIdSitoAssociato(sharedPreferences.getString("idSito", ""));
                         percorso.setNomeSitoAssociato(sharedPreferences.getString("nomeSito", ""));
+                        percorso.setCittaSitoAssociato(sharedPreferences.getString("cittaSito", ""));
                         percorso.setIdUtente(utente.getUid());
 
                         ArrayList<Opera> listaOpere = new ArrayList<>();

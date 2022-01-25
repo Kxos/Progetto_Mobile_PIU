@@ -6,14 +6,16 @@ public class CardPercorso {
     private String nome;
     private String idSitoAssociato;
     private String nomeSitoAssociato;
+    private String cittaSitoAssociato;
     private String descrizione;
     private boolean pubblico;
 
-    public CardPercorso(String id, String nome, String idSitoAssociato, String nomeSitoAssociato, String descrizione, boolean pubblico) {
+    public CardPercorso(String id, String nome, String idSitoAssociato, String nomeSitoAssociato, String cittaSitoAssociato, String descrizione, boolean pubblico) {
         this.id = id;
         this.nome = nome;
         this.idSitoAssociato = idSitoAssociato;
         this.nomeSitoAssociato = nomeSitoAssociato;
+        this.cittaSitoAssociato = cittaSitoAssociato;
         this.descrizione = descrizione;
         this.pubblico = pubblico;
     }
@@ -67,5 +69,13 @@ public class CardPercorso {
 
     public void setNomeSitoAssociato(String nomeSitoAssociato) {
         this.nomeSitoAssociato = nomeSitoAssociato;
+    }
+
+    public String getCittaSitoAssociato() {
+        return cittaSitoAssociato;
+    }
+
+    public void setCittaSitoAssociato(String cittaSitoAssociato) {
+        this.cittaSitoAssociato = cittaSitoAssociato;
     }
 }
