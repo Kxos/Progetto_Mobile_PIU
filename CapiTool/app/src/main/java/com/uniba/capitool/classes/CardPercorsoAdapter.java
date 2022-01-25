@@ -118,6 +118,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                 itemFavouriteBorder.setVisibility(View.INVISIBLE);
                 itemFavourite.setVisibility(View.VISIBLE);
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastAggiuntoPercorsoAiPreferiti), Toast.LENGTH_SHORT).show();
+
+                //TODO AGGIUNGERE IL PERCORSO AI PREFERITI DELL'UTENTE
             }
         });
 
@@ -127,6 +129,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                 itemFavouriteBorder.setVisibility(View.VISIBLE);
                 itemFavourite.setVisibility(View.INVISIBLE);
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastRimossoPercorsoDaiPreferiti), Toast.LENGTH_SHORT).show();
+
+                //TODO RIMUOVERE IL PERCORSO DAI PREFERITI DELL'UTENTE
             }
         });
 

@@ -76,8 +76,12 @@ public class FragmentConsigliati extends Fragment {
 
     }
 
+
     /***
      * Popola la RecyclerView con i Percorsi delle guide PUBBLICI cercati
+     *
+     * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà un Sito od una Città)
+     * @param view
      */
     public void popolaPercorsiInRecyclerView(String valoreDiRicerca, View view){
 
@@ -98,14 +102,14 @@ public class FragmentConsigliati extends Fragment {
         // SetLayoutManager posiziona i Percorsi trovati nel Layout
         rvCardsSiti.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
-    /** FINE popolaSitiInRecyclerView()
+    /** FINE
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
      * Ottiene tutti i Percorsi delle guide PUBBLICI, cercando con il valoreDiRicerca
      *
      * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà un Sito od una Città)
-     * @return
+     * @return listaPercorsi
      */
     private ArrayList<CardPercorso> getPercorsiFromDB(String valoreDiRicerca) {
 
@@ -115,13 +119,14 @@ public class FragmentConsigliati extends Fragment {
 
         return listaPercorsi;
     }
-    /** FINE getSitoFromDB()
+    /** FINE
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
     /***
      * Ottiene tutti i Percorsi delle guide PUBBLICI esistenti, cercando per il Nome del sito associato
      *
      * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà un Sito)
+     * @return listaPercorsi
      */
     public ArrayList<CardPercorso> getPercorsiFromDBOrderByNomeSitoAssociato(String valoreDiRicerca) {
 
@@ -173,9 +178,9 @@ public class FragmentConsigliati extends Fragment {
      *
      * Ottiene tutti i Percorsi delle guide PUBBLICI esistenti, cercando per la Città del sito associato
      *
-     * @param valoreDiRicerca
-     * @param listaPercorsi
-     * @return
+     * @param valoreDiRicerca: parametro su cui effettuare la ricerca (Sarà un Sito)
+     * @param listaPercorsi: Lista dei percorsi prima dell'aggiornamento
+     * @return listaPercorsi: Lista dei percorsi dopo l'aggiornamento
      */
     public ArrayList<CardPercorso> getPercorsiFromDBOrderByCittaSitoAssociato(String valoreDiRicerca, ArrayList<CardPercorso>[] listaPercorsi) {
 
