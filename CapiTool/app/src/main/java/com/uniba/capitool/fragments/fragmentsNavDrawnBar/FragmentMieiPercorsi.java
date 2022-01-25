@@ -3,12 +3,14 @@ package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -162,6 +164,7 @@ public class FragmentMieiPercorsi extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
                     CardPercorso cardPercorso = snapshot.getValue(CardPercorso.class);
+
                     listaPercorsi.add(cardPercorso);
 
                 }
