@@ -46,6 +46,8 @@
     <string name="toastNessunaOpera">Nessuna opera selezionata!</string>
     <string name="toastDatiPercorso">Controlla il nome del Percorso!</string>
     <string name="toastPercorsoSalvato">Percorso salvato correttamente!</string>
+    <string name="toastAggiuntoPercorsoAiPreferiti">Percorso salvato nei favoriti</string>
+    <string name="toastRimossoPercorsoDaiPreferiti">Percorso rimosso dai favoriti</string>
     <string name="cercaPercorso">Cerca il nome del Percorso</string>
     <string name="descrizionePercorso">Descrizione:</string>
 

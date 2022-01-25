@@ -45,9 +45,12 @@
     <string name="toastNessunaOpera">No opera selected!</string>
     <string name="toastDatiPercorso">Check your path name!</string>
     <string name="toastPercorsoSalvato">Path saved successfully!</string>
+    <string name="toastAggiuntoPercorsoAiPreferiti">Path saved in favourites</string>
+    <string name="toastRimossoPercorsoDaiPreferiti">Path Removed from favourites</string>
     <string name="cercaPercorso">Search Path Name</string>
     <string name="descrizionePercorso">Description:</string>
 
+<<<<<<< HEAD
 
 
     <string name="noPswInsert">You don\'t insert any password</string>
@@ -62,5 +65,7 @@
 
 
 
+=======
+>>>>>>> a27597b351c240eb0025c4c7e085c7314a2a761b
 
 </resources>

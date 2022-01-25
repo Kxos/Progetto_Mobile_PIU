@@ -9,6 +9,7 @@ public class Percorso {
     private ArrayList<Opera> opereScelte;
     private String idSitoAssociato;
     private String nomeSitoAssociato;
+    private String cittaSitoAssociato;
     private String idUtente;
     private String descrizione;
     private boolean pubblico;
@@ -17,12 +18,13 @@ public class Percorso {
 
     }
 
-    public Percorso(String id, String nome, ArrayList<Opera> opereScelte, String idSitoAssociato, String nomeSitoAssociato, String idUtente, String descrizione, boolean pubblico) {
+    public Percorso(String id, String nome, ArrayList<Opera> opereScelte, String idSitoAssociato, String nomeSitoAssociato, String cittaSitoAssociato, String idUtente, String descrizione, boolean pubblico) {
         this.id = id;
         this.nome = nome;
         this.opereScelte = opereScelte;
         this.idSitoAssociato = idSitoAssociato;
         this.nomeSitoAssociato = nomeSitoAssociato;
+        this.cittaSitoAssociato = cittaSitoAssociato;
         this.idUtente = idUtente;
         this.descrizione = descrizione;
         this.pubblico = pubblico;
@@ -108,6 +110,14 @@ public class Percorso {
 
     public void setNomeSitoAssociato(String nomeSitoAssociato) {
         this.nomeSitoAssociato = nomeSitoAssociato;
+    }
+
+    public String getCittaSitoAssociato() {
+        return cittaSitoAssociato;
+    }
+
+    public void setCittaSitoAssociato(String cittaSitoAssociato) {
+        this.cittaSitoAssociato = cittaSitoAssociato;
     }
 
 }

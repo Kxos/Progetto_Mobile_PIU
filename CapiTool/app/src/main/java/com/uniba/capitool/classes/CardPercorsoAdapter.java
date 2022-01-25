@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
     // Store a member variable
     private ArrayList<CardPercorso> listaPercorsi;
+    private String fragment;
     private CardPercorsoAdapter.OnEventClickListener mListener;
 
     public interface OnEventClickListener{
@@ -36,6 +38,12 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
     // Pass in the array into the constructor
     public CardPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi) {
         this.listaPercorsi = listaPercorsi;
+        this.fragment = "";
+    }
+
+    public CardPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi, String fragment) {
+        this.listaPercorsi = listaPercorsi;
+        this.fragment = fragment;
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -77,6 +85,9 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         TextView cardNomeSitoAssociato = holder.nomeSitoAssociato;
         cardNomeSitoAssociato.setText(cardPercorso.getNomeSitoAssociato());
 
+        TextView cardCittaSitoAssociato = holder.cittaSitoAssociato;
+        cardCittaSitoAssociato.setText(cardPercorso.getCittaSitoAssociato());
+
         TextView cardDescrizionePercorso = holder.descrizione;
         cardDescrizionePercorso.setText(cardPercorso.getDescrizione());
 
@@ -98,6 +109,37 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
         }
 
+        ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
+        ImageView itemFavourite = holder.itemFavourite;
+
+        itemFavouriteBorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemFavouriteBorder.setVisibility(View.INVISIBLE);
+                itemFavourite.setVisibility(View.VISIBLE);
+                Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastAggiuntoPercorsoAiPreferiti), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        itemFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemFavouriteBorder.setVisibility(View.VISIBLE);
+                itemFavourite.setVisibility(View.INVISIBLE);
+                Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastRimossoPercorsoDaiPreferiti), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Verifico che mi trovo in FragmentConsigliati
+        if(fragment.equals("Consigliati")){
+            itemFavouriteBorder.setVisibility(View.VISIBLE);
+        }else{
+            itemFavouriteBorder.setVisibility(View.INVISIBLE);
+            itemFavourite.setVisibility(View.INVISIBLE);
+        }
+
+
+
     }
 
     // Returns the total count of items in the list
@@ -116,10 +158,13 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         public TextView nome;
         public TextView idSitoAssociato;
         public TextView nomeSitoAssociato;
+        public TextView cittaSitoAssociato;
         public TextView descrizione;
         public TextView pubblico;
         public ImageView itemVisibilityTruePercorso;
         public ImageView itemVisibilityFalsePercorso;
+        public ImageView itemFavouriteBorder;
+        public ImageView itemFavourite;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -134,9 +179,12 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
             descrizione = (TextView) itemView.findViewById(R.id.itemDescrizionePercorso);
             idSitoAssociato = (TextView) itemView.findViewById(R.id.itemIdSitoAssociato);
             nomeSitoAssociato = (TextView) itemView.findViewById(R.id.itemNomeSitoAssociato);
+            cittaSitoAssociato = (TextView) itemView.findViewById(R.id.itemCittaSitoAssociato);
             pubblico = (TextView) itemView.findViewById(R.id.itemStatoPubblico);
             itemVisibilityTruePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityTruePercorso);
             itemVisibilityFalsePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityFalsePercorso);
+            itemFavouriteBorder = (ImageView)itemView.findViewById(R.id.itemFavouriteBorder);
+            itemFavourite = (ImageView)itemView.findViewById(R.id.itemFavourite);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
