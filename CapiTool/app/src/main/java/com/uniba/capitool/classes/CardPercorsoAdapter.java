@@ -140,7 +140,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                 itemFavouriteBorder.setVisibility(View.VISIBLE);
                 itemFavourite.setVisibility(View.INVISIBLE);
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastRimossoPercorsoDaiPreferiti), Toast.LENGTH_SHORT).show();
-                
+
                 managePercorsoNeiPreferiti(cardPercorso.getId(), "Rimuovere");
             }
         });
@@ -276,6 +276,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                         // Aggiunge il Percorso ai Preferiti dell'utente corrente
                         if(azione.equals("Aggiungere")){
                             percorsoDeiPreferiti[0].setIdUtenteSelezionatoPercorsoTraPreferiti(BasicMethod.getUtente().getUid());
+                            percorsoDeiPreferiti[0].setId(percorsoDeiPreferiti[0].getId()+"_"+BasicMethod.getUtente().getUid());
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
                             DatabaseReference myRef;
@@ -291,7 +292,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                             FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
                             DatabaseReference myRef;
 
-                            myRef = database.getReference("/PercorsiPreferiti/"+percorsoDeiPreferiti[0].getId());
+                            myRef = database.getReference("/PercorsiPreferiti/"+percorsoDeiPreferiti[0].getId()+"_"+BasicMethod.getUtente().getUid());
 
                             myRef.removeValue();
 
@@ -334,7 +335,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef = database.getReference("/");
 
-        recentPostsQuery = myRef.child("PercorsiPreferiti").orderByChild("id").equalTo(idPercorso);
+        recentPostsQuery = myRef.child("PercorsiPreferiti").orderByChild("id").equalTo(idPercorso+"_"+BasicMethod.getUtente().getUid());
         recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
