@@ -50,8 +50,6 @@
     <string name="cercaPercorso">Search Path Name</string>
     <string name="descrizionePercorso">Description:</string>
 
-<<<<<<< HEAD
-
 
     <string name="noPswInsert">You don\'t insert any password</string>
     <string name="boxInfoNotChecked">You must confirm thah you read the information</string>
@@ -62,10 +60,5 @@
     <string name="userhaveAlreadySite">Error: You cannot delegate to a curator who already has a site </string>
     <string name="SuccesfulDelegateSite">Site successfully delegated</string>
 
-
-
-
-=======
->>>>>>> a27597b351c240eb0025c4c7e085c7314a2a761b
 
 </resources>

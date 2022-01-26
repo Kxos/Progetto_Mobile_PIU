@@ -2,6 +2,7 @@ package com.uniba.capitool.classes;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.BasicMethod;
 
 import java.util.ArrayList;
 
@@ -112,6 +120,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
         ImageView itemFavourite = holder.itemFavourite;
 
+        setCuorePienoSePercorsoPresenteNeiPreferiti(cardPercorso.getId(), BasicMethod.getUtente().getUid(), itemFavouriteBorder, itemFavourite);
+
         itemFavouriteBorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +130,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastAggiuntoPercorsoAiPreferiti), Toast.LENGTH_SHORT).show();
 
                 //TODO AGGIUNGERE IL PERCORSO AI PREFERITI DELL'UTENTE
+                managePercorsoNeiPreferiti(cardPercorso.getId(), "Aggiungere");
+
             }
         });
 
@@ -225,6 +237,117 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
             }
         });
 
+    }
+
+
+    /***
+     * Ottiene il Percorso cercando per l'id, poi a seconda dell'azione lo aggiunge o rimuove dai preferiti
+     *
+     * @param idPercorso: parametro su cui effettuare la ricerca (Sarà un id)
+     * @param azione: azione da eseguire (Aggiungere o Rimuovere)
+     */
+    public void managePercorsoNeiPreferiti(String idPercorso, String azione) {
+
+        final Percorso[] percorsoDeiPreferiti = {new Percorso()};
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        recentPostsQuery = myRef.child("Percorsi").orderByChild("id").equalTo(idPercorso);     //SELECT * FROM Percorsi WHERE id LIKE "xyz"
+        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    percorsoDeiPreferiti[0] = snapshot.getValue(Percorso.class);
+
+                }
+
+
+                // Ottengo le opere per quel percorso
+                Query secondRecentPostsQuery = myRef.child("Percorsi/"+idPercorso+"/OpereScelte");
+                secondRecentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        percorsoDeiPreferiti[0].setOpereScelte((ArrayList<Opera>)snapshot.getValue());
+
+                        // Aggiunge il Percorso ai Preferiti dell'utente corrente
+                        if(azione.equals("Aggiungere")){
+                            percorsoDeiPreferiti[0].setIdUtenteSelezionatoPercorsoTraPreferiti(BasicMethod.getUtente().getUid());
+
+                            FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                            DatabaseReference myRef;
+
+                            myRef = database.getReference("/PercorsiPreferiti/"+percorsoDeiPreferiti[0].getId());
+
+                            myRef.setValue(percorsoDeiPreferiti[0]);
+                        }
+
+                        // Rimuove il Percorso ai Preferiti dell'utente corrente
+                        if(azione.equals("Rimuovere")){
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+            }
+        });
+
+    }
+    /** FINE
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+    /***
+     * Imposta l'ImageView del cuore a Pieno se il Percorso è presente nei preferiti dell'utente corrente
+     *
+     * @param idPercorso
+     * @param idUtente
+     * @param itemFavouriteBorder: ImageView del cuore vuoto
+     * @param itemFavourite: ImageView del cuore pieno
+     */
+    public void setCuorePienoSePercorsoPresenteNeiPreferiti(String idPercorso, String idUtente, ImageView itemFavouriteBorder, ImageView itemFavourite){
+
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        recentPostsQuery = myRef.child("PercorsiPreferiti").orderByChild("id").equalTo(idPercorso);
+        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot snapshotCuore : snapshot.getChildren()){
+
+                    if(snapshotCuore.getValue(Percorso.class).getIdUtenteSelezionatoPercorsoTraPreferiti().equals(idUtente)){
+                        itemFavouriteBorder.setVisibility(View.INVISIBLE);
+                        itemFavourite.setVisibility(View.VISIBLE);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
