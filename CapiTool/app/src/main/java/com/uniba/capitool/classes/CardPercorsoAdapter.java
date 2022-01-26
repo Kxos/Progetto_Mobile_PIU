@@ -129,7 +129,6 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                 itemFavourite.setVisibility(View.VISIBLE);
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastAggiuntoPercorsoAiPreferiti), Toast.LENGTH_SHORT).show();
 
-                //TODO AGGIUNGERE IL PERCORSO AI PREFERITI DELL'UTENTE
                 managePercorsoNeiPreferiti(cardPercorso.getId(), "Aggiungere");
 
             }
@@ -141,8 +140,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                 itemFavouriteBorder.setVisibility(View.VISIBLE);
                 itemFavourite.setVisibility(View.INVISIBLE);
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastRimossoPercorsoDaiPreferiti), Toast.LENGTH_SHORT).show();
-
-                //TODO RIMUOVERE IL PERCORSO DAI PREFERITI DELL'UTENTE
+                
+                managePercorsoNeiPreferiti(cardPercorso.getId(), "Rimuovere");
             }
         });
 
@@ -288,6 +287,13 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
                         // Rimuove il Percorso ai Preferiti dell'utente corrente
                         if(azione.equals("Rimuovere")){
+
+                            FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                            DatabaseReference myRef;
+
+                            myRef = database.getReference("/PercorsiPreferiti/"+percorsoDeiPreferiti[0].getId());
+
+                            myRef.removeValue();
 
                         }
 
