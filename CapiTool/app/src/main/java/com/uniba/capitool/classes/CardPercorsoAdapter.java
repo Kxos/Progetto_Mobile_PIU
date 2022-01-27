@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -33,6 +34,8 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
     // Store a member variable
     private ArrayList<CardPercorso> listaPercorsi;
     private String fragment;
+    private View view;
+    private Context context;
     private CardPercorsoAdapter.OnEventClickListener mListener;
 
     public interface OnEventClickListener{
@@ -52,6 +55,13 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
     public CardPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi, String fragment) {
         this.listaPercorsi = listaPercorsi;
         this.fragment = fragment;
+    }
+
+    public CardPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi, String fragment, View view, Context context) {
+        this.listaPercorsi = listaPercorsi;
+        this.fragment = fragment;
+        this.view = view;
+        this.context = context;
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -129,7 +139,9 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                 itemFavourite.setVisibility(View.VISIBLE);
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastAggiuntoPercorsoAiPreferiti), Toast.LENGTH_SHORT).show();
 
-                managePercorsoNeiPreferiti(cardPercorso.getId(), "Aggiungere");
+                if(fragment.equals("Consigliati")){
+                    managePercorsoDaScegliereNeiPreferiti(cardPercorso.getId(), "Aggiungere");
+                }
 
             }
         });
@@ -141,18 +153,29 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                 itemFavourite.setVisibility(View.INVISIBLE);
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toastRimossoPercorsoDaiPreferiti), Toast.LENGTH_SHORT).show();
 
-                managePercorsoNeiPreferiti(cardPercorso.getId(), "Rimuovere");
+                if(fragment.equals("Consigliati")){
+                    managePercorsoDaScegliereNeiPreferiti(cardPercorso.getId(), "Rimuovere");
+                }
+
+                if(fragment.equals("Preferiti")){
+                    rimuoviPercorsoDaiPreferiti(cardPercorso.getId(), holder.getAdapterPosition());
+                }
+
             }
         });
 
         // Verifico che mi trovo in FragmentConsigliati
         if(fragment.equals("Consigliati")){
             itemFavouriteBorder.setVisibility(View.VISIBLE);
+
+            // Verifico che mi trovo in FragmentPreferiti
+        }else if(fragment.equals("Preferiti")){
+            itemFavourite.setVisibility(View.VISIBLE);
+            itemFavouriteBorder.setVisibility(View.INVISIBLE);
         }else{
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
             itemFavourite.setVisibility(View.INVISIBLE);
         }
-
 
 
     }
@@ -245,7 +268,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
      * @param idPercorso: parametro su cui effettuare la ricerca (Sarà un id)
      * @param azione: azione da eseguire (Aggiungere o Rimuovere)
      */
-    public void managePercorsoNeiPreferiti(String idPercorso, String azione) {
+    public void managePercorsoDaScegliereNeiPreferiti(String idPercorso, String azione) {
 
         final Percorso[] percorsoDeiPreferiti = {new Percorso()};
         Query recentPostsQuery;
@@ -297,6 +320,79 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
                             myRef.removeValue();
 
                         }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+            }
+        });
+
+    }
+    /** FINE
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+    /***
+     * Ottiene il Percorso cercando per l'id (in PercorsiPreferiti), poi lo rimuove dai preferiti
+     *
+     * @param idPercorso: parametro su cui effettuare la ricerca (Sarà un id)
+     * @param position: indice che indica la CardPercorso selezionata dalla listaPercorsi
+     */
+    public void rimuoviPercorsoDaiPreferiti(String idPercorso, int position) {
+
+        final Percorso[] percorsoDeiPreferiti = {new Percorso()};
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        recentPostsQuery = myRef.child("PercorsiPreferiti").orderByChild("id").equalTo(idPercorso);     //SELECT * FROM Percorsi WHERE id LIKE "xyz"
+        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    percorsoDeiPreferiti[0] = snapshot.getValue(Percorso.class);
+
+                }
+
+
+                // Ottengo le opere per quel percorso
+                Query secondRecentPostsQuery = myRef.child("Percorsi/"+idPercorso+"/OpereScelte");
+                secondRecentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        percorsoDeiPreferiti[0].setOpereScelte((ArrayList<Opera>)snapshot.getValue());
+
+                        // Rimuove il Percorso dalla lista dei Preferiti
+                        listaPercorsi.remove(position);
+
+                        //Aggiorna la RecyclerView
+                        RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
+                        CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "Preferiti", view, context);
+                        rvCardsSiti.setAdapter(adapter);
+                        rvCardsSiti.setLayoutManager(new LinearLayoutManager(context));
+
+                        // Rimuove il Percorso dal DB
+                        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                        DatabaseReference myRef;
+
+                        myRef = database.getReference("/PercorsiPreferiti/"+percorsoDeiPreferiti[0].getId());
+
+                        myRef.removeValue();
 
                     }
 
