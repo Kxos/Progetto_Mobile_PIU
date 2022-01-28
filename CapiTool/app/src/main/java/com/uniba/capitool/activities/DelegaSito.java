@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
@@ -32,6 +33,7 @@ public class DelegaSito extends AppCompatActivity {
 
     Utente delegato;
     Dialog dialog ;
+    CardSitoCulturale sitoDaDelegare ;
 
 
 
@@ -101,40 +103,41 @@ public class DelegaSito extends AppCompatActivity {
                                      */
                                     Log.e("*****!!!!*****", "E' un curaotre, controllo se c'è gia un sito");
 
-                                    Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(delegato.getUid());
+                                    Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(delegato.getUid()).limitToFirst(1);
                                     recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            ArrayList<SitoCulturale> siti = new ArrayList<>();
+                                            CardSitoCulturale potenzialeSitoDelegato = new CardSitoCulturale() ;
                                             // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                                                siti.add(snapshot.getValue(SitoCulturale.class));
+                                                potenzialeSitoDelegato = snapshot.getValue(CardSitoCulturale.class);
+
                                                 Log.e("*****!!!!*****", "c'è un sito");
                                             }
                                             Log.e("*****!!!!*****", "procedo");
 
-                                            if (!siti.isEmpty()) {
+                                            if (potenzialeSitoDelegato == null) {
                                                 Toast.makeText(getApplicationContext(), getString(R.string.userhaveAlreadySite), Toast.LENGTH_SHORT).show();
                                             }else{
                                                 Log.e("*****!!!!*****", "Non ha un sito quindi posso delegare");
 
 
-                                                Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(utente.getUid());  //recupero il sito dell'utente che vuole delegare per poi cambiare Uid assocociato con quello del nuovo curatore
+                                                Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(utente.getUid()).limitToFirst(1);  //recupero il sito dell'utente che vuole delegare per poi cambiare Uid assocociato con quello del nuovo curatore
                                                 recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                        ArrayList<SitoCulturale> siti = new ArrayList<>();
+                                                        CardSitoCulturale sitoUtente = new CardSitoCulturale() ;
                                                         // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                                                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                             Log.e("*****!!!!*****", "SONO NEL FOR!!!");
-                                                            siti.add(snapshot.getValue(SitoCulturale.class));
+                                                            sitoUtente = snapshot.getValue(CardSitoCulturale.class);
                                                         }
 
 
-                                                        if (!siti.isEmpty()) {
-                                                            SitoCulturale sitoDaDelegare = siti.get(0);
+                                                        if (sitoUtente != null) {
 
+                                                            sitoDaDelegare = sitoUtente ;
 
                                                             dialog = new Dialog(DelegaSito.this) ;
                                                             dialog.setContentView(R.layout.delega_dialog);

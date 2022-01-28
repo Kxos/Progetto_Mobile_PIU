@@ -27,6 +27,7 @@ import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
 import com.uniba.capitool.activities.DelegaSito;
 import com.uniba.capitool.activities.EliminaSito;
+import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Visitatore;
@@ -41,7 +42,7 @@ import java.util.ArrayList;
  */
 public class FragmentImpostazioniSito extends Fragment {
 
-    SitoCulturale sito ;
+    CardSitoCulturale sito ;
     DatabaseReference myRef ;
 
 
@@ -176,8 +177,8 @@ public class FragmentImpostazioniSito extends Fragment {
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Log.e("*****!!!!*****","SONO NEL FOR!!!");
-                    sito = snapshot.getValue(SitoCulturale.class) ;
-                    Log.e("sonoInImpostazioniSito", "sito catturato: " + sito.getNome()) ;
+                    sito = snapshot.getValue(CardSitoCulturale.class) ;
+                    Log.e("sono in ImpostazioniSito", "sito catturato: " + sito.getNome()) ;
 
                 }
             }

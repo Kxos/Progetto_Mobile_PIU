@@ -32,13 +32,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.Curatore;
 import com.uniba.capitool.classes.SitoCulturale;
 
 public class EliminaSito extends AppCompatActivity {
 
     boolean passwordCorretta ;
-    SitoCulturale sitoTrovato;
+    CardSitoCulturale sitoTrovato;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +129,7 @@ public class EliminaSito extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                             for (DataSnapshot shot : snapshot.getChildren()) {
-                                                sitoTrovato = shot.getValue(SitoCulturale.class);
+                                                sitoTrovato = shot.getValue(CardSitoCulturale.class);
                                                 Log.e("FOR","Ho trovato il sito *");
 
                                             }
