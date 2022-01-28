@@ -59,6 +59,7 @@ public class EliminaSito extends AppCompatActivity {
         Button buttonAnnulla = findViewById(R.id.button_annulla_delega);
 
 
+
         editPasswordCuratore.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
