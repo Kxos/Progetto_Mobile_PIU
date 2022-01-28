@@ -78,6 +78,16 @@
             app:layout_constraintEnd_toStartOf="@+id/checkZonaSelezionata"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/itemIdFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="101dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/checkZonaSelezionata"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AggiungiOpera">
+
+    <include
+        android:id="@+id/toolbarAddOpera"
+        layout="@layout/toolbar" />
+
+    <Button
+        android:id="@+id/bt_Aggiungi_Opera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:text="Aggiungi Opera"
+        app:layout_constraintEnd_toEndOf="@+id/layout_descrizioneOpera"
+        app:layout_constraintTop_toBottomOf="@+id/layout_descrizioneOpera" />
+
+    <ImageView
+        android:id="@+id/addOpera_foto"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+       android:background="@drawable/border_imageview"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAddOpera"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/avatars"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_titolo"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="Titolo"
+        android:theme="@style/CapiToolStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addOpera_foto">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_titolo_opera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_descrizioneOpera"
+        android:layout_width="350dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Descrizione"
+        android:theme="@style/CapiToolStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_titolo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textfield_descrizioneOpera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_area_border"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="6"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            app:layout_constraintTop_toBottomOf="@+id/layout_email" />
+    </com.google.android.material.textfield.TextInputLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

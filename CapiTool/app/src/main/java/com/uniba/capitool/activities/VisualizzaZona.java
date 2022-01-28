@@ -28,13 +28,13 @@ public class VisualizzaZona extends AppCompatActivity {
     SitoCulturale sito;
     Utente utente;
     String nomeZona;
-
-
+    AllZona allZone;
+    GridView gridView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizza_zona);
-
+        gridView= findViewById(R.id.myGrid);
 
         // mi serve per capire se aggiornare la recycler se ci sono state delle modifiche o se tornare semplicemente indietro
 
@@ -47,11 +47,13 @@ public class VisualizzaZona extends AppCompatActivity {
             sito = (SitoCulturale) dati.getSerializable("sito");
             utente = (Utente) dati.getSerializable("utente");
             //nomeZona= dati.getString("nomeZona");
-           AllZona allZone = (AllZona) dati.getSerializable("allZone");
+            allZone = (AllZona) dati.getSerializable("allZone");
             nomeZona= allZone.getNomeZona();
-            GridView gridView= findViewById(R.id.myGrid);
-            gridView.setAdapter(new ImageAdapter(allZone.getListaOpereZona(), this));
 
+
+          //  GridView gridView= findViewById(R.id.myGrid);
+          //  gridView.setAdapter(new ImageAdapter(allZone.getListaOpereZona(), this));
+           // riempiGriglia();
 
 
             Log.e("***********", ""+utente.getUid()+" / "+sito.getNome()+"/  "+ allZone.getId());
@@ -63,6 +65,8 @@ public class VisualizzaZona extends AppCompatActivity {
             if(allZone.getListaOpereZona()==null){
                 Log.e("Visulizza Zone Sito", "VUOTOOOOOOO");
                 //TODO inserire un messaggio per l'utente
+            }else{
+                riempiGriglia();
             }
 
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,6 +99,15 @@ public class VisualizzaZona extends AppCompatActivity {
                     VisualizzaZona.super.onBackPressed();
             }
         });
+
+//        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
+//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                recreate();
+//                pullToRefresh.setRefreshing(false);
+//            }
+//        });
     }
 
     /***
@@ -113,7 +126,14 @@ public class VisualizzaZona extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.aggiungiOpera:
-
+                Intent aggiungiOpera= new Intent(VisualizzaZona.this, AggiungiOpera.class);
+                Bundle dati = new Bundle();
+                dati.putSerializable("sito", sito);
+                dati.putSerializable("utente", utente);
+                dati.putString("nomeZona", nomeZona);
+                dati.putString("idZona", allZone.getId());
+                aggiungiOpera.putExtras(dati);
+                startActivity(aggiungiOpera);
                 break;
 
             case R.id.eliminaOpere:
@@ -127,4 +147,19 @@ public class VisualizzaZona extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void riempiGriglia(){
+
+        gridView.setAdapter(new ImageAdapter(allZone.getListaOpereZona(), this));
+    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        Log.e("OnResume",""+1);
+////        finish();
+////        startActivity(getIntent());
+//
+//        riempiGriglia();
+//    }
 }

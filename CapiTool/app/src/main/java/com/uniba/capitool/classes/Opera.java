@@ -12,18 +12,20 @@ public class Opera {
     private Image qrCode;
     private String idZona;
     private Uri foto;
+    private String idFoto;
 
     private static int countId = 0 ;
 
     public Opera(){} ;
 
-    public Opera(String id, String titolo, String descrizione, Image qrCode, String idZona, Uri foto) {
+    public Opera(String id, String titolo, String descrizione, Image qrCode, String idZona, Uri foto, String fotoOpera) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.qrCode = qrCode;
         this.idZona = idZona;
         this.foto = foto;
+        this.idFoto = fotoOpera;
     }
 
     public String getIdZona() {
@@ -80,6 +82,14 @@ public class Opera {
 
     public void setFoto(Uri foto) {
         this.foto = foto;
+    }
+
+    public String getIdFoto() {
+        return idFoto;
+    }
+
+    public void setIdFoto(String idFoto) {
+        this.idFoto = idFoto;
     }
 
 }

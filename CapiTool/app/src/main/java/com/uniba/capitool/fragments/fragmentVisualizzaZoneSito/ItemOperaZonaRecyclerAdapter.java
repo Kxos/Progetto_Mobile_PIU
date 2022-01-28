@@ -41,7 +41,7 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
     @Override
     public void onBindViewHolder(@NonNull ItemOperaZonaViewHolder holder, int position) {
 
-        setImmagineOperaFromDB(listaOpereZona.get(position).getIdOpera(), holder.itemView.getContext(), holder.fotoOpera);
+        setImmagineOperaFromDB(listaOpereZona.get(position).getIdFoto(), holder.itemView.getContext(), holder.fotoOpera);
         holder.titoloOpera.setText(listaOpereZona.get(position).getTitolo());
 
         //setto in una TextVew invisibile l'id della Zona in modo da avere un riferimento quando clicco sull'opera (brutto ma efficace)
