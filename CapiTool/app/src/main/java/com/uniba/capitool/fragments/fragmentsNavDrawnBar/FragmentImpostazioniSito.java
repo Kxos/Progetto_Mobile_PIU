@@ -41,7 +41,7 @@ import java.util.ArrayList;
  */
 public class FragmentImpostazioniSito extends Fragment {
 
-    SitoCulturale sito = null ;
+    SitoCulturale sito ;
     DatabaseReference myRef ;
 
 
@@ -54,8 +54,7 @@ public class FragmentImpostazioniSito extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_impostazioni_sito, container, false);
-        return v ;
+        return inflater.inflate(R.layout.fragment_impostazioni_sito, container, false);
     }
 
 
@@ -170,22 +169,17 @@ public class FragmentImpostazioniSito extends Fragment {
         //-------------------------------------------------------------------------------------
         // Ricerca per Nome
 
-        recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(uidUtente);     //SELECT * FROM Siti WHERE getUid LIKE "..."
+        recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(uidUtente).limitToFirst(1);     //SELECT * FROM Siti WHERE getUid LIKE "..."
         recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<SitoCulturale> siti = new ArrayList<>();
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Log.e("*****!!!!*****","SONO NEL FOR!!!");
-                    siti.add(snapshot.getValue(SitoCulturale.class));
+                    sito = snapshot.getValue(SitoCulturale.class) ;
+                    Log.e("sonoInImpostazioniSito", "sito catturato: " + sito.getNome()) ;
 
                 }
-                if(siti.size() != 0) {
-                    Log.e("****SITI_0*****", siti.get(0).getNome());
-                    sito = siti.get(0);
-                }
-
             }
 
 

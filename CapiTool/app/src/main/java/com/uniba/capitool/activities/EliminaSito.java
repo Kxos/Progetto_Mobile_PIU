@@ -128,12 +128,12 @@ public class EliminaSito extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                             for (DataSnapshot shot : snapshot.getChildren()) {
-                                                sitoTrovato = (SitoCulturale) shot.getValue(SitoCulturale.class);
+                                                sitoTrovato = shot.getValue(SitoCulturale.class);
                                                 Log.e("FOR","Ho trovato il sito *");
 
                                             }
 
-                                            //Log.e("Fuori fda FOR", "Nome: " + sitoTrovato.getNome() + "----- idSito: " + sitoTrovato.getId());
+
 
                                             if(sitoTrovato == null){
                                                 Log.e("Risultato ricerca sito", "SITO NON TROVATO") ;
@@ -141,7 +141,7 @@ public class EliminaSito extends AppCompatActivity {
 
                                                 Log.e("Sito trovato", "Nome: " + sitoTrovato.getNome() + "----- idSito: " + sitoTrovato.getId());
 
-                                                //myRef.child("Siti").child(sitoTrovato.getId()).setValue(null) ;
+                                                myRef.child("Siti").child(sitoTrovato.getId()).setValue(null) ;
                                                 Log.e("Elimina sito", "Sito elimianto!") ;
 
 

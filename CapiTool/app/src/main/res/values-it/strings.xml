@@ -56,10 +56,10 @@
     <string name="boxInfoNotChecked">You must confirm thah you read the information</string>
     <string name="SuccesfulDeleteSite">Sito eliminato con successo</string>
 
-    <string name="noEmailInsert">Non bai inserito nessuna e-mail</string>
+    <string name="noEmailInsert">Non hai inserito nessuna e-mail</string>
     <string name="userNotFound">Errore: utente non trovato</string>
     <string name="userhaveAlreadySite">Errore: Non puoi delegare ad un curatore che ha già un sito</string>
-    <string name="SuccesfulDelegateSite">Site successfully delegated</string>
+    <string name="SuccesfulDelegateSite">Sito delegato con successo</string>
 
 
 

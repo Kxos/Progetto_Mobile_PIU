@@ -148,7 +148,7 @@ public class DelegaSito extends AppCompatActivity {
                                                             dialog_confirm.setOnClickListener(new View.OnClickListener() {
                                                                 @Override
                                                                 public void onClick(View v) {
-                                                                    //myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
+                                                                    myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
                                                                     Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
                                                                     BasicMethod.alertDialog(DelegaSito.this, "", getString(R.string.SuccesfulDelegateSite), "");
 
