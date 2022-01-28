@@ -10,15 +10,32 @@ public class ItemOperaZona implements Serializable {
     String descrizione;
     String idZona;  //salvo l'id della zona per avere un riferimento quando poi clicco nella recycler view delle opere, altrimenti ho la posizione dell'opera
                     // ma non la posizione della zona nella recycler view "Main"
+    String idFoto;
+
+    public String getIdFoto() {
+        return idFoto;
+    }
+
+    public void setIdFoto(String idFoto) {
+        this.idFoto = idFoto;
+    }
 
     Drawable foto;
 
-    public ItemOperaZona(String id, String titolo, String descrizione, String idZona) {
-        this.idOpera = id;
+    public ItemOperaZona(String idOpera, String titolo, String descrizione, String idZona, String idFoto) {
+        this.idOpera = idOpera;
         this.titolo = titolo;
         this.descrizione = descrizione;
-        this.idZona=idZona;
+        this.idZona = idZona;
+        this.idFoto = idFoto;
     }
+
+//    public ItemOperaZona(String id, String titolo, String descrizione, String idZona) {
+//        this.idOpera = id;
+//        this.titolo = titolo;
+//        this.descrizione = descrizione;
+//        this.idZona=idZona;
+//    }
 
     public String getIdZona() {
         return idZona;
