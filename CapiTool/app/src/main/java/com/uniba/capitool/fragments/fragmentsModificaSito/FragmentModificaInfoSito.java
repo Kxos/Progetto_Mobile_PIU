@@ -295,10 +295,10 @@ public class FragmentModificaInfoSito extends Fragment {
         DatabaseReference myRef;
 
         myRef = database.getReference("/Siti/"+ sitoCulturale.getId() + "/nome");
-        myRef.setValue(sitoCulturale.getNome());
+        myRef.setValue(BasicMethod.toLower(sitoCulturale.getNome()));
 
         myRef = database.getReference("/Siti/"+ sitoCulturale.getId() + "/citta");
-        myRef.setValue(sitoCulturale.getCitta());
+        myRef.setValue(BasicMethod.toLower(sitoCulturale.getCitta()));
 
         myRef = database.getReference("/Siti/"+ sitoCulturale.getId() + "/costoBiglietto");
         myRef.setValue(sitoCulturale.getCostoBiglietto());

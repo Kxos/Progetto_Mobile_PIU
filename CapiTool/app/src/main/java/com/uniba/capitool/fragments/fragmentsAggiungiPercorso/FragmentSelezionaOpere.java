@@ -150,12 +150,13 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
 
         Log.e("Numero di Opere trovate: ",""+numeroOpere);
         Log.e("Numero di Zone trovate: ",""+listaZone.size());
+        Log.e("Opera trovata: ",""+listaZone.get(0).getOpere().get(1).getDescrizione());
 
         int count=0;
         for(int countZone = 0; countZone!=listaZone.size();countZone++){
 
             for (Opera opera : listaZone.get(countZone).getOpere()) {
-                if(count!=0){
+                if(count!=0 && opera!=null){
                     CardOpera cardOpera = new CardOpera();
                     cardOpera.setId(opera.getId());
                     cardOpera.setTitolo(opera.getTitolo());
