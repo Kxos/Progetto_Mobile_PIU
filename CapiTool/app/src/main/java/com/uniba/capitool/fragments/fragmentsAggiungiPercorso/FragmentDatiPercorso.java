@@ -140,6 +140,8 @@ public class FragmentDatiPercorso extends Fragment {
                             listaOpere.get(i).setTitolo(listaOpereChecked.get(i).getTitolo());
                             listaOpere.get(i).setDescrizione(listaOpereChecked.get(i).getDescrizione());
                             listaOpere.get(i).setIdZona(listaOpereChecked.get(i).getIdZona());
+                            listaOpere.get(i).setIdFoto(listaOpereChecked.get(i).getIdFoto());
+                            Log.e( "TGFERGFERGER: ", ""+listaOpereChecked.get(i).getIdFoto() );
                         }
 
                         myRef = database.getReference("/Percorsi/"+key);

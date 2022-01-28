@@ -2,6 +2,7 @@ package com.uniba.capitool.classes;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,10 +77,13 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
 
         // Set item views based on your views and data model
         ImageView cardFotoOpera = holder.foto;
-        setImmagineOperaFromDB(cardOpera.getId(), holder.itemView.getContext(), cardFotoOpera);
+        setImmagineOperaFromDB(cardOpera.getIdFoto(), holder.itemView.getContext(), cardFotoOpera);
 
         TextView cardIdOpera = holder.id;
         cardIdOpera.setText(cardOpera.getId());
+
+        TextView cardIdFoto = holder.idFoto;
+        cardIdFoto.setText(cardOpera.getIdFoto());
 
         TextView cardTitoloOpera = holder.titolo;
         cardTitoloOpera.setText(cardOpera.getTitolo());
@@ -101,6 +105,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
                 if(isChecked){
                     cardOpera.setCheckBoxCheckedStatus(true);
                     listaOpereChecked.add(cardOpera);
+
                 }else {
                     cardOpera.setCheckBoxCheckedStatus(false);
                     listaOpereUnchecked.add(cardOpera);
@@ -128,6 +133,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
         // for any view that will be set as you render a row
         public ImageView foto;
         public TextView id;
+        public TextView idFoto;
         public TextView titolo;
         public TextView descrizione;
         public CheckBox checkBox;
@@ -142,6 +148,7 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
 
             foto = (ImageView) itemView.findViewById(R.id.itemImmaginePercorso);
             id = (TextView) itemView.findViewById(R.id.itemIdZonaCard);
+            idFoto = (TextView) itemView.findViewById(R.id.itemIdFoto);
             titolo = (TextView) itemView.findViewById(R.id.itemNomePercorso);
             descrizione = (TextView) itemView.findViewById(R.id.itemDescrizioneOpera);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkZonaSelezionata);
@@ -166,14 +173,14 @@ public class CardOperaAdapter extends RecyclerView.Adapter<CardOperaAdapter.View
     /***
      * Imposta l'immagine dell'opera nella card
      *
-     * @param idOpera
+     * @param idFoto
      * @param context
      * @param cardFotoSito
      */
-    public void setImmagineOperaFromDB(String idOpera, Context context, ImageView cardFotoSito){
+    public void setImmagineOperaFromDB(String idFoto, Context context, ImageView cardFotoSito){
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference dateRef = storageRef.child("/fotoOpere/" + idOpera);
+        StorageReference dateRef = storageRef.child("/fotoOpere/" + idFoto);
 
         /**
          * Scarica il "DownloadURL" che ci serve per leggere l'immagine dal DB e metterla in una ImageView
