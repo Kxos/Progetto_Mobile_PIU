@@ -97,7 +97,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
     private void leggiZoneFromFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
        //TODO mettere l'id del sito nel path e togliere 1
-        DatabaseReference myRef = database.getReference("/Siti/1");
+        DatabaseReference myRef = database.getReference("/Siti/"+sito.getId());
 
         Query recentPostsQuery = myRef.child("Zone");     //SELECT * FROM Utenti WHERE ruolo="visitatore"
         recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,9 +107,19 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                 List<AllZona> allZoneList=new ArrayList<>();
                 List<Zona> zone=new ArrayList<>();
 
+//                try{}catch (Exception e){}
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i risultati della query e li formatta esattamente come se fossero oggetti di classe Zona
+                try{
                     Zona zona=snapshot.getValue(Zona.class);
+                    Log.e("Zona trovata",""+zona.getNome());
                     zone.add(zona);
+                }catch (Exception e){
+                    Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)","");
+
+//                    String idZona = leggiIdZona(snapshot.getValue().toString());
+//                    recuperaFromDB(idSito);
+
+                    }
                 }
 
 
@@ -127,12 +137,18 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                     List<ItemOperaZona> listaOpereZona = new ArrayList<>();
                     try{
                         for(Opera opera: zone.get(i).getOpere()){
-                            if(contatore==0){
-                                Log.e("SKIP", "Skip dell'opera null");
-                            }else{
-                                listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId()));
-                                Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
-                            }
+                            //Log.e("zone.get(i).getOpere()", ""+opera.getId());
+
+                                //Log.e("SKIP", "Skip dell'opera null");
+
+                                try{
+                                    listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId(), opera.getIdFoto()));
+                                    Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
+                                }catch(Exception e){
+                                    Log.e("Opera trovata", "errore");
+                                }
+
+
                             contatore++;
                         }
                         allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona));
@@ -263,7 +279,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         zona.setId(key);
 
         //TODO - togliere 1 di default e mettere sito.getId()
-        myRef=database.getReference("Siti/1"+"/Zone").child(key);
+        myRef=database.getReference("Siti/"+sito.getId()+"/Zone").child(key);
         Log.e("*****************", ""+myRef);
         myRef.setValue(zona);
 
