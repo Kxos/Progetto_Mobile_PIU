@@ -12,6 +12,7 @@ import android.widget.Toolbar;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -50,31 +51,36 @@ public class FragmentImpostazioniSito extends Fragment {
     }
 
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        Visitatore utente = getUserInfo();
-
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_impostazioni_sito, container, false);
-        TextView delega_sito = (TextView) v.findViewById(R.id.text_delega_sito) ;
-        TextView elimina_sito = v.findViewById(R.id.text_elimina_sito) ;
+        return v ;
+    }
 
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+
+        Visitatore utente = getUserInfo();
+        TextView delega_sito = (TextView) view.findViewById(R.id.text_delega_sito) ;
+        TextView elimina_sito = view.findViewById(R.id.text_elimina_sito) ;
 
         checkSitoAssociatoAlCuratore(utente.getUid());
 
-            delega_sito.setOnClickListener(new View.OnClickListener() {
+        delega_sito.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                   // checkSitoAssociatoAlCuratore(utente.getUid()); inserito prima dell' onClick
-                    Log.e("controlloSito", "Ho controllato se è associato il sito");
+            @Override
+            public void onClick(View v) {
+                // checkSitoAssociatoAlCuratore(utente.getUid()); inserito prima dell' onClick
+                Log.e("controlloSito", "Ho controllato se è associato il sito");
 
-                    if(sito == null){
+                if(sito == null){
                     Toast.makeText(getActivity().getApplicationContext(), R.string.toastDelegateSito, Toast.LENGTH_SHORT).show();
                     Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
-                    }else{
+                }else{
 
                     Log.e("sitoAssociato", "il curatore ha un sito associato");
 
@@ -90,27 +96,27 @@ public class FragmentImpostazioniSito extends Fragment {
                     intentDelegaSito.putExtra("ruolo", utente.getRuolo()); //Optional parameters*/
 
                     getActivity().startActivity(intentDelegaSito);
-                    }
-
-
                 }
-            });
 
 
-            elimina_sito.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("controlloSito", "Ho controllato se è associato il sito");
+            }
+        });
 
-                    if(sito == null){
-                        Toast.makeText(getActivity().getApplicationContext(), R.string.toastDeleteSito, Toast.LENGTH_SHORT).show();
-                        Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
-                    }else {
 
-                        Intent intentEliminaSito = new Intent(getActivity(), EliminaSito.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("utente", (Serializable) utente);
-                        intentEliminaSito.putExtras(bundle) ;
+        elimina_sito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("controlloSito", "Ho controllato se è associato il sito");
+
+                if(sito == null){
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.toastDeleteSito, Toast.LENGTH_SHORT).show();
+                    Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
+                }else {
+
+                    Intent intentEliminaSito = new Intent(getActivity(), EliminaSito.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("utente", (Serializable) utente);
+                    intentEliminaSito.putExtras(bundle) ;
 
 
                         /*intentEliminaSito.putExtra("uid", utente.getUid()); //Optional parameters
@@ -119,15 +125,11 @@ public class FragmentImpostazioniSito extends Fragment {
                         intentEliminaSito.putExtra("email", utente.getEmail()); //Optional parameters
                         intentEliminaSito.putExtra("ruolo", utente.getRuolo()); //Optional parameters*/
 
-                        getActivity().startActivity(intentEliminaSito);
-                    }
+                    getActivity().startActivity(intentEliminaSito);
                 }
-            });
+            }
+        });
 
-
-
-
-        return v ;
 
     }
 
@@ -194,7 +196,13 @@ public class FragmentImpostazioniSito extends Fragment {
                 Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
             }
         });
+    }
+
+
+
+
+
+
 
 
     }
-}

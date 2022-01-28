@@ -40,7 +40,7 @@
     <string name="insertYourPassword">Insert your password</string>
 
     <string name="toastDelegateSito">Delegate site not available: you do not have an associated site</string>
-    <string name="toastDeleteSito">Delete site non avaible: you do not have an associated site</string>
+    <string name="toastDeleteSito">Delete site not available: you do not have an associated site</string>
 
     <string name="toastNessunaOpera">No opera selected!</string>
     <string name="toastDatiPercorso">Check your path name!</string>
