@@ -1,5 +1,6 @@
 package com.uniba.capitool.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,7 +75,7 @@ public class AggiungiOpera extends AppCompatActivity {
         }
 
         Toolbar toolbar = findViewById(R.id.toolbarAddOpera);
-        toolbar.setTitle("Aggiungi opera in"+ nomeZona);
+        toolbar.setTitle("Aggiungi opera in "+ nomeZona);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -104,16 +106,10 @@ public class AggiungiOpera extends AppCompatActivity {
                     erroreDatiCompilati=true;
                 }
 
-
-
                 if(descrizioneOpera.getText().toString().equals("")){
                     descrizioneOpera.setError("Inserisci una descrizione");
                     erroreDatiCompilati=true;
                 }
-
-
-
-
 
                 if(erroreDatiCompilati==false){
                     saveChanges();
@@ -123,33 +119,6 @@ public class AggiungiOpera extends AppCompatActivity {
             }
         });
     }
-
-//    public void setImmagineOperaFromDB(String idOpera, Context context, ImageView imageViewOpera){
-//
-//        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-//        StorageReference dateRef = storageRef.child("/fotoOpere/"+idOpera);
-//
-//        /**
-//         * Scarica il "DownloadURL" che ci serve per leggere l'immagine dal DB e metterla in una ImageView
-//         * */
-//        dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-//        {
-//            @Override
-//            public void onSuccess(Uri downloadUrl)
-//            {
-//                Glide.with(context).load(downloadUrl).into(imageViewOpera);
-//                image = downloadUrl;
-//            }
-//
-//        })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Glide.with(context).load(R.drawable.images).into(imageViewOpera);
-//                    }
-//                });
-//
-//    }
 
     private void saveChanges() {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -168,37 +137,33 @@ public class AggiungiOpera extends AppCompatActivity {
                 Log.e("nextId",""+nextIdOpera);
 
                 myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/titolo");
-        myRef.setValue(titoloOpera.getText().toString());
+                myRef.setValue(titoloOpera.getText().toString());
 
-        myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/id");
-        myRef.setValue(""+nextIdOpera);
+                myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/id");
+                myRef.setValue(""+nextIdOpera);
 
-        myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/descrizione");
-        myRef.setValue(descrizioneOpera.getText().toString());
+                myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/descrizione");
+                myRef.setValue(descrizioneOpera.getText().toString());
 
                 myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/idFoto");
                 myRef.setValue(key);
 
                 StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
 
-//        final ProgressDialog pd = new ProgressDialog(this);
-//        pd.setMessage("Caricamento");
-//        pd.show();
+        final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
+        pd.setMessage("Caricamento");
+        pd.show();
 
 
 
                 fileReference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        //   pd.dismiss();
-//                        Intent aggiungiOpera= new Intent(AggiungiOpera.this, VisualizzaZona.class);
-//                        Bundle dati = new Bundle();
-//                        dati.putSerializable("sito", sito);
-//                        dati.putSerializable("utente", utente);
-//                        dati.putString("nomeZona", nomeZona);
-//                        //dati.putString("idZona", allZone.getId());
-//                        aggiungiOpera.putExtras(dati);
-//                        startActivity(aggiungiOpera);
+
+                           pd.dismiss();
+                           Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
+                           AggiungiOpera.super.onBackPressed();
+
                     }
                 });
             }
@@ -209,13 +174,8 @@ public class AggiungiOpera extends AppCompatActivity {
             }
         });
 
-       // String key = myRef.push().getKey();
-
-//
-
-
-
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -232,12 +192,10 @@ public class AggiungiOpera extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //  overridePendingTransition(R.anim.slide_from_top, R.anim.slide_in_top);
 
     }
 
    private void leggiOpere(){
-       // int nextIdOpera=0;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
         //TODO mettere l'id del sito nel path e togliere 1
@@ -250,64 +208,17 @@ public class AggiungiOpera extends AppCompatActivity {
 
                 List<Opera> opere=new ArrayList<>();
 
-//                try{}catch (Exception e){}
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i risultati della query e li formatta esattamente come se fossero oggetti di classe Zona
                     try{
                         Opera opera = snapshot.getValue(Opera.class);
                         opere.add(opera);
                     }catch (Exception e){
-                        Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)","");
-
-//                    String idZona = leggiIdZona(snapshot.getValue().toString());
-//                    recuperaFromDB(idSito);
 
                     }
                 }
 
+                Log.e("size opere",""+opere.size());
 
-
-                /***
-                 * Passo gli oggetti salvati nella lista zone, nella lista allZoneList
-                 * Il primo for scorre le zone
-                 * Il secondo for scorre tutte le opere della relativa zona
-                 * Salto il salvataggio della prima opera perchè è null
-                 */
-                for(int i=0; i<opere.size(); i++){
-                    int contatore=0;
-                    Log.e("", ""+opere.get(i).getId());
-
-//                    List<ItemOperaZona> listaOpereZona = new ArrayList<>();
-//                    try{
-//                        for(Opera opera: zone.get(i).getOpere()){
-//                            if(contatore==0){
-//                                Log.e("SKIP", "Skip dell'opera null");
-//                            }else{
-//                                listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId()));
-//                                Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
-//                            }
-//                            contatore++;
-//                        }
-//                        allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona));
-//                    }catch (Exception e){
-//                        Log.e("","Erroreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-//
-//                        allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), null));
-//                    }
-
-
-                }
-
-//                //ciclo for per scorrere la lista ottnuta dal db
-//                int contatore=0;
-//                for(Zona visitatore : zone){
-//                    Log.d("Oggetto "+(contatore+1)+" della lista visitatori", ""+visitatore);
-//                    contatore++;
-//                }
-//
-//                Log.d("Lunghezza lista della query", String.valueOf(zone.size()));
-//
-//                setZoneRecycler(allZoneList);
-Log.e("size opere",""+opere.size());
                if(opere.size()==0){
                    salvaIndice(0);
                }else{

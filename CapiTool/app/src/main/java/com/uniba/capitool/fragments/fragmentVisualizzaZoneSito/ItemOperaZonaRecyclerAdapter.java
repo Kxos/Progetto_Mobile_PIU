@@ -112,7 +112,7 @@ public class ItemOperaZonaRecyclerAdapter extends RecyclerView.Adapter<ItemOpera
         .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Glide.with(context).load(R.drawable.images).into(imageViewOpera);
+                Glide.with(context).load(R.drawable.image_not_found).into(imageViewOpera);
             }
         });
 
