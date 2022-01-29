@@ -12,11 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
-<<<<<<< HEAD
+
 import android.widget.GridView;
 import android.widget.ImageView;
-=======
->>>>>>> f08699ab1f781c12d5b98f42aa9284d927230cc6
+
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
