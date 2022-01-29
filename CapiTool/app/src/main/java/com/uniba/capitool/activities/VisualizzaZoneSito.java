@@ -66,7 +66,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Zone "+sito.getNome());
+        toolbar.setTitle(BasicMethod.setUpperPhrase(sito.getNome()));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
