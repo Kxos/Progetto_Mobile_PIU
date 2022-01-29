@@ -59,7 +59,7 @@ public class VisualizzaModificaOpera extends AppCompatActivity {
             testo.setText(opera.getDescrizione());
             idSito = dati.getString("idSito");
 
-            setImmagineOperaFromDB(opera.getIdOpera(), this, immagine);
+            setImmagineOperaFromDB(opera.getId(), this, immagine);
 
         }else{
             Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
@@ -143,13 +143,13 @@ public class VisualizzaModificaOpera extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef;
 
-        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getIdOpera() + "/nome");
+        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId() + "/nome");
         myRef.setValue(titoloOpera.getText().toString());
 
-        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getIdOpera() + "/descrizione");
+        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId() + "/descrizione");
         myRef.setValue(testo.getText().toString());
 
-        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(opera.getIdOpera());
+        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(opera.getId());
 
 //        final ProgressDialog pd = new ProgressDialog(this);
 //        pd.setMessage("Caricamento");

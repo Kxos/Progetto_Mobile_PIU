@@ -12,6 +12,7 @@
     <color name="dark_grey_25">#d4d7da</color>
     <color name="dark_grey_50">#a8afb5</color>
     <color name="dark_grey_75">#7d8790</color>
+    <color name="light_black">#2e2e2e</color>
     <color name="dark_blue">#005691</color>
     <color name="dark_blue_link">#00639a</color>
     <color name="light_green">#78BE20</color>

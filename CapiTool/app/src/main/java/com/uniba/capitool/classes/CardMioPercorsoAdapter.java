@@ -235,12 +235,23 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Percorso cliccato", ""+getAdapterPosition()+""+nome.getText().toString());
+                    boolean boolean_public=false;
+                    if(pubblico.getText().toString().equals("true")){
+                        boolean_public=true;
+                    }
+                    Log.e("Percorso cliccato", ""+getAdapterPosition()+""+id.getText().toString());
                     Bundle b = new Bundle();
-                    Intent visualizzaPercorso = new Intent((HomePage)itemView.getContext(), VisualizzaPercorso.class);
 
+                    CardPercorso percorsoSelezionato=new CardPercorso(id.getText().toString(), nome.getText().toString(),
+                            idSitoAssociato.getText().toString(), nomeSitoAssociato.getText().toString(),
+                            cittaSitoAssociato.getText().toString(), descrizione.getText().toString(), boolean_public);
+
+
+                    Intent visualizzaPercorso = new Intent((HomePage)itemView.getContext(), VisualizzaPercorso.class);
+                    b.putSerializable("percorso", percorsoSelezionato);
                     visualizzaPercorso.putExtras(b);
                     ((HomePage)itemView.getContext()).startActivity(visualizzaPercorso);
+
                 }
             });
 

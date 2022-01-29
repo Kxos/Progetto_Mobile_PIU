@@ -1,6 +1,8 @@
 package com.uniba.capitool.classes;
 
-public class CardPercorso {
+import java.io.Serializable;
+
+public class CardPercorso implements Serializable {
 
     private String id;
     private String nome;

@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import java.io.Serializable;
 
 public class ItemOperaZona implements Serializable {
-    String idOpera;
+    String id;
     String titolo;
     String descrizione;
     String idZona;  //salvo l'id della zona per avere un riferimento quando poi clicco nella recycler view delle opere, altrimenti ho la posizione dell'opera
@@ -22,8 +22,12 @@ public class ItemOperaZona implements Serializable {
 
     Drawable foto;
 
-    public ItemOperaZona(String idOpera, String titolo, String descrizione, String idZona, String idFoto) {
-        this.idOpera = idOpera;
+    public ItemOperaZona() {
+
+    }
+
+    public ItemOperaZona(String id, String titolo, String descrizione, String idZona, String idFoto) {
+        this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.idZona = idZona;
@@ -53,12 +57,12 @@ public class ItemOperaZona implements Serializable {
         this.descrizione = descrizione;
     }
 
-    public String getIdOpera() {
-        return idOpera;
+    public String getId() {
+        return id;
     }
 
-    public void setIdOpera(String idOpera) {
-        this.idOpera = idOpera;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitolo() {

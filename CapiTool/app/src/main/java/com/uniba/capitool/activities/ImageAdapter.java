@@ -50,7 +50,7 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return Long.parseLong(listaOpereZona.get(position).getIdOpera());
+        return Long.parseLong(listaOpereZona.get(position).getId());
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ImageAdapter extends BaseAdapter {
 
 
         titolo.setText(listaOpereZona.get(position).getTitolo());
-        setImmagineOperaFromDB(listaOpereZona.get(position).getIdOpera(), mContext, fotoOpera);
+        setImmagineOperaFromDB(listaOpereZona.get(position).getId(), mContext, fotoOpera);
 
         return convertView;
     }
