@@ -1,7 +1,9 @@
 package com.uniba.capitool.classes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.activities.HomePage;
+import com.uniba.capitool.activities.VisualizzaPercorso;
 
 import java.util.ArrayList;
 
@@ -231,15 +235,15 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("RECYCLER", ""+getAdapterPosition()+""+descrizione.getText().toString());
+                    Log.e("Percorso cliccato", ""+getAdapterPosition()+""+nome.getText().toString());
+                    Bundle b = new Bundle();
+                    Intent visualizzaPercorso = new Intent((HomePage)itemView.getContext(), VisualizzaPercorso.class);
+
+                    visualizzaPercorso.putExtras(b);
+                    ((HomePage)itemView.getContext()).startActivity(visualizzaPercorso);
                 }
             });
-            foto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("RECYCLER", ""+getAdapterPosition()+""+descrizione.getText().toString());
-                }
-            });
+
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
