@@ -42,7 +42,8 @@ import java.util.ArrayList;
  */
 public class FragmentImpostazioniSito extends Fragment {
 
-    CardSitoCulturale sito ;
+    SitoCulturale sito ;
+    CardSitoCulturale cardSitoCulturale;
     DatabaseReference myRef ;
 
 
@@ -177,8 +178,13 @@ public class FragmentImpostazioniSito extends Fragment {
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Log.e("*****!!!!*****","SONO NEL FOR!!!");
-                    sito = snapshot.getValue(CardSitoCulturale.class) ;
-                    Log.e("sono in ImpostazioniSito", "sito catturato: " + sito.getNome()) ;
+
+                    sito = snapshot.getValue(SitoCulturale.class);
+                    Log.e("sonoInImpostazioniSito", "sito catturato: " + sito.getNome());
+
+                    cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class) ;
+                    Log.e("sono in ImpostazioniSito", "cardSitoCulturale catturata: " + cardSitoCulturale.getNome()) ;
+
 
                 }
             }
