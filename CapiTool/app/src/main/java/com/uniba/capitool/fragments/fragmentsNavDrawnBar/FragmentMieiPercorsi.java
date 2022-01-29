@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+<<<<<<< HEAD
 import android.widget.GridView;
 import android.widget.ImageView;
+=======
+>>>>>>> f08699ab1f781c12d5b98f42aa9284d927230cc6
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -35,9 +38,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.classes.CardMioPercorsoAdapter;
 import com.uniba.capitool.classes.CardPercorso;
-import com.uniba.capitool.classes.CardPercorsoAdapter;
-import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.Percorso;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentSelezionaOpere;
@@ -51,7 +53,12 @@ import java.util.ArrayList;
 public class FragmentMieiPercorsi extends Fragment {
 
     Utente utente;
+
     final ArrayList<CardPercorso> listaPercorsi = new ArrayList<>();;
+
+    CardMioPercorsoAdapter adapter;
+    RecyclerView rvCardsPercorsi;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -107,8 +114,16 @@ public class FragmentMieiPercorsi extends Fragment {
             }
         });
 
+
         // Inflate the layout for this fragment
         return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
     }
 
     /***
@@ -220,14 +235,14 @@ public class FragmentMieiPercorsi extends Fragment {
      *
      * @param listaPercorsi: Lita di tutti i Percorsi di un Utente
      */
-    public CardPercorsoAdapter popolaPercorsiInRecyclerView(ArrayList<CardPercorso> listaPercorsi, View view){
+    public CardMioPercorsoAdapter popolaPercorsiInRecyclerView(ArrayList<CardPercorso> listaPercorsi, View view){
 
-        RecyclerView rvCardsPercorsi = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
+        rvCardsPercorsi = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
 
         if(!listaPercorsi.isEmpty()){
 
             // Crea un adapter passando i Percorsi trovati
-            CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi);
+            adapter = new CardMioPercorsoAdapter(listaPercorsi);
 
             // Lega l'Adapter alla recyclerview per popolare i Percorsi
             rvCardsPercorsi.setAdapter(adapter);
