@@ -176,8 +176,8 @@ public class FragmentImpostazioniSito extends Fragment {
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Log.e("*****!!!!*****","SONO NEL FOR!!!");
-                    sito = snapshot.getValue(SitoCulturale.class) ;
-                    Log.e("sonoInImpostazioniSito", "sito catturato: " + sito.getNome()) ;
+                    sito = snapshot.getValue(SitoCulturale.class);
+                    Log.e("sonoInImpostazioniSito", "sito catturato: " + sito.getNome());
 
                 }
             }
