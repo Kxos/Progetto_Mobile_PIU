@@ -1,97 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.VisualizzaModificaOpera">
 
-    <ScrollView
-        android:id="@+id/scrollViewOpera"
+    <include
+        android:id="@+id/toolbarModificaOpera"
+        layout="@layout/toolbar" />
+
+    <Button
+        android:id="@+id/btnModificaOpera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:text="Conferma"
+        android:background="@drawable/roundedbutton_style"
+        app:layout_constraintEnd_toEndOf="@+id/layout_descrizioneOpera"
+        app:layout_constraintTop_toBottomOf="@+id/layout_descrizioneOpera" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardImageViewOpera"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarModificaOpera">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/imageViewVisualizzaModificaOpera"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_add_image"
+            />
+    </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/imageViewVisualizzaModificaOpera"
-                android:layout_width="417dp"
-                android:layout_height="265dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_titolo"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="Titolo"
+        android:theme="@style/CapiToolStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardImageViewOpera">
 
-            <ImageView
-                android:id="@+id/esci"
-                android:layout_width="41dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="28dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_close" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titoloNomeModificaOpera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btnModificaOpera"
-                android:layout_width="131dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/rounded_style"
-                android:text="Conferma"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.942"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/modificaTestoOpera" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_descrizioneOpera"
+        android:layout_width="350dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        android:hint="Descrizione"
+        android:theme="@style/CapiToolStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_titolo">
 
-            <EditText
-                android:id="@+id/titoloNomeModificaOpera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:text="Nome Opera"
-                android:theme="@style/CapiToolStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewVisualizzaModificaOpera" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/modificaTestoOpera"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Descrizione"
-                android:padding="10dp"
-                android:theme="@style/CapiToolStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titoloNomeModificaOpera">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/descrizioneOpera"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/text_area_border"
-                    android:gravity="top|left"
-                    android:inputType="textMultiLine"
-                    android:lines="6"
-                    android:overScrollMode="always"
-                    android:scrollbarStyle="insideInset"
-                    android:scrollbars="vertical"
-                    android:scrollHorizontally="false"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        >
-    </ScrollView>
-
-</FrameLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descrizioneOpera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/text_area_border"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="6"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </com.google.android.material.textfield.TextInputLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

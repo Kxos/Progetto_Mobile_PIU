@@ -13,12 +13,14 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -27,13 +29,12 @@ import com.google.firebase.storage.UploadTask;
 import com.uniba.capitool.R;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
 
-public class VisualizzaModificaOpera extends AppCompatActivity {
+public class VisualizzaModificaOpera extends AppCompatActivity{
 
     Uri image;
     ImageView immagine;
     EditText testo;
     EditText titoloOpera;
-    ImageView close;
     String idSito;
     ItemOperaZona opera;
     private static final int SELECT_IMAGE_CODE = 1;
@@ -47,8 +48,9 @@ public class VisualizzaModificaOpera extends AppCompatActivity {
         testo = findViewById(R.id.descrizioneOpera);
         titoloOpera = findViewById(R.id.titoloNomeModificaOpera);
         Button btnModifica = findViewById(R.id.btnModificaOpera);
-        close = findViewById(R.id.esci);
-        close.setClickable(true);
+
+
+
 
 
         if(dati!=null){
@@ -65,10 +67,16 @@ public class VisualizzaModificaOpera extends AppCompatActivity {
             Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
         }
 
-        close.setOnClickListener(new View.OnClickListener() {
+        Toolbar toolbar = findViewById(R.id.toolbarModificaOpera);
+        toolbar.setTitle("Modifica Opera " + opera.getTitolo());
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                onBackPressed();
+            public void onClick(View v) {
+                VisualizzaModificaOpera.super.onBackPressed();
             }
         });
 
@@ -151,9 +159,6 @@ public class VisualizzaModificaOpera extends AppCompatActivity {
 
         StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(opera.getId());
 
-//        final ProgressDialog pd = new ProgressDialog(this);
-//        pd.setMessage("Caricamento");
-//        pd.show();
 
 
 

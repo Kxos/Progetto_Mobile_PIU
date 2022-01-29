@@ -17,11 +17,12 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:text="Aggiungi Opera"
+        android:background="@drawable/roundedbutton_style"
         app:layout_constraintEnd_toEndOf="@+id/layout_descrizioneOpera"
         app:layout_constraintTop_toBottomOf="@+id/layout_descrizioneOpera" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardImageView"
+        android:id="@+id/cardImageViewOpera"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="20dp"
@@ -51,10 +52,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardImageView">
+        app:layout_constraintTop_toBottomOf="@+id/cardImageViewOpera">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_titolo_opera"
+            android:id="@+id/titoloNomeModificaOpera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textEmailAddress" />
@@ -73,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_titolo">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textfield_descrizioneOpera"
+            android:id="@+id/descrizioneOpera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/text_area_border"
