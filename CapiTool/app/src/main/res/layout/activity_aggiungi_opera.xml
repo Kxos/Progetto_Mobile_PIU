@@ -20,20 +20,26 @@
         app:layout_constraintEnd_toEndOf="@+id/layout_descrizioneOpera"
         app:layout_constraintTop_toBottomOf="@+id/layout_descrizioneOpera" />
 
-    <ImageView
-        android:id="@+id/addOpera_foto"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardImageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="20dp"
-       android:background="@drawable/border_imageview"
-        android:layout_marginTop="20dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarAddOpera"
-        android:scaleType="centerCrop"
-        tools:src="@tools:sample/avatars"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAddOpera">
+
+        <ImageView
+            android:id="@+id/addOpera_foto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_add_image"
+             />
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_titolo"
@@ -45,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addOpera_foto">
+        app:layout_constraintTop_toBottomOf="@+id/cardImageView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/text_titolo_opera"
