@@ -57,6 +57,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
            holder.emptyZona.setVisibility(View.VISIBLE);
        }
 
+
         holder.nomeZona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
