@@ -55,8 +55,8 @@ public class AggiungiOpera extends AppCompatActivity {
         setContentView(R.layout.activity_aggiungi_opera);
 
         fotoOpera = findViewById(R.id.addOpera_foto);
-        descrizioneOpera = findViewById(R.id.textfield_descrizioneOpera);
-        titoloOpera = findViewById(R.id.text_titolo_opera);
+        descrizioneOpera = findViewById(R.id.descrizioneOpera);
+        titoloOpera = findViewById(R.id.titoloNomeModificaOpera);
         btaggiungiOpera = findViewById(R.id.bt_Aggiungi_Opera);
 
 

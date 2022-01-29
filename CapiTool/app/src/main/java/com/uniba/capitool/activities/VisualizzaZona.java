@@ -89,7 +89,7 @@ public class VisualizzaZona extends AppCompatActivity {
 //       gridView.setAdapter(new ImageAdapter(allZ, context));
 
         Toolbar toolbar = findViewById(R.id.toolbarVisualizzaZona);
-        toolbar.setTitle("Zona "+ BasicMethod.setUpperPhrase(nomeZona));
+        toolbar.setTitle("Zona"+ BasicMethod.setUpperPhrase(nomeZona));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
