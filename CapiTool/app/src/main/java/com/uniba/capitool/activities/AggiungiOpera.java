@@ -1,6 +1,5 @@
 package com.uniba.capitool.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -150,9 +149,9 @@ public class AggiungiOpera extends AppCompatActivity {
 
                 StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
 
-        final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
-        pd.setMessage("Caricamento");
-        pd.show();
+//        final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
+//        pd.setMessage("Caricamento");
+//        pd.show();
 
 
 
@@ -160,7 +159,7 @@ public class AggiungiOpera extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                           pd.dismiss();
+                           //pd.dismiss();
                            Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
                            AggiungiOpera.super.onBackPressed();
 
