@@ -46,20 +46,20 @@
         android:id="@+id/text_sub_delega_sito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
+        android:layout_marginStart="84dp"
         android:text="@string/delegateSite_subtext"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/text_delega_sito"
         app:layout_constraintStart_toStartOf="@+id/text_delega_sito"
         app:layout_constraintTop_toTopOf="@+id/text_delega_sito"
-        app:layout_constraintVertical_bias="0.704" />
+        app:layout_constraintVertical_bias="0.636" />
 
     <TextView
         android:id="@+id/text_sub_elimina_sito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="28dp"
         android:text="@string/deleteSite_subtext"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@+id/text_elimina_sito"
@@ -75,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/text_delega_sito"
         app:layout_constraintStart_toStartOf="@+id/text_delega_sito" />
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/button_delega_sito"
         android:layout_width="41dp"
         android:layout_height="34dp"
@@ -84,9 +84,9 @@
         android:background="@color/white"
         android:src="@drawable/ic_baseline_navigate_next_24"
         app:layout_constraintBottom_toBottomOf="@+id/text_delega_sito"
-        app:layout_constraintEnd_toEndOf="@+id/text_delega_sito" />
+        app:layout_constraintEnd_toEndOf="@+id/text_delega_sito" />-->
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/button_elimina_sito"
         android:layout_width="41dp"
         android:layout_height="34dp"
@@ -95,7 +95,7 @@
         android:background="@color/white"
         android:src="@drawable/ic_baseline_navigate_next_24"
         app:layout_constraintBottom_toBottomOf="@+id/text_elimina_sito"
-        app:layout_constraintEnd_toEndOf="@+id/text_elimina_sito" />
+        app:layout_constraintEnd_toEndOf="@+id/text_elimina_sito" />-->
 
     <ImageView
         android:id="@+id/image_elimina_sito"
