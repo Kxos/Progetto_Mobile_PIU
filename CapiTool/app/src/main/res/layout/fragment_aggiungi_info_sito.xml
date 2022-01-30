@@ -10,53 +10,78 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/CostoIngresso"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_CostoIngresso"
+            android:layout_width="288dp"
             android:layout_height="50dp"
             android:layout_marginTop="22dp"
-            android:background="@drawable/rounded_style"
             android:ems="10"
             android:hint="Costo Ingresso"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="@+id/Timer"
-            app:layout_constraintTop_toBottomOf="@+id/Timer" />
+            app:layout_constraintTop_toBottomOf="@+id/Timer">
 
-        <EditText
-            android:id="@+id/Città"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/CostoIngresso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="22dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_Città"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="73dp"
-            android:background="@drawable/rounded_style"
+            android:theme="@style/CapiToolStyle"
             android:ems="10"
             android:hint="Città"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/Indirizzo"
-            app:layout_constraintStart_toStartOf="@+id/Indirizzo"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/layout_Indirizzo"
+            app:layout_constraintStart_toStartOf="@+id/layout_Indirizzo"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Città"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="73dp" />
 
-        <EditText
-            android:id="@+id/Indirizzo"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_Indirizzo"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="48dp"
-            android:background="@drawable/rounded_style"
+            android:theme="@style/CapiToolStyle"
             android:ems="10"
             android:hint="Indirizzo"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="@+id/Timer2"
             app:layout_constraintStart_toStartOf="@+id/Timer"
-            app:layout_constraintTop_toBottomOf="@+id/Città" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_Città">
+            <EditText
+                android:id="@+id/Indirizzo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/btnConferma"
             android:layout_width="131dp"
             android:layout_height="48dp"
             android:layout_marginTop="105dp"
-            android:background="@drawable/rounded_style"
+            android:background="@drawable/roundedbutton_style"
+            android:theme="@style/CapiToolStyle"
+            android:backgroundTint="@color/orangeCapiTool"
+            android:textColor="@color/white"
             android:text="Conferma"
             app:layout_constraintEnd_toEndOf="@+id/Timer2"
-            app:layout_constraintTop_toBottomOf="@+id/CostoIngresso" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_CostoIngresso" />
 
         <TextView
             android:id="@+id/Timer"
@@ -64,18 +89,19 @@
             android:layout_height="89dp"
             android:layout_marginTop="31dp"
             android:layout_marginBottom="22dp"
-            android:background="@drawable/rounded_style"
+            android:background="@drawable/roundedbutton_style"
+            android:elevation="2dp"
             android:drawableTop="@drawable/ic_time"
             android:drawablePadding="1dp"
             android:gravity="center"
             android:hint="Orario Apertura"
             android:textSize="18dp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/CostoIngresso"
+            app:layout_constraintBottom_toTopOf="@+id/layout_CostoIngresso"
             app:layout_constraintEnd_toStartOf="@+id/Timer2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Indirizzo"
+            app:layout_constraintTop_toBottomOf="@+id/layout_Indirizzo"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
@@ -84,7 +110,8 @@
             android:layout_height="89dp"
             android:layout_marginTop="31dp"
             android:layout_marginBottom="176dp"
-            android:background="@drawable/rounded_style"
+            android:background="@drawable/roundedbutton_style"
+            android:elevation="2dp"
             android:drawableTop="@drawable/ic_time_closed"
             android:drawablePadding="1dp"
             android:gravity="center"
@@ -95,7 +122,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/Timer"
-            app:layout_constraintTop_toBottomOf="@+id/Indirizzo"
+            app:layout_constraintTop_toBottomOf="@+id/layout_Indirizzo"
             app:layout_constraintVertical_bias="1.0" />
 
 

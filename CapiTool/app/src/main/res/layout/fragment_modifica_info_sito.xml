@@ -10,53 +10,89 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/modificaCostoIngresso"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/rounded_style"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_modificaCostoIngresso"
+            android:layout_width="283dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/roundedbutton_style"
+            android:elevation="2dp"
             android:ems="10"
             android:hint="Costo Ingresso"
             android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="@+id/modificaTimer"
-            app:layout_constraintTop_toBottomOf="@+id/modificaTimer" />
+            android:theme="@style/CapiToolStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modificaTimer2">
 
-        <EditText
-            android:id="@+id/modificaCittà"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/modificaCostoIngresso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="22dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_modificaCittà"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="73dp"
-            android:background="@drawable/rounded_style"
             android:ems="10"
             android:hint="Città"
+            android:elevation="2dp"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/modificaIndirizzo"
-            app:layout_constraintStart_toStartOf="@+id/modificaIndirizzo"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/roundedbutton_style"
+            android:theme="@style/CapiToolStyle"
+            app:layout_constraintEnd_toEndOf="@+id/layout_modificaIndirizzo"
+            app:layout_constraintStart_toStartOf="@+id/layout_modificaIndirizzo"
+            app:layout_constraintTop_toTopOf="parent"
+            >
 
-        <EditText
-            android:id="@+id/modificaIndirizzo"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/modificaCittà"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="73dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_modificaIndirizzo"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="48dp"
-            android:background="@drawable/rounded_style"
             android:ems="10"
             android:hint="Indirizzo"
+            android:elevation="2dp"
             android:inputType="textPersonName"
+            android:background="@drawable/roundedbutton_style"
+            android:theme="@style/CapiToolStyle"
             app:layout_constraintEnd_toEndOf="@+id/modificaTimer2"
             app:layout_constraintStart_toStartOf="@+id/modificaTimer"
-            app:layout_constraintTop_toBottomOf="@+id/modificaCittà" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_modificaCittà">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/modificaIndirizzo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="48dp"
+            />
+       </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnModifica"
             android:layout_width="131dp"
             android:layout_height="48dp"
-            android:layout_marginTop="105dp"
-            android:background="@drawable/rounded_style"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="40dp"
             android:text="Modifica"
-            app:layout_constraintEnd_toEndOf="@+id/modificaTimer2"
-            app:layout_constraintTop_toBottomOf="@+id/modificaCostoIngresso" />
+            android:theme="@style/CapiToolStyle"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/orangeCapiTool"
+            android:background="@drawable/roundedbutton_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_modificaCostoIngresso" />
 
         <TextView
             android:id="@+id/modificaTimer"
@@ -64,18 +100,19 @@
             android:layout_height="89dp"
             android:layout_marginTop="31dp"
             android:layout_marginBottom="22dp"
-            android:background="@drawable/rounded_style"
             android:drawableTop="@drawable/ic_time"
+            android:background="@drawable/roundedbutton_style"
+            android:elevation="2dp"
             android:drawablePadding="1dp"
             android:gravity="center"
             android:hint="Orario Apertura"
             android:textSize="18dp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/modificaCostoIngresso"
+            app:layout_constraintBottom_toTopOf="@+id/layout_modificaCostoIngresso"
             app:layout_constraintEnd_toStartOf="@+id/modificaTimer2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/modificaIndirizzo"
+            app:layout_constraintTop_toBottomOf="@+id/layout_modificaIndirizzo"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
@@ -83,21 +120,20 @@
             android:layout_width="112dp"
             android:layout_height="89dp"
             android:layout_marginTop="31dp"
-            android:layout_marginBottom="176dp"
-            android:background="@drawable/rounded_style"
+            android:background="@drawable/roundedbutton_style"
             android:drawableTop="@drawable/ic_time_closed"
             android:drawablePadding="1dp"
+            android:elevation="2dp"
             android:gravity="center"
             android:hint="Orario Chiusura"
             android:textSize="18dp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/btnModifica"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/modificaTimer"
-            app:layout_constraintTop_toBottomOf="@+id/modificaIndirizzo"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_modificaIndirizzo" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
+
