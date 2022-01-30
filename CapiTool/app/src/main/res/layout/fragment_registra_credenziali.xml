@@ -74,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Mostra Password"
+                android:theme="@style/CapiToolStyle"
                 app:layout_constraintEnd_toEndOf="@+id/confermaPassword"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/confermaPassword"
@@ -86,6 +87,10 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:text="Avanti"
+                android:background="@drawable/roundedbutton_style"
+                android:backgroundTint="@color/orangeCapiTool"
+                android:textColor="@color/white"
+                android:elevation="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mostraPassword" />
         </androidx.constraintlayout.widget.ConstraintLayout>

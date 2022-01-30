@@ -20,7 +20,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -61,7 +60,7 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
             testo.setText(opera.getDescrizione());
             idSito = dati.getString("idSito");
 
-            setImmagineOperaFromDB(opera.getId(), this, immagine);
+            setImmagineOperaFromDB(opera.getIdFoto(), this, immagine);
 
         }else{
             Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
