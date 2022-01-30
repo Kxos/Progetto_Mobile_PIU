@@ -78,7 +78,7 @@ public class FragmentImpostazioniSito extends Fragment {
                 // checkSitoAssociatoAlCuratore(utente.getUid()); inserito prima dell' onClick
                 Log.e("controlloSito", "Ho controllato se è associato il sito");
 
-                if(sito == null){
+                if(sito == null && cardSitoCulturale == null){
                     Toast.makeText(getActivity().getApplicationContext(), R.string.toastDelegateSito, Toast.LENGTH_SHORT).show();
                     Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
                 }else{
@@ -109,7 +109,7 @@ public class FragmentImpostazioniSito extends Fragment {
             public void onClick(View v) {
                 Log.e("controlloSito", "Ho controllato se è associato il sito");
 
-                if(sito == null){
+                if(sito == null && cardSitoCulturale == null){
                     Toast.makeText(getActivity().getApplicationContext(), R.string.toastDeleteSito, Toast.LENGTH_SHORT).show();
                     Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
                 }else {
@@ -179,11 +179,13 @@ public class FragmentImpostazioniSito extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Log.e("*****!!!!*****","SONO NEL FOR!!!");
 
-                    sito = snapshot.getValue(SitoCulturale.class);
-                    Log.e("sonoInImpostazioniSito", "sito catturato: " + sito.getNome());
-
-                    cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class) ;
-                    Log.e("sono in ImpostazioniSito", "cardSitoCulturale catturata: " + cardSitoCulturale.getNome()) ;
+                    if(snapshot.getValue() instanceof SitoCulturale){
+                        sito = snapshot.getValue(SitoCulturale.class);
+                        Log.e("sonoInImpostazioniSito", "sito catturato: " + sito.getNome());
+                    }else{
+                        cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class) ;
+                        Log.e("sono in ImpostazioniSito", "cardSitoCulturale catturata: " + cardSitoCulturale.getNome()) ;
+                    }
 
 
                 }

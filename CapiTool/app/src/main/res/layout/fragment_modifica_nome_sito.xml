@@ -31,9 +31,9 @@
             android:layout_height="238dp"
             android:layout_marginTop="64dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
             android:background="@drawable/rounded_style"
             android:clickable="true"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_account_balance_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -44,12 +44,11 @@
             android:id="@+id/buttonAvantiModifica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="140dp"
+            android:layout_marginTop="64dp"
             android:background="@drawable/rounded_style"
             android:text="Avanti"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/modificaImmagineSito"
+            app:layout_constraintTop_toBottomOf="@+id/modificaNomeSito" />
 
         <TextView
             android:id="@+id/textViewModificaImmagine"
