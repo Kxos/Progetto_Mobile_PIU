@@ -92,6 +92,7 @@
             android:layout_marginStart="52dp"
             android:drawableLeft="@drawable/ic_baseline_keyboard_backspace_24"
             android:text="Credenziali"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
