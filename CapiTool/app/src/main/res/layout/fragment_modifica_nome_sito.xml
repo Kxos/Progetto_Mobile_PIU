@@ -11,19 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/modificaNomeSito"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_modificaNomeSito"
             android:layout_width="226dp"
             android:layout_height="52dp"
-            android:layout_marginTop="108dp"
-            android:background="@drawable/rounded_style"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="92dp"
             android:ems="10"
             android:hint="Nome Sito"
+            android:theme="@style/CapiToolStyle"
             android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAvantiModifica"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/modificaImmagineSito" />
+            app:layout_constraintTop_toBottomOf="@+id/modificaImmagineSito"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/modificaNomeSito"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="108dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
             android:id="@+id/modificaImmagineSito"
@@ -31,8 +40,9 @@
             android:layout_height="238dp"
             android:layout_marginTop="64dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/rounded_style"
+            android:background="@drawable/roundedbutton_style"
             android:clickable="true"
+            android:elevation="2dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_account_balance_24"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,11 +54,21 @@
             android:id="@+id/buttonAvantiModifica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="140dp"
+            android:background="@drawable/roundedbutton_style"
+            android:backgroundTint="@color/orangeCapiTool"
+            android:theme="@style/CapiToolStyle"
+            android:text="Avanti"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
             android:layout_marginTop="64dp"
             android:background="@drawable/rounded_style"
             android:text="Avanti"
             app:layout_constraintEnd_toEndOf="@+id/modificaImmagineSito"
             app:layout_constraintTop_toBottomOf="@+id/modificaNomeSito" />
+
 
         <TextView
             android:id="@+id/textViewModificaImmagine"
@@ -57,13 +77,16 @@
             android:layout_marginStart="62dp"
             android:layout_marginEnd="131dp"
             android:layout_marginBottom="94dp"
+            android:elevation="2dp"
             android:text="Clicca sull'immagine per selezionarne una nuova"
             android:textSize="10sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/modificaNomeSito"
+            app:layout_constraintBottom_toTopOf="@+id/layout_modificaNomeSito"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/modificaImmagineSito" />
+            app:layout_constraintTop_toBottomOf="@+id/modificaImmagineSito"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
