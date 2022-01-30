@@ -65,6 +65,7 @@
                     android:id="@+id/text_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:theme="@style/CapiToolStyle"
                     android:clickable="false"
                     android:enabled="false"
                     android:focusable="false"
@@ -85,6 +86,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_nome"
+                    android:theme="@style/CapiToolStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text" />
@@ -104,6 +106,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_cognome"
+                    android:theme="@style/CapiToolStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text" />
@@ -123,6 +126,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_dataNascita"
+                    android:theme="@style/CapiToolStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
@@ -143,6 +147,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_numeroPatentino"
+                    android:theme="@style/CapiToolStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text|date" />
@@ -156,6 +161,10 @@
                 android:layout_marginEnd="44dp"
                 android:layout_marginBottom="20dp"
                 android:text="Conferma"
+                android:background="@drawable/roundedbutton_style"
+                android:backgroundTint="@color/orangeCapiTool"
+                android:textColor="@color/white"
+                android:elevation="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_numeroPatentino" />

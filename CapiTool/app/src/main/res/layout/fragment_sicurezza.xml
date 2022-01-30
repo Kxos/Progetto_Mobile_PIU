@@ -86,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Mostra Password"
+            android:theme="@style/CapiToolStyle"
             app:layout_constraintEnd_toEndOf="@+id/layout_ConfermaPassword"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/layout_ConfermaPassword"
@@ -98,6 +99,10 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
             android:text="Conferma"
+            android:background="@drawable/roundedbutton_style"
+            android:backgroundTint="@color/orangeCapiTool"
+            android:textColor="@color/white"
+            android:elevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mostraPassword" />
 
