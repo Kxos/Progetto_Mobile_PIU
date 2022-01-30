@@ -82,7 +82,7 @@ public class ImageAdapter extends BaseAdapter {
 
 
         titolo.setText(listaOpereZona.get(position).getTitolo());
-        setImmagineOperaFromDB(listaOpereZona.get(position).getId(), mContext, fotoOpera);
+        setImmagineOperaFromDB(listaOpereZona.get(position).getIdFoto(), mContext, fotoOpera);
 
         return convertView;
     }

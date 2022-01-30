@@ -41,7 +41,7 @@ public class VisualizzaOpera extends AppCompatActivity {
             titoloOpera.setText(opera.getTitolo());
             testo.setText(opera.getDescrizione());
 
-            setImmagineOperaFromDB(opera.getId(), this, immagine);
+            setImmagineOperaFromDB(opera.getIdFoto(), this, immagine);
         }else{
             Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
         }
