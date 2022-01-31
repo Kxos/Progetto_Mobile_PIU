@@ -135,11 +135,11 @@ public class FragmentGestioneAccount extends Fragment {
                                                 if (task.isSuccessful()) {
 
                                                     Log.d("TAG", "Account eliminato");
+                                                    Toast.makeText(getActivity(), "Account eliminato correttamente", Toast.LENGTH_LONG).show();
 
                                                     Intent login = new Intent(getActivity(), Login.class);
                                                     startActivity(login);
 
-                                                    Toast.makeText(((Login)getActivity()), "Account eliminato correttamente", Toast.LENGTH_LONG).show();
                                                 } else {
                                                     Log.d("TAG", "Errore eliminazione account");
                                                     Toast.makeText(getActivity(), "C'è stato un errore. Riprova", Toast.LENGTH_LONG).show();
