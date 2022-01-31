@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_inserisci_password"
+        android:id="@+id/textfieldInserisciPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,11 +40,11 @@
         android:hint="password"
         android:inputType="textPersonName"
         android:theme="@style/CapiToolStyle"
-        app:layout_constraintStart_toStartOf="@+id/text_inserisci_password"
-        app:layout_constraintTop_toBottomOf="@+id/text_inserisci_password" />
+        app:layout_constraintStart_toStartOf="@+id/textfieldInserisciPassword"
+        app:layout_constraintTop_toBottomOf="@+id/textfieldInserisciPassword" />
 
     <CheckBox
-        android:id="@+id/boxInfoDelete"
+        android:id="@+id/boxInfoCancellazioneAccount"
         android:layout_width="325dp"
         android:layout_height="33dp"
         android:layout_marginTop="60dp"
@@ -54,18 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <Button
-        android:id="@+id/button_annulla_delega"
-        android:layout_width="131dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="72dp"
-        android:background="@drawable/roundedbutton_style"
-        android:elevation="2dp"
-        android:text="@string/cancel"
-        app:layout_constraintStart_toStartOf="@+id/boxInfoDelete"
-        app:layout_constraintTop_toBottomOf="@+id/boxInfoDelete" />
-
-    <Button
-        android:id="@+id/button_conferma_delega"
+        android:id="@+id/confermaEliminazioneAccount"
         android:layout_width="131dp"
         android:layout_height="47dp"
         android:layout_marginTop="72dp"
@@ -76,7 +65,7 @@
         android:text="@string/confirm"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boxInfoDelete" />
+        app:layout_constraintTop_toBottomOf="@+id/boxInfoCancellazioneAccount" />
 
     <TextView
         android:id="@+id/textView13"

@@ -52,7 +52,7 @@ public class FragmentSicurezza extends Fragment {
         Button conferma = view.findViewById(R.id.confermaModificaPassword);
         mostraPassword = view.findViewById(R.id.mostraPassword);
 
-        conferma.setEnabled(false);
+        conferma.setEnabled(true);
 
         vecchiaPsw.addTextChangedListener(new TextWatcher() {
             @Override
@@ -67,17 +67,8 @@ public class FragmentSicurezza extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(isFilled(vecchiaPsw)) {
-                    if(isFilled(nuovaPsw) && isFilled(confermaPsw)) {
-                        conferma.setEnabled(true);
-                    }
-                    else {
-                        conferma.setEnabled(false);
-                    }
-                }
-                else {
+                if(!isFilled(vecchiaPsw)) {
                     vecchiaPsw.setError("Campo obbligatorio");
-                    conferma.setEnabled(false);
                 }
             }
         });
@@ -95,17 +86,8 @@ public class FragmentSicurezza extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(isFilled(nuovaPsw)) {
-                    if(isFilled(vecchiaPsw) && isFilled(confermaPsw)) {
-                        conferma.setEnabled(true);
-                    }
-                    else {
-                        conferma.setEnabled(false);
-                    }
-                }
-                else {
+                if(!isFilled(nuovaPsw)) {
                     nuovaPsw.setError("Campo obbligatorio");
-                    conferma.setEnabled(false);
                 }
             }
         });
@@ -123,17 +105,8 @@ public class FragmentSicurezza extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(isFilled(confermaPsw)) {
-                    if(isFilled(vecchiaPsw) && isFilled(nuovaPsw)) {
-                        conferma.setEnabled(true);
-                    }
-                    else {
-                        conferma.setEnabled(false);
-                    }
-                }
-                else {
+                if(!isFilled(confermaPsw)) {
                     confermaPsw.setError("Campo obbligatorio");
-                    conferma.setEnabled(false);
                 }
             }
         });
@@ -160,58 +133,68 @@ public class FragmentSicurezza extends Fragment {
 
                 boolean errorePassword=false;
 
-                //controllo se la password è sicura
-                String messaggio=BasicMethod.isPasswordStrong(nuovaPsw.getText().toString());
-
-                if(messaggio==null){      // Significa che la password è forte e non ho ricevuto messaggi di errore in ritorno /
-
-                    if(nuovaPsw.getText().toString().equals(confermaPsw.getText().toString())==false){
-                        confermaPsw.setError("La password non corrisponde");
-                        errorePassword=true;
-                    }
-                    else if(nuovaPsw.getText().toString().equals(vecchiaPsw.getText().toString())==true) {
-                        nuovaPsw.setError("La nuova password è uguale alla vecchia");
-                        errorePassword=true;
-                    }
-                }else{
-                    nuovaPsw.setError(messaggio);
-                    errorePassword=true;
+                if(!isFilled(vecchiaPsw)) {
+                    vecchiaPsw.setError("Campo obbligatorio");
+                }
+                if(!isFilled(nuovaPsw)) {
+                    nuovaPsw.setError("Campo obbligatorio");
+                }
+                if(!isFilled(confermaPsw)) {
+                    confermaPsw.setError("Campo obbligatorio");
                 }
 
+                if(isFilled(vecchiaPsw) && isFilled(nuovaPsw) && isFilled(confermaPsw)) {
+                    //controllo se la password è sicura
+                    String messaggio=BasicMethod.isPasswordStrong(nuovaPsw.getText().toString());
 
+                    if(messaggio==null){      // Significa che la password è forte e non ho ricevuto messaggi di errore in ritorno /
 
-                //se i campi sono compilati, non ci sono errori di formato e la password è sicura procedo
-                if(errorePassword==false) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                    // Get auth credentials from the user for re-authentication. The example below shows
-                    // email and password credentials but there are multiple possible providers,
-                    // such as GoogleAuthProvider or FacebookAuthProvider.
-                    AuthCredential credential = EmailAuthProvider.getCredential(email, vecchiaPsw.getText().toString());
-
-                    // Prompt the user to re-provide their sign-in credentials
-                    user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                user.updatePassword(nuovaPsw.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d("TAG", "Password updated");
-                                            Toast.makeText(((HomePage)getActivity()), "Password aggiornata correttamente", Toast.LENGTH_LONG).show();
-                                        } else {
-                                            Log.d("TAG", "Error password not updated");
-                                            Toast.makeText(((HomePage)getActivity()), "C'è stato un errore. Riprova", Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                });
-                            } else {
-                                Log.d("TAG", "Error auth failed");
-                                vecchiaPsw.setError("Password errata");
-                            }
+                        if(nuovaPsw.getText().toString().equals(confermaPsw.getText().toString())==false){
+                            confermaPsw.setError("La password non corrisponde");
+                            errorePassword=true;
                         }
-                    });
+                        else if(nuovaPsw.getText().toString().equals(vecchiaPsw.getText().toString())==true) {
+                            nuovaPsw.setError("La nuova password è uguale alla vecchia");
+                            errorePassword=true;
+                        }
+                    }else{
+                        nuovaPsw.setError(messaggio);
+                        errorePassword=true;
+                    }
+
+                    //se i campi sono compilati, non ci sono errori di formato e la password è sicura procedo
+                    if(errorePassword==false) {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                        // Get auth credentials from the user for re-authentication. The example below shows
+                        // email and password credentials but there are multiple possible providers,
+                        // such as GoogleAuthProvider or FacebookAuthProvider.
+                        AuthCredential credential = EmailAuthProvider.getCredential(email, vecchiaPsw.getText().toString());
+
+                        // Prompt the user to re-provide their sign-in credentials
+                        user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    user.updatePassword(nuovaPsw.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("TAG", "Password updated");
+                                                Toast.makeText(((HomePage)getActivity()), "Password aggiornata correttamente", Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Log.d("TAG", "Error password not updated");
+                                                Toast.makeText(((HomePage)getActivity()), "C'è stato un errore. Riprova", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    Log.d("TAG", "Error auth failed");
+                                    vecchiaPsw.setError("Password errata");
+                                }
+                            }
+                        });
+                    }
                 }
             }
         });

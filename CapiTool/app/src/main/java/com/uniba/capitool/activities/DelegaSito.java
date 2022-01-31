@@ -24,10 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.CardSitoCulturale;
 import com.uniba.capitool.classes.Curatore;
-import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
-
-import java.util.ArrayList;
 
 public class DelegaSito extends AppCompatActivity {
 
@@ -52,7 +49,7 @@ public class DelegaSito extends AppCompatActivity {
         Curatore utente = (Curatore) bundle.getSerializable("utente");
 
         EditText editEmailDelegato = findViewById(R.id.edit_text_email);
-        CheckBox boxInfo = findViewById(R.id.boxInfoDelete);
+        CheckBox boxInfo = findViewById(R.id.boxInfoCancellazioneAccount);
         Button buttonConferma = findViewById(R.id.button_conferma_delega);
         Button buttonAnnulla = findViewById(R.id.button_annulla_delega);
 

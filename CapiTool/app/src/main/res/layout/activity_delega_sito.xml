@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_scegli_delegato" />
 
     <CheckBox
-        android:id="@+id/boxInfoDelete"
+        android:id="@+id/boxInfoCancellazioneAccount"
         android:layout_width="322dp"
         android:layout_height="46dp"
         android:layout_marginTop="116dp"
@@ -63,8 +63,8 @@
         android:background="@drawable/roundedbutton_style"
         android:elevation="2dp"
         android:text="@string/cancel"
-        app:layout_constraintStart_toStartOf="@+id/boxInfoDelete"
-        app:layout_constraintTop_toBottomOf="@+id/boxInfoDelete" />
+        app:layout_constraintStart_toStartOf="@+id/boxInfoCancellazioneAccount"
+        app:layout_constraintTop_toBottomOf="@+id/boxInfoCancellazioneAccount" />
 
     <Button
         android:id="@+id/button_conferma_delega"
@@ -78,6 +78,6 @@
         android:text="@string/confirm"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boxInfoDelete" />
+        app:layout_constraintTop_toBottomOf="@+id/boxInfoCancellazioneAccount" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
