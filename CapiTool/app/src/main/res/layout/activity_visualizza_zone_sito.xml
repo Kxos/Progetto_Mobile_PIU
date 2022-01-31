@@ -32,4 +32,60 @@
             android:visibility="gone" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutEmptyStateSito"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/imageEmptyStateZona"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:src="@drawable/istockphoto_empty_museo" />
+
+        <TextView
+            android:id="@+id/inizioMessaggio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageEmptyStateZona"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:text="In questa sito culturale non ci sono zone"
+            android:textSize="20dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inizioMessaggio1"
+            android:layout_margin="20dp"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/inizioMessaggio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:drawableRight="@drawable/ic_baseline_more_vert_24"
+                android:text="Clicca su "
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignBottom="@+id/inizioMessaggio2"
+
+
+                android:layout_toEndOf="@+id/inizioMessaggio2"
+                android:text="per iniziare"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>
