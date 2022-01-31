@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +66,9 @@ public class VisualizzaZona extends AppCompatActivity {
             if(allZone.getListaOpereZona()==null){
                 Log.e("Visulizza Zone Sito", "VUOTOOOOOOO");
                 //TODO inserire un messaggio per l'utente
+                RelativeLayout emptyState=findViewById(R.id.layoutEmptyStateZona);
+                emptyState.setVisibility(View.VISIBLE);
+
             }else{
                 riempiGriglia();
             }

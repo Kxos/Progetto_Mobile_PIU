@@ -24,4 +24,60 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbarVisualizzaZona">
     </GridView>
 
+    <RelativeLayout
+        android:id="@+id/layoutEmptyStateZona"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/toolbarVisualizzaZona">
+
+        <ImageView
+            android:id="@+id/imageEmptyStateZona"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:src="@drawable/istockphoto_1277505315_612x612" />
+
+        <TextView
+            android:id="@+id/inizioMessaggio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageEmptyStateZona"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_centerHorizontal="true"
+
+            android:text="In questa zona non ci sono opere"
+            android:textSize="20dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inizioMessaggio1"
+            android:layout_margin="20dp"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/inizioMessaggio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:drawableRight="@drawable/ic_baseline_more_vert_24"
+                android:text="Clicca su "
+                android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignBottom="@+id/inizioMessaggio2"
+
+
+            android:layout_toEndOf="@+id/inizioMessaggio2"
+            android:text="per iniziare"
+            android:textSize="20dp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -195,6 +196,12 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         mainZoneRecycler.setAdapter(mainRecyclerAdapter);
 
         zoneSito=allZoneList;
+
+        if(allZoneList.size()==0){
+            RelativeLayout emptyState=findViewById(R.id.layoutEmptyStateSito);
+            emptyState.setVisibility(View.VISIBLE);
+        }
+
 
     }
 
