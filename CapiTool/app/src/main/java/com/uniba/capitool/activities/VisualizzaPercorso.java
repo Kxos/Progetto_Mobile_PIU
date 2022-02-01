@@ -27,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.CardPercorso;
+import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapterVisualizzaPercorso;
@@ -90,7 +91,7 @@ public class VisualizzaPercorso extends AppCompatActivity {
 //Log.e("PATH","/Percorsi/"+idPercorso+"/OpereScelte/");
 
         Query recentPostsQuery = myRef.child("OpereScelte").orderByChild("idZona");
-        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        recentPostsQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                // Log.e("dataSnapshot",""+dataSnapshot.getChildren());
@@ -102,6 +103,23 @@ public class VisualizzaPercorso extends AppCompatActivity {
     for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i risultati della query e li formatta esattamente come se fossero oggetti di classe Zona
         try{
             ItemOperaZona opera=snapshot.getValue(ItemOperaZona.class);
+
+             FirebaseDatabase.getInstance().getReference()
+                    .child("Siti").child(percorso.getIdSitoAssociato()).child("Zone").child(opera.getIdZona()).child(opera.getId()).limitToFirst(1)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                            for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                Opera opera=snapshot.getValue(Opera.class);
+                                opera.setIdFoto(opera.getIdFoto());
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
            // Log.e("Opera trovata",""+opera.getId());
 
             listaOpere.add(opera);
