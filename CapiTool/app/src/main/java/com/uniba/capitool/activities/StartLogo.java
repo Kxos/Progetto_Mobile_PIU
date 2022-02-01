@@ -17,7 +17,7 @@ public class StartLogo extends AppCompatActivity {
         setContentView(R.layout.activity_start_logo);
 
         //display the logo during 5 seconds,
-        new CountDownTimer(5000,1000){
+        new CountDownTimer(2500,1000){
             @Override
             public void onTick(long millisUntilFinished){}
 
