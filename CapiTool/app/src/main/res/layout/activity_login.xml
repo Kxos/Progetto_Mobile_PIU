@@ -4,20 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.Login">
 
     <ImageView
         android:id="@+id/img_museum"
-        android:layout_width="121dp"
-        android:layout_height="154dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginStart="144dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="146dp"
         android:layout_marginBottom="28dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/museum" />
+        app:srcCompat="@drawable/capitool_icon" />
+
+    <TextView
+        android:id="@+id/benvenuto"
+        android:text="Benvenuto! Accedi o Registrati"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:visibility="gone"
+
+        android:textColor="@color/orangeCapiTool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_museum" />
 
     <TextView
         android:id="@+id/textView_register"
@@ -66,13 +86,13 @@
         android:id="@+id/layout_email"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:hint="Email"
         android:theme="@style/CapiToolStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_museum">
+        app:layout_constraintTop_toBottomOf="@+id/benvenuto">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textfield_email"

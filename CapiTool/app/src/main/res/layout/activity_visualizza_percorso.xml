@@ -47,6 +47,8 @@
                 android:layout_below="@+id/frameImmagineSito"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:text="Museo"
                 android:textSize="25dp" />
 
@@ -69,7 +71,5 @@
 
         </RelativeLayout>
     </ScrollView>
-
-
 
 </RelativeLayout>

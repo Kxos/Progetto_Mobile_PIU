@@ -40,9 +40,9 @@ public class VisualizzaPercorso extends AppCompatActivity {
     ImageView fotoSito;
     TextView nomeSito;
     TextView descrizionePercorso;
-    String nomeZona;
-    List<String> nomiZone;
     List<AllZona> zoneSito;
+    RecyclerView mainZoneRecycler;
+    MainRecyclerAdapterVisualizzaPercorso mainRecyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,6 @@ public class VisualizzaPercorso extends AppCompatActivity {
 
         if(dati!=null){
             percorso = (CardPercorso) dati.getSerializable("percorso");
-
 
             nomeSito.setText(BasicMethod.setUpperPhrase(percorso.getNomeSitoAssociato()));
             descrizionePercorso.setText(percorso.getDescrizione());
@@ -88,57 +87,52 @@ public class VisualizzaPercorso extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
 
         DatabaseReference myRef = database.getReference("/Percorsi/"+idPercorso);
-//Log.e("PATH","/Percorsi/"+idPercorso+"/OpereScelte/");
 
         Query recentPostsQuery = myRef.child("OpereScelte").orderByChild("idZona");
         recentPostsQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               // Log.e("dataSnapshot",""+dataSnapshot.getChildren());
+
                 List<ItemOperaZona> listaOpere = new ArrayList<>();
 
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i risultati della query e li formatta esattamente come se fossero oggetti di classe Zona
+                    try{
+                        ItemOperaZona opera=snapshot.getValue(ItemOperaZona.class);
 
-               // listaOpere= (List<ItemOperaZona>) dataSnapshot.getValue(ItemOperaZona.class);
-//try{
-    for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i risultati della query e li formatta esattamente come se fossero oggetti di classe Zona
-        try{
-            ItemOperaZona opera=snapshot.getValue(ItemOperaZona.class);
+                        /***
+                         * Con questa query "annidata" vado a leggere di ogni opera il suo idFoto perché nel percorso non l'ho salvato
+                         * E' come fare un join
+                         */
+                        FirebaseDatabase.getInstance().getReference()
+                                .child("Siti").child(percorso.getIdSitoAssociato()).child("Zone").child(opera.getIdZona()).child(opera.getId()).limitToFirst(1)
+                                .addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                            Opera opera=snapshot.getValue(Opera.class);
+                                            opera.setIdFoto(opera.getIdFoto());
+                                        }
+                                    }
 
-             FirebaseDatabase.getInstance().getReference()
-                    .child("Siti").child(percorso.getIdSitoAssociato()).child("Zone").child(opera.getIdZona()).child(opera.getId()).limitToFirst(1)
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                            for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                                Opera opera=snapshot.getValue(Opera.class);
-                                opera.setIdFoto(opera.getIdFoto());
-                            }
-                        }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
 
-                        }
-                    });
-           // Log.e("Opera trovata",""+opera.getId());
+                        listaOpere.add(opera);
+                    }catch (Exception e){
+                        Log.e("Errore","C'è stato un'errore nel leggere un opera");
 
-            listaOpere.add(opera);
-        }catch (Exception e){
-            Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)","qui");
-
-//                    String idZona = leggiIdZona(snapshot.getValue().toString());
-//                    recuperaFromDB(idSito);
-
-        }
-    }
-//}catch(Exception e){
-//    Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)","qui2");
-//}
-
-                for(int i=0; i<listaOpere.size(); i++){
-                   Log.e("Opera di listaOpere",""+listaOpere.get(i).getIdZona()+" "+listaOpere.get(i).getTitolo());
+                    }
                 }
 
+                /***
+                 * Le opere non sono salvate per zona, quindi in qualche modo le devo ordinare.
+                 * In questo for mi recupero ogni id di ogni zona, così saprò quante zone ci sono
+                 * e quali sono
+                 * Salvo tutto nell'array indiciZone
+                 */
                 String idZona=listaOpere.get(0).getIdZona();
                 List<String> indiciZone=new ArrayList<>();
                 indiciZone.add(listaOpere.get(0).getIdZona());
@@ -150,107 +144,33 @@ public class VisualizzaPercorso extends AppCompatActivity {
                     }
                 }
 
-//                for(int i=0; i<indiciZone.size(); i++){
-//                    Log.e("IndiciZone","Zona: "+indiciZone.get(i));
-//                }
-
-               // leggiNomiZone(indiciZone);
-
-                List<AllZona> allZoneList=new ArrayList<>();
-                //List<ItemOperaZona> listaOpereZona=new ArrayList<>();
-
                 /***
-                 * iniziale
+                 * Per creare la doppia recycle view, devo salvare le opere e le zone in una lista
+                 * List<AllZona> allZoneList
+                 * Nel for creo una lista List<ItemOperaZona> listaOpereZona per ogni zona che ho trovato con il for precedente
+                 * Scorro la lista listaOpere che contiene tutte le opere del percorso in modo sparso e le salvo in listaOpereZona
+                 * che conterrà le opere solo di quella zona
+                 * Alla fine del ciclo salvo la lista creata (listaOpereZona) in allZoneList
+                 * Quindi ora in allZoneList in posizione i-esima ci saranno tutte le opere relative alla zona i                 *
                  */
-
-                Log.e("Size ", ""+listaOpere.size());
-
-                idZona=listaOpere.get(0).getIdZona();
+                List<AllZona> allZoneList=new ArrayList<>();
 
                 for(int i=0; i<indiciZone.size(); i++){
-                    Log.e("IndiciZone","Zona: "+indiciZone.get(i));
                     List<ItemOperaZona> listaOpereZona=new ArrayList<>();
                     for(int j=0; j<listaOpere.size(); j++){
-
-                        //Log.e("Opera salvata","Zona: "+listaOpere.get(i).getIdZona()+"idOpera: "+listaOpere.get(i).getId()+" "+listaOpere.get(i).getTitolo());
-
                         if(listaOpere.get(j).getIdZona().equals(indiciZone.get(i))){
-
                             listaOpereZona.add(listaOpere.get(j));
-                            Log.e("if Opera aggiunta a ", ""+idZona+"="+listaOpere.get(j));
-
-                        }else{
-
-
-                            //leggiNomeZona(percorso.getIdSitoAssociato(), idZona);
-                            //  myRef.addListenerForSingleValueEvent(new                                );
-                            // Log.e("Lista opere", ""+listaOpereZona.size());
-
-//                            idZona=listaOpere.get(j).getIdZona();
-//                            listaOpereZona.clear();
-//
-//                            listaOpereZona.add(listaOpere.get(j));
-//                            Log.e("else Opera aggiunta a ", ""+idZona+"="+listaOpere.get(j).getTitolo());
-
-
                         }
                     }
-
                     allZoneList.add(new AllZona(indiciZone.get(i), indiciZone.get(i), listaOpereZona));
                 }
 
-
-
-                for(int i=0; i<allZoneList.size(); i++){
-                    Log.e("allZoneList",""+allZoneList.get(i).getNomeZona());
-                    for(int j=0; j<allZoneList.get(i).getListaOpereZona().size(); j++){
-                        Log.e("opera",""+allZoneList.get(i).getListaOpereZona().get(j).getTitolo());
-
-                    }
-                }
-
-                setZoneRecycler(allZoneList);
                 /***
-                 * Passo gli oggetti salvati nella lista zone, nella lista allZoneList
-                 * Il primo for scorre le zone
-                 * Il secondo for scorre tutte le opere della relativa zona
-                 * Salto il salvataggio della prima opera perchè è null
+                 * Il problema successivo è che non dispongo del nome di ogni singola zona
+                 * Li vado a recuperare da DB con questo metodo
                  */
-               /* for(int i=0; i<listaOpere.size(); i++){
-                    int contatore=0;
-                    Log.e("", ""+listaOpere.get(i).getIdZona());
-
-                    List<ItemOperaZona> listaOpereZona = new ArrayList<>();
-                    try{
-                        for(ItemOperaZona opera: listaOpere){
-                            //Log.e("zone.get(i).getOpere()", ""+opera.getId());
-
-                            //Log.e("SKIP", "Skip dell'opera null");
-
-                            try{
-                                listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), listaOpere.get(i).getId(), opera.getIdFoto()));
-                                Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
-                            }catch(Exception e){
-                                Log.e("Opera trovata", "errore");
-                            }
-
-
-                            contatore++;
-                        }
-                        allZoneList.add(new AllZona(listaOpere.get(i).getId(), listaOpere.get(i).getNome(), listaOpereZona));
-                    }catch (Exception e){
-                        Log.e("","Erroreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-
-                        allZoneList.add(new AllZona(listaOpere.get(i).getId(), listaOpere.get(i).getNome(), null));
-                    }
-
-
-                }*/
-
-
+                setNomiZone(allZoneList);
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -259,10 +179,42 @@ public class VisualizzaPercorso extends AppCompatActivity {
         });
     }
 
-    RecyclerView mainZoneRecycler;
-    MainRecyclerAdapterVisualizzaPercorso mainRecyclerAdapter;
+    /***
+     * Pero ogni oggetto della lista allZoneList, vado a leggere da DB il suo "nomeZona"
+     * @param allZoneList
+     */
+    private void setNomiZone(List<AllZona> allZoneList){
 
-    private void setZoneRecycler(List<AllZona> allZoneList){
+        for(int i=0; i<allZoneList.size(); i++){
+
+            int finalI = i;
+            FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+            DatabaseReference myRef = database.getReference("/");
+
+            Query recentPostsQuery = myRef.child("Siti").child(percorso.getIdSitoAssociato()).child("Zone").child(allZoneList.get(i).getId()).child("nome");
+            recentPostsQuery.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+
+                            allZoneList.get(finalI).setNomeZona((String) datasnapshot.getValue());
+
+                            setZoneRecycler(allZoneList);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+        }
+    }
+
+    /***
+     * Setto gli ogetti da inserire nella doppia recyclerview
+     * @param allZoneList
+     */
+    private void setZoneRecycler(List<AllZona> allZoneList) {
+
         mainZoneRecycler = findViewById(R.id.recyclerPercorso);
         RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(this);
         mainZoneRecycler.setLayoutManager(layoutManager);
@@ -271,35 +223,6 @@ public class VisualizzaPercorso extends AppCompatActivity {
         mainZoneRecycler.setAdapter(mainRecyclerAdapter);
 
         zoneSito=allZoneList;
-
-    }
-    private void leggiNomiZone(List<String> indiciZone) {
-        //leggiNomeZona(indiciZone);
-    }
-
-    private void leggiNomeZona(String idSitoAssociato, String idZona) {
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef = database.getReference("/Siti/"+idSitoAssociato+"/Zone/"+idZona);
-
-        Log.e("datasnapshot", ""+idSitoAssociato+"-----------"+idZona);
-        Query recentPostsQuery = myRef.limitToFirst(1);
-        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("inner datasnapshot", ""+dataSnapshot.getValue());
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    nomeZona= (String) snapshot.getValue();
-                    Log.e("NomeZONA nel db", ""+snapshot.getValue());
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     public void setImmagineSitoFromDB(String idSito, Context context, ImageView immagineSito){
