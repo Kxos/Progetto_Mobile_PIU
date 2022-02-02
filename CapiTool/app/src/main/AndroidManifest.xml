@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".activities.OrdinaZone"
+            android:exported="true" />
+        <activity
             android:name=".activities.StartLogo"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,8 +71,7 @@
             android:parentActivityName=".activities.Login" /> <!-- in Registrati cliccando back, nella tool bar, tornerà in Login -->
         <activity
             android:name=".activities.Login"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
