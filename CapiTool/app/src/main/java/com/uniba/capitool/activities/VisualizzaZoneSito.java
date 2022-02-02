@@ -100,7 +100,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
        //TODO mettere l'id del sito nel path e togliere 1
         DatabaseReference myRef = database.getReference("/Siti/"+sito.getId());
 
-        Query recentPostsQuery = myRef.child("Zone");     //SELECT * FROM Utenti WHERE ruolo="visitatore"
+        Query recentPostsQuery = myRef.child("Zone").orderByChild("posizione");     //SELECT * FROM Utenti WHERE ruolo="visitatore"
         recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -152,11 +152,11 @@ public class VisualizzaZoneSito extends AppCompatActivity{
 
                             contatore++;
                         }
-                        allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona));
+                        allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona, zone.get(i).getPosizione()));
                     }catch (Exception e){
                         Log.e("","Erroreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
-                        allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), null));
+                        allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), null, zone.get(i).getPosizione()));
                     }
 
 
@@ -224,8 +224,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         switch (item.getItemId()){
             case R.id.aggiungiZona:
 
-
-
                // Log.e("ITEMSELECTED", "AGGIUNGI ZONA");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Scrivi il nome della nuova zona");
@@ -268,6 +266,14 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                 break;
 
             case R.id.ordinaZone:
+
+                Intent ordinaZona = new Intent(this, OrdinaZone.class);
+                datiZona = new Bundle();
+                datiZona.putSerializable("zone", (Serializable) zoneSito);
+                datiZona.putSerializable("sito",sito);
+                ordinaZona.putExtras(datiZona);
+                startActivity(ordinaZona);
+
                 break;
 
         }

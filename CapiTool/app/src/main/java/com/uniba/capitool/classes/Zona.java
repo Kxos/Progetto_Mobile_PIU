@@ -10,6 +10,7 @@ public class Zona implements Serializable {
 
     private String id ;
     private String nome ;
+    private String posizione;
     private List<Opera> Opere;
 
 
@@ -21,6 +22,13 @@ public class Zona implements Serializable {
     }
 
 
+    public String getPosizione() {
+        return posizione;
+    }
+
+    public void setPosizione(String posizione) {
+        this.posizione = posizione;
+    }
 
     public String getId() {
         return id;

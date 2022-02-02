@@ -53,7 +53,7 @@ public class FragmentMieiPercorsi extends Fragment {
 
     Utente utente;
 
-    final ArrayList<CardPercorso> listaPercorsi = new ArrayList<>();;
+    final ArrayList<CardPercorso> listaPercorsi = new ArrayList<>();
 
     CardMioPercorsoAdapter adapter;
     RecyclerView rvCardsPercorsi;
@@ -87,9 +87,6 @@ public class FragmentMieiPercorsi extends Fragment {
                 getActivity().startActivity(aggiungiPercorso);
             }
         });
-
-
-
 
         cercaPercorsiFromDB(utente.getUid(), v);
 
@@ -134,6 +131,7 @@ public class FragmentMieiPercorsi extends Fragment {
     public void cercaPercorsoFromDBDalNome(String nomePercorso, View view){
 
         Log.e("NOME PERCORSO: ",nomePercorso );
+        final ArrayList<CardPercorso> listaPercorsiCercati = new ArrayList<>();
 
         Query recentPostsQuery;
 
@@ -155,13 +153,13 @@ public class FragmentMieiPercorsi extends Fragment {
                     if(percorso.getIdUtente().equals(utente.getUid())){
 
                         CardPercorso cardPercorso = snapshot.getValue(CardPercorso.class);
-                        listaPercorsi.add(cardPercorso);
+                        listaPercorsiCercati.add(cardPercorso);
 
                     }
 
                 }
 
-                    popolaPercorsiInRecyclerView(listaPercorsi,view);
+                    popolaPercorsiInRecyclerView(listaPercorsiCercati,view);
 
             }
 

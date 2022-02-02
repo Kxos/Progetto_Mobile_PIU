@@ -11,9 +11,8 @@
         android:roundIcon="@mipmap/capitool_icon_notitle_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity
-            android:name=".activities.EliminaOpere"
-            android:exported="true" />
+
+
         <activity
             android:name=".activities.StartLogo"
             android:exported="true">
@@ -37,6 +36,13 @@
             android:exported="true" />
         <activity
             android:name=".activities.EliminaZone"
+            android:exported="true" />
+        <activity
+            android:name=".activities.EliminaOpere"
+            android:exported="true" />
+
+        <activity
+            android:name=".activities.OrdinaZone"
             android:exported="true" />
         <activity
             android:name=".activities.VisualizzaOpera"
