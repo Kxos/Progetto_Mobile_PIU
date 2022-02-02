@@ -89,7 +89,7 @@ public class FragmentPreviewPercorso extends Fragment {
             listaOpere = (ArrayList<Opera>) args.getSerializable("listaOpereNuovoPercorso");
 
             toolbar = ((AggiungiPercorso)getActivity()).getToolbar();
-            toolbar.setTitle(percorso.getNome());
+            toolbar.setTitle("Preview");
 
             TextView nomeSitoAssociato = view.findViewById(R.id.nomeMuseo);
             nomeSitoAssociato.setText(percorso.getNomeSitoAssociato());
@@ -97,11 +97,9 @@ public class FragmentPreviewPercorso extends Fragment {
             TextView descrizionePercorso = view.findViewById(R.id.descrizionePercorso);
             descrizionePercorso.setText(percorso.getDescrizione());
 
-
             setImmagineSitoFromDB(percorso.getIdSitoAssociato(), getActivity(), fotoSito);
 
             setRecyclerView(view);
-            
 
             Button bottoneIndietro = view.findViewById(R.id.buttonIndietroPreview);
             bottoneIndietro.setOnClickListener(new View.OnClickListener() {

@@ -71,11 +71,11 @@ public class Login extends AppCompatActivity {
         registrati.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Visitatore visit= new Visitatore();
-                visit.setCognome("Nardo");
+                //visit.setCognome("Nardo");
 
                 Intent intentRegistrati = new Intent(Login.this, Registrati.class);
-                intentRegistrati.putExtra("cognome",visit.getCognome());
-                intentRegistrati.putExtra("nome",visit.getNome());
+                //intentRegistrati.putExtra("cognome",visit.getCognome());
+                //intentRegistrati.putExtra("nome",visit.getNome());
                 Login.this.startActivity(intentRegistrati);
             }
         });
