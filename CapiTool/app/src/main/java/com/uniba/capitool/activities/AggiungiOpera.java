@@ -33,6 +33,7 @@ import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,9 +151,9 @@ public class AggiungiOpera extends AppCompatActivity {
 
                 StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
 
-                final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
+               /* final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
                 pd.setMessage("Caricamento");
-                pd.show();
+                pd.show();*/
 
 
 
@@ -160,12 +161,31 @@ public class AggiungiOpera extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                           pd.dismiss();
+                           //pd.dismiss();
                            Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
-                           //AggiungiOpera.super.onBackPressed();
 
+                           //Intent eliminaOpere = new Intent(AggiungiOpera.this, VisualizzaZoneSito.class);
+
+//                           Bundle datiZona = new Bundle();
+//                           datiZona.putSerializable("sito",sito);
+//                           datiZona.putSerializable("utente", utente);
+//                           eliminaOpere.putExtras(datiZona);
+//                           startActivity(eliminaOpere);
                     }
                 });
+
+//                myRef.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        AggiungiOpera.super.onBackPressed();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+
             }
 
             @Override
@@ -189,11 +209,7 @@ public class AggiungiOpera extends AppCompatActivity {
             }
         }
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
 
-    }
 
    private void leggiOpere(){
 
@@ -241,4 +257,13 @@ public class AggiungiOpera extends AppCompatActivity {
         Log.e("nextIdSalvaIndice",""+idOperaPrecedente);
         nextIdOpera=idOperaPrecedente+1;
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        try{
+//            super.onBackPressed();
+//        } catch (NullPointerException nullPointerException){
+//            System.out.println("Catch the NullPointerException in FragmentPagerAdapter.finishUpdate");
+//        }
+//    }
 }

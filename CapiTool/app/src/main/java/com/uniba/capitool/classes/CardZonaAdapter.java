@@ -37,6 +37,7 @@ public class CardZonaAdapter extends RecyclerView.Adapter<CardZonaAdapter.ViewHo
     public CardZonaAdapter(ArrayList<CardZona> listaZone, Context myContext) {
         this.listaZone = listaZone;
         this.listaZoneUnchecked = new ArrayList<>();
+        this.listaZoneChecked = new ArrayList<>();
         this.myContext = myContext;
     }
 
@@ -80,20 +81,20 @@ public class CardZonaAdapter extends RecyclerView.Adapter<CardZonaAdapter.ViewHo
                 //Log.e("AAAAAAAAAAA: ", ""+isChecked);
                 //Log.e("POSIZIONE: ", ""+position);
 
-               /* if(isChecked){
+               if(isChecked){
                     cardZona.setCheckBoxCheckedStatus(true);
                     listaZoneChecked.add(cardZona);
                 }else {
                     cardZona.setCheckBoxCheckedStatus(false);
                     listaZoneUnchecked.add(cardZona);
                     listaZoneChecked.remove(cardZona);
-                }*/
+                }
 
                 //Log.e("Esistono opere checked SINGOLO ITEM: ", ""+cardOpera);
                 //Log.e("Esistono opere checked NELLA LISTA: ", ""+listaOpereChecked);
             }
         });
-
+        cardCheckBoxZona.setChecked(cardZona.getCheckBox().isChecked());
 
     }
 
@@ -145,11 +146,11 @@ public class CardZonaAdapter extends RecyclerView.Adapter<CardZonaAdapter.ViewHo
 
 
 
-    public ArrayList<CardZona> getListaOpereChecked() {
+    public ArrayList<CardZona> getListaZoneChecked() {
         return listaZoneChecked;
     }
 
-    public ArrayList<CardZona> getListaOpereUnchecked() {
+    public ArrayList<CardZona> getListaZoneUnchecked() {
         return listaZoneUnchecked;
     }
 

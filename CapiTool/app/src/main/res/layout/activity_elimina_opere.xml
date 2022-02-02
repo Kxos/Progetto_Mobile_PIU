@@ -31,7 +31,7 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <Button
-                android:id="@+id/eliminaOpereSelezionate"
+                android:id="@+id/eliminaZoneSelezionate"
                 android:layout_width="90dp"
                 android:layout_height="40dp"
                 android:background="@drawable/roundedbutton_style"

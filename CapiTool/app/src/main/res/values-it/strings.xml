@@ -64,6 +64,9 @@
     <string name="userhaveAlreadySite">Errore: Non puoi delegare ad un curatore che ha già un sito</string>
     <string name="SuccesfulDelegateSite">Sito delegato con successo</string>
 
+    <string name="zoneDeletedSuccesful">Zona eliminata con successo</string>
+    <string name="artworkDeletedSuccesful">Opera eliminata con successo</string>
+
 
 
 

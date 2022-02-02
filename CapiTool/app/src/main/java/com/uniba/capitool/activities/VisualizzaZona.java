@@ -147,6 +147,7 @@ public class VisualizzaZona extends AppCompatActivity {
                 Bundle datiZona = new Bundle();
                 datiZona.putSerializable("zona", (Serializable) allZone);
                 datiZona.putSerializable("sito",sito);
+                datiZona.putSerializable("utente", utente);
                 eliminaOpere.putExtras(datiZona);
                 startActivity(eliminaOpere);
 

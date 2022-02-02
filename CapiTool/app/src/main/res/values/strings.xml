@@ -61,5 +61,7 @@
     <string name="userhaveAlreadySite">Error: You cannot delegate to a curator who already has a site </string>
     <string name="SuccesfulDelegateSite">Site successfully delegated</string>
 
+    <string name="zoneDeletedSuccesful">Zone successfully deleted</string>
+    <string name="artworkDeletedSuccesful">Artwork successfully deleted</string>
 
 </resources>
