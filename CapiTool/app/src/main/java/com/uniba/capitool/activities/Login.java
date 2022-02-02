@@ -93,6 +93,8 @@ public class Login extends AppCompatActivity {
                     signIn(email_value,password_value);
                 }else{
                     email.setError("Inserisci un Email");
+                    progressCircle.setVisibility(View.GONE);
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 }
 
 
