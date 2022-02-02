@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,11 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.Percorso;
@@ -29,7 +33,7 @@ public class FragmentPreviewPercorso extends Fragment {
 
     static Percorso percorso = new Percorso();
     static ArrayList<Opera> listaOpere = new ArrayList<>();
-
+    private Toolbar toolbar;
 
     public FragmentPreviewPercorso() {
         // Required empty public constructor
@@ -60,6 +64,18 @@ public class FragmentPreviewPercorso extends Fragment {
 
             percorso = (Percorso) args.getSerializable("nuovoPercorso");
             listaOpere = (ArrayList<Opera>) args.getSerializable("listaOpereNuovoPercorso");
+
+            toolbar = ((AggiungiPercorso)getActivity()).getToolbar();
+            toolbar.setTitle(percorso.getNome());
+
+            TextView nomeSitoAssociato = view.findViewById(R.id.nomeMuseo);
+            nomeSitoAssociato.setText(percorso.getNomeSitoAssociato());
+
+            TextView descrizionePercorso = view.findViewById(R.id.descrizionePercorso);
+            descrizionePercorso.setText(percorso.getDescrizione());
+
+            // TODO - SETTARE LA RECYCLERVIEW PER LE ZONE/OPERE
+            
 
             Button bottoneIndietro = view.findViewById(R.id.buttonIndietroPreview);
             bottoneIndietro.setOnClickListener(new View.OnClickListener() {
