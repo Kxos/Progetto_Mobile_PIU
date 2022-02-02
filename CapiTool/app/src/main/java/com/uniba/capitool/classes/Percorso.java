@@ -1,8 +1,9 @@
 package com.uniba.capitool.classes;
 
+import java.io.Serializable;
 import  java.util.ArrayList;
 
-public class Percorso {
+public class Percorso implements Serializable {
 
     private String id;
     private String nome;
