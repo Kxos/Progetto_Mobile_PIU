@@ -47,6 +47,7 @@ public class VisualizzaPercorso extends AppCompatActivity {
     RecyclerView mainZoneRecycler;
     MainRecyclerAdapterVisualizzaPercorso mainRecyclerAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
