@@ -52,8 +52,6 @@ public class EliminaSito extends AppCompatActivity {
         Button buttonConferma = findViewById(R.id.button_conferma_delega);
         Button buttonAnnulla = findViewById(R.id.button_annulla_delega);
 
-
-
         editPasswordCuratore.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -78,9 +76,6 @@ public class EliminaSito extends AppCompatActivity {
             }
         });
 
-        //TODO temporaneo, da eliminare
-        editPasswordCuratore.setText("Cur123/");
-        boxInfo.setChecked(true);
 
         buttonConferma.setOnClickListener(new View.OnClickListener() {
             @Override
