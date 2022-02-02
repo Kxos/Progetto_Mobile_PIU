@@ -34,12 +34,19 @@ public class ItemOperaZona implements Serializable {
         this.idFoto = idFoto;
     }
 
-//    public ItemOperaZona(String id, String titolo, String descrizione, String idZona) {
-//        this.idOpera = id;
-//        this.titolo = titolo;
-//        this.descrizione = descrizione;
-//        this.idZona=idZona;
-//    }
+    /***
+     * Usato per la preview del percorso
+     * @param id
+     * @param titolo
+     * @param idZona
+     * @param idFoto
+     */
+    public ItemOperaZona(String id, String titolo, String idZona, String idFoto) {
+        this.id = id;
+        this.titolo = titolo;
+        this.idZona=idZona;
+        this.idFoto = idFoto;
+    }
 
     public String getIdZona() {
         return idZona;
