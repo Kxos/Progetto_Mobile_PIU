@@ -52,12 +52,15 @@
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout-large/fragment_info_sito.xml" value="0.275390625" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout-small/fragment_info_sito.xml" value="1.0476973684210527" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_aggiungi_opera.xml" value="0.2884963768115942" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_aggiungi_percorso.xml" value="0.3671875" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_aggiungi_sito.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_home_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_main.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_modifica_sito.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_ordina_zone.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_registrati.xml" value="0.36666666666666664" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_visualizza_modifica_opera.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_visualizza_opera.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_visualizza_percorso.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_visualizza_zona.xml" value="0.23120567375886525" />
@@ -91,6 +94,7 @@
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/navigation_header.xml" value="0.3645833333333333" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/toolbar.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/toolbar2.xml" value="0.36666666666666664" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/menu/condividi_button.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/menu/kebab_menu.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/menu/navigation_visitatore_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/drawable/rounded_style.xml" value="0.34791666666666665" />
