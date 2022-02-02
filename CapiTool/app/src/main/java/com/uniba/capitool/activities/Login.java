@@ -3,9 +3,7 @@ package com.uniba.capitool.activities;
 import static android.content.ContentValues.TAG;
 import static com.uniba.capitool.activities.BasicMethod.isEmailValid;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -217,4 +215,9 @@ public class Login extends AppCompatActivity {
         Login.this.startActivity(myIntent);
     }
 
+    @Override
+    public void onBackPressed() {
+       // super.onBackPressed();
+
+    }
 }
