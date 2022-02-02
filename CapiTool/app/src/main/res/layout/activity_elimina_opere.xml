@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.EliminaZone">
+    tools:context=".activities.EliminaOpere">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,8 +12,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="393dp"
-            android:layout_height="658dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,25 +25,24 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewEliminaOpere"
-                android:layout_width="393dp"
-                android:layout_height="604dp">
+                android:layout_width="match_parent"
+                android:layout_height="545dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
+            <Button
+                android:id="@+id/eliminaOpereSelezionate"
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:background="@drawable/roundedbutton_style"
+                android:backgroundTint="@color/orangeCapiTool"
+                android:layout_gravity="end"
+                android:layout_marginEnd="40dp"
+                android:text="Elimina"
+                android:textColor="@color/white" />
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/eliminaOpereSelezionate"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="48dp"
-            android:background="@drawable/roundedbutton_style"
-            android:backgroundTint="@color/orangeCapiTool"
-            android:text="Elimina"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

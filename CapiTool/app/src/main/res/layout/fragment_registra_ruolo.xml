@@ -14,8 +14,8 @@
 
         <RadioGroup
             android:id="@+id/radioGroup2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="163dp"
+            android:layout_height="362dp"
             android:layout_marginTop="44dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -25,46 +25,52 @@
 
             <RadioButton
                 android:id="@+id/visitatore"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="76dp"
+                android:layout_marginBottom="20dp"
                 android:text="Visitatore"
+                android:textSize="20sp"
                 android:theme="@style/CapiToolStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.481"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="visitatore" />
+                tools:text="Visitatore" />
 
             <RadioButton
                 android:id="@+id/curatore"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:gravity="right"
-                android:theme="@style/CapiToolStyle"
                 android:text="Curatore"
+                android:layout_marginBottom="20dp"
+                android:textSize="20sp"
+                android:theme="@style/CapiToolStyle"
                 app:layout_constraintStart_toStartOf="@+id/visitatore"
                 app:layout_constraintTop_toBottomOf="@+id/visitatore"
-                tools:text="curatore" />
+                tools:text="Curatore" />
 
             <RadioButton
                 android:id="@+id/guida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Guida"
+                android:textSize="20sp"
                 android:theme="@style/CapiToolStyle"
                 app:layout_constraintStart_toStartOf="@+id/curatore"
                 app:layout_constraintTop_toBottomOf="@+id/curatore" />
+
         </RadioGroup>
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="253dp"
+            android:layout_height="79dp"
             android:layout_marginTop="32dp"
             android:text="Come ti vuoi registrare?"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +104,30 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             app:layout_constraintVertical_bias="0.619"
             app:srcCompat="@drawable/museum" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/Person"
+            tools:layout_editor_absoluteX="294dp"
+            tools:layout_editor_absoluteY="213dp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/Curator"
+            tools:layout_editor_absoluteX="294dp"
+            tools:layout_editor_absoluteY="277dp" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/Guid"
+            tools:layout_editor_absoluteX="294dp"
+            tools:layout_editor_absoluteY="340dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

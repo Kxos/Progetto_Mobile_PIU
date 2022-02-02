@@ -1,5 +1,6 @@
 package com.uniba.capitool.classes;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.CheckBox;
 
@@ -26,6 +27,12 @@ public class CardOpera implements Serializable {
     }
 
     public CardOpera() {
+    }
+
+    public CardOpera(String id, String titolo, String fotoOpera) {
+        this.id = id;
+        this.titolo = titolo;
+        this.idFoto = fotoOpera;
     }
 
     public String getId() {

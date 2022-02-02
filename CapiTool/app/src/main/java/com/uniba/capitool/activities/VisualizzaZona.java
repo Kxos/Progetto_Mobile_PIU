@@ -21,6 +21,8 @@ import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapter;
 
+import java.io.Serializable;
+
 public class VisualizzaZona extends AppCompatActivity {
 
     private String nuovaZona = "";
@@ -141,7 +143,12 @@ public class VisualizzaZona extends AppCompatActivity {
                 break;
 
             case R.id.eliminaOpere:
-
+                Intent eliminaOpere = new Intent(this, EliminaOpere.class);
+                Bundle datiZona = new Bundle();
+                datiZona.putSerializable("zona", (Serializable) allZone);
+                datiZona.putSerializable("sito",sito);
+                eliminaOpere.putExtras(datiZona);
+                startActivity(eliminaOpere);
 
                 break;
 
