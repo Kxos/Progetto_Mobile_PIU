@@ -8,8 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.CardZona;
 import com.uniba.capitool.classes.CardZonaAdapter;
 import com.uniba.capitool.classes.SitoCulturale;
@@ -24,8 +31,7 @@ public class EliminaZone extends AppCompatActivity {
     RecyclerView eliminaZoneRecycler;
     CardZonaAdapter cardZonaAdapter;
     SitoCulturale sito;
-    private CardZonaAdapter adapter;
-    private ArrayList<CardZona> listaZoneChecked;
+    Button btnElimina;
     private ArrayList<CardZona> listaZone;
     List<AllZona> zoneSito;
     @Override
@@ -33,7 +39,9 @@ public class EliminaZone extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elimina_zone);
 
+        btnElimina = findViewById(R.id.eliminaZoneSelezionate);
         eliminaZoneRecycler = findViewById(R.id.recyclerViewEliminaOpere);
+
         Bundle dati = getIntent().getExtras();
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Elimina Zone");
@@ -53,6 +61,10 @@ public class EliminaZone extends AppCompatActivity {
             listaZone = new ArrayList<>();
             for(int i=0; i<zoneSito.size(); i++){
                 CardZona cardZona = new CardZona(zoneSito.get(i).getId(), zoneSito.get(i).getNomeZona(), sito.getId());
+                View cardZonaView = getLayoutInflater().inflate(R.layout.card_zona, null);
+                cardZona.setCheckBox(cardZonaView.findViewById(R.id.checkZonaSelezionata));
+                //cardZona.setCheckBox(new CheckBox(this));
+                cardZona.setCheckBoxCheckedStatus(false);
                 listaZone.add(cardZona);
             }
 
@@ -67,7 +79,30 @@ public class EliminaZone extends AppCompatActivity {
         }
 
 
+        btnElimina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eliminaZoneChecked(cardZonaAdapter.getListaZoneChecked());
+                Toast.makeText((EliminaZone.this).getApplicationContext(), getString(R.string.zoneDeletedSuccesful), Toast.LENGTH_SHORT).show();
+                EliminaZone.super.onBackPressed();
+            }
+        });
 
 
+
+    }
+    public void eliminaZoneChecked(ArrayList<CardZona> listaZoneChecked){
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef;
+
+        for(int i=0; i<listaZoneChecked.size(); i++){
+            String percorsoDatabase = ("/Siti/"+sito.getId()+"/Zone/"+listaZoneChecked.get(i).getId());
+            Log.e("PERCORSO DATABASE ELIMINA Zone:",""+percorsoDatabase);
+            myRef = database.getReference(percorsoDatabase);
+
+            myRef.removeValue();
+        }
     }
 }

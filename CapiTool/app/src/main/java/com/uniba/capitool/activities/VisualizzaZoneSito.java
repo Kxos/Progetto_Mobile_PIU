@@ -325,4 +325,10 @@ public class VisualizzaZoneSito extends AppCompatActivity{
     public Utente getUtente() {
         return utente;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        leggiZoneFromFirebase();
+    }
 }
