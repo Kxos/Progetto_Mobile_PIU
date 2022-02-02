@@ -45,7 +45,10 @@ public class FragmentDatiPercorso extends Fragment {
     private View viewActivity;
     Utente utente;
     DatabaseReference myRef;
+    Percorso percorsoRicevutoDaPreview;
+    ArrayList<Opera> listaOpere = new ArrayList<>();
     private static ArrayList<CardOpera> listaOpereChecked;
+    private static ArrayList<Opera> listaOpereRicevuteDaPreview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +73,8 @@ public class FragmentDatiPercorso extends Fragment {
 
             Bundle args = getArguments();;
             listaOpereChecked = (ArrayList<CardOpera>)args.getSerializable("listaOpereSelezionate");
+            percorsoRicevutoDaPreview = (Percorso) args.getSerializable("nuovoPercorso");
+            listaOpereRicevuteDaPreview = (ArrayList<Opera>) args.getSerializable("listaOpereRicevuteDaPreview");
 
             //Log.e("SEI IN DATI PERCORSO: ", ""+listaOpereChecked);
 
@@ -103,6 +108,13 @@ public class FragmentDatiPercorso extends Fragment {
                 pubblicoPercorso.setVisibility(View.INVISIBLE);
             }
 
+            // Verifico che sto tornando dalla Preview, quindi reimposto i dati
+            if(percorsoRicevutoDaPreview != null) {
+                nomePercorso.setText(percorsoRicevutoDaPreview.getNome());
+                descrizionePercorso.setText(percorsoRicevutoDaPreview.getDescrizione());
+                pubblicoPercorso.setChecked(percorsoRicevutoDaPreview.isPubblico());
+            }
+
             FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
             myRef = database.getReference("/");
 
@@ -132,28 +144,43 @@ public class FragmentDatiPercorso extends Fragment {
                         percorso.setCittaSitoAssociato(sharedPreferences.getString("cittaSito", ""));
                         percorso.setIdUtente(utente.getUid());
 
-                        ArrayList<Opera> listaOpere = new ArrayList<>();
+                        if(listaOpereRicevuteDaPreview != null){
 
-                        for(int i = 0; i < listaOpereChecked.size(); i++){
-                            listaOpere.add(i,new Opera());
-                            listaOpere.get(i).setId(listaOpereChecked.get(i).getId());
-                            listaOpere.get(i).setTitolo(listaOpereChecked.get(i).getTitolo());
-                            listaOpere.get(i).setDescrizione(listaOpereChecked.get(i).getDescrizione());
-                            listaOpere.get(i).setIdZona(listaOpereChecked.get(i).getIdZona());
-                            listaOpere.get(i).setIdFoto(listaOpereChecked.get(i).getIdFoto());
-                            Log.e( "TGFERGFERGER: ", ""+listaOpereChecked.get(i).getIdFoto() );
+                            FragmentPreviewPercorso fragmentPreviewPercorso = new FragmentPreviewPercorso();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("nuovoPercorso", percorso);
+                            bundle.putSerializable("listaOpereNuovoPercorso",  listaOpereRicevuteDaPreview);
+                            fragmentPreviewPercorso.setArguments(bundle);
+
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentPreviewPercorso );
+                            fragmentTransaction.commit();
+
+                        }else{
+
+                            for(int i = 0; i < listaOpereChecked.size(); i++){
+                                listaOpere.add(i,new Opera());
+                                listaOpere.get(i).setId(listaOpereChecked.get(i).getId());
+                                listaOpere.get(i).setTitolo(listaOpereChecked.get(i).getTitolo());
+                                listaOpere.get(i).setDescrizione(listaOpereChecked.get(i).getDescrizione());
+                                listaOpere.get(i).setIdZona(listaOpereChecked.get(i).getIdZona());
+                                listaOpere.get(i).setIdFoto(listaOpereChecked.get(i).getIdFoto());
+                                //Log.e( "TGFERGFERGER: ", ""+listaOpereChecked.get(i).getIdFoto() );
+                            }
+
+                            FragmentPreviewPercorso fragmentPreviewPercorso = new FragmentPreviewPercorso();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("nuovoPercorso",  percorso);
+                            bundle.putSerializable("listaOpereNuovoPercorso",  listaOpere);
+                            fragmentPreviewPercorso.setArguments(bundle);
+
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentPreviewPercorso );
+                            fragmentTransaction.commit();
+
                         }
-
-                        myRef = database.getReference("/Percorsi/"+key);
-                        myRef.setValue(percorso);
-
-                        myRef = database.getReference("/Percorsi/"+key+"/OpereScelte");
-                        myRef.setValue(listaOpere);
-
-                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.toastPercorsoSalvato), Toast.LENGTH_SHORT).show();
-
-                        // Ritorna ad "I Miei Percorsi"
-                        getActivity().onBackPressed();
 
 
                     }else{

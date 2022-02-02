@@ -48,6 +48,9 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/***
+ * Classe che contiene i Metodi che vengono più riutilizzati nell'App
+ */
 public class BasicMethod extends AppCompatActivity {
     
     static Utente utente;
