@@ -52,11 +52,14 @@
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout-large/fragment_info_sito.xml" value="0.275390625" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout-small/fragment_info_sito.xml" value="1.0476973684210527" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_aggiungi_opera.xml" value="0.2884963768115942" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_aggiungi_percorso.xml" value="0.3671875" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_aggiungi_sito.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_home_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_main.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_modifica_sito.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_registrati.xml" value="0.36666666666666664" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_visualizza_modifica_opera.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_visualizza_opera.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_visualizza_percorso.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/activity_visualizza_zona.xml" value="0.23120567375886525" />
@@ -89,6 +92,7 @@
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/navigation_header.xml" value="0.3645833333333333" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/toolbar.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/layout/toolbar2.xml" value="0.36666666666666664" />
+        <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/menu/condividi_button.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/menu/kebab_menu.xml" value="0.3671875" />
         <entry key="..\:/Progetto_SMS/CapiTool/app/src/main/res/menu/navigation_visitatore_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/drawable/rounded_style.xml" value="0.34791666666666665" />
@@ -101,6 +105,7 @@
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_registrati.xml" value="0.3307291666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_seleziona_opere.xml" value="0.5541666666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_visualizza_modifica_opera.xml" value="0.5541666666666667" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/activity_visualizza_percorso.xml" value="0.5421195652173914" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/card_opera.xml" value="0.33177083333333335" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/card_percorso.xml" value="0.33177083333333335" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/card_sito_culturale.xml" value="0.5" />
@@ -111,10 +116,14 @@
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_impostazioni_sito.xml" value="0.5541666666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_miei_percorsi.xml" value="0.5" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_mio_sito.xml" value="0.5541666666666667" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_modifica_info_sito.xml" value="0.5421195652173914" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_modifica_nome_sito.xml" value="0.5421195652173914" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_preferiti.xml" value="0.27152988855116517" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_preview_percorso.xml" value="0.5421195652173914" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_profilo.xml" value="0.27152988855116517" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_registra_credenziali.xml" value="0.3307291666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_registra_dati_personali.xml" value="0.27152988855116517" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_registra_ruolo.xml" value="0.5421195652173914" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_ricerca_siti.xml" value="0.33177083333333335" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_seleziona_opere.xml" value="0.33177083333333335" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/layo.xml" value="0.5541666666666667" />

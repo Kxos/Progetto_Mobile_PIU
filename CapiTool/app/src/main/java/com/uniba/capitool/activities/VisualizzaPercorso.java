@@ -1,9 +1,12 @@
 package com.uniba.capitool.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -249,5 +252,54 @@ public class VisualizzaPercorso extends AppCompatActivity {
                     }
                 });
 
+    }
+
+
+    /***
+     * Istanzia nella toolbar il kebab menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.condividi_button, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.condividiPercorso:
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+
+                DatabaseReference myRef = database.getReference("/Percorsi");
+
+                Query recentPostsQuery = myRef.child(percorso.getId()).orderByChild("idZona");
+                recentPostsQuery.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, ""+snapshot.getValue());
+                        sendIntent.setType("text/plain");
+                        startActivity(sendIntent);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+                break;
+
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

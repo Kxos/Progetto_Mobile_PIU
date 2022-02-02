@@ -16,6 +16,7 @@ import android.view.View;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentDatiPercorso;
+import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentPreviewPercorso;
 import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentRicercaSiti;
 import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentSelezionaOpere;
 
@@ -78,6 +79,20 @@ public class AggiungiPercorso extends AppCompatActivity {
                     FragmentManager fragmentManager= getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentSelezionaOpere );
+                    fragmentTransaction.commit();
+
+                }else if (currentFragment instanceof FragmentPreviewPercorso){
+                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentSelezionaOpere");
+
+                    FragmentDatiPercorso fragmentDatiPercorso = new FragmentDatiPercorso();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("nuovoPercorso",  FragmentPreviewPercorso.getPercorso());
+                    bundle.putSerializable("listaOpereRicevuteDaPreview",  FragmentPreviewPercorso.getListaOpere());
+                    fragmentDatiPercorso.setArguments(bundle);
+
+                    FragmentManager fragmentManager= getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerRicercaSiti, fragmentDatiPercorso );
                     fragmentTransaction.commit();
 
                 }
