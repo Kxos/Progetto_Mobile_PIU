@@ -111,6 +111,8 @@
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_impostazioni_sito.xml" value="0.5541666666666667" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_miei_percorsi.xml" value="0.5" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_mio_sito.xml" value="0.5541666666666667" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_modifica_info_sito.xml" value="0.5421195652173914" />
+        <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_modifica_nome_sito.xml" value="0.5421195652173914" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_preferiti.xml" value="0.27152988855116517" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_profilo.xml" value="0.27152988855116517" />
         <entry key="..\:/Repository Git/Progetto_Mobile_PIU/CapiTool/app/src/main/res/layout/fragment_registra_credenziali.xml" value="0.3307291666666667" />
@@ -185,16 +187,13 @@
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_mio_sito.xml" value="0.17654508611955422" />
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_preferiti.xml" value="0.36302083333333335" />
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_profilo.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_credenziali.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_dati_personali.xml" value="0.22" />
-        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_ruolo.xml" value="0.26628895184135976" />
+        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_credenziali.xml" value="0.1" />
+        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_dati_personali.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_ruolo.xml" value="0.327445652173913" />
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_ricerca_siti.xml" value="0.31567028985507245" />
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_seleziona_opere.xml" value="0.31567028985507245" />
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_sicurezza.xml" value="0.31567028985507245" />
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/item_opera_zona.xml" value="0.31567028985507245" />
-        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_credenziali.xml" value="0.1" />
-        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_dati_personali.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/fragment_registra_ruolo.xml" value="0.327445652173913" />
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/navigation_header.xml" value="0.12273550724637682" />
         <entry key="..\:/Users/marco/OneDrive/Desktop/UNI/3_anno/Sms/E-culture/CapiTool/app/src/main/res/layout/toolbar.xml" value="0.12082066869300911" />
       </map>
