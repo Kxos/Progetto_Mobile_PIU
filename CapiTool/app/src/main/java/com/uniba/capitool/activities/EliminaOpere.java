@@ -46,7 +46,7 @@ public class EliminaOpere extends AppCompatActivity {
         eliminaOpereRecycler = findViewById(R.id.recyclerViewEliminaOpere);
         Bundle dati = getIntent().getExtras();
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Elimina Opere");
+        toolbar.setTitle(getString(R.string.deleteOpera));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -74,7 +74,11 @@
     <string name="pswReq1">"Please enter a password with at least 6 characters"</string>
 
     <string name="errorDelegate">"Error in delegation, something went wrong :S"</string>
-    <string name="errorDelegate2">"You cannot delegate a site to a non-curator user"</string>.
+    <string name="errorDelegate2">"You cannot delegate a site to a non-curator user"</string>
+
+    <string name="deleteOpera">"Delete Opera"</string>
+
+    <string name="correctDeleteSite">"Site deleted successfully!"</string>.
 
 
 

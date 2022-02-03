@@ -79,6 +79,12 @@
     <string name="errorDelegate">"Errore nella delega, qualcosa è andato storto :S"</string>
     <string name="errorDelegate2">"Non puoi delegare un sito ad un utente non curatore"</string>
 
+    <string name="deleteOpera">"Elimina Opere"</string>
+
+    <string name="correctDeleteSite">"Sito eliminato con successo!"</string>
+
+
+
 
 
 

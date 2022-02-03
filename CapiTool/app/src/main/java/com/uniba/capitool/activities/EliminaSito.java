@@ -134,7 +134,7 @@ public class EliminaSito extends AppCompatActivity {
                                                 Log.e("Elimina sito", "Sito elimianto!") ;
 
 
-                                                BasicMethod.alertDialog(EliminaSito.this, "", "Sito eliminato con successo!", "");
+                                                BasicMethod.alertDialog(EliminaSito.this, "", getString(R.string.correctDeleteSite), "");
 
 
 
