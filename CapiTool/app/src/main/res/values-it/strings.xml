@@ -72,6 +72,18 @@
     <string name="errorOperaDescription">"Inserisci una descrizione"</string>
     <string name="correctEnterOpera">"Opera aggiunta correttamente"</string>
 
+    <string name="addSiteToolbar">"Aggiungi Sito"</string>
+
+    <string name="pswReq1">"Inserisci una password con almeno 6 caratteri"</string>
+
+    <string name="errorDelegate">"Errore nella delega, qualcosa è andato storto :S"</string>
+    <string name="errorDelegate2">"Non puoi delegare un sito ad un utente non curatore"</string>
+
+
+
+
+
+
 
 
 

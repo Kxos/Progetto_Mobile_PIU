@@ -100,7 +100,7 @@ public class BasicMethod extends AppCompatActivity {
 
         String messaggio = null;
         if(password.length()<6){
-            messaggio="Inserisci una password con almeno 6 caratteri";
+            messaggio = "Inserisci una password con almeno 6 caratteri" ;
         }else{
             int i, j;
             boolean letteraMaiuscola=false;
@@ -264,7 +264,7 @@ public class BasicMethod extends AppCompatActivity {
 
 
         }else{
-            BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
+            BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati" , "OK");
             Intent login= new Intent(activity, Login.class);
             activity.startActivity(login);
 

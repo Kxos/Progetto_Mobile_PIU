@@ -39,7 +39,7 @@ public class AggiungiSito extends AppCompatActivity {
         setContentView(R.layout.activity_aggiungi_sito);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Aggiungi Sito");
+        toolbar.setTitle(getString(R.string.addSiteToolbar));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

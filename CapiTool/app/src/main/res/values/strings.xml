@@ -69,6 +69,15 @@
     <string name="errorOperaDescription">"Enter a description"</string>
     <string name="correctEnterOpera">"Opera added correctly"</string>
 
+    <string name="addSiteToolbar">"Add Site"</string>
+
+    <string name="pswReq1">"Please enter a password with at least 6 characters"</string>
+
+    <string name="errorDelegate">"Error in delegation, something went wrong :S"</string>
+    <string name="errorDelegate2">"You cannot delegate a site to a non-curator user"</string>.
+
+
+
 
 
 </resources>

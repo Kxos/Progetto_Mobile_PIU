@@ -203,7 +203,7 @@ public class DelegaSito extends AppCompatActivity {
                                     });
 
                                 }else{
-                                    Toast.makeText(getApplicationContext(), "Non puoi delegare un sito ad un utente non curatore", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), getString(R.string.errorDelegate2), Toast.LENGTH_SHORT).show();
                                     Log.e("non è un curatore", "ruolo: " + delegato.getRuolo());
                                 }
                             }
