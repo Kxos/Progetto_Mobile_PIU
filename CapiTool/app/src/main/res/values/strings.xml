@@ -64,4 +64,11 @@
     <string name="zoneDeletedSuccesful">Zone successfully deleted</string>
     <string name="artworkDeletedSuccesful">Artwork successfully deleted</string>
 
+    <string name="addOperaToolbar">"Add opera in "</string>
+    <string name="errorOperaTitle">"Enter an Opera title that is valid and not empty"</string>
+    <string name="errorOperaDescription">"Enter a description"</string>
+    <string name="correctEnterOpera">"Opera added correctly"</string>
+
+
+
 </resources>

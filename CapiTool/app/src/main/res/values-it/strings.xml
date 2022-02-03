@@ -67,6 +67,12 @@
     <string name="zoneDeletedSuccesful">Zona eliminata con successo</string>
     <string name="artworkDeletedSuccesful">Opera eliminata con successo</string>
 
+    <string name="addOperaToolbar">"Aggiungi opera in "</string>
+    <string name="errorOperaTitle">"Inserisci un titolo dell'opera che sia valido e non vuoto"</string>
+    <string name="errorOperaDescription">"Inserisci una descrizione"</string>
+    <string name="correctEnterOpera">"Opera aggiunta correttamente"</string>
+
+
 
 
 
