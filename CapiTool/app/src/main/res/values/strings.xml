@@ -78,6 +78,9 @@
     <string name="addSiteToolbar">"Add Site"</string>
 
     <string name="pswReq1">"Please enter a password with at least 6 characters"</string>
+    <string name="pswReq2">"Please enter at least one capital letter"</string>
+    <string name="pswReq3">"Please enter at least one lower case letter"</string>
+    <string name="pswReq4">"Please insert at least one special character (e.g. !/*+)"</string>
 
     <string name="errorDelegate">"Error in delegation, something went wrong :S"</string>
     <string name="errorDelegate2">"You cannot delegate a site to a non-curator user"</string>
@@ -112,6 +115,10 @@
     <string name="errorSiteName">"Enter a valid, non-empty name"</string>
 
     <string name="loading">"Loading"</string>
+
+    <string name="personalData">"Personal Data"</string>
+    <string name="errorLoadingDataMsg">"An error occurred while loading your data, you will be returned to your login"</string>
+    <string name="errorLoadingDataDscr">"Error loading data"</string>
 
 
 

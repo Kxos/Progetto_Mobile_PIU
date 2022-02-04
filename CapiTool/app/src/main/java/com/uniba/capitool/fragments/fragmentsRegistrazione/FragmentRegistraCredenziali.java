@@ -108,7 +108,17 @@ CheckBox mostraPassword;
                         errorePassword=true;
                     }
                 }else{
-                    password.setError(messaggio);
+
+                    if(messaggio.equals("pswReq1")){
+                        password.setError(getString(R.string.pswReq1));
+                    }else if(messaggio.equals("pswReq2")){
+                        password.setError(getString(R.string.pswReq2));
+                    }else if(messaggio.equals("pswReq3")){
+                        password.setError(getString(R.string.pswReq3));
+                    }else{
+                        password.setError(getString(R.string.pswReq4));
+                    }
+
                     errorePassword=true;
                 }
 

@@ -158,7 +158,17 @@ public class FragmentSicurezza extends Fragment {
                             errorePassword=true;
                         }
                     }else{
-                        nuovaPsw.setError(messaggio);
+
+                        if(messaggio.equals("pswReq1")){
+                            nuovaPsw.setError(getString(R.string.pswReq1));
+                        }else if(messaggio.equals("pswReq2")){
+                            nuovaPsw.setError(getString(R.string.pswReq2));
+                        }else if(messaggio.equals("pswReq3")){
+                            nuovaPsw.setError(getString(R.string.pswReq3));
+                        }else{
+                            nuovaPsw.setError(getString(R.string.pswReq4));
+                        }
+
                         errorePassword=true;
                     }
 
