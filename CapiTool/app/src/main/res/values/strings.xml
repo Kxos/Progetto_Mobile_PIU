@@ -80,6 +80,12 @@
 
     <string name="correctDeleteSite">"Site deleted successfully!"</string>.
 
+    <string name="deleteZoneToolbar">"Delete Zone"</string>
+
+    <string name="insertEmail">"Insert an email"</string>
+    <string name="checkInsertData">"Check the data you entered and try again"</string>
+    <string name = "accountNotFound">"Account not found" </string>
+
 
 
 

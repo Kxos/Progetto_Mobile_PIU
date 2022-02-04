@@ -44,7 +44,7 @@ public class EliminaZone extends AppCompatActivity {
 
         Bundle dati = getIntent().getExtras();
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Elimina Zone");
+        toolbar.setTitle(getString(R.string.deleteZoneToolbar));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
