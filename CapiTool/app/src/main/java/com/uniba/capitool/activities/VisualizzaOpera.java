@@ -58,7 +58,7 @@ public class VisualizzaOpera extends AppCompatActivity {
         qrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 
+                //TODO
                 Log.e("VisualizzaOpera","cliccato QRCODE");
             }
         });
@@ -86,7 +86,7 @@ public class VisualizzaOpera extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Glide.with(context).load(R.drawable.images).into(imageViewOpera);
+                        Glide.with(context).load(R.drawable.image_not_found).into(imageViewOpera);
                     }
                 });
 
