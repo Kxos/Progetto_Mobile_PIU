@@ -90,4 +90,14 @@
             android:scrollHorizontally="false"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/qrCodeImage"
+        android:layout_width="18dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="41dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/border_imageview" />
 </androidx.constraintlayout.widget.ConstraintLayout>
