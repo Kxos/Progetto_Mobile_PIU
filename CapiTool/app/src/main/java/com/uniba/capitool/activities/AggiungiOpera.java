@@ -626,6 +626,8 @@ public class AggiungiOpera extends AppCompatActivity {
                 } else {
                     // permission denied!
 
+                    Toast.makeText(getApplicationContext(), R.string.CreatingOpera, Toast.LENGTH_SHORT).show();
+
                 }
                 return;
             }

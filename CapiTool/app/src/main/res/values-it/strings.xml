@@ -11,6 +11,8 @@
     <string name="Si">Si</string>
     <string name="No">No</string>
 
+    <string name="CreatingOpera">Per poter creare un opera bisogna fornire i permessi</string>
+
     <string name="siteManagement">Gestione Sito</string>
     <string name="mySite">Il mio sito</string>
     <string name="site">Sito</string>
