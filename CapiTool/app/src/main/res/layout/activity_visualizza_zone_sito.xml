@@ -38,12 +38,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
+        android:background="@color/white"
         android:layout_below="@+id/toolbar">
 
         <ImageView
             android:id="@+id/imageEmptyStateZona"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:src="@drawable/istockphoto_empty_museo" />
 

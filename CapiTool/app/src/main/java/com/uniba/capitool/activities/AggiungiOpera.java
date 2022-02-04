@@ -137,7 +137,7 @@ public class AggiungiOpera extends AppCompatActivity {
 
 
 
-        Opera opera=new Opera(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), idZona, key);
+        Opera opera=new Opera(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key);
         myRef.setValue(opera);
 
         StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
@@ -150,7 +150,7 @@ public class AggiungiOpera extends AppCompatActivity {
 //                           Toast.makeText(AggiungiOpera.this, getString(R.string.correctEnterOpera), Toast.LENGTH_LONG).show();
 
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -175,9 +175,16 @@ public class AggiungiOpera extends AppCompatActivity {
                             dati.putSerializable("utente", utente);
                             dati.putString("nomeZona", nomeZona);
                             dati.putString("idZona", allZone.getId());
+
                             List<ItemOperaZona> newOpereList= new ArrayList<>();
-                            newOpereList=allZone.getListaOpereZona();
-                            newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), idZona, key));
+                            if(nextIdOpera==1){
+                                newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                            }else{
+
+                                newOpereList=allZone.getListaOpereZona();
+                                newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                            }
+
                             allZone.setListaOpereZona(newOpereList);
                             dati.putSerializable("allZone", allZone);
                             backVisualizzaZona.putExtras(dati);
@@ -198,9 +205,16 @@ public class AggiungiOpera extends AppCompatActivity {
                     dati.putSerializable("utente", utente);
                     dati.putString("nomeZona", nomeZona);
                     dati.putString("idZona", allZone.getId());
+
                     List<ItemOperaZona> newOpereList= new ArrayList<>();
-                    newOpereList=allZone.getListaOpereZona();
-                    newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), idZona, key));
+                    if(nextIdOpera==0){
+                        newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                    }else{
+
+                        newOpereList=allZone.getListaOpereZona();
+                        newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                    }
+
                     allZone.setListaOpereZona(newOpereList);
                     dati.putSerializable("allZone", allZone);
                     backVisualizzaZona.putExtras(dati);
@@ -294,7 +308,7 @@ public class AggiungiOpera extends AppCompatActivity {
                 Log.e("***********************************************size opere",""+opere.size());
 
                if(opere.size()==0){
-                   salvaIndice(0);
+                   salvaIndice(-1);
                }else{
                    salvaIndice(Integer.parseInt(opere.get(opere.size()-1).getId()));
 
