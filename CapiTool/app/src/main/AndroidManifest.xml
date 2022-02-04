@@ -15,6 +15,7 @@
 
         <activity
             android:name=".activities.StartLogo"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,6 +56,7 @@
             android:exported="true" />
         <activity
             android:name=".activities.ModificaSito"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activities.InfoSitoAssociato"
@@ -70,6 +72,7 @@
             android:exported="true" />
         <activity
             android:name=".activities.HomePage"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activities.Registrati"
@@ -77,7 +80,8 @@
             android:parentActivityName=".activities.Login" /> <!-- in Registrati cliccando back, nella tool bar, tornerà in Login -->
         <activity
             android:name=".activities.Login"
-            android:exported="true"></activity>
+            android:screenOrientation="portrait"
+            android:exported="true" />
     </application>
 
 </manifest>
