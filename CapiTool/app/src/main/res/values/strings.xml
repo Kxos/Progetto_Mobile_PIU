@@ -86,7 +86,10 @@
     <string name="checkInsertData">"Check the data you entered and try again"</string>
     <string name = "accountNotFound">"Account not found" </string>
 
+    <string name="editSiteToolbar">"Edit Site"</string>
 
+    <string name="orderZoneToolbar">"Order Zone"</string>
+    <string name="correctOrderZone">"Zone ordered correctly"</string>
 
 
 

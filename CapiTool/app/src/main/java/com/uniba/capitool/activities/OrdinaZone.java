@@ -50,7 +50,7 @@ public class OrdinaZone extends AppCompatActivity {
         }
 
         toolbar = findViewById(R.id.toolbarOrdinaZone);
-        toolbar.setTitle("Ordina Zone");
+        toolbar.setTitle(getString(R.string.orderZoneToolbar));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -65,7 +65,7 @@ public class OrdinaZone extends AppCompatActivity {
                         myRef.setValue(""+i);
                     }
 
-                    Toast.makeText((OrdinaZone.this), "Zone ordinate correttamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText((OrdinaZone.this), getString(R.string.correctOrderZone), Toast.LENGTH_SHORT).show();
                     OrdinaZone.super.onBackPressed();
 
                 }else{

@@ -89,6 +89,16 @@
     <string name="checkInsertData">"Controlla i dati inseriti e riprova"</string>
     <string name="accountNotFound">"Account non trovato"</string>
 
+    <string name="editSiteToolbar">"Modifica Sito"</string>
+
+    <string name="orderZoneToolbar">"Ordina Zone"</string>
+    <string name="correctOrderZone">"Zone ordinate correttamente"</string>
+
+
+
+
+
+
 
 
 

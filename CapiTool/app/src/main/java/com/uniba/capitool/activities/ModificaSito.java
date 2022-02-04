@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,7 +47,7 @@ public class ModificaSito extends AppCompatActivity {
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Modifica Sito");
+        toolbar.setTitle(getString(R.string.editSiteToolbar));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
