@@ -1,6 +1,5 @@
 package com.uniba.capitool.classes;
 
-import android.media.Image;
 import android.net.Uri;
 
 public class Opera {
@@ -9,7 +8,7 @@ public class Opera {
     private String id ;
     private String titolo ;
     private String descrizione ;
-    private Image qrCode;
+    private String qrCode;
     private String idZona;
     private Uri foto;
     private String idFoto;
@@ -18,7 +17,7 @@ public class Opera {
 
     public Opera(){} ;
 
-    public Opera(String id, String titolo, String descrizione, Image qrCode, String idZona, Uri foto, String fotoOpera) {
+    public Opera(String id, String titolo, String descrizione, String qrCode, String idZona, Uri foto, String fotoOpera) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
@@ -83,11 +82,11 @@ public class Opera {
         this.descrizione = descrizione;
     }
 
-    public Image getQrCode() {
+    public String getQrCode() {
         return qrCode;
     }
 
-    public void setQrCode(Image qrCode) {
+    public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
     }
 
