@@ -38,9 +38,11 @@ import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapt
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class VisualizzaZoneSito extends AppCompatActivity{
 
+    private static final int MAXITERAZIONI = 1000;
     private String nuovaZona = "";
     RecyclerView mainZoneRecycler;
     MainRecyclerAdapter mainRecyclerAdapter;
@@ -115,10 +117,79 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                     Log.e("Zona trovata",""+zona.getNome());
                     zone.add(zona);
                 }catch (Exception e){
-                    Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)","");
+                    Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)",""+snapshot.getValue());
+
+
+
+                   int lastIndex=snapshot.getValue().toString().lastIndexOf("id=");
+                   String idZonaCercata=snapshot.getValue().toString().substring(lastIndex+3, snapshot.getValue().toString().length()-1);
+                   Log.e("LASTINDEX",""+snapshot.getValue().toString().substring(lastIndex+3, snapshot.getValue().toString().length()-1));
 
 //                    String idZona = leggiIdZona(snapshot.getValue().toString());
 //                    recuperaFromDB(idSito);
+
+                    DatabaseReference myRef2 = database.getReference("/Siti/"+sito.getId()+"/Zone/"+idZonaCercata);
+                    Map<String, Map<String, Map<String, Object>>> risultato ;
+
+
+                    risultato= (Map<String, Map<String, Map<String, Object>>>) snapshot.getValue();
+//                            Zona zonaCercata=dataSnapshot.getValue(Zona.class);
+                    //List<Opera> listaOpereCercate= new ArrayList<>();
+                    //listaOpereCercate.set(risultato.get("Opere"));
+                    Opera opera= new Opera();
+                    //   opera = (Opera) risultato.get("Opere").get("0");
+                    // Log.e("MYREF2",""+risultato.get("Opere").size());
+                    Log.e("MYREF2",""+risultato.get("Opere"));
+
+
+                    /***
+                     * Vado a leggere tutti gli indici delle opere
+                     */
+                    List<String> indiciOpere = new ArrayList<>();
+                    String stringaOpere=risultato.get("Opere").toString();
+                    for (int i=0; i<risultato.get("Opere").size(); i++){
+
+                        // Log.e("FORINDICI",""+stringaOpere.substring(stringaOpere.indexOf("id=")));
+
+                        int j=stringaOpere.indexOf("id=")+3;
+                        String indice="";
+                        while(stringaOpere.charAt(j) != '}'){
+                            indice=indice+stringaOpere.charAt(j);
+                            j++;
+                        }
+                        indiciOpere.add(indice);
+                        stringaOpere=stringaOpere.substring(j);
+                    }
+
+                    /***
+                     * Creo un oggetto di tipo opera per ogni indice opera trovato nel metodo precedente
+                     */
+                    ArrayList<Opera> listaOpereCercate=new ArrayList<>();
+                    for(int i=0; i<indiciOpere.size(); i++){
+                        Log.e("FORINDICI",""+risultato.get("Opere").get(indiciOpere.get(i)).get("titolo"));
+
+                        Opera operaCercata=new Opera();
+                        operaCercata.setTitolo(risultato.get("Opere").get(indiciOpere.get(i)).get("titolo").toString());
+                        operaCercata.setId(risultato.get("Opere").get(indiciOpere.get(i)).get("id").toString());
+                        operaCercata.setIdFoto(risultato.get("Opere").get(indiciOpere.get(i)).get("idFoto").toString());
+                        operaCercata.setDescrizione(risultato.get("Opere").get(indiciOpere.get(i)).get("descrizione").toString());
+                        //DatabaseReference myRef = database.getReference("/Siti/"+sito.getId()+"/Zone/"+idZonaCercata);
+
+                        listaOpereCercate.add(operaCercata);
+
+                    }
+
+                    Zona zonaCercata=new Zona();
+
+                    zonaCercata.setId(""+risultato.get("id"));
+                    Log.e("IDCERCATO", ""+risultato.get("id"));
+                    zonaCercata.setNome(""+risultato.get("nome"));
+                    Log.e("NOMECERCATO", ""+risultato.get("nome"));
+                    zonaCercata.setPosizione(""+risultato.get("posizione"));
+                    Log.e("POSIZIONECERCATO", ""+risultato.get("posizione"));
+                    zonaCercata.setOpere(listaOpereCercate);
+
+                    zone.add(zonaCercata);
 
                     }
                 }

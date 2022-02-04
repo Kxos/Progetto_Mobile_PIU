@@ -134,15 +134,22 @@ public class EliminaOpere extends AppCompatActivity {
 //
 //            myRef.removeValue();
 
+            Log.e("LISTAOPERECECKED", ""+listaOpereChecked.get(i).getId());
             map.put("/Siti/"+sito.getId()+"/Zone/"+ allZone.getId()+"/Opere/"+listaOpereChecked.get(i).getId(), null);
 
 
             /***
              * Aggiornamento della lista offline
              */
-            if(allZone.getListaOpereZona().get(i).getId().equals(listaOpereChecked.get(i).getId())){
-                allZone.getListaOpereZona().remove(i);
+            for(int j=0; j<allZone.getListaOpereZona().size(); j++){
+                if(allZone.getListaOpereZona().get(j).getId().equals(listaOpereChecked.get(i).getId())){
+                    allZone.getListaOpereZona().remove(j);
+                    Log.e("OPERADAELIMINAREID", ""+listaOpereChecked.get(i).getId());
+
+                }
             }
+            //Log.e("IDALLZONA", ""+allZone.getListaOpereZona().get(i).getId());
+
 
             if(allZone.getListaOpereZona().size()!=1 && listaOpereChecked.get(i).getId().equals("0")){
                spostareOpera=true;
