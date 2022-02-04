@@ -41,7 +41,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
 
     // Store a member variable
     private ArrayList<CardPercorso> listaPercorsi;
-    private String fragment;
+    private static String fragment;
     private View view;
     private Context context;
     private Activity activity;
@@ -150,6 +150,8 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
         ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
         ImageView itemFavourite = holder.itemFavourite;
         ImageView itemEliminaPercorso = holder.itemEliminaPercorso;
+        ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
+        ImageView itemVisibilityFalsePercorso = holder.itemVisibilityFalsePercorso;
 
         setCuorePienoSePercorsoPresenteNeiPreferiti(cardPercorso.getId(), BasicMethod.getUtente().getUid(), itemFavouriteBorder, itemFavourite);
 
@@ -218,10 +220,16 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
         if(fragment.equals("Consigliati")){
             itemFavouriteBorder.setVisibility(View.VISIBLE);
 
+            itemVisibilityTruePercorso.setVisibility(View.INVISIBLE);
+            itemVisibilityFalsePercorso.setVisibility(View.INVISIBLE);
+
             // Verifico che mi trovo in FragmentPreferiti
         }else if(fragment.equals("Preferiti")){
             itemFavourite.setVisibility(View.VISIBLE);
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
+
+            itemVisibilityTruePercorso.setVisibility(View.INVISIBLE);
+            itemVisibilityFalsePercorso.setVisibility(View.INVISIBLE);
 
             // Verifico che mi trovo in FragmentMieiPercorsi
         }else if(fragment.equals("MieiPercorsi")){
@@ -229,9 +237,6 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
             itemFavourite.setVisibility(View.INVISIBLE);
 
             itemEliminaPercorso.setVisibility(View.VISIBLE);
-
-            ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
-            ImageView itemVisibilityFalsePercorso = holder.itemVisibilityFalsePercorso;
 
             if(!BasicMethod.getUtente().getRuolo().equals("guida")){
                 //Rimuove l'occhio per la visibilità
@@ -312,6 +317,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
 
                     Intent visualizzaPercorso = new Intent((HomePage)itemView.getContext(), VisualizzaPercorso.class);
                     b.putSerializable("percorso", percorsoSelezionato);
+                    b.putString("FragmentChiamato", fragment);
                     visualizzaPercorso.putExtras(b);
                     ((HomePage)itemView.getContext()).startActivity(visualizzaPercorso);
 

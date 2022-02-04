@@ -26,6 +26,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.classes.CardMioPercorsoAdapter;
 import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.CardPercorsoAdapter;
 import com.uniba.capitool.classes.Percorso;
@@ -94,7 +95,7 @@ public class FragmentPreferiti extends Fragment {
         }
 
         // Crea un adapter passando i Percorsi trovati
-        CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "Preferiti", view, this.getContext());
+        CardMioPercorsoAdapter adapter = new CardMioPercorsoAdapter(listaPercorsi, "Preferiti", view, this.getContext());
 
         // Lega l'Adapter alla recyclerview per popolare i Percorsi
         rvCardsSiti.setAdapter(adapter);
@@ -254,7 +255,7 @@ public class FragmentPreferiti extends Fragment {
 
                     //Aggiorna la RecyclerView
                     RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
-                    CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "Preferiti", view, context);
+                    CardMioPercorsoAdapter adapter = new CardMioPercorsoAdapter(listaPercorsi, "Preferiti", view, context);
                     rvCardsSiti.setAdapter(adapter);
                     rvCardsSiti.setLayoutManager(new LinearLayoutManager(context));
                 }
