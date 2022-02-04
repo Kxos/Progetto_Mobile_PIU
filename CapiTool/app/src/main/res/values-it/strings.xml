@@ -11,6 +11,8 @@
     <string name="Si">Si</string>
     <string name="No">No</string>
 
+    <string name="CreatingOpera">Per poter creare un opera bisogna fornire i permessi</string>
+
     <string name="siteManagement">Gestione Sito</string>
     <string name="mySite">Il mio sito</string>
     <string name="site">Sito</string>
@@ -135,7 +137,21 @@
     <string name="errorOccurred">"C'è stato un errore. Riprova"</string>
     <string name="errorPsw">"Password errata"</string>
 
+    <string name="missmatchPsw">"La password non corrisponde a quella inserita in precedenza"</string>
+    <string name="oldPswEqualNew">"La nuova password è uguale alla vecchia. Inserisci una password diversa"</string>
+    <string name="correctUpdatePassword">"Password aggiornata correttamente"</string>
+    <string name="wrongPassword">"Password errata"</string>
 
+    <string name="insertValidEmail">"Inserisci una email valida"</string>
+    <string name="userAlredyExists">"Utente già esistente"</string>
+
+    <string name="insertYourName">"Inserisci il tuo nome"</string>
+    <string name="insertYourSurname">"Inserisci il tuo  cognome"</string>
+    <string name="insertYourBirthDate">"Inserisci la tua data di nascita</string>
+    <string name="insertYourLicenseNumber">"Inserisci il tuo numero di patentino"</string>
+
+    <string name="selectRole">"Seleziona un ruolo tra Curatore, Visitatore o Guida Turistica"</string>
+    <string name="roleNotSelected">"Ruolo non selezionato"</string>
 
 
 

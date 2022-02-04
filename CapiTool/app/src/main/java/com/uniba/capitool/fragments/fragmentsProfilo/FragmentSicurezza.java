@@ -68,7 +68,7 @@ public class FragmentSicurezza extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(!isFilled(vecchiaPsw)) {
-                    vecchiaPsw.setError("Campo obbligatorio");
+                    vecchiaPsw.setError(getString(R.string.requiredField));
                 }
             }
         });
@@ -87,7 +87,7 @@ public class FragmentSicurezza extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(!isFilled(nuovaPsw)) {
-                    nuovaPsw.setError("Campo obbligatorio");
+                    nuovaPsw.setError(getString(R.string.requiredField));
                 }
             }
         });
@@ -106,7 +106,7 @@ public class FragmentSicurezza extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(!isFilled(confermaPsw)) {
-                    confermaPsw.setError("Campo obbligatorio");
+                    confermaPsw.setError(getString(R.string.requiredField));
                 }
             }
         });
@@ -134,13 +134,13 @@ public class FragmentSicurezza extends Fragment {
                 boolean errorePassword=false;
 
                 if(!isFilled(vecchiaPsw)) {
-                    vecchiaPsw.setError("Campo obbligatorio");
+                    vecchiaPsw.setError(getString(R.string.requiredField));
                 }
                 if(!isFilled(nuovaPsw)) {
-                    nuovaPsw.setError("Campo obbligatorio");
+                    nuovaPsw.setError(getString(R.string.requiredField));
                 }
                 if(!isFilled(confermaPsw)) {
-                    confermaPsw.setError("Campo obbligatorio");
+                    confermaPsw.setError(getString(R.string.requiredField));
                 }
 
                 if(isFilled(vecchiaPsw) && isFilled(nuovaPsw) && isFilled(confermaPsw)) {
@@ -150,11 +150,11 @@ public class FragmentSicurezza extends Fragment {
                     if(messaggio==null){      // Significa che la password è forte e non ho ricevuto messaggi di errore in ritorno /
 
                         if(nuovaPsw.getText().toString().equals(confermaPsw.getText().toString())==false){
-                            confermaPsw.setError("La password non corrisponde");
+                            confermaPsw.setError(getString(R.string.missmatchPsw));
                             errorePassword=true;
                         }
                         else if(nuovaPsw.getText().toString().equals(vecchiaPsw.getText().toString())==true) {
-                            nuovaPsw.setError("La nuova password è uguale alla vecchia");
+                            nuovaPsw.setError(getString(R.string.oldPswEqualNew));
                             errorePassword=true;
                         }
                     }else{
@@ -191,16 +191,16 @@ public class FragmentSicurezza extends Fragment {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 Log.d("TAG", "Password updated");
-                                                Toast.makeText(((HomePage)getActivity()), "Password aggiornata correttamente", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(((HomePage)getActivity()), getString(R.string.correctUpdatePassword), Toast.LENGTH_LONG).show();
                                             } else {
                                                 Log.d("TAG", "Error password not updated");
-                                                Toast.makeText(((HomePage)getActivity()), "C'è stato un errore. Riprova", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(((HomePage)getActivity()), getString(R.string.errorOccurred), Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
                                 } else {
                                     Log.d("TAG", "Error auth failed");
-                                    vecchiaPsw.setError("Password errata");
+                                    vecchiaPsw.setError(getString(R.string.wrongPassword));
                                 }
                             }
                         });

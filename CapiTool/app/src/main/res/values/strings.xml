@@ -9,6 +9,7 @@
     <string name="Si">Yes</string>
     <string name="No">No</string>
 
+    <string name="CreatingOpera">You need to grant permission if you want to create an Opera</string>
 
     <string name="siteManagement">Site Management</string>
     <string name="mySite">My Site</string>
@@ -131,12 +132,25 @@
 
     <string name="requiredField">"Required field"</string>
     <string name="erroreDeleteAccount">"Unable to delete account. Delegate your site or delete it"</string>
-    <string name = "correctDeleteAccount"> "Account successfully deleted" </string>
-    <string name = "errorOccurred"> "There was an error. Please try again" </string>
-    <string name = "errorPsw"> "Wrong password" </string>
+    <string name="correctDeleteAccount"> "Account successfully deleted" </string>
+    <string name="errorOccurred"> "There was an error. Please try again" </string>
+    <string name="errorPsw"> "Wrong password" </string>
 
+    <string name="missmatchPsw">"The password does not match the one previously entered"</string>
+    <string name="oldPswEqualNew">"The new password is the same as the old one. Please enter a different password"</string>
+    <string name="correctUpdatePassword">"Password updated correctly"</string>
+    <string name="wrongPassword">"Wrong password"</string>
 
+    <string name="insertValidEmail">"Insert a valid email"</string>
+    <string name="userAlredyExists"> "User already exists" </string>
 
+    <string name="insertYourName"> "Enter your name" </string>
+    <string name="insertYourSurname"> "Enter your surname" </string>
+    <string name="insertYourBirthDate"> "Enter your birth date </string>
+    <string name="insertYourLicenseNumber"> "Enter your license number" </string>
+
+    <string name="selectRole">"Select a role among Curator, Visitor or Tourist Guide"</string>
+    <string name="roleNotSelected">"Role not selected"</string>
 
 
 
