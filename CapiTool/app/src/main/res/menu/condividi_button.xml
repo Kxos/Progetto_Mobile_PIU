@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_baseline_share_24"
         android:title="Condividi"
         app:showAsAction="always"/>
+
+    <item android:id="@+id/eliminaPercorso"
+        android:icon="@drawable/ic_baseline_delete_24_basic"
+        android:title="Elimina"
+        app:showAsAction="always"/>
 </menu>

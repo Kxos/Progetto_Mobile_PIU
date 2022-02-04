@@ -28,6 +28,21 @@ public class Opera {
         this.idFoto = fotoOpera;
     }
 
+    public Opera(String id, String titolo, String descrizione, String idZona, String idFoto) {
+        this.id = id;
+        this.titolo = titolo;
+        this.descrizione = descrizione;
+        this.idZona = idZona;
+        this.idFoto=idFoto;
+    }
+
+    public Opera(String id, String titolo, String descrizione, String idZona) {
+        this.id = id;
+        this.titolo = titolo;
+        this.descrizione = descrizione;
+        this.idZona = idZona;
+    }
+
     public String getIdZona() {
         return idZona;
     }
