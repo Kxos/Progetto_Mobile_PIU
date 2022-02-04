@@ -17,6 +17,16 @@ public class Opera {
 
     public Opera(){} ;
 
+
+    public Opera(String id, String titolo, String descrizione, String qrCode, String idZona, String idFoto) {
+        this.id = id;
+        this.titolo = titolo;
+        this.descrizione = descrizione;
+        this.qrCode = qrCode;
+        this.idZona = idZona;
+        this.idFoto = idFoto;
+    }
+
     public Opera(String id, String titolo, String descrizione, String qrCode, String idZona, Uri foto, String fotoOpera) {
         this.id = id;
         this.titolo = titolo;
@@ -41,6 +51,7 @@ public class Opera {
         this.descrizione = descrizione;
         this.idZona = idZona;
     }
+
 
     public String getIdZona() {
         return idZona;
