@@ -44,7 +44,7 @@ public class VisualizzaZona extends AppCompatActivity {
             allZone = (AllZona) dati.getSerializable("allZone");
             nomeZona= allZone.getNomeZona();
 
-            if(allZone.getListaOpereZona()==null){
+            if(allZone.getListaOpereZona()==null || allZone.getListaOpereZona().size()==0){
 
                 RelativeLayout emptyState=findViewById(R.id.layoutEmptyStateZona);
                 emptyState.setVisibility(View.VISIBLE);
@@ -146,5 +146,5 @@ public class VisualizzaZona extends AppCompatActivity {
 
         gridView.setAdapter(new ImageAdapter(allZone.getListaOpereZona(), this));
     }
-    
+
 }

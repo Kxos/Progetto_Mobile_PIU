@@ -115,6 +115,8 @@ public class EliminaOpere extends AppCompatActivity {
 
         spostareOpera=false;
 
+        int sizeListaOpere=allZone.getListaOpereZona().size();
+
         for(int i=0; i<listaOpereChecked.size(); i++){
 
             map.put("/Siti/"+sito.getId()+"/Zone/"+ allZone.getId()+"/Opere/"+listaOpereChecked.get(i).getId(), null);
@@ -129,9 +131,16 @@ public class EliminaOpere extends AppCompatActivity {
                 }
             }
 
-            if(allZone.getListaOpereZona().size()!=1 && listaOpereChecked.get(i).getId().equals("0")){
+             if(allZone.getListaOpereZona().size()!=1 && listaOpereChecked.get(i).getId().equals("0")){
                spostareOpera=true;
             }
+        }
+
+        /***
+         * Se l'utente vuole eliminare tutte le opere non devo spostare in posizione 0 nessuna
+         */
+        if(sizeListaOpere==listaOpereChecked.size()){
+            spostareOpera=false;
         }
 
         myRef.updateChildren(map);
