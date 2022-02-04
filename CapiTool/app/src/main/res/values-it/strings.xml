@@ -73,87 +73,91 @@
     <string name="zoneDeletedSuccesful">Zona eliminata con successo</string>
     <string name="artworkDeletedSuccesful">Opera eliminata con successo</string>
 
-    <string name="addOperaToolbar">"Aggiungi opera in "</string>
-    <string name="errorOperaTitle">"Inserisci un titolo dell'opera che sia valido e non vuoto"</string>
-    <string name="errorOperaDescription">"Inserisci una descrizione"</string>
-    <string name="correctEnterOpera">"Opera aggiunta correttamente"</string>
+    <string name="addOperaToolbar">Aggiungi opera in </string>
+    <string name="errorOperaTitle">Inserisci un titolo dell\'opera che sia valido e non vuoto</string>
+    <string name="errorOperaDescription">Inserisci una descrizione</string>
+    <string name="correctEnterOpera">Opera aggiunta correttamente</string>
 
-    <string name="addSiteToolbar">"Aggiungi Sito"</string>
+    <string name="addSiteToolbar">Aggiungi Sito</string>
 
-    <string name="pswReq1">"Inserisci una password con almeno 6 caratteri"</string>
-    <string name="pswReq2">"Inserisci almeno una lettera Maiuscola"</string>
-    <string name="pswReq3">"Inserisci almeno una lettera minuscola"</string>
-    <string name="pswReq4">"Inserisci almeno una carattere speciale (ad es. !/*+)"</string>
+    <string name="pswReq1">Inserisci una password con almeno 6 caratteri</string>
+    <string name="pswReq2">Inserisci almeno una lettera Maiuscola</string>
+    <string name="pswReq3">Inserisci almeno una lettera minuscola</string>
+    <string name="pswReq4">Inserisci almeno una carattere speciale (ad es. !/*+)</string>
 
-    <string name="errorDelegate">"Errore nella delega, qualcosa è andato storto :S"</string>
-    <string name="errorDelegate2">"Non puoi delegare un sito ad un utente non curatore"</string>
+    <string name="errorDelegate">Errore nella delega, qualcosa è andato storto :S</string>
+    <string name="errorDelegate2">Non puoi delegare un sito ad un utente non curatore"</string>
 
-    <string name="deleteOpera">"Elimina Opere"</string>
+    <string name="deleteOpera">Elimina Opere</string>
 
-    <string name="correctDeleteSite">"Sito eliminato con successo!"</string>
+    <string name="correctDeleteSite">Sito eliminato con successo!</string>
 
-    <string name="deleteZoneToolbar">"Elimina Zone"</string>
+    <string name="deleteZoneToolbar">Elimina Zone</string>
 
-    <string name="insertEmail">"Inserisci un email"</string>
-    <string name="checkInsertData">"Controlla i dati inseriti e riprova"</string>
-    <string name="accountNotFound">"Account non trovato"</string>
+    <string name="insertEmail">Inserisci un email</string>
+    <string name="checkInsertData">Controlla i dati inseriti e riprova</string>
+    <string name="accountNotFound">Account non trovato</string>
 
-    <string name="editSiteToolbar">"Modifica Sito"</string>
+    <string name="editSiteToolbar">Modifica Sito</string>
 
-    <string name="orderZoneToolbar">"Ordina Zone"</string>
-    <string name="correctOrderZone">"Zone ordinate correttamente"</string>
+    <string name="orderZoneToolbar">Ordina Zone</string>
+    <string name="correctOrderZone">Zone ordinate correttamente</string>
 
-    <string name="signUpToolbar">"Registrati"</string>
+    <string name="signUpToolbar">Registrati</string>
 
-    <string name="editOperaToolbar">"Modifica Opera "</string>
+    <string name="editOperaToolbar">Modifica Opera </string>
 
-    <string name="writeNewNameZone">"Scrivi il nome della nuova zona"</string>
+    <string name="writeNewNameZone">Scrivi il nome della nuova zona</string>
 
-    <string name="errorCitytName">"Inserisci un nome di città che sia valido e non vuoto"</string>
-    <string name="errorClosingTime">"Inserisci l'orario di chiusura"</string>
-    <string name="errorOpeningTime">"Inserisci l'orario di apertura"</string>
-    <string name="errorEntranceFee">"Inserisci il costo d'ingresso in euro (es. 10.50)"</string>
-    <string name="errorAddress">Inserisci un indirizzo che sia valido e non vuoto (es. Via Napoli 42)"</string>
+    <string name="errorCitytName">Inserisci un nome di città che sia valido e non vuoto</string>
+    <string name="errorClosingTime">Inserisci l\'orario di chiusura</string>
+    <string name="errorOpeningTime">Inserisci l\'orario di apertura</string>
+    <string name="errorEntranceFee">Inserisci il costo d\'ingresso in euro (es. 10.50)</string>
+    <string name="errorAddress">Inserisci un indirizzo che sia valido e non vuoto (es. Via Napoli 42)</string>
 
     <string name="errorSiteName">"Inserisci un nome che sia valido e non vuoto"</string>
 
-    <string name="loading">"Caricamento"</string>
+    <string name="loading">Caricamento</string>
 
-    <string name="personalData">"Dati Personali"</string>
-    <string name="security">"Sicurezza"</string>
-    <string name="accountMngt">"Gestione Account"</string>
+    <string name="personalData">Dati Personali</string>
+    <string name="security">Sicurezza</string>
+    <string name="accountMngt">Gestione Account</string>
 
-    <string name="errorLoadingDataMsg">"C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login"</string>
-    <string name="errorLoadingDataDscr">"Errore caricamento dati"</string>
+    <string name="errorLoadingDataMsg">C\'è stato un errore nel caricare i tuoi dati, sarai riportato alla login</string>
+    <string name="errorLoadingDataDscr">Errore caricamento dati</string>
 
-    <string name="insertValidName">"Inserisci un nome valido"</string>
-    <string name="insertValidSurname">"Inserisci un cognome valido"</string>
-    <string name="correctUpdatePersonalData">"Dati personali aggiornati correttamente"</string>
-    <string name="correctUpdatePhotoProfile">"Foto del profilo aggiornata correttamente"</string>
+    <string name="insertValidName">Inserisci un nome valido</string>
+    <string name="insertValidSurname">Inserisci un cognome valido</string>
+    <string name="correctUpdatePersonalData">Dati personali aggiornati correttamente</string>
+    <string name="correctUpdatePhotoProfile">Foto del profilo aggiornata correttamente</string>
 
-    <string name="requiredField">"Campo obbligatorio"</string>
-    <string name="erroreDeleteAccount">"Impossibile eliminare l'account. Delega il tuo sito oppure eliminalo"</string>
-    <string name="correctDeleteAccount">"Account eliminato correttamente"</string>
-    <string name="errorOccurred">"C'è stato un errore. Riprova"</string>
-    <string name="errorPsw">"Password errata"</string>
+    <string name="requiredField">Campo obbligatorio</string>
+    <string name="erroreDeleteAccount">Impossibile eliminare l\'account. Delega il tuo sito oppure eliminalo</string>
+    <string name="correctDeleteAccount">Account eliminato correttamente</string>
+    <string name="errorOccurred">C\'è stato un errore. Riprova</string>
+    <string name="errorPsw">Password errata</string>
 
-    <string name="missmatchPsw">"La password non corrisponde a quella inserita in precedenza"</string>
-    <string name="oldPswEqualNew">"La nuova password è uguale alla vecchia. Inserisci una password diversa"</string>
-    <string name="correctUpdatePassword">"Password aggiornata correttamente"</string>
-    <string name="wrongPassword">"Password errata"</string>
+    <string name="missmatchPsw">La password non corrisponde a quella inserita in precedenza</string>
+    <string name="oldPswEqualNew">La nuova password è uguale alla vecchia. Inserisci una password diversa</string>
+    <string name="correctUpdatePassword">Password aggiornata correttamente</string>
+    <string name="wrongPassword">Password errata</string>
 
-    <string name="insertValidEmail">"Inserisci una email valida"</string>
-    <string name="userAlredyExists">"Utente già esistente"</string>
+    <string name="insertValidEmail">Inserisci una email valida</string>
+    <string name="userAlredyExists">Utente già esistente</string>
 
-    <string name="insertYourName">"Inserisci il tuo nome"</string>
-    <string name="insertYourSurname">"Inserisci il tuo  cognome"</string>
-    <string name="insertYourBirthDate">"Inserisci la tua data di nascita</string>
-    <string name="insertYourLicenseNumber">"Inserisci il tuo numero di patentino"</string>
+    <string name="insertYourName">Inserisci il tuo nome</string>
+    <string name="insertYourSurname">Inserisci il tuo  cognome</string>
+    <string name="insertYourBirthDate">Inserisci la tua data di nascita</string>
+    <string name="insertYourLicenseNumber">Inserisci il tuo numero di patentino</string>
 
-    <string name="selectRole">"Seleziona un ruolo tra Curatore, Visitatore o Guida Turistica"</string>
-    <string name="roleNotSelected">"Ruolo non selezionato"</string>
+    <string name="selectRole">Seleziona un ruolo tra Curatore, Visitatore o Guida Turistica</string>
+    <string name="roleNotSelected">Ruolo non selezionato</string>
 
+    <string name="addOpera">Aggiungi Opera</string>
 
+    <string name="title">Titolo</string>
+    <string name="description">Descrizione</string>
+    <string name="delete">Elimina</string>
 
 
 
