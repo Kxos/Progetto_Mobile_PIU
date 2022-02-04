@@ -61,8 +61,8 @@ public class Login extends AppCompatActivity {
          *
          * */
         // TODO -- DA RIMUOVERE, ACCESSO VELOCE IN LOGIN
-        email.setText("ss@gmail.com");
-        password.setText("Cur123/");
+        //email.setText("ss@gmail.com");
+        //password.setText("Cur123/");
         
         TextView registrati;
         registrati = findViewById(R.id.textView_register);
