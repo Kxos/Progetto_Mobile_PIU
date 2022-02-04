@@ -86,7 +86,7 @@ public class FragmentModificaNomeSito extends Fragment {
                 boolean erroreDatiPersonali = false;
 
                 if(nome.getText().toString().equals("") || !BasicMethod.checkIfNameIsAcceptable(nome.getText().toString()) ){
-                    nome.setError("Inserisci un nome che sia valido e non vuoto");
+                    nome.setError(getString(R.string.errorSiteName));
                     erroreDatiPersonali=true;
                 }
 

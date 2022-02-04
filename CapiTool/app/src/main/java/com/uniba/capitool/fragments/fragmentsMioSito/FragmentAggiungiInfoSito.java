@@ -191,34 +191,34 @@ public class FragmentAggiungiInfoSito extends Fragment {
                 boolean erroreDatiPersonali=false;
 
                 if(nomeCitta.getText().toString().equals("") || !BasicMethod.checkIfNameIsAcceptable(nomeCitta.getText().toString())){
-                    nomeCitta.setError("Inserisci un nome della città che sia valido e non vuoto");
+                    nomeCitta.setError(getString(R.string.errorCitytName));
                     erroreDatiPersonali=true;
                 }
 
 
 
                 if(orarioChiusura.getText().toString().equals("")){
-                    orarioChiusura.setError("Inserisci l'orario di chiusura");
+                    orarioChiusura.setError(getString(R.string.errorClosingTime));
                     erroreDatiPersonali=true;
                 }
 
                 if(orarioApertura.getText().toString().equals("")){
-                    orarioApertura.setError("Inserisci l'orario di apertura");
+                    orarioApertura.setError(getString(R.string.errorOpeningTime));
                     erroreDatiPersonali=true;
                 }
 
                 if(costoIngresso.getText().toString().equals("")){
-                    costoIngresso.setError("Inserisci il costo d'ingresso");
+                    costoIngresso.setError(getString(R.string.errorEntranceFee));
                     erroreDatiPersonali=true;
                 }
 
                 if(!BasicMethod.stringIsInteger(costoIngresso.getText().toString())){
-                    costoIngresso.setError("Inserisci un costo d'ingresso valido");
+                    costoIngresso.setError(getString(R.string.errorEntranceFee));
                     erroreDatiPersonali=true;
                 }
 
                 if(indirizzo.getText().toString().equals("") || !BasicMethod.checkIfAddressIsAcceptable(indirizzo.getText().toString())) {
-                    indirizzo.setError("Inserisci un indirizzo che sia valido e non vuoto");
+                    indirizzo.setError(getString(R.string.errorAddress));
                     erroreDatiPersonali=true;
                 }
 

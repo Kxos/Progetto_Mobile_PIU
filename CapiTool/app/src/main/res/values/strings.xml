@@ -84,7 +84,7 @@
 
     <string name="insertEmail">"Insert an email"</string>
     <string name="checkInsertData">"Check the data you entered and try again"</string>
-    <string name = "accountNotFound">"Account not found" </string>
+    <string name ="accountNotFound">"Account not found" </string>
 
     <string name="editSiteToolbar">"Edit Site"</string>
 
@@ -96,6 +96,33 @@
     <string name="editOperaToolbar">"Edit Opera "</string>
 
     <string name="writeNewNameZone">"Write the name of the new zone"</string>
+
+    <string name="errorCitytName">"Enter a valid, non-empty city name"</string>
+    <string name="errorClosingTime">"Enter the closing time"</string>
+    <string name="errorOpeningTime">"Enter the opening time"</string>
+    <string name="errorEntranceFee">"Enter the entrance fee in euros without cents (e.g.  10)"</string>
+    <string name="errorAddress">Please enter a valid, non-empty address (e.g. Via Napoli 42)"</string>
+
+    <string name="errorSiteName">"Enter a valid, non-empty name"</string>
+
+    <string name="loading">"Loading"</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
