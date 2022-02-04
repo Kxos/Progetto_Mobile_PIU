@@ -67,7 +67,7 @@ public class AggiungiPercorso extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.containerRicercaSiti, new FragmentRicercaSiti() );
                     fragmentTransaction.commit();
                 } else if (currentFragment instanceof FragmentDatiPercorso){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentSelezionaOpere");
+                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentDatiPercorso");
 
                     FragmentSelezionaOpere fragmentSelezionaOpere = new FragmentSelezionaOpere();
                     Bundle bundle = new Bundle();
@@ -82,7 +82,7 @@ public class AggiungiPercorso extends AppCompatActivity {
                     fragmentTransaction.commit();
 
                 }else if (currentFragment instanceof FragmentPreviewPercorso){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentSelezionaOpere");
+                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentPreviewPercorso");
 
                     FragmentDatiPercorso fragmentDatiPercorso = new FragmentDatiPercorso();
                     Bundle bundle = new Bundle();
