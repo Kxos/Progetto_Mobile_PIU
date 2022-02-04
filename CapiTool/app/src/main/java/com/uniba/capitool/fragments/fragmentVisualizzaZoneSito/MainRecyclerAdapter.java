@@ -150,6 +150,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         Intent visualizzaOpera = new Intent(v.getContext(), VisualizzaOpera.class);
         Bundle itemSelected = new Bundle();
         itemSelected.putSerializable("opera", operaCliccata);
+        itemSelected.putString("ActivityChiamante", "VisualizzaZone");
         visualizzaOpera.putExtras(itemSelected);
         Bundle transazione= ActivityOptions.makeSceneTransitionAnimation((VisualizzaZoneSito)v.getContext()).toBundle();
 
