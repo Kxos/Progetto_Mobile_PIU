@@ -1,7 +1,11 @@
 package com.uniba.capitool.classes;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +31,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.activities.HomePage;
+import com.uniba.capitool.activities.VisualizzaPercorso;
 
 import java.util.ArrayList;
 
@@ -33,9 +40,10 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
     // Store a member variable
     private ArrayList<CardPercorso> listaPercorsi;
-    private String fragment;
+    private static String fragment;
     private View view;
     private Context context;
+    private Activity activity;
     private CardPercorsoAdapter.OnEventClickListener mListener;
 
     public interface OnEventClickListener{
@@ -63,6 +71,16 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         this.view = view;
         this.context = context;
     }
+
+    public CardPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi, String fragment, Activity activity, View view, Context context) {
+        this.listaPercorsi = listaPercorsi;
+        this.fragment = fragment;
+        this.activity = activity;
+        this.context = context;
+        this.view = view;
+    }
+
+
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
@@ -127,8 +145,12 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
         }
 
+
         ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
         ImageView itemFavourite = holder.itemFavourite;
+        ImageView itemEliminaPercorso = holder.itemEliminaPercorso;
+        ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
+        ImageView itemVisibilityFalsePercorso = holder.itemVisibilityFalsePercorso;
 
         setCuorePienoSePercorsoPresenteNeiPreferiti(cardPercorso.getId(), BasicMethod.getUtente().getUid(), itemFavouriteBorder, itemFavourite);
 
@@ -164,15 +186,40 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
             }
         });
 
+        itemEliminaPercorso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder = BasicMethod.confermaEliminazione(activity);
+                builder.setPositiveButton(R.string.Si, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        eliminaPercorso(cardPercorso.getId(), holder.getAdapterPosition());
+                        //Log.e("onClick: ", ""+cardIdPercorso.getText() );
+                        dialogInterface.cancel();
+                    }
+                });
+
+                builder.setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                AlertDialog EliminaPercorsoDialog = builder.create();
+                EliminaPercorsoDialog.show();
+
+            }
+        });
+
+
         // Verifico che mi trovo in FragmentConsigliati
         if(fragment.equals("Consigliati")){
             itemFavouriteBorder.setVisibility(View.VISIBLE);
 
-            //Rimuove l'occhio per la visibilità
-            ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
             itemVisibilityTruePercorso.setVisibility(View.INVISIBLE);
-
-            ImageView itemVisibilityFalsePercorso = holder.itemVisibilityFalsePercorso;
             itemVisibilityFalsePercorso.setVisibility(View.INVISIBLE);
 
             // Verifico che mi trovo in FragmentPreferiti
@@ -180,12 +227,22 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
             itemFavourite.setVisibility(View.VISIBLE);
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
 
-            //Rimuove l'occhio per la visibilità
-            ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
             itemVisibilityTruePercorso.setVisibility(View.INVISIBLE);
-
-            ImageView itemVisibilityFalsePercorso = holder.itemVisibilityFalsePercorso;
             itemVisibilityFalsePercorso.setVisibility(View.INVISIBLE);
+
+            // Verifico che mi trovo in FragmentMieiPercorsi
+        }else if(fragment.equals("MieiPercorsi")){
+            itemFavouriteBorder.setVisibility(View.INVISIBLE);
+            itemFavourite.setVisibility(View.INVISIBLE);
+
+            itemEliminaPercorso.setVisibility(View.VISIBLE);
+
+            if(!BasicMethod.getUtente().getRuolo().equals("guida")){
+                //Rimuove l'occhio per la visibilità
+                itemVisibilityTruePercorso.setVisibility(View.INVISIBLE);
+                itemVisibilityFalsePercorso.setVisibility(View.INVISIBLE);
+            }
+
         }else{
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
             itemFavourite.setVisibility(View.INVISIBLE);
@@ -193,6 +250,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
 
     }
+
 
     // Returns the total count of items in the list
     @Override
@@ -202,7 +260,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static final class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public ImageView foto;
@@ -217,6 +275,7 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
         public ImageView itemVisibilityFalsePercorso;
         public ImageView itemFavouriteBorder;
         public ImageView itemFavourite;
+        public ImageView itemEliminaPercorso;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -233,22 +292,41 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
             nomeSitoAssociato = (TextView) itemView.findViewById(R.id.itemNomeSitoAssociato);
             cittaSitoAssociato = (TextView) itemView.findViewById(R.id.itemCittaSitoAssociato);
             pubblico = (TextView) itemView.findViewById(R.id.itemStatoPubblico);
-            itemVisibilityTruePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityTruePercorso);
-            itemVisibilityFalsePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityFalsePercorso);
-            itemFavouriteBorder = (ImageView)itemView.findViewById(R.id.itemFavouriteBorder);
-            itemFavourite = (ImageView)itemView.findViewById(R.id.itemFavourite);
+            itemVisibilityTruePercorso = (ImageView) itemView.findViewById(R.id.itemVisibilityTruePercorso);
+            itemVisibilityFalsePercorso = (ImageView) itemView.findViewById(R.id.itemVisibilityFalsePercorso);
+            itemFavouriteBorder = (ImageView) itemView.findViewById(R.id.itemFavouriteBorder);
+            itemFavourite = (ImageView) itemView.findViewById(R.id.itemFavourite);
+            itemEliminaPercorso = (ImageView) itemView.findViewById(R.id.itemEliminaPercorso);
 
+            // Clicco la Card per percorso per visualizzarne i Dettagli
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    if(mListener!=null){
-                        int position=getAdapterPosition();
-                        if(position!=RecyclerView.NO_POSITION){
-                            mListener.onEventClick(position);
-                        }
+                public void onClick(View v) {
+                    boolean boolean_public=false;
+                    if(pubblico.getText().toString().equals("true")){
+                        boolean_public=true;
                     }
+                    //Log.e("Percorso cliccato", ""+getAdapterPosition()+""+id.getText().toString());
+                    Bundle b = new Bundle();
+
+                    CardPercorso percorsoSelezionato=new CardPercorso(id.getText().toString(), nome.getText().toString(),
+                            idSitoAssociato.getText().toString(), nomeSitoAssociato.getText().toString(),
+                            cittaSitoAssociato.getText().toString(), descrizione.getText().toString(), boolean_public);
+
+
+                    Intent visualizzaPercorso = new Intent((HomePage)itemView.getContext(), VisualizzaPercorso.class);
+                    b.putSerializable("percorso", percorsoSelezionato);
+                    b.putString("FragmentChiamato", fragment);
+                    visualizzaPercorso.putExtras(b);
+                    ((HomePage)itemView.getContext()).startActivity(visualizzaPercorso);
+
                 }
             });
+
+        }
+
+        @Override
+        public void onClick(View v) {
 
         }
     }
@@ -429,6 +507,62 @@ public class CardPercorsoAdapter extends RecyclerView.Adapter<CardPercorsoAdapte
     }
     /** FINE
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+    /***
+     * Elimina un Percorso scelto dal DB
+     *
+     * @param idPercorso:
+     * @param position: indice che indica la CardPercorso selezionata dalla listaPercorsi
+     */
+    private void eliminaPercorso(String idPercorso, int position) {
+
+        final Percorso[] percorsoDaEliminare = {new Percorso()};
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        recentPostsQuery = myRef.child("Percorsi").orderByChild("id").equalTo(idPercorso);     //SELECT * FROM Percorsi WHERE id LIKE "xyz"
+        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    percorsoDaEliminare[0] = snapshot.getValue(Percorso.class);
+
+                }
+
+                // Rimuove il Percorso dalla lista
+                listaPercorsi.remove(position);
+
+                //Aggiorna la RecyclerView
+                RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
+                CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "MieiPercorsi", view, context);
+                rvCardsSiti.setAdapter(adapter);
+                rvCardsSiti.setLayoutManager(new LinearLayoutManager(context));
+
+                // Rimuove il Percorso dal DB
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                DatabaseReference myRef;
+
+                myRef = database.getReference("/Percorsi/"+percorsoDaEliminare[0].getId());
+
+                myRef.removeValue();
+
+                Toast.makeText((activity).getApplicationContext(), R.string.percorsoEliminato, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+            }
+        });
+
+    }
 
     /***
      * Imposta l'ImageView del cuore a Pieno se il Percorso è presente nei preferiti dell'utente corrente

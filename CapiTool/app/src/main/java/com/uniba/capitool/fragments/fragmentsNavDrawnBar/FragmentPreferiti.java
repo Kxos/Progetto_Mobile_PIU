@@ -9,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,9 +24,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
-import com.uniba.capitool.classes.CardMioPercorsoAdapter;
-import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.CardPercorsoAdapter;
+import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.Percorso;
 
 import java.util.ArrayList;
@@ -95,7 +92,7 @@ public class FragmentPreferiti extends Fragment {
         }
 
         // Crea un adapter passando i Percorsi trovati
-        CardMioPercorsoAdapter adapter = new CardMioPercorsoAdapter(listaPercorsi, "Preferiti", view, this.getContext());
+        CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "Preferiti", view, this.getContext());
 
         // Lega l'Adapter alla recyclerview per popolare i Percorsi
         rvCardsSiti.setAdapter(adapter);
@@ -255,7 +252,7 @@ public class FragmentPreferiti extends Fragment {
 
                     //Aggiorna la RecyclerView
                     RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
-                    CardMioPercorsoAdapter adapter = new CardMioPercorsoAdapter(listaPercorsi, "Preferiti", view, context);
+                    CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "Preferiti", view, context);
                     rvCardsSiti.setAdapter(adapter);
                     rvCardsSiti.setLayoutManager(new LinearLayoutManager(context));
                 }

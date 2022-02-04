@@ -32,7 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
-import com.uniba.capitool.classes.CardMioPercorsoAdapter;
 import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.Percorso;
