@@ -33,6 +33,7 @@ public class VisualizzaZona extends AppCompatActivity {
     String nomeZona;
     AllZona allZone;
     GridView gridView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

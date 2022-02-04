@@ -33,7 +33,7 @@ public class Registrati extends AppCompatActivity {
         datiRegistrazioneUtente.edit().clear().commit();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Registrati");
+        toolbar.setTitle(getString(R.string.signUpToolbar));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //fa comparire nella toolbar il pulsante back
 

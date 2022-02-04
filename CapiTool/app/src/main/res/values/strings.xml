@@ -65,7 +65,7 @@
     <string name="artworkDeletedSuccesful">Artwork successfully deleted</string>
 
     <string name="addOperaToolbar">"Add opera in "</string>
-    <string name="errorOperaTitle">"Enter an Opera title that is valid and not empty"</string>
+    <string name="errorOperaTitle">"Enter a valid Opera title and not empty"</string>
     <string name="errorOperaDescription">"Enter a description"</string>
     <string name="correctEnterOpera">"Opera added correctly"</string>
 
@@ -90,6 +90,12 @@
 
     <string name="orderZoneToolbar">"Order Zone"</string>
     <string name="correctOrderZone">"Zone ordered correctly"</string>
+
+    <string name="signUpToolbar">"Sign Up"</string>
+
+    <string name="editOperaToolbar">"Edit Opera "</string>
+
+    <string name="writeNewNameZone">"Write the name of the new zone"</string>
 
 
 

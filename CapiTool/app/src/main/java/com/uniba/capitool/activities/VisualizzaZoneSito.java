@@ -226,7 +226,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
 
                // Log.e("ITEMSELECTED", "AGGIUNGI ZONA");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Scrivi il nome della nuova zona");
+                builder.setTitle(getString(R.string.writeNewNameZone));
 
                 // Set up the input
                 final EditText input = new EditText(this);
@@ -235,7 +235,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                 builder.setView(input);
 
                 // Set up the buttons
-                builder.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         nuovaZona = input.getText().toString();
@@ -243,7 +243,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                         inserisciNuovaZona(nuovaZona);
                     }
                 });
-                builder.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
