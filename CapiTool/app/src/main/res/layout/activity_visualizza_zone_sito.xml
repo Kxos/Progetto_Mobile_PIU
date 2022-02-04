@@ -37,9 +37,9 @@
         android:id="@+id/layoutEmptyStateSito"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:layout_below="@+id/toolbar"
         android:background="@color/white"
-        android:layout_below="@+id/toolbar">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageEmptyStateZona"
@@ -52,18 +52,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageEmptyStateZona"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"
             android:text="In questo sito culturale non ci sono zone"
+            android:textAlignment="center"
             android:textSize="20dp" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/inizioMessaggio1"
-            android:layout_margin="20dp"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp">
 
             <TextView
                 android:id="@+id/inizioMessaggio2"
@@ -71,7 +72,7 @@
                 android:layout_height="wrap_content"
 
 
-                android:drawableRight="@drawable/ic_baseline_more_vert_24"
+                android:drawableRight="@drawable/ic_baseline_add_24"
                 android:text="Clicca su "
                 android:textSize="20dp" />
 
