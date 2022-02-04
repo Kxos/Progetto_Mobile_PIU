@@ -1,6 +1,9 @@
 package com.uniba.capitool.fragments.fragmentVisualizzaZoneSito;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uniba.capitool.R;
+import com.uniba.capitool.activities.VisualizzaOpera;
+import com.uniba.capitool.activities.VisualizzaPercorso;
+import com.uniba.capitool.activities.VisualizzaZoneSito;
 
 import java.util.List;
 
@@ -138,7 +144,7 @@ public class MainRecyclerAdapterVisualizzaPercorso extends RecyclerView.Adapter<
     @Override
     public void onOperaClick(int posizioneOpera, String idZona, View v) {
 
-        /*
+
         int posizioneZona=getIndexZona(allZoneList, idZona);
 
         //Log.e("CLICCATO", ""+allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera).getDescrizione());
@@ -148,11 +154,11 @@ public class MainRecyclerAdapterVisualizzaPercorso extends RecyclerView.Adapter<
         Bundle itemSelected = new Bundle();
         itemSelected.putSerializable("opera", operaCliccata);
         visualizzaOpera.putExtras(itemSelected);
-        Bundle transazione= ActivityOptions.makeSceneTransitionAnimation((VisualizzaZoneSito)v.getContext()).toBundle();
+        Bundle transazione= ActivityOptions.makeSceneTransitionAnimation((VisualizzaPercorso)v.getContext()).toBundle();
 
-        ((VisualizzaZoneSito)v.getContext()).startActivity(visualizzaOpera, transazione);
+        ((VisualizzaPercorso)v.getContext()).startActivity(visualizzaOpera, transazione);
 
-        */
+
     }
 
     /***

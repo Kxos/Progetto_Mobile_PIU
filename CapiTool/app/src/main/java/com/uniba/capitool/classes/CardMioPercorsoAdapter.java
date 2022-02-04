@@ -224,18 +224,21 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
 
             // Verifico che mi trovo in FragmentMieiPercorsi
-        }else if(fragment.equals("MieiPercorsi") && !BasicMethod.getUtente().getRuolo().equals("guida")){
+        }else if(fragment.equals("MieiPercorsi")){
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
             itemFavourite.setVisibility(View.INVISIBLE);
 
             itemEliminaPercorso.setVisibility(View.VISIBLE);
 
-            //Rimuove l'occhio per la visibilità
             ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
-            itemVisibilityTruePercorso.setVisibility(View.INVISIBLE);
-
             ImageView itemVisibilityFalsePercorso = holder.itemVisibilityFalsePercorso;
-            itemVisibilityFalsePercorso.setVisibility(View.INVISIBLE);
+
+            if(!BasicMethod.getUtente().getRuolo().equals("guida")){
+                //Rimuove l'occhio per la visibilità
+                itemVisibilityTruePercorso.setVisibility(View.INVISIBLE);
+                itemVisibilityFalsePercorso.setVisibility(View.INVISIBLE);
+            }
+
         }else{
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
             itemFavourite.setVisibility(View.INVISIBLE);
