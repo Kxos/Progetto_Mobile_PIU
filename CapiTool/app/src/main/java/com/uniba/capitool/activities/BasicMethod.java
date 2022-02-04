@@ -5,11 +5,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,12 +25,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
@@ -43,10 +34,7 @@ import com.uniba.capitool.classes.Visitatore;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -112,7 +100,8 @@ public class BasicMethod extends AppCompatActivity {
 
         String messaggio = null;
         if(password.length()<6){
-            messaggio = "Inserisci una password con almeno 6 caratteri" ;
+            //messaggio = "Inserisci una password con almeno 6 caratteri" ;
+            messaggio = "pswReq1" ;
         }else{
             int i, j;
             boolean letteraMaiuscola=false;
@@ -148,15 +137,19 @@ public class BasicMethod extends AppCompatActivity {
             } // fine ciclo controllo password
 
             if (letteraMaiuscola==false) {
-                messaggio="Inserisci almeno una lettera Maiuscola";
+                //messaggio="Inserisci almeno una lettera Maiuscola";
+                messaggio = "pswReq2" ;
             }
 
             if(letteraminuscola==false){
-                messaggio="Inserisci almeno una lettera minuscola";
+                //messaggio="Inserisci almeno una lettera minuscola";
+                messaggio = "pswReq3" ;
             }
 
             if(carattereSpeciale==false){
-                messaggio="Inserisci almeno una carattere speciale (ad es. !/*+)";
+                //messaggio="Inserisci almeno una carattere speciale (ad es. !/*+)";
+                messaggio = "pswReq4" ;
+
             }
         }
 
@@ -276,7 +269,7 @@ public class BasicMethod extends AppCompatActivity {
 
 
         }else{
-            BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati" , "OK");
+            BasicMethod.alertDialog(activity, activity.getString(R.string.errorLoadingDataMsg), activity.getString(R.string.errorLoadingDataDscr), "OK");
             Intent login= new Intent(activity, Login.class);
             activity.startActivity(login);
 

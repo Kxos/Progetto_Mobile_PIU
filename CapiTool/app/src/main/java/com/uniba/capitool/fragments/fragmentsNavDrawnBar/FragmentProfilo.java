@@ -36,7 +36,7 @@ public class FragmentProfilo extends Fragment {
         viewPager2.setAdapter(adapter);
 
         //nomi che compaiono per ogni scheda sulla barra in alto
-        tabsLayout.addTab(tabsLayout.newTab().setText("Dati Personali"));
+        tabsLayout.addTab(tabsLayout.newTab().setText(getString(R.string.personalData)));
         tabsLayout.addTab(tabsLayout.newTab().setText("Sicurezza"));
         tabsLayout.addTab(tabsLayout.newTab().setText("Gestione Account"));
 
