@@ -148,9 +148,9 @@ public class FragmentSelezionaOpere extends Fragment implements Serializable {
             listaOpere[i] = new ArrayList<CardOpera>();
         }
 
-        Log.e("Numero di Opere trovate: ",""+numeroOpere);
-        Log.e("Numero di Zone trovate: ",""+listaZone.size());
-        Log.e("Opera trovata: ",""+listaZone.get(0).getOpere().get(1).getDescrizione());
+        //Log.e("Numero di Opere trovate: ",""+numeroOpere);
+        //Log.e("Numero di Zone trovate: ",""+listaZone.size());
+        //Log.e("Opera trovata: ",""+listaZone.get(0).getOpere().get(1).getDescrizione());
 
         int count=0;
         for(int countZone = 0; countZone!=listaZone.size();countZone++){

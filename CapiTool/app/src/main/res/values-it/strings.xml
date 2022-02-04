@@ -8,6 +8,8 @@
     <string name="save">Salva</string>
     <string name="back">Indietro</string>
     <string name="continua">Continua</string>
+    <string name="Si">Si</string>
+    <string name="No">No</string>
 
     <string name="siteManagement">Gestione Sito</string>
     <string name="mySite">Il mio sito</string>
@@ -53,7 +55,9 @@
     <string name="toastRimossoPercorsoDaiPreferiti">Percorso rimosso dai favoriti</string>
     <string name="cercaPercorso">Cerca il nome del Percorso</string>
     <string name="descrizionePercorso">Descrizione:</string>
-
+    <string name="eliminaPercorsoTitolo">Eliminare il percorso</string>
+    <string name="eliminaPercorsoMessaggio">Sei sicuro di voler eliminare il percorso?</string>
+    <string name="percorsoEliminato">Percorso Eliminato</string>
 
     <string name="noPswInsert">Non hai inserito nessuna password</string>
     <string name="boxInfoNotChecked">You must confirm thah you read the information</string>

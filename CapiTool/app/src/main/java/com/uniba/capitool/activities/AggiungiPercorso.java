@@ -56,18 +56,18 @@ public class AggiungiPercorso extends AppCompatActivity {
                 //in questo modo recupero il fragment in uso, così se l'utente spinge back torno al passo precedente
                 Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.containerRicercaSiti);
                 if(currentFragment instanceof FragmentRicercaSiti){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentRicercaSiti");
+                    //Log.d( "--------------------FRAGMENT IN USE: ", "FragmentRicercaSiti");
                     Intent HomePage = BasicMethod.putUtenteExtrasInIntent(AggiungiPercorso.this,utente,HomePage.class);
                     startActivity(HomePage);
                 } else if (currentFragment instanceof FragmentSelezionaOpere){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentSelezionaOpere");
+                    //Log.d( "--------------------FRAGMENT IN USE: ", "FragmentSelezionaOpere");
                     toolbar.setTitle(R.string.addSite);
                     FragmentManager fragmentManager= getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerRicercaSiti, new FragmentRicercaSiti() );
                     fragmentTransaction.commit();
                 } else if (currentFragment instanceof FragmentDatiPercorso){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentDatiPercorso");
+                    //Log.d( "--------------------FRAGMENT IN USE: ", "FragmentDatiPercorso");
 
                     FragmentSelezionaOpere fragmentSelezionaOpere = new FragmentSelezionaOpere();
                     Bundle bundle = new Bundle();
@@ -82,7 +82,7 @@ public class AggiungiPercorso extends AppCompatActivity {
                     fragmentTransaction.commit();
 
                 }else if (currentFragment instanceof FragmentPreviewPercorso){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "FragmentPreviewPercorso");
+                    //Log.d( "--------------------FRAGMENT IN USE: ", "FragmentPreviewPercorso");
 
                     FragmentDatiPercorso fragmentDatiPercorso = new FragmentDatiPercorso();
                     Bundle bundle = new Bundle();

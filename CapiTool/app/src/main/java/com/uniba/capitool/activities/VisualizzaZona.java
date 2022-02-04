@@ -80,11 +80,19 @@ public class VisualizzaZona extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Log.e("Hai cliccato l'opera", ""+allZone.getListaOpereZona().get(position).getTitolo());
-                    Bundle opera = new Bundle();
-                    opera.putSerializable("opera",allZone.getListaOpereZona().get(position));
-                    opera.putString("idSito",sito.getId());
-                    Intent visualizzaModificaOpera = new Intent(VisualizzaZona.this,VisualizzaModificaOpera.class);
-                    visualizzaModificaOpera.putExtras(opera);
+
+                    Intent visualizzaModificaOpera = new Intent(VisualizzaZona.this, VisualizzaModificaOpera.class);
+                    Bundle dati = new Bundle();
+                    dati.putSerializable("zona", (Serializable) allZone);
+                    dati.putSerializable("opera",allZone.getListaOpereZona().get(position));
+                    dati.putSerializable("opera",allZone.getListaOpereZona().get(position));
+                    dati.putString("idSito",sito.getId());
+                    dati.putSerializable("sito",sito);
+                    dati.putSerializable("utente", utente);
+                    dati.putString("nomeZona", nomeZona);
+                    dati.putSerializable("allZona", allZone);
+                    visualizzaModificaOpera.putExtras(dati);
+                    finish();
                     startActivity(visualizzaModificaOpera);
                 }
             });
@@ -139,17 +147,21 @@ public class VisualizzaZona extends AppCompatActivity {
                 dati.putSerializable("utente", utente);
                 dati.putString("nomeZona", nomeZona);
                 dati.putString("idZona", allZone.getId());
+                dati.putSerializable("allZona", allZone);
                 aggiungiOpera.putExtras(dati);
+                finish();
                 startActivity(aggiungiOpera);
                 break;
 
             case R.id.eliminaOpere:
                 Intent eliminaOpere = new Intent(this, EliminaOpere.class);
                 Bundle datiZona = new Bundle();
-                datiZona.putSerializable("zona", (Serializable) allZone);
                 datiZona.putSerializable("sito",sito);
                 datiZona.putSerializable("utente", utente);
+                datiZona.putString("nomeZona", nomeZona);
+                datiZona.putSerializable("allZona", allZone);
                 eliminaOpere.putExtras(datiZona);
+                finish();
                 startActivity(eliminaOpere);
 
                 break;

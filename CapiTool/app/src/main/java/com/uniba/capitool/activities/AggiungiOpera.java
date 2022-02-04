@@ -31,6 +31,8 @@ import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
+import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
+import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ public class AggiungiOpera extends AppCompatActivity {
     SitoCulturale sito;
     String idZona;
     String nomeZona;
+    AllZona allZone;
     ProgressBar progressBar;
     Button btaggiungiOpera;
     int nextIdOpera;
@@ -68,6 +71,7 @@ public class AggiungiOpera extends AppCompatActivity {
             utente = (Utente) dati.getSerializable("utente");
             idZona = dati.getString("idZona");
             nomeZona=  dati.getString("nomeZona");
+            allZone= (AllZona) dati.getSerializable("allZona");
 
         }else{
             Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
@@ -117,60 +121,112 @@ public class AggiungiOpera extends AppCompatActivity {
 
             }
         });
+
+        leggiOpere();
     }
 
     private void saveChanges() {
+
+
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef= database.getReference("/");
+        DatabaseReference myRef= database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera);
 
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
         String key = myRef.push().getKey();
 
-        leggiOpere();
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DatabaseReference myRef;
-                Log.e("nextId",""+nextIdOpera);
 
-                myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/titolo");
-                myRef.setValue(titoloOpera.getText().toString());
+        Opera opera=new Opera(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), idZona, key);
+        myRef.setValue(opera);
 
-                myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/id");
-                myRef.setValue(""+nextIdOpera);
-
-                myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/descrizione");
-                myRef.setValue(descrizioneOpera.getText().toString());
-
-                myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/idFoto");
-                myRef.setValue(key);
-
-                StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
+        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
 
                /* final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
                 pd.setMessage("Caricamento");
                 pd.show();*/
 
+//                           //pd.dismiss();
+//                           Toast.makeText(AggiungiOpera.this, getString(R.string.correctEnterOpera), Toast.LENGTH_LONG).show();
 
 
-                fileReference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                           //pd.dismiss();
-                           Toast.makeText(AggiungiOpera.this, getString(R.string.correctEnterOpera), Toast.LENGTH_LONG).show();
+                try {
+                    fileReference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                           //Intent eliminaOpere = new Intent(AggiungiOpera.this, VisualizzaZoneSito.class);
+                            //pd.dismiss();
+                            Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
+
+                            //Intent eliminaOpere = new Intent(AggiungiOpera.this, VisualizzaZoneSito.class);
 
 //                           Bundle datiZona = new Bundle();
 //                           datiZona.putSerializable("sito",sito);
 //                           datiZona.putSerializable("utente", utente);
 //                           eliminaOpere.putExtras(datiZona);
 //                           startActivity(eliminaOpere);
-                    }
-                });
+                            Intent backVisualizzaZona= new Intent(AggiungiOpera.this, VisualizzaZona.class);
+                            Bundle dati = new Bundle();
+                            dati.putSerializable("sito", sito);
+                            dati.putSerializable("utente", utente);
+                            dati.putString("nomeZona", nomeZona);
+                            dati.putString("idZona", allZone.getId());
+                            List<ItemOperaZona> newOpereList= new ArrayList<>();
+                            newOpereList=allZone.getListaOpereZona();
+                            newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), idZona, key));
+                            allZone.setListaOpereZona(newOpereList);
+                            dati.putSerializable("allZone", allZone);
+                            backVisualizzaZona.putExtras(dati);
+                            finish();
+                            startActivity(backVisualizzaZona);
+                            Log.e("********************************************nextId",""+nextIdOpera);
+                        }
+
+                    });
+                    Log.e("********************************************nextId",""+nextIdOpera);
+                }catch (Exception e){
+
+                    Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
+
+                    Intent backVisualizzaZona= new Intent(AggiungiOpera.this, VisualizzaZona.class);
+                    Bundle dati = new Bundle();
+                    dati.putSerializable("sito", sito);
+                    dati.putSerializable("utente", utente);
+                    dati.putString("nomeZona", nomeZona);
+                    dati.putString("idZona", allZone.getId());
+                    List<ItemOperaZona> newOpereList= new ArrayList<>();
+                    newOpereList=allZone.getListaOpereZona();
+                    newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), idZona, key));
+                    allZone.setListaOpereZona(newOpereList);
+                    dati.putSerializable("allZone", allZone);
+                    backVisualizzaZona.putExtras(dati);
+                    finish();
+                    startActivity(backVisualizzaZona);
+                    Log.e("********************************************nextId",""+nextIdOpera);
+                }
+
+
+
+
+//                myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/titolo");
+//                myRef.setValue(titoloOpera.getText().toString());
+//
+//                myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/id");
+//                myRef.setValue(""+nextIdOpera);
+//
+//                myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/descrizione");
+//                myRef.setValue(descrizioneOpera.getText().toString());
+//
+//                myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/idFoto");
+//                myRef.setValue(key);
+
+
+
+
 
 //                myRef.addValueEventListener(new ValueEventListener() {
 //                    @Override
@@ -191,6 +247,8 @@ public class AggiungiOpera extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 
@@ -215,7 +273,7 @@ public class AggiungiOpera extends AppCompatActivity {
         //TODO mettere l'id del sito nel path e togliere 1
         DatabaseReference myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/");
 
-        Query recentPostsQuery = myRef.orderByChild("id");    //SELECT * FROM Utenti WHERE ruolo="visitatore"
+        Query recentPostsQuery = myRef.limitToLast(1);//.orderByChild("id");    //SELECT * FROM Utenti WHERE ruolo="visitatore"
         recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -226,18 +284,22 @@ public class AggiungiOpera extends AppCompatActivity {
                     try{
                         Opera opera = snapshot.getValue(Opera.class);
                         opere.add(opera);
+
+                        Log.e("Opera id",""+opera.getId());
                     }catch (Exception e){
 
                     }
                 }
 
-                Log.e("size opere",""+opere.size());
+                Log.e("***********************************************size opere",""+opere.size());
 
                if(opere.size()==0){
                    salvaIndice(0);
                }else{
                    salvaIndice(Integer.parseInt(opere.get(opere.size()-1).getId()));
+
                }
+
 
             }
 

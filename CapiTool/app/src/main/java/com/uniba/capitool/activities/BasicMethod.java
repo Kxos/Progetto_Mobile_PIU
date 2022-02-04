@@ -75,6 +75,15 @@ public class BasicMethod extends AppCompatActivity {
         invalidDialogError.show();
     }
 
+    public static AlertDialog.Builder confermaEliminazione(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        builder.setTitle(R.string.eliminaPercorsoTitolo);
+        builder.setMessage(R.string.eliminaPercorsoMessaggio);
+
+        return builder;
+    }
+
 
     /***
      *
