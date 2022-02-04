@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
     <menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
-        <item android:id="@+id/searchOpera"
-            android:icon="@drawable/ic_baseline_search_24"
-            android:title="Search"
+        <item android:id="@+id/aggiungiOpera"
+            android:icon="@drawable/ic_baseline_add_24"
+            android:title="Aggiungi opera"
             app:showAsAction="always"/>
 
     <item android:id="@+id/kebabMenu"
@@ -16,11 +16,11 @@
             android:icon="@drawable/ic_baseline_create_24_black"
             app:showAsAction="ifRoom"/>
 
-        <item
+        <!--<item
             android:id="@+id/aggiungiOpera"
             android:icon="@drawable/ic_baseline_add_circle_outline_24_black"
             app:showAsAction="ifRoom"
-            android:title="Aggiungi Opera" />
+            android:title="Aggiungi Opera" />-->
 
         <item android:id="@+id/eliminaOpere"
             android:title="Elimina Opere"

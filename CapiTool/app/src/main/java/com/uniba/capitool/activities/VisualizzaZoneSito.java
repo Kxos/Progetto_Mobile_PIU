@@ -38,6 +38,7 @@ import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapt
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class VisualizzaZoneSito extends AppCompatActivity{
 
@@ -115,10 +116,63 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                     Log.e("Zona trovata",""+zona.getNome());
                     zone.add(zona);
                 }catch (Exception e){
-                    Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)","");
+                    Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)",""+snapshot.getValue());
 
-//                    String idZona = leggiIdZona(snapshot.getValue().toString());
-//                    recuperaFromDB(idSito);
+
+
+                   int lastIndex=snapshot.getValue().toString().lastIndexOf("id=");
+                   String idZonaCercata=snapshot.getValue().toString().substring(lastIndex+3, snapshot.getValue().toString().length()-1);
+
+                    Map<String, Map<String, Map<String, Object>>> risultato ;
+
+                    risultato= (Map<String, Map<String, Map<String, Object>>>) snapshot.getValue();
+
+                    /***
+                     * Vado a leggere tutti gli indici delle opere della zona
+                     */
+                    List<String> indiciOpere = new ArrayList<>();
+                    String stringaOpere=risultato.get("Opere").toString();
+
+                    for (int i=0; i<risultato.get("Opere").size(); i++){
+
+                        int j=stringaOpere.indexOf("id=")+3;
+                        String indice="";
+
+                        while(stringaOpere.charAt(j) != '}'){
+                            indice=indice+stringaOpere.charAt(j);
+                            j++;
+                        }
+
+                        indiciOpere.add(indice);
+                        stringaOpere=stringaOpere.substring(j);
+                    }
+
+                    /***
+                     * Creo un oggetto di tipo opera per ogni indice opera trovato nel metodo precedente
+                     */
+                    ArrayList<Opera> listaOpereCercate=new ArrayList<>();
+
+                    for(int i=0; i<indiciOpere.size(); i++){
+
+                        Opera operaCercata=new Opera();
+
+                        operaCercata.setTitolo(risultato.get("Opere").get(indiciOpere.get(i)).get("titolo").toString());
+                        operaCercata.setId(risultato.get("Opere").get(indiciOpere.get(i)).get("id").toString());
+                        operaCercata.setIdFoto(risultato.get("Opere").get(indiciOpere.get(i)).get("idFoto").toString());
+                        operaCercata.setDescrizione(risultato.get("Opere").get(indiciOpere.get(i)).get("descrizione").toString());
+
+                        listaOpereCercate.add(operaCercata);
+
+                    }
+
+                    Zona zonaCercata=new Zona();
+
+                    zonaCercata.setId(""+risultato.get("id"));
+                    zonaCercata.setNome(""+risultato.get("nome"));
+                    zonaCercata.setPosizione(""+risultato.get("posizione"));
+                    zonaCercata.setOpere(listaOpereCercate);
+
+                    zone.add(zonaCercata);
 
                     }
                 }
@@ -138,38 +192,24 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                     List<ItemOperaZona> listaOpereZona = new ArrayList<>();
                     try{
                         for(Opera opera: zone.get(i).getOpere()){
-                            //Log.e("zone.get(i).getOpere()", ""+opera.getId());
-
-                                //Log.e("SKIP", "Skip dell'opera null");
 
                                 try{
                                     listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId(), opera.getIdFoto()));
-                                    Log.e("Opera trovata", ""+opera.getTitolo()+"/"+opera.getId());
-                                }catch(Exception e){
-                                    Log.e("Opera trovata", "errore");
-                                }
 
+                                }catch(Exception e){
+                                    Log.e("Errore", "c'è stato un errore nel leggere l'opera");
+                                }
 
                             contatore++;
                         }
                         allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona, zone.get(i).getPosizione()));
                     }catch (Exception e){
-                        Log.e("","Erroreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+
+                        Log.e("Errore","la zona non ha opere");
 
                         allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), null, zone.get(i).getPosizione()));
                     }
-
-
                 }
-
-                //ciclo for per scorrere la lista ottnuta dal db
-                int contatore=0;
-                for(Zona visitatore : zone){
-                    Log.d("Oggetto "+(contatore+1)+" della lista visitatori", ""+visitatore);
-                    contatore++;
-                }
-
-                Log.d("Lunghezza lista della query", String.valueOf(zone.size()));
 
                 setZoneRecycler(allZoneList);
             }
@@ -224,7 +264,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         switch (item.getItemId()){
             case R.id.aggiungiZona:
 
-               // Log.e("ITEMSELECTED", "AGGIUNGI ZONA");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(R.string.writeNewNameZone));
 
@@ -239,7 +278,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         nuovaZona = input.getText().toString();
-                        Log.e("ITEMSELECTED", ""+ nuovaZona);
                         inserisciNuovaZona(nuovaZona);
                     }
                 });
@@ -291,32 +329,10 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         Zona zona= new Zona(nuovaZona);
         zona.setId(key);
 
-        //TODO - togliere 1 di default e mettere sito.getId()
         myRef=database.getReference("Siti/"+sito.getId()+"/Zone").child(key);
-        Log.e("*****************", ""+myRef);
         myRef.setValue(zona);
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.e("Completato", "");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        leggiZoneFromFirebase();
-//    }
 
     public SitoCulturale getSito(){
         return sito;

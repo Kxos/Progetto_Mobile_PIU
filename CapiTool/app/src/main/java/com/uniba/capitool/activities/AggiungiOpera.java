@@ -1,12 +1,15 @@
 package com.uniba.capitool.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
@@ -22,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +49,6 @@ import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
-import androidmads.library.qrgenearator.QRGSaver;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -74,6 +78,11 @@ public class AggiungiOpera extends AppCompatActivity {
     Bitmap bitmap;
     QRGEncoder qrgEncoder;
     String qrCodeString;
+
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 284;
+    Uri percorsoImmagine = null;
+    String chiave = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +148,6 @@ public class AggiungiOpera extends AppCompatActivity {
 
                 if(erroreDatiCompilati==false){
 
-
                     saveChanges();
                    // onBackPressed();
                 }
@@ -152,29 +160,47 @@ public class AggiungiOpera extends AppCompatActivity {
 
     private void saveChanges() {
 
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef= database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 
-        Long tsLong = System.currentTimeMillis()/1000;
-        String ts = tsLong.toString();
-        String key = myRef.push().getKey();
+        } else {
+            // Permission has already been granted
 
-        generateQRCode();
+            try {
 
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                DatabaseReference myRef= database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera);
 
-        Opera opera=new Opera(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key);
-        myRef.setValue(opera);
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+                String key = myRef.push().getKey();
 
-        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
-        StorageReference qrReference = FirebaseStorage.getInstance().getReference().child("QRCodeOpere").child(key);
+                generateQRCode();
 
-        qrReference.putFile(Uri.parse(bitMapToString(bitmap))).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                chiave = key;
 
-            }
-        });
+                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "Title", null);
+                percorsoImmagine = Uri.parse(path);
+
+                StorageReference qrReference = FirebaseStorage.getInstance().getReference().child("QRCodeOpere").child(chiave);
+
+                qrReference.putFile(percorsoImmagine).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                    }
+                });
+
+                Opera opera=new Opera(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key);
+                myRef.setValue(opera);
+
+                StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
+
                /* final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
                 pd.setMessage("Caricamento");
                 pd.show();*/
@@ -183,25 +209,55 @@ public class AggiungiOpera extends AppCompatActivity {
 //                           Toast.makeText(AggiungiOpera.this, getString(R.string.correctEnterOpera), Toast.LENGTH_LONG).show();
 
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                try {
-                    fileReference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        try {
+                            fileReference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                            //pd.dismiss();
-                            Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
+                                    //pd.dismiss();
+                                    Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
 
-                            //Intent eliminaOpere = new Intent(AggiungiOpera.this, VisualizzaZoneSito.class);
+                                    //Intent eliminaOpere = new Intent(AggiungiOpera.this, VisualizzaZoneSito.class);
 
 //                           Bundle datiZona = new Bundle();
 //                           datiZona.putSerializable("sito",sito);
 //                           datiZona.putSerializable("utente", utente);
 //                           eliminaOpere.putExtras(datiZona);
 //                           startActivity(eliminaOpere);
+                                    Intent backVisualizzaZona= new Intent(AggiungiOpera.this, VisualizzaZona.class);
+                                    Bundle dati = new Bundle();
+                                    dati.putSerializable("sito", sito);
+                                    dati.putSerializable("utente", utente);
+                                    dati.putString("nomeZona", nomeZona);
+                                    dati.putString("idZona", allZone.getId());
+
+                                    List<ItemOperaZona> newOpereList= new ArrayList<>();
+                                    if(nextIdOpera==1){
+                                        newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                                    }else{
+
+                                        newOpereList=allZone.getListaOpereZona();
+                                        newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                                    }
+
+                                    allZone.setListaOpereZona(newOpereList);
+                                    dati.putSerializable("allZone", allZone);
+                                    backVisualizzaZona.putExtras(dati);
+                                    finish();
+                                    startActivity(backVisualizzaZona);
+                                    Log.e("********************************************nextId",""+nextIdOpera);
+                                }
+
+                            });
+                            Log.e("********************************************nextId",""+nextIdOpera);
+                        }catch (Exception e){
+
+                            Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
+
                             Intent backVisualizzaZona= new Intent(AggiungiOpera.this, VisualizzaZona.class);
                             Bundle dati = new Bundle();
                             dati.putSerializable("sito", sito);
@@ -210,7 +266,7 @@ public class AggiungiOpera extends AppCompatActivity {
                             dati.putString("idZona", allZone.getId());
 
                             List<ItemOperaZona> newOpereList= new ArrayList<>();
-                            if(nextIdOpera==1){
+                            if(nextIdOpera==0){
                                 newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
                             }else{
 
@@ -225,36 +281,6 @@ public class AggiungiOpera extends AppCompatActivity {
                             startActivity(backVisualizzaZona);
                             Log.e("********************************************nextId",""+nextIdOpera);
                         }
-
-                    });
-                    Log.e("********************************************nextId",""+nextIdOpera);
-                }catch (Exception e){
-
-                    Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
-
-                    Intent backVisualizzaZona= new Intent(AggiungiOpera.this, VisualizzaZona.class);
-                    Bundle dati = new Bundle();
-                    dati.putSerializable("sito", sito);
-                    dati.putSerializable("utente", utente);
-                    dati.putString("nomeZona", nomeZona);
-                    dati.putString("idZona", allZone.getId());
-
-                    List<ItemOperaZona> newOpereList= new ArrayList<>();
-                    if(nextIdOpera==0){
-                        newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
-                    }else{
-
-                        newOpereList=allZone.getListaOpereZona();
-                        newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
-                    }
-
-                    allZone.setListaOpereZona(newOpereList);
-                    dati.putSerializable("allZone", allZone);
-                    backVisualizzaZona.putExtras(dati);
-                    finish();
-                    startActivity(backVisualizzaZona);
-                    Log.e("********************************************nextId",""+nextIdOpera);
-                }
 
 
 
@@ -287,15 +313,19 @@ public class AggiungiOpera extends AppCompatActivity {
 //                    }
 //                });
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
+        }
 
     }
 
@@ -374,7 +404,8 @@ public class AggiungiOpera extends AppCompatActivity {
 //        }
 //    }
 
-    private void generateQRCode(){
+    private Uri generateQRCode(){
+
         inputValue = idZona + nextIdOpera;
         if (inputValue.length() > 0) {
             WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -394,6 +425,8 @@ public class AggiungiOpera extends AppCompatActivity {
                 bitmap = qrgEncoder.encodeAsBitmap();
                 qrImage.setImageBitmap(bitmap);
 
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
             } catch (WriterException e) {
                 Log.v(TAG, e.toString());
@@ -402,7 +435,7 @@ public class AggiungiOpera extends AppCompatActivity {
             edtValue.setError("Required");
         }
 
-
+        return percorsoImmagine;
     }
     public String bitMapToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -421,6 +454,184 @@ public class AggiungiOpera extends AppCompatActivity {
         } catch (Exception e) {
             e.getMessage();
             return null;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted!
+
+                    try {
+
+                        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                        DatabaseReference myRef= database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera);
+
+                        Long tsLong = System.currentTimeMillis()/1000;
+                        String ts = tsLong.toString();
+                        String key = myRef.push().getKey();
+
+                        generateQRCode();
+
+                        chiave = key;
+
+                        String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "Title", null);
+                        percorsoImmagine = Uri.parse(path);
+
+                        StorageReference qrReference = FirebaseStorage.getInstance().getReference().child("QRCodeOpere").child(chiave);
+
+                        qrReference.putFile(percorsoImmagine).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                            }
+                        });
+
+                        Opera opera=new Opera(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key);
+                        myRef.setValue(opera);
+
+                        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
+
+               /* final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
+                pd.setMessage("Caricamento");
+                pd.show();*/
+
+//                           //pd.dismiss();
+//                           Toast.makeText(AggiungiOpera.this, getString(R.string.correctEnterOpera), Toast.LENGTH_LONG).show();
+
+
+                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                try {
+                                    fileReference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                                            //pd.dismiss();
+                                            Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
+
+                                            //Intent eliminaOpere = new Intent(AggiungiOpera.this, VisualizzaZoneSito.class);
+
+//                           Bundle datiZona = new Bundle();
+//                           datiZona.putSerializable("sito",sito);
+//                           datiZona.putSerializable("utente", utente);
+//                           eliminaOpere.putExtras(datiZona);
+//                           startActivity(eliminaOpere);
+                                            Intent backVisualizzaZona= new Intent(AggiungiOpera.this, VisualizzaZona.class);
+                                            Bundle dati = new Bundle();
+                                            dati.putSerializable("sito", sito);
+                                            dati.putSerializable("utente", utente);
+                                            dati.putString("nomeZona", nomeZona);
+                                            dati.putString("idZona", allZone.getId());
+
+                                            List<ItemOperaZona> newOpereList= new ArrayList<>();
+                                            if(nextIdOpera==1){
+                                                newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                                            }else{
+
+                                                newOpereList=allZone.getListaOpereZona();
+                                                newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                                            }
+
+                                            allZone.setListaOpereZona(newOpereList);
+                                            dati.putSerializable("allZone", allZone);
+                                            backVisualizzaZona.putExtras(dati);
+                                            finish();
+                                            startActivity(backVisualizzaZona);
+                                            Log.e("********************************************nextId",""+nextIdOpera);
+                                        }
+
+                                    });
+                                    Log.e("********************************************nextId",""+nextIdOpera);
+                                }catch (Exception e){
+
+                                    Toast.makeText(AggiungiOpera.this, "Opera aggiunta correttamente", Toast.LENGTH_LONG).show();
+
+                                    Intent backVisualizzaZona= new Intent(AggiungiOpera.this, VisualizzaZona.class);
+                                    Bundle dati = new Bundle();
+                                    dati.putSerializable("sito", sito);
+                                    dati.putSerializable("utente", utente);
+                                    dati.putString("nomeZona", nomeZona);
+                                    dati.putString("idZona", allZone.getId());
+
+                                    List<ItemOperaZona> newOpereList= new ArrayList<>();
+                                    if(nextIdOpera==0){
+                                        newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                                    }else{
+
+                                        newOpereList=allZone.getListaOpereZona();
+                                        newOpereList.add(new ItemOperaZona(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key));
+                                    }
+
+                                    allZone.setListaOpereZona(newOpereList);
+                                    dati.putSerializable("allZone", allZone);
+                                    backVisualizzaZona.putExtras(dati);
+                                    finish();
+                                    startActivity(backVisualizzaZona);
+                                    Log.e("********************************************nextId",""+nextIdOpera);
+                                }
+
+
+
+
+//                myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/titolo");
+//                myRef.setValue(titoloOpera.getText().toString());
+//
+//                myRef =database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/id");
+//                myRef.setValue(""+nextIdOpera);
+//
+//                myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/descrizione");
+//                myRef.setValue(descrizioneOpera.getText().toString());
+//
+//                myRef = database.getReference("Siti/"+ sito.getId() + "/Zone/" + idZona + "/Opere/" + nextIdOpera + "/idFoto");
+//                myRef.setValue(key);
+
+
+
+
+
+//                myRef.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        AggiungiOpera.super.onBackPressed();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                } else {
+                    // permission denied!
+
+                    Toast.makeText(getApplicationContext(), R.string.CreatingOpera, Toast.LENGTH_SHORT).show();
+
+                }
+                return;
+            }
+
         }
     }
 

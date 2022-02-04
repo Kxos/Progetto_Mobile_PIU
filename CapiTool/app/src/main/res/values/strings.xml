@@ -9,6 +9,7 @@
     <string name="Si">Yes</string>
     <string name="No">No</string>
 
+    <string name="CreatingOpera">You need to grant permission if you want to create an Opera</string>
 
     <string name="siteManagement">Site Management</string>
     <string name="mySite">My Site</string>
