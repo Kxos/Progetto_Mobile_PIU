@@ -129,7 +129,7 @@ public class EliminaOpere extends AppCompatActivity {
                 }
             }
 
-            if(allZone.getListaOpereZona().size()!=1 && listaOpereChecked.get(i).getId().equals("0")){
+            if(allZone.getListaOpereZona().size()!=1 && listaOpereChecked.get(i).getId().equals("0") && allZone.getListaOpereZona().size()!=listaOpereChecked.size()){
                spostareOpera=true;
             }
         }

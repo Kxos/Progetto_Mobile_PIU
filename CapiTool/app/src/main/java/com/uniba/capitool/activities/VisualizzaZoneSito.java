@@ -49,7 +49,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
     Utente utente;
     List<AllZona> zoneSito;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +57,9 @@ public class VisualizzaZoneSito extends AppCompatActivity{
         Bundle dati = getIntent().getExtras();
 
         if(dati!=null){
+
             sito = (SitoCulturale) dati.getSerializable("sito");
             utente = (Utente) dati.getSerializable("utente");
-
-            Log.e("***********", ""+utente.getUid()+" / "+sito.getNome());
 
         }else{
            Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
@@ -97,11 +95,11 @@ public class VisualizzaZoneSito extends AppCompatActivity{
     }
 
     private void leggiZoneFromFirebase() {
+
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-       //TODO mettere l'id del sito nel path e togliere 1
         DatabaseReference myRef = database.getReference("/Siti/"+sito.getId());
 
-        Query recentPostsQuery = myRef.child("Zone").orderByChild("posizione");     //SELECT * FROM Utenti WHERE ruolo="visitatore"
+        Query recentPostsQuery = myRef.child("Zone").orderByChild("posizione");
         recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -109,19 +107,14 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                 List<AllZona> allZoneList=new ArrayList<>();
                 List<Zona> zone=new ArrayList<>();
 
-//                try{}catch (Exception e){}
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){        //un for che legge tutti i risultati della query e li formatta esattamente come se fossero oggetti di classe Zona
                 try{
+
                     Zona zona=snapshot.getValue(Zona.class);
-                    Log.e("Zona trovata",""+zona.getNome());
                     zone.add(zona);
+
                 }catch (Exception e){
                     Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)",""+snapshot.getValue());
-
-
-
-                   int lastIndex=snapshot.getValue().toString().lastIndexOf("id=");
-                   String idZonaCercata=snapshot.getValue().toString().substring(lastIndex+3, snapshot.getValue().toString().length()-1);
 
                     Map<String, Map<String, Map<String, Object>>> risultato ;
 
@@ -177,8 +170,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                     }
                 }
 
-
-
                 /***
                  * Passo gli oggetti salvati nella lista zone, nella lista allZoneList
                  * Il primo for scorre le zone
@@ -186,21 +177,17 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                  * Salto il salvataggio della prima opera perchè è null
                  */
                 for(int i=0; i<zone.size(); i++){
-                    int contatore=0;
-                    Log.e("", ""+zone.get(i).getNome());
 
                     List<ItemOperaZona> listaOpereZona = new ArrayList<>();
+
                     try{
                         for(Opera opera: zone.get(i).getOpere()){
-
                                 try{
                                     listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId(), opera.getIdFoto()));
 
                                 }catch(Exception e){
                                     Log.e("Errore", "c'è stato un errore nel leggere l'opera");
                                 }
-
-                            contatore++;
                         }
                         allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona, zone.get(i).getPosizione()));
                     }catch (Exception e){
@@ -241,7 +228,6 @@ public class VisualizzaZoneSito extends AppCompatActivity{
             RelativeLayout emptyState=findViewById(R.id.layoutEmptyStateSito);
             emptyState.setVisibility(View.VISIBLE);
         }
-
 
     }
 

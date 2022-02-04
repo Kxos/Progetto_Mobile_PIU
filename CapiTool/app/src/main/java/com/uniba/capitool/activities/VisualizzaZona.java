@@ -146,5 +146,5 @@ public class VisualizzaZona extends AppCompatActivity {
 
         gridView.setAdapter(new ImageAdapter(allZone.getListaOpereZona(), this));
     }
-    
+
 }
