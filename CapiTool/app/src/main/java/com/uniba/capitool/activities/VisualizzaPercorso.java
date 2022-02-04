@@ -32,7 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
-import com.uniba.capitool.classes.CardMioPercorsoAdapter;
 import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.Percorso;
@@ -50,6 +49,7 @@ public class VisualizzaPercorso extends AppCompatActivity {
     TextView descrizionePercorso;
     List<AllZona> zoneSito;
     RecyclerView mainZoneRecycler;
+    String FragmentChiamante;
     MainRecyclerAdapterVisualizzaPercorso mainRecyclerAdapter;
 
 
@@ -68,6 +68,7 @@ public class VisualizzaPercorso extends AppCompatActivity {
 
         if(dati!=null){
             percorso = (CardPercorso) dati.getSerializable("percorso");
+            FragmentChiamante = dati.getString("FragmentChiamato");
 
             nomeSito.setText(BasicMethod.setUpperPhrase(percorso.getNomeSitoAssociato()));
             descrizionePercorso.setText(percorso.getDescrizione());
@@ -88,6 +89,11 @@ public class VisualizzaPercorso extends AppCompatActivity {
             }
         });
 
+        int posizioneUnderscore = percorso.getId().indexOf("_");
+
+        if(posizioneUnderscore != -1){
+            percorso.setId(percorso.getId().substring(0, posizioneUnderscore));
+        }
 
         leggiOpere(percorso.getId());
     }
@@ -273,9 +279,15 @@ public class VisualizzaPercorso extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.condividi_button, menu);
+        if(FragmentChiamante.equals("Preferiti") || FragmentChiamante.equals("Consigliati")){
+            return false;
 
-        return super.onCreateOptionsMenu(menu);
+        }else{
+            getMenuInflater().inflate(R.menu.condividi_button, menu);
+
+            return super.onCreateOptionsMenu(menu);
+        }
+
     }
 
     @Override

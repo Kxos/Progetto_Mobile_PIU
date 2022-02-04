@@ -23,8 +23,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
-import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.CardPercorsoAdapter;
+import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.Percorso;
 
 import java.util.ArrayList;
@@ -94,7 +94,7 @@ public class FragmentConsigliati extends Fragment {
         }
 
         // Crea un adapter passando i Percorsi trovati
-        CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "Consigliati");
+        CardPercorsoAdapter adapter = new CardPercorsoAdapter(listaPercorsi, "Consigliati", view, this.getContext());
 
         // Lega l'Adapter alla recyclerview per popolare i Percorsi
         rvCardsSiti.setAdapter(adapter);

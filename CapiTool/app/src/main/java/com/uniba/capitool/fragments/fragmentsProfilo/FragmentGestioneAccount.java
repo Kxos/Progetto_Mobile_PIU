@@ -83,7 +83,7 @@ public class FragmentGestioneAccount extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(!isFilled(psw)) {
-                    psw.setError("Campo obbligatorio");
+                    psw.setError(getString(R.string.requiredField));
                 }
             }
         });
@@ -96,16 +96,16 @@ public class FragmentGestioneAccount extends Fragment {
             public void onClick(View v) {
 
                 if(!isFilled(psw)) {
-                    psw.setError("Campo obbligatorio");
+                    psw.setError(getString(R.string.requiredField));
                 }
                 else {
                     if(!confermaInformativa.isChecked()) {
-                        confermaInformativa.setError("Devi confermare di aver letto l'informativa");
+                        confermaInformativa.setError(getString(R.string.boxInfoNotChecked));
                     }
                     else {
                         if(utente.getRuolo().equals("curatore") && riferimentoSnapshotSitoAssociato != null) {
                             Log.d("TAG", "Sito ancora presente");
-                            Toast.makeText(getActivity(), "Impossibile eliminare l'account. Delega il tuo sito oppure eliminalo.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), getString(R.string.erroreDeleteAccount), Toast.LENGTH_LONG).show();
                         }
                         else {
                             Log.e("TAG", "ramo else attivo");
@@ -135,20 +135,20 @@ public class FragmentGestioneAccount extends Fragment {
                                                 if (task.isSuccessful()) {
 
                                                     Log.d("TAG", "Account eliminato");
-                                                    Toast.makeText(getActivity(), "Account eliminato correttamente", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getActivity(), getString(R.string.correctDeleteAccount), Toast.LENGTH_LONG).show();
 
                                                     Intent login = new Intent(getActivity(), Login.class);
                                                     startActivity(login);
 
                                                 } else {
                                                     Log.d("TAG", "Errore eliminazione account");
-                                                    Toast.makeText(getActivity(), "C'è stato un errore. Riprova", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getActivity(), getString(R.string.errorOccurred), Toast.LENGTH_LONG).show();
                                                 }
                                             }
                                         });
                                     } else {
                                         Log.d("TAG", "Error auth failed");
-                                        psw.setError("Password errata");
+                                        psw.setError(getString(R.string.errorPsw));
                                     }
                                 }
                             });

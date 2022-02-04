@@ -79,6 +79,9 @@
     <string name="addSiteToolbar">"Aggiungi Sito"</string>
 
     <string name="pswReq1">"Inserisci una password con almeno 6 caratteri"</string>
+    <string name="pswReq2">"Inserisci almeno una lettera Maiuscola"</string>
+    <string name="pswReq3">"Inserisci almeno una lettera minuscola"</string>
+    <string name="pswReq4">"Inserisci almeno una carattere speciale (ad es. !/*+)"</string>
 
     <string name="errorDelegate">"Errore nella delega, qualcosa è andato storto :S"</string>
     <string name="errorDelegate2">"Non puoi delegare un sito ad un utente non curatore"</string>
@@ -113,6 +116,28 @@
     <string name="errorSiteName">"Inserisci un nome che sia valido e non vuoto"</string>
 
     <string name="loading">"Caricamento"</string>
+
+    <string name="personalData">"Dati Personali"</string>
+    <string name="security">"Sicurezza"</string>
+    <string name="accountMngt">"Gestione Account"</string>
+
+    <string name="errorLoadingDataMsg">"C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login"</string>
+    <string name="errorLoadingDataDscr">"Errore caricamento dati"</string>
+
+    <string name="insertValidName">"Inserisci un nome valido"</string>
+    <string name="insertValidSurname">"Inserisci un cognome valido"</string>
+    <string name="correctUpdatePersonalData">"Dati personali aggiornati correttamente"</string>
+    <string name="correctUpdatePhotoProfile">"Foto del profilo aggiornata correttamente"</string>
+
+    <string name="requiredField">"Campo obbligatorio"</string>
+    <string name="erroreDeleteAccount">"Impossibile eliminare l'account. Delega il tuo sito oppure eliminalo"</string>
+    <string name="correctDeleteAccount">"Account eliminato correttamente"</string>
+    <string name="errorOccurred">"C'è stato un errore. Riprova"</string>
+    <string name="errorPsw">"Password errata"</string>
+
+
+
+
 
 
 
