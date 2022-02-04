@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,6 +30,7 @@ public class VisualizzaOpera extends AppCompatActivity {
         ImageView immagine = findViewById(R.id.imageViewVisualizzaOpera);
         TextView testo = findViewById(R.id.textView12);
         TextView titoloOpera = findViewById(R.id.titoloNomeOpera);
+        CardView qrCode = findViewById(R.id.qrCodeButton);
         Bundle dati = getIntent().getExtras();
         ImageView esci = findViewById(R.id.esci);
         esci.setClickable(true);
@@ -52,7 +54,17 @@ public class VisualizzaOpera extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        qrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO 
+                Log.e("VisualizzaOpera","cliccato QRCODE");
+            }
+        });
     }
+
+
 
     public void setImmagineOperaFromDB(String idOpera, Context context, ImageView imageViewOpera){
 
