@@ -195,7 +195,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         eliminaPercorso(cardPercorso.getId(), holder.getAdapterPosition());
-                        Log.e("onClick: ", ""+cardIdPercorso.getText() );
+                        //Log.e("onClick: ", ""+cardIdPercorso.getText() );
                         dialogInterface.cancel();
                     }
                 });
@@ -299,7 +299,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
                     if(pubblico.getText().toString().equals("true")){
                         boolean_public=true;
                     }
-                    Log.e("Percorso cliccato", ""+getAdapterPosition()+""+id.getText().toString());
+                    //Log.e("Percorso cliccato", ""+getAdapterPosition()+""+id.getText().toString());
                     Bundle b = new Bundle();
 
                     CardPercorso percorsoSelezionato=new CardPercorso(id.getText().toString(), nome.getText().toString(),
@@ -315,36 +315,10 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
                 }
             });
 
-
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if(mListener!=null){
-//                        int position=getAdapterPosition();
-//                        if(position!=RecyclerView.NO_POSITION){
-//                            mListener.onEventClick(position);
-//                        }
-//                    }
-//                }
-//            });
-
         }
 
         @Override
         public void onClick(View v) {
-
-            Log.e("RECYCLER", ""+getAdapterPosition()+""+descrizione.getText().toString());
-
-//            Intent visualizzaZona = new Intent(v.getContext(), VisualizzaZona.class);
-//            Bundle dati = new Bundle();
-//            dati.putSerializable("sito", ((VisualizzaZoneSito)v.getContext()).getSito());
-//            dati.putSerializable("utente", ((VisualizzaZoneSito)v.getContext()).getUtente());
-//            dati.putString("nomeZona", nomeZona.getText().toString());
-//            visualizzaZona.putExtras(dati);
-//
-//
-//
-//            ((VisualizzaZoneSito)v.getContext()).startActivity(visualizzaZona);
 
         }
     }
