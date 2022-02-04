@@ -107,18 +107,18 @@ public class FragmentRegistraDatiPersonali extends Fragment {
                 boolean erroreDatiPersonali=false;
 
                 if(nome.getText().toString().equals("")){
-                    nome.setError("Inserisci il tuo nome");
+                    nome.setError(getString(R.string.insertYourName));
                     erroreDatiPersonali=true;
                 }else if(cognome.getText().toString().equals("")){
-                    cognome.setError("Inserisci il tuo cognome");
+                    cognome.setError(getString(R.string.insertYourSurname));
                     erroreDatiPersonali=true;
                 }else if(dataNascita.getText().toString().equals("")){
-                    dataNascita.setError("Inserisci la tua data di nascita");
+                    dataNascita.setError(getString(R.string.insertYourBirthDate));
                     erroreDatiPersonali=true;
                 }
 
                 if(ruoloTrovato.equals("guida") && numeroPatentino.getText().toString().equals("")){
-                    numeroPatentino.setError("Inserisci il tuo numero di patentino");
+                    numeroPatentino.setError(getString(R.string.insertYourLicenseNumber));
                     erroreDatiPersonali=true;
                 }
 

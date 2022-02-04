@@ -94,7 +94,7 @@ CheckBox mostraPassword;
 
                 //controllo se la mail è sicura
                 if(BasicMethod.isEmailValid(email.getText().toString())==false){
-                        email.setError("Inserisci una email valida");
+                        email.setError(getString(R.string.insertValidEmail));
                         erroreEmail=true;
                 }
 
@@ -104,7 +104,7 @@ CheckBox mostraPassword;
                 if(messaggio==null){      // Significa che la password è forte e non ho ricevuto messaggi di errore in ritorno /
 
                     if(password.getText().toString().equals(confermaPassword.getText().toString())==false){
-                        confermaPassword.setError("La password non corrisponde");
+                        confermaPassword.setError(getString(R.string.missmatchPsw));
                         errorePassword=true;
                     }
                 }else{
@@ -152,7 +152,7 @@ CheckBox mostraPassword;
                         } else {
 
                             Log.e("TAG", "Is Old User!");
-                            email.setError("Utente già esistente");
+                            email.setError(getString(R.string.userAlredyExists));
                             confermaCredenziali(false);
                         }
                     }

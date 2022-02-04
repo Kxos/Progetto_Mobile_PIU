@@ -106,7 +106,7 @@ public class FragmentRegistraRuolo extends Fragment {
 
                 }else{
                     erroreRuolo=true;
-                    BasicMethod.alertDialog(getActivity(), "Seleziona un ruolo tra Curatore, Visitatore o Guida Turistica", "Ruolo non selezionato", "OK");
+                    BasicMethod.alertDialog(getActivity(), getString(R.string.selectRole), getString(R.string.roleNotSelected), "OK");
                 }
 
                 if(erroreRuolo==false){
