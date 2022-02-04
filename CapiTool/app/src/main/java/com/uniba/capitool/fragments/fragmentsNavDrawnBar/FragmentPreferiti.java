@@ -71,7 +71,6 @@ public class FragmentPreferiti extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                // TODO - VISUALIZZARE I SOLI PERCORSI PREFERITI DALL'UTENTE CORRENTE
                 popolaPercorsiInRecyclerView(editable.toString(), view);
             }
         });

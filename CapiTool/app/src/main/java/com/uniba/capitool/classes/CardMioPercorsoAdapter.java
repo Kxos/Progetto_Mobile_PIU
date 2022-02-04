@@ -1,6 +1,8 @@
 package com.uniba.capitool.classes;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
+import com.uniba.capitool.activities.EliminaOpere;
 import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.activities.VisualizzaPercorso;
 
@@ -40,6 +44,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
     private String fragment;
     private View view;
     private Context context;
+    private Activity activity;
     private CardMioPercorsoAdapter.OnEventClickListener mListener;
 
     public interface OnEventClickListener{
@@ -67,6 +72,16 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
         this.view = view;
         this.context = context;
     }
+
+    public CardMioPercorsoAdapter(ArrayList<CardPercorso> listaPercorsi, String fragment, Activity activity, View view, Context context) {
+        this.listaPercorsi = listaPercorsi;
+        this.fragment = fragment;
+        this.activity = activity;
+        this.context = context;
+        this.view = view;
+    }
+
+
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
@@ -130,7 +145,6 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
             itemVisibilityFalsePercorso.setVisibility(View.VISIBLE);
 
         }
-
 
 
         ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
@@ -199,7 +213,6 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
     }
 
 
-
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
@@ -223,6 +236,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
         public ImageView itemVisibilityFalsePercorso;
         public ImageView itemFavouriteBorder;
         public ImageView itemFavourite;
+        public ImageView itemEliminaPercorso;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -239,11 +253,13 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
             nomeSitoAssociato = (TextView) itemView.findViewById(R.id.itemNomeSitoAssociato);
             cittaSitoAssociato = (TextView) itemView.findViewById(R.id.itemCittaSitoAssociato);
             pubblico = (TextView) itemView.findViewById(R.id.itemStatoPubblico);
-            itemVisibilityTruePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityTruePercorso);
-            itemVisibilityFalsePercorso = (ImageView)itemView.findViewById(R.id.itemVisibilityFalsePercorso);
-            itemFavouriteBorder = (ImageView)itemView.findViewById(R.id.itemFavouriteBorder);
-            itemFavourite = (ImageView)itemView.findViewById(R.id.itemFavourite);
+            itemVisibilityTruePercorso = (ImageView) itemView.findViewById(R.id.itemVisibilityTruePercorso);
+            itemVisibilityFalsePercorso = (ImageView) itemView.findViewById(R.id.itemVisibilityFalsePercorso);
+            itemFavouriteBorder = (ImageView) itemView.findViewById(R.id.itemFavouriteBorder);
+            itemFavourite = (ImageView) itemView.findViewById(R.id.itemFavourite);
+            //itemEliminaPercorso = (ImageView) itemView.findViewById(R.id.itemEliminaPercorso);
 
+            // Clicco la Card per percorso per visualizzarne i Dettagli
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -266,6 +282,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
 
                 }
             });
+
 
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -476,6 +493,62 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
     }
     /** FINE
      * ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+    /***
+     * Elimina un Percorso scelto dal DB
+     *
+     * @param idPercorso:
+     * @param position: indice che indica la CardPercorso selezionata dalla listaPercorsi
+     */
+    private void eliminaPercorso(String idPercorso, int position) {
+
+        final Percorso[] percorsoDaEliminare = {new Percorso()};
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        recentPostsQuery = myRef.child("Percorsi").orderByChild("id").equalTo(idPercorso);     //SELECT * FROM Percorsi WHERE id LIKE "xyz"
+        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    percorsoDaEliminare[0] = snapshot.getValue(Percorso.class);
+
+                }
+
+                // Rimuove il Percorso dalla lista
+                listaPercorsi.remove(position);
+
+                //Aggiorna la RecyclerView
+                RecyclerView rvCardsSiti = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
+                CardMioPercorsoAdapter adapter = new CardMioPercorsoAdapter(listaPercorsi, "MieiPercorsi", view, context);
+                rvCardsSiti.setAdapter(adapter);
+                rvCardsSiti.setLayoutManager(new LinearLayoutManager(context));
+
+                // Rimuove il Percorso dal DB
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                DatabaseReference myRef;
+
+                myRef = database.getReference("/Percorsi/"+percorsoDaEliminare[0].getId());
+
+                myRef.removeValue();
+
+                Toast.makeText((activity).getApplicationContext(), R.string.percorsoEliminato, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+            }
+        });
+
+    }
 
     /***
      * Imposta l'ImageView del cuore a Pieno se il Percorso è presente nei preferiti dell'utente corrente

@@ -239,7 +239,7 @@ public class FragmentMieiPercorsi extends Fragment {
         if(!listaPercorsi.isEmpty()){
 
             // Crea un adapter passando i Percorsi trovati
-            adapter = new CardMioPercorsoAdapter(listaPercorsi, "MieiPercorsi");
+            adapter = new CardMioPercorsoAdapter(listaPercorsi, "MieiPercorsi", getActivity(), view, this.getContext());
 
             // Lega l'Adapter alla recyclerview per popolare i Percorsi
             rvCardsPercorsi.setAdapter(adapter);

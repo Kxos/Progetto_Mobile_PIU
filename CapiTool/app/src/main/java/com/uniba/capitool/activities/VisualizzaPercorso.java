@@ -303,4 +303,5 @@ public class VisualizzaPercorso extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
