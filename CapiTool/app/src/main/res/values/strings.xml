@@ -129,6 +129,13 @@
     <string name="correctUpdatePhotoProfile">"Foto del profilo aggiornata correttamente"</string>
 
 
+    <string name="requiredField">"Required field"</string>
+    <string name="erroreDeleteAccount">"Unable to delete account. Delegate your site or delete it"</string>
+    <string name = "correctDeleteAccount"> "Account successfully deleted" </string>
+    <string name = "errorOccurred"> "There was an error. Please try again" </string>
+    <string name = "errorPsw"> "Wrong password" </string>
+
+
 
 
 

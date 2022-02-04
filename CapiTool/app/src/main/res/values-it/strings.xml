@@ -129,6 +129,13 @@
     <string name="correctUpdatePersonalData">"Dati personali aggiornati correttamente"</string>
     <string name="correctUpdatePhotoProfile">"Foto del profilo aggiornata correttamente"</string>
 
+    <string name="requiredField">"Campo obbligatorio"</string>
+    <string name="erroreDeleteAccount">"Impossibile eliminare l'account. Delega il tuo sito oppure eliminalo"</string>
+    <string name="correctDeleteAccount">"Account eliminato correttamente"</string>
+    <string name="errorOccurred">"C'è stato un errore. Riprova"</string>
+    <string name="errorPsw">"Password errata"</string>
+
+
 
 
 
