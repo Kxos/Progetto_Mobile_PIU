@@ -1,8 +1,6 @@
 package com.uniba.capitool.fragments.fragmentsNavDrawnBar;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,11 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
-
-import android.widget.GridView;
-import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
 
@@ -22,8 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,11 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.BasicMethod;
-import com.uniba.capitool.classes.CardMioPercorsoAdapter;
+import com.uniba.capitool.classes.CardPercorsoAdapter;
 import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.Percorso;
 import com.uniba.capitool.classes.Utente;
-import com.uniba.capitool.fragments.fragmentsAggiungiPercorso.FragmentSelezionaOpere;
 
 import java.util.ArrayList;
 
@@ -55,7 +46,7 @@ public class FragmentMieiPercorsi extends Fragment {
 
     final ArrayList<CardPercorso> listaPercorsi = new ArrayList<>();
 
-    CardMioPercorsoAdapter adapter;
+    CardPercorsoAdapter adapter;
     RecyclerView rvCardsPercorsi;
 
     @Override
@@ -232,14 +223,14 @@ public class FragmentMieiPercorsi extends Fragment {
      *
      * @param listaPercorsi: Lita di tutti i Percorsi di un Utente
      */
-    public CardMioPercorsoAdapter popolaPercorsiInRecyclerView(ArrayList<CardPercorso> listaPercorsi, View view){
+    public CardPercorsoAdapter popolaPercorsiInRecyclerView(ArrayList<CardPercorso> listaPercorsi, View view){
 
         rvCardsPercorsi = (RecyclerView) view.findViewById(R.id.recyclerViewPercorsi);
 
         if(!listaPercorsi.isEmpty()){
 
             // Crea un adapter passando i Percorsi trovati
-            adapter = new CardMioPercorsoAdapter(listaPercorsi, "MieiPercorsi", getActivity(), view, this.getContext());
+            adapter = new CardPercorsoAdapter(listaPercorsi, "MieiPercorsi", getActivity(), view, this.getContext());
 
             // Lega l'Adapter alla recyclerview per popolare i Percorsi
             rvCardsPercorsi.setAdapter(adapter);

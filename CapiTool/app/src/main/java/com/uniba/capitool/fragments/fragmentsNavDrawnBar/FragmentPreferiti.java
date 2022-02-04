@@ -9,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,8 +24,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.BasicMethod;
-import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.CardPercorsoAdapter;
+import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.Percorso;
 
 import java.util.ArrayList;
