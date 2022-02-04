@@ -1,5 +1,7 @@
 package com.uniba.capitool.fragments.fragmentsModificaSito;
 
+import static com.uniba.capitool.activities.BasicMethod.limitDigit;
+
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -10,6 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,6 +61,21 @@ public class FragmentModificaInfoSito extends Fragment {
     EditText indirizzo;
     int hour, minute;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private String blockCharacterSet = "- ";
+
+
+    private InputFilter filter = new InputFilter() {
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +102,7 @@ public class FragmentModificaInfoSito extends Fragment {
         orarioApertura.setText(sitoCulturale.getOrarioApertura());
         costoIngresso.setText(sitoCulturale.getCostoBiglietto());
         indirizzo.setText(sitoCulturale.getIndirizzo());
-
+        costoIngresso.setFilters(new InputFilter[] { filter });
 
         nomeCitta.addTextChangedListener(new TextWatcher() {
             @Override
@@ -144,7 +163,7 @@ public class FragmentModificaInfoSito extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                sitoCulturale.setCostoBiglietto(costoIngresso.getText().toString());
+                sitoCulturale.setCostoBiglietto( costoIngresso.getText().toString());
                 ((ModificaSito)getActivity()).setSito(sitoCulturale);
             }
             @Override
@@ -200,7 +219,7 @@ public class FragmentModificaInfoSito extends Fragment {
                     erroreDatiPersonali=true;
                 }
 
-                if(!BasicMethod.stringIsInteger(costoIngresso.getText().toString())){
+                if(!BasicMethod.isFloat(costoIngresso.getText().toString())){
                     costoIngresso.setError(getString(R.string.errorEntranceFee));
                     erroreDatiPersonali=true;
                 }
@@ -301,7 +320,7 @@ public class FragmentModificaInfoSito extends Fragment {
         myRef.setValue(BasicMethod.toLower(sitoCulturale.getCitta()));
 
         myRef = database.getReference("/Siti/"+ sitoCulturale.getId() + "/costoBiglietto");
-        myRef.setValue(sitoCulturale.getCostoBiglietto());
+        myRef.setValue(limitDigit(Float.parseFloat(sitoCulturale.getCostoBiglietto())));
 
         myRef = database.getReference("/Siti/"+ sitoCulturale.getId() + "/indirizzo");
         myRef.setValue(sitoCulturale.getIndirizzo());

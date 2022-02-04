@@ -107,7 +107,7 @@
     <string name="errorCitytName">"Inserisci un nome di città che sia valido e non vuoto"</string>
     <string name="errorClosingTime">"Inserisci l'orario di chiusura"</string>
     <string name="errorOpeningTime">"Inserisci l'orario di apertura"</string>
-    <string name="errorEntranceFee">"Inserisci il costo d'ingresso in euro senza centesimi (es. 10)"</string>
+    <string name="errorEntranceFee">"Inserisci il costo d'ingresso in euro (es. 10.50)"</string>
     <string name="errorAddress">Inserisci un indirizzo che sia valido e non vuoto (es. Via Napoli 42)"</string>
 
     <string name="errorSiteName">"Inserisci un nome che sia valido e non vuoto"</string>

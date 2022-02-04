@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +21,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.Opera;
+import com.uniba.capitool.classes.SitoCulturale;
+import com.uniba.capitool.classes.Utente;
+import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
 
 public class VisualizzaModificaOpera extends AppCompatActivity{
@@ -36,13 +44,19 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
     EditText titoloOpera;
     String idSito;
     ItemOperaZona opera;
+    Utente utente;
+    SitoCulturale sito;
+    String idZona;
+    String nomeZona;
+    AllZona allZone;
+
     private static final int SELECT_IMAGE_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizza_modifica_opera);
-        Bundle dati = getIntent().getExtras();
+
         immagine = findViewById(R.id.imageViewVisualizzaModificaOpera);
         testo = findViewById(R.id.descrizioneOpera);
         titoloOpera = findViewById(R.id.titoloNomeModificaOpera);
@@ -50,7 +64,7 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
 
 
 
-
+        Bundle dati = getIntent().getExtras();
 
         if(dati!=null){
             opera = (ItemOperaZona) dati.getSerializable("opera");
@@ -59,6 +73,13 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
             titoloOpera.setText(opera.getTitolo());
             testo.setText(opera.getDescrizione());
             idSito = dati.getString("idSito");
+
+            idZona = dati.getString("idZona");
+            sito = (SitoCulturale) dati.getSerializable("sito");
+            utente = (Utente) dati.getSerializable("utente");
+
+            nomeZona=  dati.getString("nomeZona");
+            allZone= (AllZona) dati.getSerializable("allZona");
 
             setImmagineOperaFromDB(opera.getIdFoto(), this, immagine);
 
@@ -112,7 +133,6 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
 
                 if(erroreDatiPersonali==false){
                     saveChanges(opera, idSito);
-                    onBackPressed();
                 }
 
             }
@@ -140,7 +160,7 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Glide.with(context).load(R.drawable.images).into(imageViewOpera);
+                        Glide.with(context).load(R.drawable.default_add_image).into(imageViewOpera);
                     }
                 });
 
@@ -148,26 +168,78 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
 
     private void saveChanges(ItemOperaZona opera, String idSito) {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef;
+        DatabaseReference myRef= database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId());
 
-        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId() + "/nome");
-        myRef.setValue(titoloOpera.getText().toString());
+        Opera operaModificata =new Opera(opera.getId(), titoloOpera.getText().toString(), testo.getText().toString(), idZona, opera.getIdFoto());
 
-        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId() + "/descrizione");
-        myRef.setValue(testo.getText().toString());
+//        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId() + "/nome");
+        myRef.setValue(operaModificata);
 
-        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(opera.getId());
-
-
+//        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId() + "/descrizione");
+//        myRef.setValue(testo.getText().toString());
 
 
-        fileReference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+
+        /***
+         * Aggiormento pper la lista che viene letta "offline"
+         */
+        for (int i=0; i<allZone.getListaOpereZona().size(); i++){
+            if(allZone.getListaOpereZona().get(i).getId().equals(opera.getId())){
+                allZone.getListaOpereZona().get(i).setTitolo(titoloOpera.getText().toString());
+                allZone.getListaOpereZona().get(i).setDescrizione(testo.getText().toString());
+            }
+        }
+
+        StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(opera.getIdFoto());
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    fileReference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-//                pd.dismiss();
+                            Toast.makeText(VisualizzaModificaOpera.this, "Opera modificata con successo", Toast.LENGTH_LONG).show();
+
+                            Intent backVisualizzaZona= new Intent(VisualizzaModificaOpera.this, VisualizzaZona.class);
+                            Bundle dati = new Bundle();
+                            dati.putSerializable("sito", sito);
+                            dati.putSerializable("utente", utente);
+                            dati.putString("nomeZona", nomeZona);
+                            dati.putString("idZona", allZone.getId());
+                            dati.putSerializable("allZone", allZone);
+                            backVisualizzaZona.putExtras(dati);
+                            finish();
+                            startActivity(backVisualizzaZona);
+
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(VisualizzaModificaOpera.this, "Opera modificata con successo", Toast.LENGTH_LONG).show();
+
+                    Intent backVisualizzaZona= new Intent(VisualizzaModificaOpera.this, VisualizzaZona.class);
+                    Bundle dati = new Bundle();
+                    dati.putSerializable("sito", sito);
+                    dati.putSerializable("utente", utente);
+                    dati.putString("nomeZona", nomeZona);
+                    dati.putString("idZona", allZone.getId());
+                    dati.putSerializable("allZone", allZone);
+                    backVisualizzaZona.putExtras(dati);
+                    finish();
+                    startActivity(backVisualizzaZona);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
+
+
 
 
 

@@ -106,7 +106,7 @@
     <string name="errorCitytName">"Enter a valid, non-empty city name"</string>
     <string name="errorClosingTime">"Enter the closing time"</string>
     <string name="errorOpeningTime">"Enter the opening time"</string>
-    <string name="errorEntranceFee">"Enter the entrance fee in euros without cents (e.g.  10)"</string>
+    <string name="errorEntranceFee">"Enter the entrance fee in euros (e.g. 10.50)"</string>
     <string name="errorAddress">Please enter a valid, non-empty address (e.g. Via Napoli 42)"</string>
 
     <string name="errorSiteName">"Enter a valid, non-empty name"</string>

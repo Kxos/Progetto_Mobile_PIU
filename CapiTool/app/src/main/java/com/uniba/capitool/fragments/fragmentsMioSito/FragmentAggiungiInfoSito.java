@@ -1,5 +1,7 @@
 package com.uniba.capitool.fragments.fragmentsMioSito;
 
+import static com.uniba.capitool.activities.BasicMethod.limitDigit;
+
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -10,6 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,7 +60,21 @@ public class FragmentAggiungiInfoSito extends Fragment {
     EditText costoIngresso;
     EditText indirizzo;
     int hour, minute;
+    private String blockCharacterSet = "- ";
+
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    private InputFilter filter = new InputFilter() {
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +87,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
         indirizzo =v.findViewById(R.id.Indirizzo);
         Button btnConferma = v.findViewById(R.id.btnConferma);
         sitoCulturale = new SitoCulturale();
+        costoIngresso.setFilters(new InputFilter[] { filter });
 
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         if(sharedPreferences!=null){
@@ -207,7 +226,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
                     erroreDatiPersonali=true;
                 }
 
-                if(costoIngresso.getText().toString().equals("")){
+                if(!BasicMethod.isFloat(costoIngresso.getText().toString())){
                     costoIngresso.setError(getString(R.string.errorEntranceFee));
                     erroreDatiPersonali=true;
                 }
@@ -341,7 +360,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
 
         //INSERT di un nuovo oggetto
         SitoCulturale sito= new SitoCulturale(key,BasicMethod.toLower(nomeSito), indirizzo.getText().toString(), orarioApertura.getText().toString(),
-                                                orarioChiusura.getText().toString(), costoIngresso.getText().toString(),
+                                                orarioChiusura.getText().toString(),limitDigit(Float.parseFloat(costoIngresso.getText().toString())),
                                                     BasicMethod.toLower(nomeCitta.getText().toString()), mAuth.getCurrentUser().getUid());
 
 
