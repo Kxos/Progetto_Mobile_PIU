@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -31,8 +32,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.uniba.capitool.R;
+import com.uniba.capitool.classes.CardMioPercorsoAdapter;
 import com.uniba.capitool.classes.CardPercorso;
 import com.uniba.capitool.classes.Opera;
+import com.uniba.capitool.classes.Percorso;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapterVisualizzaPercorso;
@@ -139,43 +142,47 @@ public class VisualizzaPercorso extends AppCompatActivity {
                  * e quali sono
                  * Salvo tutto nell'array indiciZone
                  */
-                String idZona=listaOpere.get(0).getIdZona();
-                List<String> indiciZone=new ArrayList<>();
-                indiciZone.add(listaOpere.get(0).getIdZona());
 
-                for(int i=0; i<listaOpere.size(); i++){
-                    if(!idZona.equals(listaOpere.get(i).getIdZona())){
-                        idZona=listaOpere.get(i).getIdZona();
-                        indiciZone.add(listaOpere.get(i).getIdZona());
-                    }
-                }
+                if(listaOpere.size()!=0){
+                    String idZona=listaOpere.get(0).getIdZona();
+                    List<String> indiciZone=new ArrayList<>();
+                    indiciZone.add(listaOpere.get(0).getIdZona());
 
-                /***
-                 * Per creare la doppia recycle view, devo salvare le opere e le zone in una lista
-                 * List<AllZona> allZoneList
-                 * Nel for creo una lista List<ItemOperaZona> listaOpereZona per ogni zona che ho trovato con il for precedente
-                 * Scorro la lista listaOpere che contiene tutte le opere del percorso in modo sparso e le salvo in listaOpereZona
-                 * che conterrà le opere solo di quella zona
-                 * Alla fine del ciclo salvo la lista creata (listaOpereZona) in allZoneList
-                 * Quindi ora in allZoneList in posizione i-esima ci saranno tutte le opere relative alla zona i                 *
-                 */
-                List<AllZona> allZoneList=new ArrayList<>();
-
-                for(int i=0; i<indiciZone.size(); i++){
-                    List<ItemOperaZona> listaOpereZona=new ArrayList<>();
-                    for(int j=0; j<listaOpere.size(); j++){
-                        if(listaOpere.get(j).getIdZona().equals(indiciZone.get(i))){
-                            listaOpereZona.add(listaOpere.get(j));
+                    for(int i=0; i<listaOpere.size(); i++){
+                        if(!idZona.equals(listaOpere.get(i).getIdZona())){
+                            idZona=listaOpere.get(i).getIdZona();
+                            indiciZone.add(listaOpere.get(i).getIdZona());
                         }
                     }
-                    allZoneList.add(new AllZona(indiciZone.get(i), indiciZone.get(i), listaOpereZona));
+
+                    /***
+                     * Per creare la doppia recycle view, devo salvare le opere e le zone in una lista
+                     * List<AllZona> allZoneList
+                     * Nel for creo una lista List<ItemOperaZona> listaOpereZona per ogni zona che ho trovato con il for precedente
+                     * Scorro la lista listaOpere che contiene tutte le opere del percorso in modo sparso e le salvo in listaOpereZona
+                     * che conterrà le opere solo di quella zona
+                     * Alla fine del ciclo salvo la lista creata (listaOpereZona) in allZoneList
+                     * Quindi ora in allZoneList in posizione i-esima ci saranno tutte le opere relative alla zona i                 *
+                     */
+                    List<AllZona> allZoneList=new ArrayList<>();
+
+                    for(int i=0; i<indiciZone.size(); i++){
+                        List<ItemOperaZona> listaOpereZona=new ArrayList<>();
+                        for(int j=0; j<listaOpere.size(); j++){
+                            if(listaOpere.get(j).getIdZona().equals(indiciZone.get(i))){
+                                listaOpereZona.add(listaOpere.get(j));
+                            }
+                        }
+                        allZoneList.add(new AllZona(indiciZone.get(i), indiciZone.get(i), listaOpereZona));
+                    }
+
+                    /***
+                     * Il problema successivo è che non dispongo del nome di ogni singola zona
+                     * Li vado a recuperare da DB con questo metodo
+                     */
+                    setNomiZone(allZoneList);
                 }
 
-                /***
-                 * Il problema successivo è che non dispongo del nome di ogni singola zona
-                 * Li vado a recuperare da DB con questo metodo
-                 */
-                setNomiZone(allZoneList);
             }
 
             @Override
@@ -304,12 +311,82 @@ public class VisualizzaPercorso extends AppCompatActivity {
 
 
             case R.id.eliminaPercorso:
+                AlertDialog.Builder builder = BasicMethod.confermaEliminazione(this);
+                builder.setPositiveButton(R.string.Si, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
+                        eliminaPercorso(percorso.getId());
+                        Log.e("onClick: ", ""+percorso.getId() );
+                        dialogInterface.cancel();
+                    }
+                });
+
+                builder.setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                AlertDialog EliminaPercorsoDialog = builder.create();
+                EliminaPercorsoDialog.show();
 
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /***
+     * Elimina un Percorso scelto dal DB
+     *
+     * @param idPercorso:
+     */
+    private void eliminaPercorso(String idPercorso) {
+
+        final Percorso[] percorsoDaEliminare = {new Percorso()};
+        Query recentPostsQuery;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("/");
+
+        recentPostsQuery = myRef.child("Percorsi").orderByChild("id").equalTo(idPercorso);     //SELECT * FROM Percorsi WHERE id LIKE "xyz"
+        recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    percorsoDaEliminare[0] = snapshot.getValue(Percorso.class);
+
+                }
+
+                // Rimuove il Percorso dal DB
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
+                DatabaseReference myRef;
+
+                myRef = database.getReference("/Percorsi/"+percorsoDaEliminare[0].getId());
+
+                myRef.removeValue();
+
+                Toast.makeText(VisualizzaPercorso.this, R.string.percorsoEliminato, Toast.LENGTH_SHORT).show();
+
+                finish();
+
+                // Torno al FragmentMieiPercorsi
+                VisualizzaPercorso.this.onBackPressed();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
+            }
+        });
+
     }
 
 }

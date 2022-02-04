@@ -149,6 +149,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
 
         ImageView itemFavouriteBorder = holder.itemFavouriteBorder;
         ImageView itemFavourite = holder.itemFavourite;
+        ImageView itemEliminaPercorso = holder.itemEliminaPercorso;
 
         setCuorePienoSePercorsoPresenteNeiPreferiti(cardPercorso.getId(), BasicMethod.getUtente().getUid(), itemFavouriteBorder, itemFavourite);
 
@@ -184,6 +185,35 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
             }
         });
 
+        itemEliminaPercorso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder = BasicMethod.confermaEliminazione(activity);
+                builder.setPositiveButton(R.string.Si, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        eliminaPercorso(cardPercorso.getId(), holder.getAdapterPosition());
+                        Log.e("onClick: ", ""+cardIdPercorso.getText() );
+                        dialogInterface.cancel();
+                    }
+                });
+
+                builder.setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                AlertDialog EliminaPercorsoDialog = builder.create();
+                EliminaPercorsoDialog.show();
+
+            }
+        });
+
+
         // Verifico che mi trovo in FragmentConsigliati
         if(fragment.equals("Consigliati")){
             itemFavouriteBorder.setVisibility(View.VISIBLE);
@@ -197,6 +227,8 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
         }else if(fragment.equals("MieiPercorsi") && !BasicMethod.getUtente().getRuolo().equals("guida")){
             itemFavouriteBorder.setVisibility(View.INVISIBLE);
             itemFavourite.setVisibility(View.INVISIBLE);
+
+            itemEliminaPercorso.setVisibility(View.VISIBLE);
 
             //Rimuove l'occhio per la visibilità
             ImageView itemVisibilityTruePercorso = holder.itemVisibilityTruePercorso;
@@ -257,7 +289,7 @@ public class CardMioPercorsoAdapter extends RecyclerView.Adapter<CardMioPercorso
             itemVisibilityFalsePercorso = (ImageView) itemView.findViewById(R.id.itemVisibilityFalsePercorso);
             itemFavouriteBorder = (ImageView) itemView.findViewById(R.id.itemFavouriteBorder);
             itemFavourite = (ImageView) itemView.findViewById(R.id.itemFavourite);
-            //itemEliminaPercorso = (ImageView) itemView.findViewById(R.id.itemEliminaPercorso);
+            itemEliminaPercorso = (ImageView) itemView.findViewById(R.id.itemEliminaPercorso);
 
             // Clicco la Card per percorso per visualizzarne i Dettagli
             itemView.setOnClickListener(new View.OnClickListener() {
