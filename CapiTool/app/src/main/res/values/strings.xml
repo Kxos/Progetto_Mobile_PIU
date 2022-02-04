@@ -64,4 +64,66 @@
     <string name="zoneDeletedSuccesful">Zone successfully deleted</string>
     <string name="artworkDeletedSuccesful">Artwork successfully deleted</string>
 
+    <string name="addOperaToolbar">"Add opera in "</string>
+    <string name="errorOperaTitle">"Enter a valid Opera title and not empty"</string>
+    <string name="errorOperaDescription">"Enter a description"</string>
+    <string name="correctEnterOpera">"Opera added correctly"</string>
+
+    <string name="addSiteToolbar">"Add Site"</string>
+
+    <string name="pswReq1">"Please enter a password with at least 6 characters"</string>
+
+    <string name="errorDelegate">"Error in delegation, something went wrong :S"</string>
+    <string name="errorDelegate2">"You cannot delegate a site to a non-curator user"</string>
+
+    <string name="deleteOpera">"Delete Opera"</string>
+
+    <string name="correctDeleteSite">"Site deleted successfully!"</string>.
+
+    <string name="deleteZoneToolbar">"Delete Zone"</string>
+
+    <string name="insertEmail">"Insert an email"</string>
+    <string name="checkInsertData">"Check the data you entered and try again"</string>
+    <string name ="accountNotFound">"Account not found" </string>
+
+    <string name="editSiteToolbar">"Edit Site"</string>
+
+    <string name="orderZoneToolbar">"Order Zone"</string>
+    <string name="correctOrderZone">"Zone ordered correctly"</string>
+
+    <string name="signUpToolbar">"Sign Up"</string>
+
+    <string name="editOperaToolbar">"Edit Opera "</string>
+
+    <string name="writeNewNameZone">"Write the name of the new zone"</string>
+
+    <string name="errorCitytName">"Enter a valid, non-empty city name"</string>
+    <string name="errorClosingTime">"Enter the closing time"</string>
+    <string name="errorOpeningTime">"Enter the opening time"</string>
+    <string name="errorEntranceFee">"Enter the entrance fee in euros (e.g. 10.50)"</string>
+    <string name="errorAddress">Please enter a valid, non-empty address (e.g. Via Napoli 42)"</string>
+
+    <string name="errorSiteName">"Enter a valid, non-empty name"</string>
+
+    <string name="loading">"Loading"</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

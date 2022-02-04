@@ -304,7 +304,7 @@ public class VisualizzaPercorso extends AppCompatActivity {
 
 
             case R.id.eliminaPercorso:
-             
+
 
                 break;
         }

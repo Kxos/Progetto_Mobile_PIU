@@ -88,7 +88,7 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
         }
 
         Toolbar toolbar = findViewById(R.id.toolbarModificaOpera);
-        toolbar.setTitle("Modifica Opera " + opera.getTitolo());
+        toolbar.setTitle(getString(R.string.editOperaToolbar) + opera.getTitolo());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -116,14 +116,14 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
                 boolean erroreDatiPersonali=false;
 
                 if(titoloOpera.getText().toString().equals("")){
-                    titoloOpera.setError("Inserisci un titolo dell'opera che sia valido e non vuoto");
+                    titoloOpera.setError(getString(R.string.errorOperaTitle));
                     erroreDatiPersonali=true;
                 }
 
 
 
                 if(testo.getText().toString().equals("")){
-                    testo.setError("Inserisci una descrizione");
+                    testo.setError(getString(R.string.errorOperaDescription));
                     erroreDatiPersonali=true;
                 }
 

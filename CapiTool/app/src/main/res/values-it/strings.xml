@@ -67,6 +67,65 @@
     <string name="zoneDeletedSuccesful">Zona eliminata con successo</string>
     <string name="artworkDeletedSuccesful">Opera eliminata con successo</string>
 
+    <string name="addOperaToolbar">"Aggiungi opera in "</string>
+    <string name="errorOperaTitle">"Inserisci un titolo dell'opera che sia valido e non vuoto"</string>
+    <string name="errorOperaDescription">"Inserisci una descrizione"</string>
+    <string name="correctEnterOpera">"Opera aggiunta correttamente"</string>
+
+    <string name="addSiteToolbar">"Aggiungi Sito"</string>
+
+    <string name="pswReq1">"Inserisci una password con almeno 6 caratteri"</string>
+
+    <string name="errorDelegate">"Errore nella delega, qualcosa è andato storto :S"</string>
+    <string name="errorDelegate2">"Non puoi delegare un sito ad un utente non curatore"</string>
+
+    <string name="deleteOpera">"Elimina Opere"</string>
+
+    <string name="correctDeleteSite">"Sito eliminato con successo!"</string>
+
+    <string name="deleteZoneToolbar">"Elimina Zone"</string>
+
+    <string name="insertEmail">"Inserisci un email"</string>
+    <string name="checkInsertData">"Controlla i dati inseriti e riprova"</string>
+    <string name="accountNotFound">"Account non trovato"</string>
+
+    <string name="editSiteToolbar">"Modifica Sito"</string>
+
+    <string name="orderZoneToolbar">"Ordina Zone"</string>
+    <string name="correctOrderZone">"Zone ordinate correttamente"</string>
+
+    <string name="signUpToolbar">"Registrati"</string>
+
+    <string name="editOperaToolbar">"Modifica Opera "</string>
+
+    <string name="writeNewNameZone">"Scrivi il nome della nuova zona"</string>
+
+    <string name="errorCitytName">"Inserisci un nome di città che sia valido e non vuoto"</string>
+    <string name="errorClosingTime">"Inserisci l'orario di chiusura"</string>
+    <string name="errorOpeningTime">"Inserisci l'orario di apertura"</string>
+    <string name="errorEntranceFee">"Inserisci il costo d'ingresso in euro (es. 10.50)"</string>
+    <string name="errorAddress">Inserisci un indirizzo che sia valido e non vuoto (es. Via Napoli 42)"</string>
+
+    <string name="errorSiteName">"Inserisci un nome che sia valido e non vuoto"</string>
+
+    <string name="loading">"Caricamento"</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

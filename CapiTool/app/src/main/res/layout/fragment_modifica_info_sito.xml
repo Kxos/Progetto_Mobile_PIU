@@ -17,8 +17,8 @@
             android:layout_marginTop="25dp"
             android:elevation="0dp"
             android:ems="10"
-            android:hint="Costo Ingresso"
-            android:inputType="textPersonName"
+            android:hint="Costo Ingresso (in €)"
+            android:inputType="numberDecimal"
             android:theme="@style/CapiToolStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,8 @@
                 android:id="@+id/modificaCostoIngresso"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="22dp" />
+                android:layout_marginTop="22dp"
+                android:inputType="numberDecimal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

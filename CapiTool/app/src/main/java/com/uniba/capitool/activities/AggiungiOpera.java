@@ -78,7 +78,7 @@ public class AggiungiOpera extends AppCompatActivity {
         }
 
         Toolbar toolbar = findViewById(R.id.toolbarAddOpera);
-        toolbar.setTitle("Aggiungi opera in "+ nomeZona);
+        toolbar.setTitle(getString(R.string.addOperaToolbar) + nomeZona);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -105,12 +105,12 @@ public class AggiungiOpera extends AppCompatActivity {
                 boolean erroreDatiCompilati=false;
 
                 if(titoloOpera.getText().toString().equals("")){
-                    titoloOpera.setError("Inserisci un titolo dell'opera che sia valido e non vuoto");
+                    titoloOpera.setError(getString(R.string.errorOperaTitle));
                     erroreDatiCompilati=true;
                 }
 
                 if(descrizioneOpera.getText().toString().equals("")){
-                    descrizioneOpera.setError("Inserisci una descrizione");
+                    descrizioneOpera.setError(getString(R.string.errorOperaDescription));
                     erroreDatiCompilati=true;
                 }
 
@@ -146,8 +146,8 @@ public class AggiungiOpera extends AppCompatActivity {
                 pd.setMessage("Caricamento");
                 pd.show();*/
 
-
-
+//                           //pd.dismiss();
+//                           Toast.makeText(AggiungiOpera.this, getString(R.string.correctEnterOpera), Toast.LENGTH_LONG).show();
 
 
         myRef.addValueEventListener(new ValueEventListener() {

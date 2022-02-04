@@ -61,8 +61,8 @@ public class Login extends AppCompatActivity {
          *
          * */
         // TODO -- DA RIMUOVERE, ACCESSO VELOCE IN LOGIN
-        //email.setText("Curatore@gmail.com");
-        //password.setText("Cur123/");
+        email.setText("Curatore@gmail.com");
+        password.setText("Cur123/");
         
         TextView registrati;
         registrati = findViewById(R.id.textView_register);
@@ -92,7 +92,7 @@ public class Login extends AppCompatActivity {
                 if(isEmailValid(email_value)){
                     signIn(email_value,password_value);
                 }else{
-                    email.setError("Inserisci un Email");
+                    email.setError(getString(R.string.insertEmail));
                     progressCircle.setVisibility(View.GONE);
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 }
@@ -144,7 +144,7 @@ public class Login extends AppCompatActivity {
      */
     private void updateUI(FirebaseUser user) {
         if(user == null){
-            BasicMethod.alertDialog(this, "Controlla i dati inseriti e riprova", "Account non trovato", "Ok");
+            BasicMethod.alertDialog(this, getString(R.string.checkInsertData), getString(R.string.accountNotFound), "Ok");
             progressCircle.setVisibility(View.GONE);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }

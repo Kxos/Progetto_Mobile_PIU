@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,8 @@ import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,7 +103,7 @@ public class BasicMethod extends AppCompatActivity {
 
         String messaggio = null;
         if(password.length()<6){
-            messaggio="Inserisci una password con almeno 6 caratteri";
+            messaggio = "Inserisci una password con almeno 6 caratteri" ;
         }else{
             int i, j;
             boolean letteraMaiuscola=false;
@@ -264,7 +267,7 @@ public class BasicMethod extends AppCompatActivity {
 
 
         }else{
-            BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
+            BasicMethod.alertDialog(activity, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati" , "OK");
             Intent login= new Intent(activity, Login.class);
             activity.startActivity(login);
 
@@ -485,6 +488,37 @@ public class BasicMethod extends AppCompatActivity {
 
 
         }
+
+    public static boolean isFloat (String phrase) {
+
+
+        try {
+
+            float number = Float.parseFloat(phrase);
+
+
+
+            return true;
+
+        }catch(Exception e) {
+            return false;
+        }
+
+    }
+
+    public static String limitDigit (float number) {
+
+        Locale locale = new Locale("en", "UK");
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+        symbols.setDecimalSeparator('.');
+
+        String pattern = "0.00";
+        DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+
+        return decimalFormat.format(number);
+
+    }
 
     }
 

@@ -16,8 +16,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="22dp"
             android:ems="10"
-            android:hint="Costo Ingresso"
-            android:inputType="textPersonName"
+            android:hint="Costo Ingresso (in €)"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="@+id/Timer"
             app:layout_constraintTop_toBottomOf="@+id/Timer">
 
@@ -25,7 +25,8 @@
                 android:id="@+id/CostoIngresso"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="22dp" />
+                android:layout_marginTop="22dp"
+                android:inputType="numberDecimal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,6 +125,8 @@
             app:layout_constraintStart_toEndOf="@+id/Timer"
             app:layout_constraintTop_toBottomOf="@+id/layout_Indirizzo"
             app:layout_constraintVertical_bias="1.0" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

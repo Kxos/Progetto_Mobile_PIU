@@ -1,5 +1,7 @@
 package com.uniba.capitool.fragments.fragmentsMioSito;
 
+import static com.uniba.capitool.activities.BasicMethod.limitDigit;
+
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -10,6 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,7 +60,21 @@ public class FragmentAggiungiInfoSito extends Fragment {
     EditText costoIngresso;
     EditText indirizzo;
     int hour, minute;
+    private String blockCharacterSet = "- ";
+
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    private InputFilter filter = new InputFilter() {
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +87,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
         indirizzo =v.findViewById(R.id.Indirizzo);
         Button btnConferma = v.findViewById(R.id.btnConferma);
         sitoCulturale = new SitoCulturale();
+        costoIngresso.setFilters(new InputFilter[] { filter });
 
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         if(sharedPreferences!=null){
@@ -191,34 +210,34 @@ public class FragmentAggiungiInfoSito extends Fragment {
                 boolean erroreDatiPersonali=false;
 
                 if(nomeCitta.getText().toString().equals("") || !BasicMethod.checkIfNameIsAcceptable(nomeCitta.getText().toString())){
-                    nomeCitta.setError("Inserisci un nome della città che sia valido e non vuoto");
+                    nomeCitta.setError(getString(R.string.errorCitytName));
                     erroreDatiPersonali=true;
                 }
 
 
 
                 if(orarioChiusura.getText().toString().equals("")){
-                    orarioChiusura.setError("Inserisci l'orario di chiusura");
+                    orarioChiusura.setError(getString(R.string.errorClosingTime));
                     erroreDatiPersonali=true;
                 }
 
                 if(orarioApertura.getText().toString().equals("")){
-                    orarioApertura.setError("Inserisci l'orario di apertura");
+                    orarioApertura.setError(getString(R.string.errorOpeningTime));
                     erroreDatiPersonali=true;
                 }
 
-                if(costoIngresso.getText().toString().equals("")){
-                    costoIngresso.setError("Inserisci il costo d'ingresso");
+                if(!BasicMethod.isFloat(costoIngresso.getText().toString())){
+                    costoIngresso.setError(getString(R.string.errorEntranceFee));
                     erroreDatiPersonali=true;
                 }
 
                 if(!BasicMethod.stringIsInteger(costoIngresso.getText().toString())){
-                    costoIngresso.setError("Inserisci un costo d'ingresso valido");
+                    costoIngresso.setError(getString(R.string.errorEntranceFee));
                     erroreDatiPersonali=true;
                 }
 
                 if(indirizzo.getText().toString().equals("") || !BasicMethod.checkIfAddressIsAcceptable(indirizzo.getText().toString())) {
-                    indirizzo.setError("Inserisci un indirizzo che sia valido e non vuoto");
+                    indirizzo.setError(getString(R.string.errorAddress));
                     erroreDatiPersonali=true;
                 }
 
@@ -341,7 +360,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
 
         //INSERT di un nuovo oggetto
         SitoCulturale sito= new SitoCulturale(key,BasicMethod.toLower(nomeSito), indirizzo.getText().toString(), orarioApertura.getText().toString(),
-                                                orarioChiusura.getText().toString(), costoIngresso.getText().toString(),
+                                                orarioChiusura.getText().toString(),limitDigit(Float.parseFloat(costoIngresso.getText().toString())),
                                                     BasicMethod.toLower(nomeCitta.getText().toString()), mAuth.getCurrentUser().getUid());
 
 
