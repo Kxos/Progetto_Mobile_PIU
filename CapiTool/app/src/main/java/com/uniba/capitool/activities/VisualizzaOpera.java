@@ -35,8 +35,14 @@ public class VisualizzaOpera extends AppCompatActivity {
         ImageView esci = findViewById(R.id.esci);
         esci.setClickable(true);
 
-
         if(dati!=null){
+
+            if(dati.getString("ActivityChiamante") != null){
+                if(BasicMethod.getUtente().getRuolo().equals("curatore") && dati.getString("ActivityChiamante").equals("VisualizzaZone")){
+                    qrCode.setVisibility(View.VISIBLE);
+                }
+            }
+
             ItemOperaZona opera = (ItemOperaZona) dati.getSerializable("opera");
             Glide.with(this).load(opera.getFoto()).into(immagine);
            // immagine.setImageDrawable(opera.getFoto());
@@ -60,6 +66,10 @@ public class VisualizzaOpera extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO
                 Log.e("VisualizzaOpera","cliccato QRCODE");
+
+                
+
+
             }
         });
     }

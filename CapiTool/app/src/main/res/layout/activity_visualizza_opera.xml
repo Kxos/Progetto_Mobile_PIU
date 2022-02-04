@@ -68,9 +68,10 @@
                 android:id="@+id/qrCodeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="-50dp"
+                android:layout_marginEnd="20dp"
                 android:elevation="8dp"
+                android:visibility="gone"
                 app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/titoloNomeOpera">
@@ -79,7 +80,7 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/ic_baseline_qr_code_2_24"/>
+                    android:src="@drawable/ic_baseline_qr_code_2_24" />
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
