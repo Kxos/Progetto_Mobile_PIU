@@ -158,6 +158,10 @@
     <string name="description">Description</string>
     <string name="delete">Delete</string>
     <string name="sito">Site</string>
+    <string name="city">City</string>
+    <string name="address">Address</string>
+    <string name="openingTime">Opening Time</string>
+    <string name="closingTime">Closing Time</string>
 
     <string name="welcome">Welcome! Login or Register</string>
     <string name="register">Register</string>
@@ -165,6 +169,12 @@
     <string name="noOperasInZone">There are no operas in this zone</string>
     <string name="clickOn">Click on</string>
     <string name="toStart">to start</string>
+    <string name="noZonesInSite">There are no zones on this site</string>
+
+    <string name="dialogDelegateTitle">Confirm delegation of your site</string>
+    <string name="dialogDelegateMsg">Do you really want to delegate your site? If you confirm, you will no longer be able to manage it. </string>
+
+    <string name="entranceFee">Entrance fee (in €)</string>
 
 
 
