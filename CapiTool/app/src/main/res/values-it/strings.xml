@@ -158,7 +158,14 @@
     <string name="title">Titolo</string>
     <string name="description">Descrizione</string>
     <string name="delete">Elimina</string>
+    <string name="sito">Sito</string>
 
+    <string name="welcome">Benvenuto! Accedi o Registrati</string>
+    <string name="register">Registrati</string>
+    <string name="noAccount">Non hai un account?</string>
+    <string name="noOperasInZone">In questa zona non ci sono opere</string>
+    <string name="clickOn">Clicca su</string>
+    <string name="toStart">per iniziare</string>
 
 
 
