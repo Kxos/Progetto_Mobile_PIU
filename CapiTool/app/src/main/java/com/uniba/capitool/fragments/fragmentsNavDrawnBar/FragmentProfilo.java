@@ -37,8 +37,8 @@ public class FragmentProfilo extends Fragment {
 
         //nomi che compaiono per ogni scheda sulla barra in alto
         tabsLayout.addTab(tabsLayout.newTab().setText(getString(R.string.personalData)));
-        tabsLayout.addTab(tabsLayout.newTab().setText("Sicurezza"));
-        tabsLayout.addTab(tabsLayout.newTab().setText("Gestione Account"));
+        tabsLayout.addTab(tabsLayout.newTab().setText(getString(R.string.security)));
+        tabsLayout.addTab(tabsLayout.newTab().setText(getString(R.string.accountMngt)));
 
         tabsLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

@@ -118,9 +118,19 @@
     <string name="loading">"Caricamento"</string>
 
     <string name="personalData">"Dati Personali"</string>
+    <string name="security">"Sicurezza"</string>
+    <string name="accountMngt">"Gestione Account"</string>
 
     <string name="errorLoadingDataMsg">"C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login"</string>
     <string name="errorLoadingDataDscr">"Errore caricamento dati"</string>
+
+    <string name="insertValidName">"Inserisci un nome valido"</string>
+    <string name="insertValidSurname">"Inserisci un cognome valido"</string>
+    <string name="correctUpdatePersonalData">"Dati personali aggiornati correttamente"</string>
+    <string name="correctUpdatePhotoProfile">"Foto del profilo aggiornata correttamente"</string>
+
+
+
 
 
 

@@ -135,7 +135,7 @@ public class FragmentDatiPersonali extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(nome.getText().toString().equals("")){
-                    nome.setError("Inserisci un nome valido");
+                    nome.setError(getString(R.string.insertValidName));
                     conferma.setEnabled(false);
                 }else{
                     conferma.setEnabled(true);
@@ -157,7 +157,7 @@ public class FragmentDatiPersonali extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(cognome.getText().toString().equals("")){
-                    cognome.setError("Inserisci un cognome valido");
+                    cognome.setError(getString(R.string.insertValidSurname));
                     conferma.setEnabled(false);
                 }else{
                     conferma.setEnabled(true);
@@ -215,7 +215,7 @@ public class FragmentDatiPersonali extends Fragment {
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 conferma.setEnabled(false);
 
-                Toast.makeText(((HomePage)getActivity()), "Dati personali aggiornati correttamente", Toast.LENGTH_LONG).show();
+                Toast.makeText(((HomePage)getActivity()), getString(R.string.correctUpdatePersonalData), Toast.LENGTH_LONG).show();
 
                 TextView nomeNavDrawer= getActivity().findViewById(R.id.headerNome);
                 TextView cognomeNavDrawer= getActivity().findViewById(R.id.headerCognome);
@@ -247,7 +247,7 @@ public class FragmentDatiPersonali extends Fragment {
                 StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoUtenti").child(utente.getUid());
 
                 final ProgressDialog pd = new ProgressDialog(getActivity());
-                pd.setMessage("Caricamento");
+                pd.setMessage(getString(R.string.loading));
                 pd.show();
 
                 /**
@@ -256,7 +256,7 @@ public class FragmentDatiPersonali extends Fragment {
                 fileReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        Toast.makeText(((HomePage)getActivity()), "Foto del profilo aggiornata correttamente", Toast.LENGTH_LONG).show();
+                        Toast.makeText(((HomePage)getActivity()), getString(R.string.correctUpdatePhotoProfile), Toast.LENGTH_LONG).show();
                         pd.dismiss();
 
                         //Reinstanzio la navigation view per aggiornare l'immagine del profilo nel navigation header

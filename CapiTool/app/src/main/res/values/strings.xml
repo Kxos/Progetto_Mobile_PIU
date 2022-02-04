@@ -117,10 +117,16 @@
     <string name="loading">"Loading"</string>
 
     <string name="personalData">"Personal Data"</string>
+    <string name="security">"Security"</string>
+    <string name="accountMngt">"Account Management"</string>
+
     <string name="errorLoadingDataMsg">"An error occurred while loading your data, you will be returned to your login"</string>
     <string name="errorLoadingDataDscr">"Error loading data"</string>
 
-
+    <string name="insertValidName">"Insert a valid name"</string>
+    <string name="insertValidSurname">"Insert a valid surname"</string>
+    <string name="correctUpdatePersonalData">"Personal data updated correctly"</string>
+    <string name="correctUpdatePhotoProfile">"Foto del profilo aggiornata correttamente"</string>
 
 
 
