@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="Search"
+    <item android:id="@+id/aggiungiZona"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="Aggiungi zona"
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/kebabMenu"
@@ -11,11 +11,11 @@
         android:title="Search"
         app:showAsAction="always">
         <menu>
-    <item
+   <!-- <item
         android:id="@+id/aggiungiZona"
         android:icon="@drawable/ic_baseline_add_circle_outline_24_black"
         android:title="Aggiungi Zona"
-        app:showAsAction="never" />
+        app:showAsAction="never" />-->
 
     <item android:id="@+id/eliminaZone"
         android:title="Elimina Zone"
