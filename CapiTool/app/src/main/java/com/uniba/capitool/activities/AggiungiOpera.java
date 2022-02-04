@@ -1,11 +1,19 @@
 package com.uniba.capitool.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -27,13 +35,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.zxing.WriterException;
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
+import androidmads.library.qrgenearator.QRGSaver;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +64,16 @@ public class AggiungiOpera extends AppCompatActivity {
     ProgressBar progressBar;
     Button btaggiungiOpera;
     int nextIdOpera;
+
+    String TAG = "GenerateQRCode";
+    EditText edtValue;
+    ImageView qrImage;
+    Button start, save, convert;
+    String inputValue;
+    String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
+    Bitmap bitmap;
+    QRGEncoder qrgEncoder;
+    String qrCodeString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +83,7 @@ public class AggiungiOpera extends AppCompatActivity {
         descrizioneOpera = findViewById(R.id.descrizioneOpera);
         titoloOpera = findViewById(R.id.titoloNomeModificaOpera);
         btaggiungiOpera = findViewById(R.id.bt_Aggiungi_Opera);
-
+        qrImage = findViewById(R.id.qrCodeImage);
 
         Bundle dati = getIntent().getExtras();
 
@@ -115,6 +138,8 @@ public class AggiungiOpera extends AppCompatActivity {
                 }
 
                 if(erroreDatiCompilati==false){
+
+
                     saveChanges();
                    // onBackPressed();
                 }
@@ -135,13 +160,21 @@ public class AggiungiOpera extends AppCompatActivity {
         String ts = tsLong.toString();
         String key = myRef.push().getKey();
 
+        generateQRCode();
 
 
         Opera opera=new Opera(""+nextIdOpera, titoloOpera.getText().toString(), descrizioneOpera.getText().toString(), null, key);
         myRef.setValue(opera);
 
         StorageReference fileReference= FirebaseStorage.getInstance().getReference().child("fotoOpere").child(key);
+        StorageReference qrReference = FirebaseStorage.getInstance().getReference().child("QRCodeOpere").child(key);
 
+        qrReference.putFile(Uri.parse(bitMapToString(bitmap))).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+            }
+        });
                /* final ProgressDialog pd = new ProgressDialog(AggiungiOpera.this);
                 pd.setMessage("Caricamento");
                 pd.show();*/
@@ -340,4 +373,55 @@ public class AggiungiOpera extends AppCompatActivity {
 //            System.out.println("Catch the NullPointerException in FragmentPagerAdapter.finishUpdate");
 //        }
 //    }
+
+    private void generateQRCode(){
+        inputValue = idZona + nextIdOpera;
+        if (inputValue.length() > 0) {
+            WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
+            Display display = manager.getDefaultDisplay();
+            Point point = new Point();
+            display.getSize(point);
+            int width = point.x;
+            int height = point.y;
+            int smallerDimension = width < height ? width : height;
+            smallerDimension = smallerDimension * 3 / 4;
+
+            qrgEncoder = new QRGEncoder(
+                    inputValue, null,
+                    QRGContents.Type.TEXT,
+                    smallerDimension);
+            try {
+                bitmap = qrgEncoder.encodeAsBitmap();
+                qrImage.setImageBitmap(bitmap);
+
+
+            } catch (WriterException e) {
+                Log.v(TAG, e.toString());
+            }
+        } else {
+            edtValue.setError("Required");
+        }
+
+
+    }
+    public String bitMapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    public Bitmap stringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
+                    encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
 }
