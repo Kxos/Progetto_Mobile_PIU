@@ -13,21 +13,16 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.uniba.capitool.R;
 import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
-import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.MainRecyclerAdapter;
 
 import java.io.Serializable;
 
 public class VisualizzaZona extends AppCompatActivity {
 
-    private String nuovaZona = "";
-    RecyclerView mainZoneRecycler;
-    MainRecyclerAdapter mainRecyclerAdapter;
     SitoCulturale sito;
     Utente utente;
     String nomeZona;
@@ -40,35 +35,17 @@ public class VisualizzaZona extends AppCompatActivity {
         setContentView(R.layout.activity_visualizza_zona);
         gridView= findViewById(R.id.myGrid);
 
-        // mi serve per capire se aggiornare la recycler se ci sono state delle modifiche o se tornare semplicemente indietro
-
-        //GridView gridView= findViewById(R.id.myGrid);
-//        gridView.setAdapter(new ImageAdapter(imageList, context));
         Bundle dati = getIntent().getExtras();
 
-
         if(dati!=null){
+
             sito = (SitoCulturale) dati.getSerializable("sito");
             utente = (Utente) dati.getSerializable("utente");
-            //nomeZona= dati.getString("nomeZona");
             allZone = (AllZona) dati.getSerializable("allZone");
             nomeZona= allZone.getNomeZona();
 
-
-          //  GridView gridView= findViewById(R.id.myGrid);
-          //  gridView.setAdapter(new ImageAdapter(allZone.getListaOpereZona(), this));
-           // riempiGriglia();
-
-
-            Log.e("***********", ""+utente.getUid()+" / "+sito.getNome()+"/  "+ allZone.getId());
-
-//            for(int i=0; i<allZone.getListaOpereZona().size(); i++){
-//                Log.e("***********", ""+allZone.getListaOpereZona().get(i).getTitolo());
-//            }
-
             if(allZone.getListaOpereZona()==null){
-                Log.e("Visulizza Zone Sito", "VUOTOOOOOOO");
-                //TODO inserire un messaggio per l'utente
+
                 RelativeLayout emptyState=findViewById(R.id.layoutEmptyStateZona);
                 emptyState.setVisibility(View.VISIBLE);
 
@@ -79,7 +56,6 @@ public class VisualizzaZona extends AppCompatActivity {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.e("Hai cliccato l'opera", ""+allZone.getListaOpereZona().get(position).getTitolo());
 
                     Intent visualizzaModificaOpera = new Intent(VisualizzaZona.this, VisualizzaModificaOpera.class);
                     Bundle dati = new Bundle();
@@ -100,9 +76,6 @@ public class VisualizzaZona extends AppCompatActivity {
             Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
         }
 
-//        GridView gridView= findViewById(R.id.myGrid);
-//       gridView.setAdapter(new ImageAdapter(allZ, context));
-
         Toolbar toolbar = findViewById(R.id.toolbarVisualizzaZona);
         toolbar.setTitle(BasicMethod.setUpperPhrase(nomeZona));
         setSupportActionBar(toolbar);
@@ -115,14 +88,6 @@ public class VisualizzaZona extends AppCompatActivity {
             }
         });
 
-//        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
-//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                recreate();
-//                pullToRefresh.setRefreshing(false);
-//            }
-//        });
     }
 
     /***
@@ -140,7 +105,9 @@ public class VisualizzaZona extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+
             case R.id.aggiungiOpera:
+
                 Intent aggiungiOpera= new Intent(VisualizzaZona.this, AggiungiOpera.class);
                 Bundle dati = new Bundle();
                 dati.putSerializable("sito", sito);
@@ -151,9 +118,11 @@ public class VisualizzaZona extends AppCompatActivity {
                 aggiungiOpera.putExtras(dati);
                 finish();
                 startActivity(aggiungiOpera);
+
                 break;
 
             case R.id.eliminaOpere:
+
                 Intent eliminaOpere = new Intent(this, EliminaOpere.class);
                 Bundle datiZona = new Bundle();
                 datiZona.putSerializable("sito",sito);
@@ -177,14 +146,5 @@ public class VisualizzaZona extends AppCompatActivity {
 
         gridView.setAdapter(new ImageAdapter(allZone.getListaOpereZona(), this));
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Log.e("OnResume",""+1);
-////        finish();
-////        startActivity(getIntent());
-//
-//        riempiGriglia();
-//    }
+    
 }

@@ -39,7 +39,6 @@ public class EliminaOpere extends AppCompatActivity {
     SitoCulturale sito;
     Button btnElimina;
     Utente utente;
-    private CardOperaAdapter adapter;
     private ArrayList<CardOpera> listaOpere = new ArrayList<>();
     AllZona allZone;
     String idZona;
@@ -69,8 +68,6 @@ public class EliminaOpere extends AppCompatActivity {
 
         if(dati!=null){
 
-//            Log.e("LA MADONNA CI VUOLE BENE:: PT1",""+ allZone.getListaOpereZona().get(0).getTitolo());
-
             idZona = dati.getString("idZona");
             sito = (SitoCulturale) dati.getSerializable("sito");
             utente = (Utente) dati.getSerializable("utente");
@@ -84,10 +81,7 @@ public class EliminaOpere extends AppCompatActivity {
                 cardOpera.setCheckBox(new CheckBox(this));
                 cardOpera.setCheckBoxCheckedStatus(false);
 
-                Log.e("LA MADONNA CI VUOLE BENE:: PT2",""+cardOpera.getTitolo());
                 listaOpere.add(cardOpera);
-
-
 
             }
 
@@ -111,53 +105,33 @@ public class EliminaOpere extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     public void eliminaOpereChecked(ArrayList<CardOpera> listaOpereChecked){
-        Query recentPostsQuery;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef=database.getReference("/");
         Map<String, Object> map = new HashMap<>();
 
-//        myRef.rem
-
         spostareOpera=false;
 
         for(int i=0; i<listaOpereChecked.size(); i++){
-//            String percorsoDatabase = ("/Siti/"+sito.getId()+"/Zone/"+ allZone.getId()+"/Opere/"+listaOpereChecked.get(i).getId());
-//            Log.e("PERCORSO DATABASE ELIMINA OPERE:",""+percorsoDatabase);
-//            myRef = database.getReference(percorsoDatabase);
-//
-//            myRef.removeValue();
 
-            Log.e("LISTAOPERECECKED", ""+listaOpereChecked.get(i).getId());
             map.put("/Siti/"+sito.getId()+"/Zone/"+ allZone.getId()+"/Opere/"+listaOpereChecked.get(i).getId(), null);
-
 
             /***
              * Aggiornamento della lista offline
              */
             for(int j=0; j<allZone.getListaOpereZona().size(); j++){
+
                 if(allZone.getListaOpereZona().get(j).getId().equals(listaOpereChecked.get(i).getId())){
                     allZone.getListaOpereZona().remove(j);
-                    Log.e("OPERADAELIMINAREID", ""+listaOpereChecked.get(i).getId());
-
                 }
             }
-            //Log.e("IDALLZONA", ""+allZone.getListaOpereZona().get(i).getId());
-
 
             if(allZone.getListaOpereZona().size()!=1 && listaOpereChecked.get(i).getId().equals("0")){
                spostareOpera=true;
-               Log.e("SPOSTAREOPERA*************************************************", "true");
             }
-            //other locations
-
-
         }
 
         myRef.updateChildren(map);
@@ -177,7 +151,6 @@ public class EliminaOpere extends AppCompatActivity {
 
                                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                                     operaDaSposatare=snapshot.getValue(Opera.class);
-                                    Log.e("****************",""+operaDaSposatare.getTitolo());
                                 }
 
 
@@ -187,15 +160,11 @@ public class EliminaOpere extends AppCompatActivity {
                             DatabaseReference myRef3=database.getReference("Siti/"+ sito.getId() + "/Zone/" + allZone.getId() + "/Opere/0");
                             myRef3.setValue(operaDaSposatare);
 
-                            Log.e("****************vecchioID",""+vecchioID);
-
                             myRef3.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     DatabaseReference myRef4=database.getReference("Siti/"+ sito.getId() + "/Zone/" + allZone.getId() + "/Opere/"+vecchioID);
                                     myRef4.removeValue();
-
-                                    Log.e("RIMOSSO","VECCHGIOID");
 
                                     myRef4.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -225,9 +194,6 @@ public class EliminaOpere extends AppCompatActivity {
                                 }
                             });
 
-
-
-
                             }
 
                         @Override
@@ -248,7 +214,6 @@ public class EliminaOpere extends AppCompatActivity {
                     startActivity(backVisualizzaZona);
 
                 }
-
 
             }
 
