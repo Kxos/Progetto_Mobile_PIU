@@ -40,6 +40,8 @@ import com.uniba.capitool.R;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.classes.Visitatore;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -486,6 +488,37 @@ public class BasicMethod extends AppCompatActivity {
 
 
         }
+
+    public static boolean isFloat (String phrase) {
+
+
+        try {
+
+            float number = Float.parseFloat(phrase);
+
+
+
+            return true;
+
+        }catch(Exception e) {
+            return false;
+        }
+
+    }
+
+    public static String limitDigit (float number) {
+
+        Locale locale = new Locale("en", "UK");
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+        symbols.setDecimalSeparator('.');
+
+        String pattern = "0.00";
+        DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+
+        return decimalFormat.format(number);
+
+    }
 
     }
 
