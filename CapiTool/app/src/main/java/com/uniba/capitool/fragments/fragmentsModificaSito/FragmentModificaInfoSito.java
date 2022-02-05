@@ -345,23 +345,18 @@ public class FragmentModificaInfoSito extends Fragment {
                 pd.dismiss();
             }
         });
-        /*Log.e("******* ID *******", myRef.push().getKey() );*/
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                //   Handler handler= new Handler();
                 Utente utente = ((ModificaSito)getActivity()).getUtente();
-
-                Log.e("**************", ""+utente.getCognome());
                 Intent homePage = new Intent(getActivity(), HomePage.class);
                 homePage.putExtra("cognome",utente.getCognome());
                 homePage.putExtra("nome",utente.getNome());
                 homePage.putExtra("uid",utente.getUid());
                 homePage.putExtra("email",utente.getEmail());
                 homePage.putExtra("ruolo",utente.getRuolo());
-                //homePage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                //handler.removeCallbacksAndMessages(null);
                 getActivity().startActivity(homePage);
             }
 

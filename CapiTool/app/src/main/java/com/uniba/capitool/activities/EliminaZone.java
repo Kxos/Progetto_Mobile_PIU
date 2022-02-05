@@ -63,7 +63,6 @@ public class EliminaZone extends AppCompatActivity {
                 CardZona cardZona = new CardZona(zoneSito.get(i).getId(), zoneSito.get(i).getNomeZona(), sito.getId());
                 View cardZonaView = getLayoutInflater().inflate(R.layout.card_zona, null);
                 cardZona.setCheckBox(cardZonaView.findViewById(R.id.checkZonaSelezionata));
-                //cardZona.setCheckBox(new CheckBox(this));
                 cardZona.setCheckBoxCheckedStatus(false);
                 listaZone.add(cardZona);
             }
@@ -75,7 +74,7 @@ public class EliminaZone extends AppCompatActivity {
             eliminaZoneRecycler.setAdapter(cardZonaAdapter);
 
         }else{
-            Log.e("Elimina Zone", "Nessun Bundle trovato");
+
         }
 
 
@@ -99,7 +98,7 @@ public class EliminaZone extends AppCompatActivity {
 
         for(int i=0; i<listaZoneChecked.size(); i++){
             String percorsoDatabase = ("/Siti/"+sito.getId()+"/Zone/"+listaZoneChecked.get(i).getId());
-            Log.e("PERCORSO DATABASE ELIMINA Zone:",""+percorsoDatabase);
+
             myRef = database.getReference(percorsoDatabase);
 
             myRef.removeValue();

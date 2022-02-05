@@ -84,7 +84,7 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
             setImmagineOperaFromDB(opera.getIdFoto(), this, immagine);
 
         }else{
-            Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
+
         }
 
         Toolbar toolbar = findViewById(R.id.toolbarModificaOpera);
@@ -171,13 +171,7 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
         DatabaseReference myRef= database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId());
 
         Opera operaModificata =new Opera(opera.getId(), titoloOpera.getText().toString(), testo.getText().toString(), idZona, opera.getIdFoto());
-
-//        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId() + "/nome");
         myRef.setValue(operaModificata);
-
-//        myRef = database.getReference("/Siti/"+ idSito + "/Zone/" + opera.getIdZona() + "/Opere/" + opera.getId() + "/descrizione");
-//        myRef.setValue(testo.getText().toString());
-
 
 
         /***
@@ -237,19 +231,13 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
 
             }
         });
-
-
-
-
-
-
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 1 && data!=null){
-            Log.e("***********************************************************","");
             image=data.getData();
             if(image!=null){
                 immagine.setImageURI(image);
@@ -260,7 +248,6 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //  overridePendingTransition(R.anim.slide_from_top, R.anim.slide_in_top);
 
     }
 

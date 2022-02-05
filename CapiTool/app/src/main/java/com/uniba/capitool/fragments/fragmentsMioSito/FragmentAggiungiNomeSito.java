@@ -56,7 +56,7 @@ public class FragmentAggiungiNomeSito extends Fragment {
             fotoSito.setImageURI(imageUri);
 
         }else{
-            Log.e( "onCreateView: ", "SharedPreferences non trovato");
+
         }
 
         avanti.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +97,6 @@ public class FragmentAggiungiNomeSito extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 1 && data!=null){
-            Log.e("***********************************************************","");
             imageUri=data.getData();
             if(imageUri!=null){
                 fotoSito.setImageURI(imageUri);

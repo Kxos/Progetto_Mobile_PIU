@@ -137,7 +137,6 @@ public class VisualizzaPercorso extends AppCompatActivity {
 
                         listaOpere.add(opera);
                     }catch (Exception e){
-                        Log.e("Errore","C'è stato un'errore nel leggere un opera");
 
                     }
                 }
@@ -267,7 +266,6 @@ public class VisualizzaPercorso extends AppCompatActivity {
                         Glide.with(context).load(R.drawable.image_not_found).into(immagineSito);
                     }
                 });
-
     }
 
 

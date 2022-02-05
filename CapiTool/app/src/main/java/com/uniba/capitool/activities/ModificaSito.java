@@ -80,7 +80,7 @@ public class ModificaSito extends AppCompatActivity {
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerModificaSito, new FragmentModificaNomeSito() );
                     fragmentTransaction.commit();
-                    // toolbar.setNavigationIcon(R.drawable.ic_android_black_24dp);
+
                 }
             }
         });
