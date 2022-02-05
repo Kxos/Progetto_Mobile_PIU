@@ -67,7 +67,7 @@ public class VisualizzaOpera extends AppCompatActivity {
                 //TODO
                 Log.e("VisualizzaOpera","cliccato QRCODE");
 
-                
+
 
 
             }
