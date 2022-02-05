@@ -194,6 +194,14 @@
     <string name="attention">Attenzione</string>
     <string name="attentionInfo">Cliccando sul tasto conferma il tuo account verrà definitivamente eliminato</string>
 
+    <string name="viewZoneAndOpera">Visualizza Zone e Opere</string>
+    <string name="timetable">Orari</string>
+    <string name="entranceFeeString">Costo d\'ingresso</string>
+
+    <string name="toCreateARoute">per creare un percroso</string>
+
+    <string name="edit">Modifica</string>
+
 
 
 

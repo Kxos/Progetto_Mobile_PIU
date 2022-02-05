@@ -193,6 +193,14 @@
     <string name="attention">Attention</string>
     <string name="attentionInfo">By clicking on the confirm button your account will be permanently deleted</string>
 
+    <string name="viewZoneAndOpera">View Zones and Operas</string>
+    <string name="timetable">Timetable</string>
+    <string name="entranceFeeString">Entrance fee</string>
+
+    <string name="toCreateARoute">to create a route</string>
+
+    <string name="edit">Edit</string>
+
 
 
 
