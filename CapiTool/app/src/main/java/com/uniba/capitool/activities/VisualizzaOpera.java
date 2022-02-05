@@ -51,7 +51,7 @@ public class VisualizzaOpera extends AppCompatActivity {
 
             setImmagineOperaFromDB(opera.getIdFoto(), this, immagine);
         }else{
-            Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
+
         }
 
         esci.setOnClickListener(new View.OnClickListener() {
@@ -65,11 +65,6 @@ public class VisualizzaOpera extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO
-                Log.e("VisualizzaOpera","cliccato QRCODE");
-
-                
-
-
             }
         });
     }
@@ -105,7 +100,7 @@ public class VisualizzaOpera extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      //  overridePendingTransition(R.anim.slide_from_top, R.anim.slide_in_top);
+
 
     }
 

@@ -78,9 +78,6 @@ public class CardZonaAdapter extends RecyclerView.Adapter<CardZonaAdapter.ViewHo
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-                //Log.e("AAAAAAAAAAA: ", ""+isChecked);
-                //Log.e("POSIZIONE: ", ""+position);
-
                if(isChecked){
                     cardZona.setCheckBoxCheckedStatus(true);
                     listaZoneChecked.add(cardZona);
@@ -89,9 +86,6 @@ public class CardZonaAdapter extends RecyclerView.Adapter<CardZonaAdapter.ViewHo
                     listaZoneUnchecked.add(cardZona);
                     listaZoneChecked.remove(cardZona);
                 }
-
-                //Log.e("Esistono opere checked SINGOLO ITEM: ", ""+cardOpera);
-                //Log.e("Esistono opere checked NELLA LISTA: ", ""+listaOpereChecked);
             }
         });
         cardCheckBoxZona.setChecked(cardZona.getCheckBox().isChecked());

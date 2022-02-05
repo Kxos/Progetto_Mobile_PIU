@@ -111,7 +111,7 @@ public class FragmentAggiungiInfoSito extends Fragment {
             }
 
         }else{
-            Log.e( "onCreateView: ", "SharedPreferences non trovato");
+
         }
 
         SharedPreferences.Editor datiSito = sharedPreferences.edit();
@@ -336,7 +336,6 @@ public class FragmentAggiungiInfoSito extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                Log.d("ChildrenCount di "+"/Siti", String.valueOf(dataSnapshot.getChildrenCount()));   //conta tutti i figli del nodo Utenti
                 insertQuery(dataSnapshot.getChildrenCount(), database, myRef);
 
 
@@ -383,15 +382,12 @@ public class FragmentAggiungiInfoSito extends Fragment {
                 pd.dismiss();
             }
         });
-        /*Log.e("******* ID *******", myRef.push().getKey() );*/
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-             //   Handler handler= new Handler();
                 Utente utente = BasicMethod.getUtente();
-
-                Log.e("**************", ""+utente.getCognome());
                 Intent homePage = new Intent(getActivity(), HomePage.class);
                 homePage.putExtra("cognome",utente.getCognome());
                 homePage.putExtra("nome",utente.getNome());

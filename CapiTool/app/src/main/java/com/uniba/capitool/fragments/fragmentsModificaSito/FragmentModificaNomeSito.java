@@ -134,7 +134,6 @@ public class FragmentModificaNomeSito extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 1 && data!=null){
-            Log.e("***********************************************************","");
             imageUri=data.getData();
             if(imageUri!=null){
                 ((ModificaSito)getActivity()).setImageUri(imageUri);

@@ -81,10 +81,8 @@ public class FragmentMioSito extends Fragment {
                  */
                 try{
                     if(dataSnapshot.getValue().toString() != null){
-                        Log.e("Try dataSnapshot","La query NON ha restituito valore null. Quindi c'è un sito associato all'utente");
 
                         // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
-
                         for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
                             /***
@@ -93,13 +91,10 @@ public class FragmentMioSito extends Fragment {
                              * Se non si verifica leggo il sito Culturale nel metodo classico
                              */
                             try{
-                                Log.e("Metodo STANDARD","Nome sito culturale trovato: "+snapshot.getValue(SitoCulturale.class).getNome());
-
                                 SitoCulturale sitoCulturale= snapshot.getValue(SitoCulturale.class);
                                 setSito(sitoCulturale);
 
                             }catch (Exception e){
-                                Log.e("Metodo ALTERNATIVO (Gestione stringa snapshot)","");
 
                                 String idSito = leggiIdSito(snapshot.getValue().toString());
                                 recuperaSitoFromDB(idSito);
@@ -109,7 +104,6 @@ public class FragmentMioSito extends Fragment {
                     }
 
                 } catch (Exception e){
-                    Log.e("Exception e dataSnapshot","La query ha restituito valore null. Quindi non c'è nessun sito associato all'utente");
                     setCreaSito();
                 }
 
@@ -145,8 +139,6 @@ public class FragmentMioSito extends Fragment {
             }
         }
 
-        Log.e("idSito trovato", idSito);
-
         return idSito;
     }
 
@@ -168,10 +160,9 @@ public class FragmentMioSito extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
+
                 }
                 else {
-                    Log.d("Dati estratti dal nodo:", String.valueOf(task.getResult().getValue()));
 
                     Map<String, Map<String, Object>> risultato ;
 
@@ -185,8 +176,6 @@ public class FragmentMioSito extends Fragment {
                     sitoCulturale.setCostoBiglietto(String.valueOf(risultato.get("costoBiglietto")));
                     sitoCulturale.setId(String.valueOf(risultato.get("id")));
                     sitoCulturale.setUidCuratore(String.valueOf(risultato.get("uidCuratore")));
-
-                    Log.d("Sito Salvato", ""+sitoCulturale.getNome());
 
                     setSito(sitoCulturale);
 
@@ -224,7 +213,7 @@ public class FragmentMioSito extends Fragment {
      * Se non è stato trovato nessun sito associato all'utente, visualizzo il FragmentCreaMioSito
      */
     private void setCreaSito() {
-        Log.e("*****!!!!*****","SITO NON ASSOCIATOOO NON DEFINITIVO"+BasicMethod.getUtente().getUid()+""+sito.getUidCuratore() );
+
         FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerSito, new FragmentCreaMioSito() );

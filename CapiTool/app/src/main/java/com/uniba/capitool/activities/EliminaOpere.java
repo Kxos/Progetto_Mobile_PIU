@@ -93,7 +93,7 @@ public class EliminaOpere extends AppCompatActivity {
 
 
         }else{
-            Log.e("Elimina Opere", "Nessun Bundle trovato");
+
         }
 
         btnElimina.setOnClickListener(new View.OnClickListener() {

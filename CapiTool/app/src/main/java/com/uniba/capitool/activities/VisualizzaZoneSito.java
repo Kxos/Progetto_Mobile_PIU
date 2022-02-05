@@ -62,7 +62,7 @@ public class VisualizzaZoneSito extends AppCompatActivity{
             utente = (Utente) dati.getSerializable("utente");
 
         }else{
-           Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
+
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -186,14 +186,11 @@ public class VisualizzaZoneSito extends AppCompatActivity{
                                     listaOpereZona.add(new ItemOperaZona(opera.getId(), opera.getTitolo(), opera.getDescrizione(), zone.get(i).getId(), opera.getIdFoto()));
 
                                 }catch(Exception e){
-                                    Log.e("Errore", "c'è stato un errore nel leggere l'opera");
+
                                 }
                         }
                         allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), listaOpereZona, zone.get(i).getPosizione()));
                     }catch (Exception e){
-
-                        Log.e("Errore","la zona non ha opere");
-
                         allZoneList.add(new AllZona(zone.get(i).getId(), zone.get(i).getNome(), null, zone.get(i).getPosizione()));
                     }
                 }

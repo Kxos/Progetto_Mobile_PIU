@@ -73,7 +73,7 @@ public class VisualizzaZona extends AppCompatActivity {
                 }
             });
         }else{
-            Log.e("Visulizza Zone Sito", "Nessun Bundle trovato");
+
         }
 
         Toolbar toolbar = findViewById(R.id.toolbarVisualizzaZona);
