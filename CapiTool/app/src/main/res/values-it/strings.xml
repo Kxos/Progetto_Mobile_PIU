@@ -177,6 +177,24 @@
 
     <string name="entranceFee">Costo Ingresso (in €)</string>
 
+    <string name="siteName">Nome Sito</string>
+    <string name="next">Avanti</string>
+    <string name="clickOnImage">Clicca sull\'immagine per selezionarne una nuova</string>
+    <string name="toAddSite">per aggiungere il tuo Sito</string>
+
+    <string name="routeName">Route\'s name</string>
+    <string name="publicString">Pubblico</string>
+
+    <string name="name">Nome</string>
+    <string name="surname">Cognome</string>
+    <string name="birthDate">Data di Nascita</string>
+    <string name="licenseNumber">Patentino Guida</string>
+
+    <string name="insertPswToDeleteAccount">Inserisci la password per eliminare il tuo account</string>
+    <string name="attention">Attenzione</string>
+    <string name="attentionInfo">Cliccando sul tasto conferma il tuo account verrà definitivamente eliminato</string>
+
+
 
 
 
