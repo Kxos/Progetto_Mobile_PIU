@@ -47,12 +47,13 @@ import com.uniba.capitool.classes.SitoCulturale;
 import com.uniba.capitool.classes.Utente;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.AllZona;
 import com.uniba.capitool.fragments.fragmentVisualizzaZoneSito.ItemOperaZona;
-import androidmads.library.qrgenearator.QRGContents;
-import androidmads.library.qrgenearator.QRGEncoder;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
 
 public class AggiungiOpera extends AppCompatActivity {
 
@@ -362,22 +363,16 @@ public class AggiungiOpera extends AppCompatActivity {
                         Opera opera = snapshot.getValue(Opera.class);
                         opere.add(opera);
 
-                        Log.e("Opera id",""+opera.getId());
                     }catch (Exception e){
 
                     }
                 }
 
-                Log.e("***********************************************size opere",""+opere.size());
-
                if(opere.size()==0){
                    salvaIndice(-1);
                }else{
                    salvaIndice(Integer.parseInt(opere.get(opere.size()-1).getId()));
-
                }
-
-
             }
 
 
@@ -391,18 +386,8 @@ public class AggiungiOpera extends AppCompatActivity {
     }
 
     private void salvaIndice(int idOperaPrecedente) {
-        Log.e("nextIdSalvaIndice",""+idOperaPrecedente);
         nextIdOpera=idOperaPrecedente+1;
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        try{
-//            super.onBackPressed();
-//        } catch (NullPointerException nullPointerException){
-//            System.out.println("Catch the NullPointerException in FragmentPagerAdapter.finishUpdate");
-//        }
-//    }
 
     private Uri generateQRCode(){
 
