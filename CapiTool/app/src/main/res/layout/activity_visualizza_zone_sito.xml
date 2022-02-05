@@ -55,7 +55,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:text="In questo sito culturale non ci sono zone"
+            android:text="@string/noZonesInSite"
             android:textAlignment="center"
             android:textSize="20dp" />
 
@@ -73,7 +73,7 @@
 
 
                 android:drawableRight="@drawable/ic_baseline_add_24"
-                android:text="Clicca su "
+                android:text="@string/clickOn"
                 android:textSize="20dp" />
 
             <TextView
@@ -84,7 +84,7 @@
 
 
                 android:layout_toEndOf="@+id/inizioMessaggio2"
-                android:text="per iniziare"
+                android:text="@string/toStart"
                 android:textSize="20dp" />
 
         </RelativeLayout>
