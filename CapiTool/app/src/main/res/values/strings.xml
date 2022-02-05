@@ -157,6 +157,60 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="delete">Delete</string>
+    <string name="sito">Site</string>
+    <string name="city">City</string>
+    <string name="address">Address</string>
+    <string name="openingTime">Opening Time</string>
+    <string name="closingTime">Closing Time</string>
+
+    <string name="welcome">Welcome! Login or Register</string>
+    <string name="register">Register</string>
+    <string name="noAccount">Don\'t have an account?</string>
+    <string name="noOperasInZone">There are no operas in this zone</string>
+    <string name="clickOn">Click on</string>
+    <string name="toStart">to start</string>
+    <string name="noZonesInSite">There are no zones on this site</string>
+
+    <string name="dialogDelegateTitle">Confirm delegation of your site</string>
+    <string name="dialogDelegateMsg">Do you really want to delegate your site? If you confirm, you will no longer be able to manage it. </string>
+
+    <string name="entranceFee">Entrance fee (in €)</string>
+
+    <string name="siteName">Site name</string>
+    <string name="next">Next</string>
+    <string name="clickOnImage">Click on the image to select a new one </string>
+    <string name="toAddSite">to add your Site</string>
+
+    <string name="routeName">Nome Percorso</string>
+    <string name="publicString">Public</string>
+
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="birthDate">Birth Date</string>
+    <string name="licenseNumber">License\'s number</string>
+
+    <string name="insertPswToDeleteAccount">Enter your password to delete your account</string>
+    <string name="attention">Attention</string>
+    <string name="attentionInfo">By clicking on the confirm button your account will be permanently deleted</string>
+
+    <string name="viewZoneAndOpera">View Zones and Operas</string>
+    <string name="timetable">Timetable</string>
+    <string name="entranceFeeString">Entrance fee</string>
+
+    <string name="toCreateARoute">to create a route</string>
+
+    <string name="edit">Edit</string>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

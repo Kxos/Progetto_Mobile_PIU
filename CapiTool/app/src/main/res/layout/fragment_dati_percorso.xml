@@ -42,7 +42,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
-            android:hint="Nome Percorso"
+            android:hint="@string/routeName"
             android:theme="@style/CapiToolStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -61,7 +61,7 @@
             android:layout_height="125dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="80dp"
-            android:hint="Descrizione"
+            android:hint="@string/description"
             android:theme="@style/CapiToolStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/layout_nomePercorso">
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
-            android:text="Pubblico"
+            android:text="@string/publicString"
             android:textSize="18sp"
             android:theme="@style/CapiToolStyle"
             app:layout_constraintStart_toStartOf="parent"

@@ -158,6 +158,50 @@
     <string name="title">Titolo</string>
     <string name="description">Descrizione</string>
     <string name="delete">Elimina</string>
+    <string name="sito">Sito</string>
+    <string name="city">Città</string>
+    <string name="address">Indirizzo</string>
+    <string name="openingTime">Orario Apertura</string>
+    <string name="closingTime">Orario Chiusa</string>
+
+    <string name="welcome">Benvenuto! Accedi o Registrati</string>
+    <string name="register">Registrati</string>
+    <string name="noAccount">Non hai un account?</string>
+    <string name="noOperasInZone">In questa zona non ci sono opere</string>
+    <string name="clickOn">Clicca su</string>
+    <string name="toStart">per iniziare</string>
+    <string name="noZonesInSite">In questo sito non ci sono zone</string>
+
+    <string name="dialogDelegateTitle">Conferma delega del tuo sito</string>
+    <string name="dialogDelegateMsg">Vuoi davvero delegare il tuo sito? Se confermi, non potrai più gestirlo.</string>
+
+    <string name="entranceFee">Costo Ingresso (in €)</string>
+
+    <string name="siteName">Nome Sito</string>
+    <string name="next">Avanti</string>
+    <string name="clickOnImage">Clicca sull\'immagine per selezionarne una nuova</string>
+    <string name="toAddSite">per aggiungere il tuo Sito</string>
+
+    <string name="routeName">Route\'s name</string>
+    <string name="publicString">Pubblico</string>
+
+    <string name="name">Nome</string>
+    <string name="surname">Cognome</string>
+    <string name="birthDate">Data di Nascita</string>
+    <string name="licenseNumber">Patentino Guida</string>
+
+    <string name="insertPswToDeleteAccount">Inserisci la password per eliminare il tuo account</string>
+    <string name="attention">Attenzione</string>
+    <string name="attentionInfo">Cliccando sul tasto conferma il tuo account verrà definitivamente eliminato</string>
+
+    <string name="viewZoneAndOpera">Visualizza Zone e Opere</string>
+    <string name="timetable">Orari</string>
+    <string name="entranceFeeString">Costo d\'ingresso</string>
+
+    <string name="toCreateARoute">per creare un percroso</string>
+
+    <string name="edit">Modifica</string>
+
 
 
 
