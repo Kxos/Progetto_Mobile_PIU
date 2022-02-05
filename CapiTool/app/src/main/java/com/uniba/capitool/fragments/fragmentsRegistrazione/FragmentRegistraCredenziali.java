@@ -162,7 +162,6 @@ CheckBox mostraPassword;
 
     public void confermaCredenziali(boolean isNewUser){
         if(isNewUser==true){
-            Log.d( "************************: ", "TUTTO OK");
 
             Bundle bundle = new Bundle();
             bundle.putString("email",email.getText().toString());
@@ -183,7 +182,7 @@ CheckBox mostraPassword;
             datiRegistrazioneUtente.apply();
 
         }else{
-            Log.d( "************************: ", "NON OK");
+            Log.e("Errore","isNewUser");
         }
     }
 

@@ -37,10 +37,7 @@ public class ModificaSito extends AppCompatActivity {
 
           Log.e("***********", ""+utente+" / "+sito);
         }else{
-           /* BasicMethod.alertDialog(this, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
-            Intent login= new Intent(HomePage.this, Login.class);
-            this.startActivity(login);
-            */
+
         }
 
 

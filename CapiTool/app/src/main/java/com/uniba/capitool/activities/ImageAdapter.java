@@ -55,19 +55,6 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-//        ImageView imageView = (ImageView) convertView;
-//        TextView textView = (TextView) convertView;
-//
-//        if(imageView == null){
-//            imageView = new ImageView(mContext);
-//            imageView.setLayoutParams(new GridView.LayoutParams(350, 450));
-//            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-////           textView = new TextView(mContext);
-////            textView.setText("prova");
-//        }
-//
-//        imageView.setImageResource(R.drawable.add_icon);
-
 
         if(inflater==null){
             inflater=(LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

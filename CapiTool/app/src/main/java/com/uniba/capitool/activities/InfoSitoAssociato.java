@@ -21,12 +21,8 @@ public class InfoSitoAssociato extends AppCompatActivity {
             utente.setEmail(b.getString("email"));
             utente.setRuolo(b.getString("ruolo"));
         }else{
-           /* BasicMethod.alertDialog(this, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
-            Intent login= new Intent(HomePage.this, Login.class);
-            this.startActivity(login);
-            */
+
         }
 
-//        setContentView(R.layout.activity_info_sito_associato);
     }
 }

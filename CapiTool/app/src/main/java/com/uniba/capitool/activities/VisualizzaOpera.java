@@ -199,11 +199,6 @@ public class VisualizzaOpera extends AppCompatActivity {
 
         super.onBackPressed();
 
-
-
-      //  overridePendingTransition(R.anim.slide_from_top, R.anim.slide_in_top);
-
-
         if(layoutQR.getVisibility()==View.VISIBLE){
             layoutQR.setVisibility(View.GONE);
         }else{

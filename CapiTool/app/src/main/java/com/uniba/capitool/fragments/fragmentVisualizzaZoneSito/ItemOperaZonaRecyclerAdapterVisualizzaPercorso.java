@@ -118,8 +118,6 @@ public class ItemOperaZonaRecyclerAdapterVisualizzaPercorso extends RecyclerView
                     visitatori.add(visitatore);                                 //se ci sarà più di un risultato nella query creiamo una lista di oggetti per gestirli da codice
                 }
 
-                //setto nella EditText il valore della data trovata
-              //  setDataNascita(visitatori.get(0).getDataNascita());
             }
 
 

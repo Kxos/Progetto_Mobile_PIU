@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -120,16 +119,10 @@ public class VisualizzaModificaOpera extends AppCompatActivity{
                     erroreDatiPersonali=true;
                 }
 
-
-
                 if(testo.getText().toString().equals("")){
                     testo.setError(getString(R.string.errorOperaDescription));
                     erroreDatiPersonali=true;
                 }
-
-
-
-
 
                 if(erroreDatiPersonali==false){
                     saveChanges(opera, idSito);

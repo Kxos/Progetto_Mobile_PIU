@@ -1,12 +1,9 @@
 package com.uniba.capitool.fragments.fragmentsModificaSito;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +55,6 @@ public class FragmentModificaNomeSito extends Fragment {
         nome.setText(sito.getNome());
 
         if( ((ModificaSito)getActivity()).getImageUri() != null){
-            Log.e("****Fotooo", " "+((ModificaSito)getActivity()).getImageUri());
 
             Glide.with(getActivity())
                     .load(((ModificaSito)getActivity()).getImageUri())
@@ -78,8 +74,6 @@ public class FragmentModificaNomeSito extends Fragment {
             }
         });
 
-
-
         btnAvanti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,8 +92,6 @@ public class FragmentModificaNomeSito extends Fragment {
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerModificaSito, new FragmentModificaInfoSito());
                     fragmentTransaction.commit();
-
-
 
                 }
             }

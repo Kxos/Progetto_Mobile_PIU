@@ -1,9 +1,16 @@
 package com.uniba.capitool.fragments.fragmentsAggiungiPercorso;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,27 +19,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.AggiungiPercorso;
 import com.uniba.capitool.activities.BasicMethod;
-import com.uniba.capitool.activities.HomePage;
 import com.uniba.capitool.classes.CardOpera;
 import com.uniba.capitool.classes.Opera;
 import com.uniba.capitool.classes.Percorso;
 import com.uniba.capitool.classes.Utente;
-import com.uniba.capitool.fragments.fragmentsNavDrawnBar.FragmentMieiPercorsi;
 
 import java.util.ArrayList;
 
@@ -76,9 +71,6 @@ public class FragmentDatiPercorso extends Fragment {
             percorsoRicevutoDaPreview = (Percorso) args.getSerializable("nuovoPercorso");
             listaOpereRicevuteDaPreview = (ArrayList<Opera>) args.getSerializable("listaOpereRicevuteDaPreview");
 
-            //Log.e("SEI IN DATI PERCORSO: ", ""+listaOpereChecked);
-
-            //toolbar.setTitle(getString(R.string.site) + " - " + sitoCulturale.getNome());
 
             Button bottoneIndietro = view.findViewById(R.id.buttonIndietro);
             bottoneIndietro.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +80,6 @@ public class FragmentDatiPercorso extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("listaOpereSelezionate",  listaOpereChecked);
                     fragmentSelezionaOpere.setArguments(bundle);
-
-                    //Log.e( "LISTA IN RITORNO: ", ""+FragmentDatiPercorso.getListaOpereChecked());
 
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -124,13 +114,6 @@ public class FragmentDatiPercorso extends Fragment {
                 public void onClick(View view) {
 
                     if(nomePercorsoIsValorized(nomePercorso)){
-
-                        //Log.e("NomePercorso: ",""+nomePercorso.getText());
-                        //Log.e("DescrizionePercorso: ",""+descrizionePercorso.getText());
-                        //Log.e("StatoPubblico",""+pubblicoPercorso.isChecked());
-                        //Log.e("Lista Opere",""+listaOpereChecked);
-                        //Log.e("UID UTENTE",""+utente.getUid());
-                        //Log.e("ID SITO ASSOCIATO",""+sharedPreferences.getString("idSito", ""));
 
                         String key = myRef.push().getKey();
 

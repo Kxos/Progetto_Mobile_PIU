@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.uniba.capitool.R;
 import com.uniba.capitool.activities.VisualizzaOpera;
 import com.uniba.capitool.activities.VisualizzaPercorso;
-import com.uniba.capitool.activities.VisualizzaZoneSito;
 
 import java.util.List;
 
@@ -57,23 +56,6 @@ public class MainRecyclerAdapterVisualizzaPercorso extends RecyclerView.Adapter<
        }
 
 
-        /*
-        holder.nomeZona.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("RECYCLER", ""+allZoneList.get(holder.getAdapterPosition()).getNomeZona());
-
-                Intent visualizzaZona = new Intent(v.getContext(), VisualizzaZona.class);
-                Bundle dati = new Bundle();
-                dati.putSerializable("sito", ((VisualizzaZoneSito)v.getContext()).getSito());
-                dati.putSerializable("utente", ((VisualizzaZoneSito)v.getContext()).getUtente());
-                dati.putSerializable("allZone", (Serializable) allZoneList.get(holder.getAdapterPosition()));
-                visualizzaZona.putExtras(dati);
-                ((VisualizzaZoneSito)v.getContext()).startActivity(visualizzaZona);
-            }
-        });
-        */
-
     }
 
     @Override
@@ -96,15 +78,6 @@ public class MainRecyclerAdapterVisualizzaPercorso extends RecyclerView.Adapter<
             opereRecycler=itemView.findViewById(R.id.opere_recycler);
             emptyZona=itemView.findViewById(R.id.textViewEmptyZona);
 
-            /*
-            emptyZona.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("nomeZona", ""+getAdapterPosition());
-
-                }
-            });
-            */
         }
 
         /***
@@ -113,22 +86,8 @@ public class MainRecyclerAdapterVisualizzaPercorso extends RecyclerView.Adapter<
          */
         @Override
         public void onClick(View v) {
-        //    Log.e("RECYCLER", ""+getAdapterPosition()+""+nomeZona.getText());
-
-//            Intent visualizzaZona = new Intent(v.getContext(), VisualizzaZona.class);
-//            Bundle dati = new Bundle();
-//            dati.putSerializable("sito", ((VisualizzaZoneSito)v.getContext()).getSito());
-//            dati.putSerializable("utente", ((VisualizzaZoneSito)v.getContext()).getUtente());
-//            dati.putString("nomeZona", nomeZona.getText().toString());
-//            visualizzaZona.putExtras(dati);
-//
-//
-//
-//            ((VisualizzaZoneSito)v.getContext()).startActivity(visualizzaZona);
 
         }
-
-
 
     }
 
@@ -144,10 +103,7 @@ public class MainRecyclerAdapterVisualizzaPercorso extends RecyclerView.Adapter<
     @Override
     public void onOperaClick(int posizioneOpera, String idZona, View v) {
 
-
         int posizioneZona=getIndexZona(allZoneList, idZona);
-
-        //Log.e("CLICCATO", ""+allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera).getDescrizione());
 
         ItemOperaZona operaCliccata=allZoneList.get(posizioneZona).getListaOpereZona().get(posizioneOpera);
         Intent visualizzaOpera = new Intent(v.getContext(), VisualizzaOpera.class);
@@ -157,8 +113,7 @@ public class MainRecyclerAdapterVisualizzaPercorso extends RecyclerView.Adapter<
         Bundle transazione= ActivityOptions.makeSceneTransitionAnimation((VisualizzaPercorso)v.getContext()).toBundle();
 
         ((VisualizzaPercorso)v.getContext()).startActivity(visualizzaOpera, transazione);
-
-
+        
     }
 
     /***

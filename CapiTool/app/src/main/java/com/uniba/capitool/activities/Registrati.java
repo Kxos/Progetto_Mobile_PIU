@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +41,6 @@ public class Registrati extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragmentContainerView, new FragmentRegistraCredenziali() );
         fragmentTransaction.commit();
 
-        //toolbar.setNavigationIcon(R.drawable.ic_android_black_24dp);
         Visitatore visit =new Visitatore();
 
        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -51,18 +49,18 @@ public class Registrati extends AppCompatActivity {
                 //in questo modo recupero il fragment in uso, così se l'utente spinge back torno al passo precedente
                 Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
                 if(currentFragment instanceof FragmentRegistraCredenziali){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "Registrati1");
+
                     Intent login = new Intent(Registrati.this, Login.class);
                     startActivity(login);
                 }else if(currentFragment instanceof FragmentRegistraRuolo){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "Registrati2");
+
                     FragmentManager fragmentManager= getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerView, new FragmentRegistraCredenziali() );
                     fragmentTransaction.commit();
                    // toolbar.setNavigationIcon(R.drawable.ic_android_black_24dp);
                 }else if(currentFragment instanceof FragmentRegistraDatiPersonali){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "Registrati3");
+
                     FragmentManager fragmentManager= getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerView, new FragmentRegistraRuolo() );

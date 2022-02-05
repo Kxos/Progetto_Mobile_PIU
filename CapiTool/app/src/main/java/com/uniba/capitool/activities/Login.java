@@ -1,6 +1,5 @@
 package com.uniba.capitool.activities;
 
-import static android.content.ContentValues.TAG;
 import static com.uniba.capitool.activities.BasicMethod.isEmailValid;
 
 import android.content.Intent;
@@ -71,11 +70,9 @@ public class Login extends AppCompatActivity {
         registrati.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Visitatore visit= new Visitatore();
-                //visit.setCognome("Nardo");
 
                 Intent intentRegistrati = new Intent(Login.this, Registrati.class);
-                //intentRegistrati.putExtra("cognome",visit.getCognome());
-                //intentRegistrati.putExtra("nome",visit.getNome());
+
                 Login.this.startActivity(intentRegistrati);
             }
         });
@@ -118,14 +115,14 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            //Log.d(TAG, "signInWithEmail:success");
+
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //Log.d("uid Utente", mAuth.getUid());
+
                             updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            //Log.w(TAG, "signInWithEmail:failure", task.getException());
+
                             Toast.makeText(Login.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -150,7 +147,7 @@ public class Login extends AppCompatActivity {
         }
 
         if(user != null) {
-            //Log.d("User_ID: ", user.getUid());
+
             getUserFromDB(user);
         }
 
