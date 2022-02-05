@@ -24,16 +24,15 @@ public class AggiungiSito extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
 
         if(b!=null){
+
             utente.setUid(b.getString("uid"));
             utente.setNome(b.getString("nome"));
             utente.setCognome(b.getString("cognome"));
             utente.setEmail(b.getString("email"));
             utente.setRuolo(b.getString("ruolo"));
+
         }else{
-           /* BasicMethod.alertDialog(this, "C'è stato un errore nel caricare i tuoi dati, sarai riportato alla login", "Errore caricamento dati", "OK");
-            Intent login= new Intent(HomePage.this, Login.class);
-            this.startActivity(login);
-            */
+           Log.e("Errore", "Nessun bundle trovato");
         }
 
         setContentView(R.layout.activity_aggiungi_sito);
@@ -54,7 +53,7 @@ public class AggiungiSito extends AppCompatActivity {
                 //in questo modo recupero il fragment in uso, così se l'utente spinge back torno al passo precedente
                 Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerAggiungiSito);
                 if(currentFragment instanceof FragmentAggiungiNomeSito){
-                    Log.d( "--------------------FRAGMENT IN USE: ", "Registrati1");
+
                     Intent homePage = new Intent(AggiungiSito.this, HomePage.class);
                     homePage.putExtra("cognome",utente.getCognome());
                     homePage.putExtra("nome",utente.getNome());
@@ -63,15 +62,13 @@ public class AggiungiSito extends AppCompatActivity {
                     homePage.putExtra("ruolo",utente.getRuolo());
                     startActivity(homePage);
 
-
-
                 }else if(currentFragment instanceof FragmentAggiungiInfoSito){
                     Log.d( "--------------------FRAGMENT IN USE: ", "Registrati2");
                     FragmentManager fragmentManager= getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerAggiungiSito, new FragmentAggiungiNomeSito() );
                     fragmentTransaction.commit();
-                    // toolbar.setNavigationIcon(R.drawable.ic_android_black_24dp);
+
                 }
             }
         });

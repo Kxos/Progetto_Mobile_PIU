@@ -265,14 +265,11 @@ public class BasicMethod extends AppCompatActivity {
             utente.setCognome(b.getString("cognome"));
             utente.setEmail(b.getString("email"));
             utente.setRuolo(b.getString("ruolo"));
-            //Log.e("RUOLO UTENTE: ", ""+utente.getRuolo());
-
 
         }else{
             BasicMethod.alertDialog(activity, activity.getString(R.string.errorLoadingDataMsg), activity.getString(R.string.errorLoadingDataDscr), "OK");
             Intent login= new Intent(activity, Login.class);
             activity.startActivity(login);
-
         }
 
         View headerView = navigationView.getHeaderView(0);

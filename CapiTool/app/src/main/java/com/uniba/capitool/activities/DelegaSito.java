@@ -32,8 +32,6 @@ public class DelegaSito extends AppCompatActivity {
     Dialog dialog ;
     CardSitoCulturale sitoDaDelegare ;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +57,10 @@ public class DelegaSito extends AppCompatActivity {
                 String emailDelegato = editEmailDelegato.getText().toString();
 
                 if (emailDelegato.isEmpty()) {
-                    //Toast.makeText(getApplicationContext(), "Non hai inserito nessuna email", Toast.LENGTH_SHORT).show();
+
                     editEmailDelegato.setError(getString(R.string.noEmailInsert));
                 } else if (!boxInfo.isChecked()) {
-                    //Toast.makeText(getApplicationContext(), "Devi confermare di aver letto l'informativa per procedere", Toast.LENGTH_SHORT).show();
+
                     boxInfo.setError(getString(R.string.boxInfoNotChecked));
                 } else {
                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -78,27 +76,22 @@ public class DelegaSito extends AppCompatActivity {
                             Utente utenteTrovato = new Utente();
                             // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                Log.e("*****!!!!*****", "SONO NEL FOR!!!" + "uid tramite KEY***** " + snapshot.getKey());
 
                                 utenteTrovato=snapshot.getValue(Utente.class);
                                 utenteTrovato.setUid(snapshot.getKey());
                             }
 
                             if (utenteTrovato==null) {
+
                                 Toast.makeText(getApplicationContext(), getString(R.string.userNotFound), Toast.LENGTH_SHORT).show();
                             } else {
 
-
                                 delegato = utenteTrovato;
-                                Log.e("***utente trovato***", "email: " + delegato.getEmail() + " --- ruolo: " + delegato.getRuolo() + " --- uid: " + delegato.getUid() );
-
-
 
                                  if(delegato.getRuolo().equals("curatore")){
                                     /**
                                      * Trovato il curatore a cui delegare il sito, controllo che non abbia già un sito associato
                                      */
-                                    Log.e("*****!!!!*****", "E' un curaotre, controllo se c'è gia un sito");
 
                                     Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(delegato.getUid()).limitToFirst(1);
                                     recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -110,15 +103,11 @@ public class DelegaSito extends AppCompatActivity {
 
                                                 potenzialeSitoDelegato = snapshot.getValue(CardSitoCulturale.class);
 
-                                                Log.e("*****!!!!*****", "c'è un sito");
                                             }
-                                            Log.e("*****!!!!*****", "procedo");
 
                                             if (potenzialeSitoDelegato == null) {
                                                 Toast.makeText(getApplicationContext(), getString(R.string.userhaveAlreadySite), Toast.LENGTH_SHORT).show();
                                             }else{
-                                                Log.e("*****!!!!*****", "Non ha un sito quindi posso delegare");
-
 
                                                 Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(utente.getUid()).limitToFirst(1);  //recupero il sito dell'utente che vuole delegare per poi cambiare Uid assocociato con quello del nuovo curatore
                                                 recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -127,10 +116,9 @@ public class DelegaSito extends AppCompatActivity {
                                                         CardSitoCulturale sitoUtente = new CardSitoCulturale() ;
                                                         // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                                                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                            Log.e("*****!!!!*****", "SONO NEL FOR!!!");
+
                                                             sitoUtente = snapshot.getValue(CardSitoCulturale.class);
                                                         }
-
 
                                                         if (sitoUtente != null) {
 
@@ -149,9 +137,7 @@ public class DelegaSito extends AppCompatActivity {
                                                                 @Override
                                                                 public void onClick(View v) {
                                                                     myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
-                                                                    Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
                                                                     BasicMethod.alertDialog(DelegaSito.this, "", getString(R.string.SuccesfulDelegateSite), "");
-
 
                                                                     Intent intent = new Intent (DelegaSito.this, HomePage.class) ;
                                                                     Bundle bundle = new Bundle() ;
@@ -175,10 +161,7 @@ public class DelegaSito extends AppCompatActivity {
                                                                 }
                                                             });
 
-
                                                             dialog.show();
-
-
 
                                                         }else{
                                                             Toast.makeText(getApplicationContext(), "Errore nella delega :(", Toast.LENGTH_SHORT).show();
@@ -204,7 +187,7 @@ public class DelegaSito extends AppCompatActivity {
 
                                 }else{
                                     Toast.makeText(getApplicationContext(), getString(R.string.errorDelegate2), Toast.LENGTH_SHORT).show();
-                                    Log.e("non è un curatore", "ruolo: " + delegato.getRuolo());
+                                    Log.e("Non è un curatore", "ruolo: " + delegato.getRuolo());
                                 }
                             }
                         }
@@ -215,11 +198,7 @@ public class DelegaSito extends AppCompatActivity {
                             Log.w("QuertActivity", "loadPost:onCancelled", error.toException());
                         }
                     });
-
-
                 }
-
-
             }
 
         });
