@@ -23,18 +23,16 @@
 
     <TextView
         android:id="@+id/benvenuto"
-        android:text="Benvenuto! Accedi o Registrati"
+        android:text="@string/welcome"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:textSize="30dp"
         android:textAlignment="center"
         android:visibility="gone"
-
         android:textColor="@color/orangeCapiTool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_museum" />
@@ -47,7 +45,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="97dp"
         android:contextClickable="false"
-        android:text="Registrati"
+        android:text="@string/register"
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +74,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
-        android:text="Non hai un account?"
+        android:text="@string/noAccount"
         app:layout_constraintEnd_toStartOf="@+id/textView_register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_login" />
