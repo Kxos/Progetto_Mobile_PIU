@@ -187,7 +187,9 @@ public class DelegaSito extends AppCompatActivity {
 
                                 }else{
                                     Toast.makeText(getApplicationContext(), getString(R.string.errorDelegate2), Toast.LENGTH_SHORT).show();
+
                                     Log.e("Non è un curatore", "ruolo: " + delegato.getRuolo());
+
                                 }
                             }
                         }
