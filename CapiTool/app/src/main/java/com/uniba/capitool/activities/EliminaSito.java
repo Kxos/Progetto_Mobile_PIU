@@ -86,27 +86,20 @@ public class EliminaSito extends AppCompatActivity {
 
                 if (passwordInserita.isEmpty()) {
                     editPasswordCuratore.setError(getString(R.string.noPswInsert));
-                    //Toast.makeText(getApplicationContext(), "Non hai inserito nessuna password", Toast.LENGTH_SHORT).show();
+
                 } else if (!boxInfo.isChecked()) {
                     boxInfo.setError(getString(R.string.boxInfoNotChecked));
-                    //Toast.makeText(getApplicationContext(), "Devi confermare di aver letto l'informativa per procedere all'eliminazione", Toast.LENGTH_SHORT).show();
+
                 } else {
 
                     FirebaseUser datiUtente = FirebaseAuth.getInstance().getCurrentUser();
                     AuthCredential credential = EmailAuthProvider.getCredential(datiUtente.getEmail(), passwordInserita);
 
-                    Log.e("Dati trovati", "email: " + datiUtente.getEmail() + " ----- uid: " + datiUtente.getUid() +  " -----  passord inserita: " + passwordInserita);
 
                     datiUtente.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Log.e("TASK", "completato con SUCCESSO, password CORRETTA") ;
-
-
-
-                                    Log.e("Elimina sito", "PWS CORETTA, ora passo all'eliminazione") ;
-
 
                                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
                                     DatabaseReference myRef = database.getReference("/");
@@ -118,24 +111,19 @@ public class EliminaSito extends AppCompatActivity {
 
                                             for (DataSnapshot shot : snapshot.getChildren()) {
                                                 sitoTrovato = shot.getValue(CardSitoCulturale.class);
-                                                Log.e("FOR","Ho trovato il sito *");
 
                                             }
 
 
 
                                             if(sitoTrovato == null){
-                                                Log.e("Risultato ricerca sito", "SITO NON TROVATO") ;
+
                                             }else{
 
-                                                Log.e("Sito trovato", "Nome: " + sitoTrovato.getNome() + "----- idSito: " + sitoTrovato.getId());
-
                                                 myRef.child("Siti").child(sitoTrovato.getId()).setValue(null) ;
-                                                Log.e("Elimina sito", "Sito elimianto!") ;
 
 
                                                 BasicMethod.alertDialog(EliminaSito.this, "", getString(R.string.correctDeleteSite), "");
-
 
 
                                                 Intent intent = new Intent (EliminaSito.this, HomePage.class) ;
@@ -161,7 +149,7 @@ public class EliminaSito extends AppCompatActivity {
 
                             } else {
                                 editPasswordCuratore.setError("Password ERRATA");
-                                Log.e("TASK", "TASK FALLITO, PASSWORD errata") ;
+                               
                             }
                         }
                     });

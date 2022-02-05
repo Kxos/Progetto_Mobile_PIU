@@ -78,7 +78,6 @@ public class DelegaSito extends AppCompatActivity {
                             Utente utenteTrovato = new Utente();
                             // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                Log.e("*****!!!!*****", "SONO NEL FOR!!!" + "uid tramite KEY***** " + snapshot.getKey());
 
                                 utenteTrovato=snapshot.getValue(Utente.class);
                                 utenteTrovato.setUid(snapshot.getKey());
@@ -90,15 +89,12 @@ public class DelegaSito extends AppCompatActivity {
 
 
                                 delegato = utenteTrovato;
-                                Log.e("***utente trovato***", "email: " + delegato.getEmail() + " --- ruolo: " + delegato.getRuolo() + " --- uid: " + delegato.getUid() );
-
 
 
                                  if(delegato.getRuolo().equals("curatore")){
                                     /**
                                      * Trovato il curatore a cui delegare il sito, controllo che non abbia già un sito associato
                                      */
-                                    Log.e("*****!!!!*****", "E' un curaotre, controllo se c'è gia un sito");
 
                                     Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(delegato.getUid()).limitToFirst(1);
                                     recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -110,15 +106,11 @@ public class DelegaSito extends AppCompatActivity {
 
                                                 potenzialeSitoDelegato = snapshot.getValue(CardSitoCulturale.class);
 
-                                                Log.e("*****!!!!*****", "c'è un sito");
                                             }
-                                            Log.e("*****!!!!*****", "procedo");
 
                                             if (potenzialeSitoDelegato == null) {
                                                 Toast.makeText(getApplicationContext(), getString(R.string.userhaveAlreadySite), Toast.LENGTH_SHORT).show();
                                             }else{
-                                                Log.e("*****!!!!*****", "Non ha un sito quindi posso delegare");
-
 
                                                 Query recentPostsQuery = myRef.child("Siti").orderByChild("uidCuratore").equalTo(utente.getUid()).limitToFirst(1);  //recupero il sito dell'utente che vuole delegare per poi cambiare Uid assocociato con quello del nuovo curatore
                                                 recentPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -127,7 +119,6 @@ public class DelegaSito extends AppCompatActivity {
                                                         CardSitoCulturale sitoUtente = new CardSitoCulturale() ;
                                                         // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                                                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                            Log.e("*****!!!!*****", "SONO NEL FOR!!!");
                                                             sitoUtente = snapshot.getValue(CardSitoCulturale.class);
                                                         }
 
@@ -149,7 +140,6 @@ public class DelegaSito extends AppCompatActivity {
                                                                 @Override
                                                                 public void onClick(View v) {
                                                                     myRef.child("Siti").child(sitoDaDelegare.getId()).child("uidCuratore").setValue(delegato.getUid());
-                                                                    Log.e("******!!!!", "SCRITTO NEL DB :))) **** ") ;
                                                                     BasicMethod.alertDialog(DelegaSito.this, "", getString(R.string.SuccesfulDelegateSite), "");
 
 
@@ -204,7 +194,7 @@ public class DelegaSito extends AppCompatActivity {
 
                                 }else{
                                     Toast.makeText(getApplicationContext(), getString(R.string.errorDelegate2), Toast.LENGTH_SHORT).show();
-                                    Log.e("non è un curatore", "ruolo: " + delegato.getRuolo());
+
                                 }
                             }
                         }

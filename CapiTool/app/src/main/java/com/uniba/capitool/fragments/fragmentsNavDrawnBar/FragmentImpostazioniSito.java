@@ -75,15 +75,12 @@ public class FragmentImpostazioniSito extends Fragment {
 
             @Override
             public void onClick(View v) {
-                // checkSitoAssociatoAlCuratore(utente.getUid()); inserito prima dell' onClick
-                Log.e("controlloSito", "Ho controllato se è associato il sito");
 
                 if(sito == null && cardSitoCulturale == null){
                     Toast.makeText(getActivity().getApplicationContext(), R.string.toastDelegateSito, Toast.LENGTH_SHORT).show();
-                    Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
+
                 }else{
 
-                    Log.e("sitoAssociato", "il curatore ha un sito associato");
 
                     Intent intentDelegaSito = new Intent(getActivity(), DelegaSito.class);
                     Bundle bundle = new Bundle();
@@ -107,11 +104,11 @@ public class FragmentImpostazioniSito extends Fragment {
         elimina_sito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("controlloSito", "Ho controllato se è associato il sito");
+
 
                 if(sito == null && cardSitoCulturale == null){
                     Toast.makeText(getActivity().getApplicationContext(), R.string.toastDeleteSito, Toast.LENGTH_SHORT).show();
-                    Log.e("toat_creare", "dovrebbe essere visuaizzato il toast") ;
+
                 }else {
 
                     Intent intentEliminaSito = new Intent(getActivity(), EliminaSito.class);
@@ -119,12 +116,6 @@ public class FragmentImpostazioniSito extends Fragment {
                     bundle.putSerializable("utente", (Serializable) utente);
                     intentEliminaSito.putExtras(bundle) ;
 
-
-                        /*intentEliminaSito.putExtra("uid", utente.getUid()); //Optional parameters
-                        intentEliminaSito.putExtra("nome", utente.getNome()); //Optional parameters
-                        intentEliminaSito.putExtra("cognome", utente.getCognome()); //Optional parameters
-                        intentEliminaSito.putExtra("email", utente.getEmail()); //Optional parameters
-                        intentEliminaSito.putExtra("ruolo", utente.getRuolo()); //Optional parameters*/
 
                     getActivity().startActivity(intentEliminaSito);
                 }
@@ -162,7 +153,6 @@ public class FragmentImpostazioniSito extends Fragment {
 
 
     public void checkSitoAssociatoAlCuratore (String uidUtente){
-        Log.e("*****!!!!*****","controllo se c'è un sito associato al curatore!");
         Query recentPostsQuery;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://capitool-6a9ea-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -177,14 +167,13 @@ public class FragmentImpostazioniSito extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Salva l'oggetto restituito in una lista di oggetti dello stesso tipo
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Log.e("*****!!!!*****","SONO NEL FOR!!!");
 
                     if(snapshot.getValue() instanceof SitoCulturale){
                         sito = snapshot.getValue(SitoCulturale.class);
-                        Log.e("sonoInImpostazioniSito", "sito catturato: " + sito.getNome());
+
                     }else{
                         cardSitoCulturale = snapshot.getValue(CardSitoCulturale.class) ;
-                        Log.e("sono in ImpostazioniSito", "cardSitoCulturale catturata: " + cardSitoCulturale.getNome()) ;
+
                     }
 
 
