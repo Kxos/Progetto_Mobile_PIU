@@ -96,6 +96,7 @@ public class VisualizzaOpera extends AppCompatActivity {
 
                 layoutQR.setVisibility(View.VISIBLE);
 
+
                 String idQRcode= finalOpera.getIdFoto();
                 setImmagineQRFromDB(idQRcode, getApplicationContext(), immagineQRCODE);
 
