@@ -202,6 +202,21 @@
 
     <string name="edit">Modifica</string>
 
+    <string name="confirmPassword">Conferma password</string>
+    <string name="createYourAccount">Crea il tuo account</string>
+    <string name="showPassword">Show Password</string>
+
+    <string name="visitor">Visitatore</string>
+    <string name="curatore">Curatore</string>
+    <string name="guide">Guida Turisitca</string>
+    <string name="whichRole">Come ti vuoi registrare?</string>
+
+    <string name="oldPassword">Vecchia Password</string>
+    <string name="newPassword">Nuova Password</string>
+    <string name="changePassword">Cambia la tua password attuale</string>
+
+
+
 
 
 

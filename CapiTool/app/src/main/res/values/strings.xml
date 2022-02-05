@@ -201,8 +201,19 @@
 
     <string name="edit">Edit</string>
 
+    <string name="confirmPassword">Confirm password</string>
+    <string name="createYourAccount">Create your account</string>
+    <string name="showPassword">Show Password</string>
 
 
+    <string name="visitor">Visitor</string>
+    <string name="curatore">Curator</string>
+    <string name="guide">Tourist guide</string>
+    <string name="whichRole">How do you want to register?</string>
+
+    <string name="oldPassword">Old Password</string>
+    <string name="newPassword">New Password</string>
+    <string name = "changePassword"> Change your current password </string>
 
 
 
